@@ -1,5 +1,5 @@
 TQuotient := function(QQ, G, n, H)
-  local NormalSubgroups, I, Q, LL, L, i, K;
+  local NormalSubgroups, I, Q, LL, L, i, K, Iso, IH, PL;
   NormalSubgroups := [];
   #Prepare the index list
   I := [];
@@ -14,11 +14,14 @@ TQuotient := function(QQ, G, n, H)
     return NormalSubgroups;
   fi;
   #Search the LowIndex Subgroups with correct index
+  Iso := IsomorphismFpGroup(H);
+  IH := Image(Iso);
   LL := LowIndexSubgroupsFpGroup(H, I[Length(I)]);
   for L in LL do
+    PL := PreImage(Iso, L);
     for i in I do
-      if Index(G,L) = i then
-        K := Core(G, L);
+      if Index(G,PL) = i then
+        K := Core(G, PL);
         if Index(G,K) <= n then
           Add(NormalSubgroups,K);
         fi;
