@@ -1,6 +1,6 @@
 #The list containing the needed information of the finite non abelian characteristically simple groups
 #First entry is the order
-#Seconde entry is the index of a subgroup with trivial core.
+#Second entry is the index of a subgroup with trivial core.
 QQ := [
 [60,5], 
 [120,5], 
