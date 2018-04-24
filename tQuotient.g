@@ -16,7 +16,7 @@ TQuotient := function(QQ, G, n, H)
   #Search the LowIndex Subgroups with correct index
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
-  LL := LowIndexSubgroupsFpGroup(H, I[Length(I)]);
+  LL := LowIndexSubgroupsFpGroup(IH, I[Length(I)]);
   for L in LL do
     PL := PreImage(Iso, L);
     for i in I do
