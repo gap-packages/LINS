@@ -1,5 +1,5 @@
 PPQuotient := function(G, n, H)
-  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, M, GM, MM, m, list, i, j, x, y, z, sub;
+  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, M, GM, MM, m, list, i, j, x, y, z, sub, countvector;
   list := [];
   p := 2;
   Iso := IsomorphismFpGroup(H);
@@ -27,7 +27,8 @@ PPQuotient := function(G, n, H)
       for y in GeneratorsOfGroup(IH) do
         y := Image(InverseGeneralMapping(Iso),y);
         word := Image(Mu, Image(Iso, x^(-1)*y*x ));
-        Add(gen, List(Count(word,Length(GenF)), z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
+        countvector := List([1..Length(GenF)],i -> ExponentSumWord(word![1],GeneratorsOfGroup(F)[i]));
+        Add(gen, List(countvector, z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
       od;
       Add(gens,gen);
     od;

@@ -1,6 +1,5 @@
 Read("addGroup.g");
 Read("tQuotient.g");
-Read("count.g");
 Read("pQuotient.g");
 Read("main.g");
 f := FreeGroup(2);
