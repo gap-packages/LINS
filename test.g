@@ -10,9 +10,13 @@ indexlist := List(m, x -> Index(g, x));
 View(m);
 Print("\n", "Are all groups normal: ", normal, "\n", "How many normal groups are found: ", Length(m), "\n");
 
-G := g;
-H := m[2];
+d := DihedralGroup(20);
+g := Image(IsomorphismFpGroup(d));
+g := Image(IsomorphismSimplifiedFpGroup(g));
+m := LowNormalSubgroups(g, 10);
+normal := ForAll(m, x -> IsNormal(g, x));
+indexlist := List(m, x -> Index(g, x));
+structure := List(m, StructureDescription);
+View(m);
+Print("\n", "Are all groups normal: ", normal, "\n", "How many normal groups are found: ", Length(m), "\n");
 
-#d := DihedralGroup(20);
-#g := Image(IsomorphismFpGroup(d));
-#m := LowNormalSubgroups(g, 10);
