@@ -1,6 +1,6 @@
 TQuotient := function(QQ, G, n, H)
-  local NormalSubgroups, I, Q, LL, L, i, K, Iso, IH, PL;
-  NormalSubgroups := [];
+  local list, I, Q, LL, L, i, K, Iso, IH, PL;
+  list := [];
   #Prepare the index list
   I := [];
   for Q in QQ do
@@ -11,7 +11,7 @@ TQuotient := function(QQ, G, n, H)
   od;
   I := SSortedList(I);
   if Length(I) = 0 then
-    return NormalSubgroups;
+    return list;
   fi;
   #Search the LowIndex Subgroups with correct index
   Iso := IsomorphismFpGroup(H);
@@ -23,11 +23,11 @@ TQuotient := function(QQ, G, n, H)
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          Add(NormalSubgroups,K);
+          Add(list,K);
         fi;
         break;
       fi;
     od;
   od;
-  return NormalSubgroups;
+  return list;
 end;

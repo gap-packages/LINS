@@ -7,6 +7,7 @@ Count := function(word, n)
   gen := [];
   sign := [];
   numb := 0;
+  Add(wordString,'f');
   for c in wordString do
     if c = '(' then
       continue;
@@ -49,10 +50,6 @@ Count := function(word, n)
     fi;
   od;
   
-  if numb <> 0 then
-    Add(gen, numb);
-    numb := 0;    
-  fi;
   if IsEmpty(gen) = false then
     for i in [1..Length(gen)] do
       vector[gen[i]] := vector[gen[i]] + sign[i];

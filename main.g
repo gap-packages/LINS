@@ -35,12 +35,14 @@ QQ := [
 ];
 
 LowNormalSubgroups := function(G, n)
-  local NormalSubgroups, NewNormalSubgroups, node, H;
+  local list, newlist, node, H;
   #The list of all normal subgroups
-  NormalSubgroups := [G];
-  for node in NormalSubgroups do
-    NewNormalSubgroups := TQuotient(QQ, G, n, node);
-    AddGroups(G, NormalSubgroups, NewNormalSubgroups);
+  list := [G];
+  for node in list do
+    newlist := TQuotient(QQ, G, n, node);
+    AddGroups(G, list, newlist);
+    newlist := PPQuotient(G, n, node);
+    AddGroups(G, list, newlist);
   od;
-  return NormalSubgroups;
+  return list;
 end;

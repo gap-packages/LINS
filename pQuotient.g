@@ -1,5 +1,5 @@
-PPQuotient := function(QQ, G, n, H)
-  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, M, GM, MM, m, list, i, j, x, y;
+PPQuotient := function(G, n, H)
+  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, M, GM, MM, m, list, i, j, x, y, z, sub;
   list := [];
   p := 2;
   Iso := IsomorphismFpGroup(H);
@@ -21,18 +21,36 @@ PPQuotient := function(QQ, G, n, H)
     
     # Define the group action on the p-Module M
     gens := [];
+    GenF := GeneratorsOfGroup(M);
     for x in GeneratorsOfGroup(G) do
       gen := [];
-      for y in GeneratorsOfGroup(H) do
+      for y in GeneratorsOfGroup(IH) do
+        y := Image(InverseGeneralMapping(Iso),y);
         word := Image(Mu, Image(Iso, x^(-1)*y*x ));
-        Add(gen, List(Count(word,Length(GenF)), x -> MultiplicativeNeutralElement(FiniteField(p)) * x));
+        Add(gen, List(Count(word,Length(GenF)), z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
       od;
       Add(gens,gen);
     od;
     
+    #Search the maximal submodules
     GM := GModuleByMats(gens, FiniteField(p));
     MM := MTX.BasesMaximalSubmodules(GM);
     for m in MM do
+      sub := [];
+      m := List(m, x -> List(x, Int));
+      for i in [1..Length(m)] do
+        x := MultiplicativeNeutralElement(M);
+        for j in [1..Length(m[i])] do
+          x := GenF[j]^m[i][j] * x;
+        od;
+        Add(sub,x);
+      od; 
+      sub := Image(InverseGeneralMapping(Iso),Image(InverseGeneralMapping(Mu),Subgroup(M,sub)));
+      if Index(G, sub) <= n then
+        Add(list,sub);
+      fi;
     od;
+    p := NextPrimeInt(p);
   od; 
+  return list;
 end;
