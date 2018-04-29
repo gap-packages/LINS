@@ -13,7 +13,7 @@ TQuotient := function(QQ, G, n, H)
   if Length(I) = 0 then
     return list;
   fi;
-  #Search the LowIndex Subgroups with correct index
+  # Search the LowIndex Subgroups with correct index
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
   LL := LowIndexSubgroupsFpGroup(IH, I[Length(I)]);

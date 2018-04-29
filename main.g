@@ -34,14 +34,17 @@ QQ := [
 [9828,28]
 ];
 
+# Find every normal subgroup of G up to index n
 LowNormalSubgroups := function(G, n)
-  local list, newlist, node, H;
+  local list, newlist, H;
   #The list of all normal subgroups
   list := [G];
-  for node in list do
-    newlist := TQuotient(QQ, G, n, node);
+  for H in list do
+    # search for possible t-quotient subgroups in H
+    newlist := TQuotient(QQ, G, n, H);
     AddGroups(G, list, newlist);
-    newlist := PPQuotient(G, n, node);
+    # search for possible p-quotient subgroups in H
+    newlist := PPQuotient(G, n, H);
     AddGroups(G, list, newlist);
   od;
   return list;
