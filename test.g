@@ -20,3 +20,11 @@ structure := List(m, StructureDescription);
 View(m);
 Print("\n", "Are all groups normal: ", normal, "\n", "How many normal groups are found: ", Length(m), "\n");
 
+c := DirectProduct(CyclicGroup(2),CyclicGroup(4));
+g := Image(IsomorphismFpGroup(c));
+m := LowNormalSubgroups(g, 4);
+normal := ForAll(m, x -> IsNormal(g, x));
+indexlist := List(m, x -> Index(g, x));
+structure := List(m, StructureDescription);
+View(m);
+Print("\n", "Are all groups normal: ", normal, "\n", "How many normal groups are found: ", Length(m), "\n");
