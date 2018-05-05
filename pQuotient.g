@@ -1,5 +1,5 @@
 PPQuotient := function(G, n, H)
-  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, M, GM, MM, m, list, i, j, x, y, z, subgroup, countvector;
+  local p, Iso, IH, F, Rel, GenF, Mu, word, gen, gens, Mcomp, M, GM, MM, m, list, i, j, x, y, z, subgroup, countvector;
   list := [];
   p := 2;
   Iso := IsomorphismFpGroup(H);
@@ -17,19 +17,26 @@ PPQuotient := function(G, n, H)
       od;
     od;
     M := F / Union(RelatorsOfFpGroup(IH), Rel);
-    Mu := GroupHomomorphismByImages(IH, M);
-    
+    Mu := IsomorphismSimplifiedFpGroup(M);
+    Mu := CompositionMapping(Mu,GroupHomomorphismByImages(IH, M));
+    M := Image(Mu);
+
     # Define the group action of G on the p-Module M
     # For every generator in G we store the action on M in form of a Matrix
     gens := [];
     GenF := GeneratorsOfGroup(M);
+    # If M is trivial we skip this prime
+    if IsEmpty(GenF) then
+      p := NextPrimeInt(p);
+      continue;
+    fi;
     for x in GeneratorsOfGroup(G) do
       gen := [];
-      for y in GeneratorsOfGroup(IH) do
-        y := Image(InverseGeneralMapping(Iso),y);
+      for y in GenF do
+        y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
         word := Image(Mu, Image(Iso, x^(-1)*y*x ));
         # count how often every generator of M is contained in the word.
-        countvector := List([1..Length(GenF)],i -> ExponentSumWord(word![1],GeneratorsOfGroup(F)[i]));
+        countvector := List([1..Length(GenF)],i -> ExponentSumWord(word![1],GenF[i]![1]));
         Add(gen, List(countvector, z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
       od;
       Add(gens,gen);
