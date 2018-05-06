@@ -37,6 +37,9 @@ QQ := [
 # Find every normal subgroup of G up to index n
 LowNormalSubgroups := function(G, n)
   local list, newlist, H;
+  if not IsFpGroup(G) then
+    G := Image(IsomorphismFpGroup(G));
+  fi;
   #The list of all normal subgroups
   list := [G];
   for H in list do
