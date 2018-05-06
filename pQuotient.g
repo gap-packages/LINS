@@ -39,7 +39,7 @@ PPQuotient := function(G, n, H)
       gen := [];
       for y in GenM do
         y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
-        word := Image(Mu, Image(Iso, x^(-1)*y*x ));
+        word := Image(Mu, Image(Iso, x*y*x^(-1) ));
         # count how often every generator of M is contained in the word.
         countvector := List([1..Length(GenM)],i -> ExponentSumWord(word![1],GenM[i]![1]));
         Add(gen, List(countvector, z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
