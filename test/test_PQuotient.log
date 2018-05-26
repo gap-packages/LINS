@@ -1,0 +1,10 @@
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                           
+    162        1        1      270        2  (oprt.)  InverseGeneralMapping              
+     95        3        0      451        0  (oprt.)  IndexInParent                      
+    216        3        2      646      191  (oprt.)  PreImagesRepresentative            
+     56       27        0     7331        0  (oprt.)  IsomorphismSimplifiedFpGroup       
+     21       33        0     4099        0  GAP      SMTX_BasesMaximalSubmodules        
+    384      268        4    81679      451  (oprt.)  Index                              
+   1730    17276        3  1252371      160  GAP      Image                              
+     15      222    17610    75563  1346787           PPQuotient                         
+           17833           1422415                    TOTAL                              
