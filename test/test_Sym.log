@@ -1,0 +1,28 @@
+
+SymmetricGroup 5
+  Are all groups normal: true
+  How many normal groups are found: 2
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
+      2        0        0        1        0           TQuotient                               
+      4        0        0        0        0           AddGroups                               
+      2      167        0    47934        0           PPQuotient                              
+              99            118773                    OTHER                                   
+             266            166710                    TOTAL                                   
+
+SymmetricGroup 6
+  Are all groups normal: true
+  How many normal groups are found: 2
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
+      4        0        0        0        0           AddGroups                               
+      2        1        0      504        0           TQuotient                               
+      2      410        0   188544        0           PPQuotient                              
+             411            189049                    TOTAL                                   
+
+SymmetricGroup 7
+  Are all groups normal: true
+  How many normal groups are found: 2
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
+      4        0        0        0        0           AddGroups                               
+      2       24        0     8958        0           TQuotient                               
+      2    17440        0  9870197        0           PPQuotient                              
+           17464           9879156                    TOTAL                                   
