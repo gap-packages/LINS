@@ -1,3 +1,5 @@
+Read("bottleneck.g");
+
 PPQuotient := function(G, n, H)
   local p, Iso, IH, F, GenF, ComRel, Rel, Mu, GenM, word, gen, gens, Mcomp, M, GM, MM, m, list, i, j, x, y, z, subgroup, countvector;
   list := [];
@@ -62,7 +64,7 @@ PPQuotient := function(G, n, H)
         Add(subgroup,x);
       od; 
       # get the subgroup with a p-Quotient in H
-      subgroup := Image(InverseGeneralMapping(Iso),Image(InverseGeneralMapping(Mu),Subgroup(M,subgroup)));
+      subgroup := PreImage(Iso,PreImage(Mu,Subgroup(M,subgroup)));
       if Index(G, subgroup) <= n then
         Add(list,subgroup);
       fi;
