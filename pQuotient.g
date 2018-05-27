@@ -1,5 +1,3 @@
-Read("bottleneck.g");
-
 PPQuotient := function(G, n, H)
   local p, Iso, IH, F, GenF, ComRel, Rel, Mu, GenM, word, gen, gens, Mcomp, M, GM, MM, m, list, i, j, x, y, z, subgroup, countvector;
   list := [];
