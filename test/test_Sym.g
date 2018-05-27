@@ -14,7 +14,7 @@ for n in [5,6,7] do
   g := m[1];
   normal := ForAll(m, x -> IsNormal(g, x));
   #indexlist := List(m, x -> Index(g, x));
-  Print("\n", "SymmetricGroup ", n, "\n", "  Are all groups normal: ", normal, "\n", "  How many normal groups are found: ", Length(m), "\n");
+  Print("\n", "SymmetricGroup ", n, " up to Index ", Factorial(n)/n/2, "\n", "  Are all groups normal: ", normal, "\n", "  How many normal groups are found: ", Length(m), "\n");
   DisplayProfile([PPQuotient,TQuotient,AddGroups],0,0);
   ClearProfile();
 od;

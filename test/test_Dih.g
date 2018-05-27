@@ -7,7 +7,7 @@ filename := "./test/test_Dih.log";
 LogTo();
 LogTo(filename);
 
-for n in [10,50,250,500] do
+for n in [10,50,250,500,1000] do
   ProfileFunctions([PPQuotient,TQuotient,AddGroups]);  
   d := DihedralGroup(2*n);
   m := LowNormalSubgroups(d, n);

@@ -1,10 +1,24 @@
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                           
-    162        1        1      270        2  (oprt.)  InverseGeneralMapping              
-     95        3        0      451        0  (oprt.)  IndexInParent                      
-    216        3        2      646      191  (oprt.)  PreImagesRepresentative            
-     56       27        0     7331        0  (oprt.)  IsomorphismSimplifiedFpGroup       
-     21       33        0     4099        0  GAP      SMTX_BasesMaximalSubmodules        
-    384      268        4    81679      451  (oprt.)  Index                              
-   1730    17276        3  1252371      160  GAP      Image                              
-     15      222    17610    75563  1346787           PPQuotient                         
-           17833           1422415                    TOTAL                              
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      0        0        0        0        0           helper                
+    133        0        1      329        4  (oprt.)  InverseGeneralMapping 
+   1908       18        0     2161        0  GAP      Image                 
+    779       23        0     7930      191  (oprt.)  PreImagesRepresentati*
+    399        3       27      186    12682  (oprt.)  IndexInParent         
+    492       28        3    12686      279  (oprt.)  Index                 
+     56       32        0     7326        0  (oprt.)  IsomorphismSimplified*
+     21       40        0     4103        0  GAP      SMTX_BasesMaximalSubm*
+    122      136       46    46556    19746  GAP      PreImage              
+     15      190      279    71782    81173           PPQuotient            
+             470            153065                    TOTAL                 
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      0        0        0        0        0           helper                
+    523        6        1     1017       12  (oprt.)  InverseGeneralMapping 
+   5256       50        2     7542        0  GAP      Image                 
+    117      129        0    21824        0  (oprt.)  IsomorphismSimplified*
+     49      158        0    18199        0  GAP      SMTX_BasesMaximalSubm*
+   1618        1      210      651   104480  (oprt.)  IndexInParent         
+   1854      215        3   104552      997  (oprt.)  Index                 
+   7677      397        3   158124      543  (oprt.)  PreImagesRepresentati*
+    346     3390      597  1321849   258954  GAP      PreImage              
+     30      814     4332   346300  1632010           PPQuotient            
+            5160           1980060                    TOTAL                 

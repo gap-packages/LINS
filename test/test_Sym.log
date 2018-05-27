@@ -1,28 +1,30 @@
 
-SymmetricGroup 5
+SymmetricGroup 5 up to Index 12
   Are all groups normal: true
   How many normal groups are found: 2
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
-      2        0        0        1        0           TQuotient                               
-      4        0        0        0        0           AddGroups                               
-      2      167        0    47934        0           PPQuotient                              
-              99            118773                    OTHER                                   
-             266            166710                    TOTAL                                   
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      2        0        0        0        0           TQuotient             
+      4        0        0        0        0           AddGroups             
+      2       59       18    20530     2635           PPQuotient            
+             558            212149                    OTHER                 
+             617            232680                    TOTAL                 
 
-SymmetricGroup 6
+SymmetricGroup 6 up to Index 60
   Are all groups normal: true
   How many normal groups are found: 2
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
-      4        0        0        0        0           AddGroups                               
-      2        1        0      504        0           TQuotient                               
-      2      410        0   188544        0           PPQuotient                              
-             411            189049                    TOTAL                                   
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      4        0        0        0        0           AddGroups             
+      2        1        0      494       10           TQuotient             
+      2      319       26   145333     9022           PPQuotient            
+              26              9033                    OTHER                 
+             346            154861                    TOTAL                 
 
-SymmetricGroup 7
+SymmetricGroup 7 up to Index 360
   Are all groups normal: true
   How many normal groups are found: 2
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                
-      4        0        0        0        0           AddGroups                               
-      2       24        0     8958        0           TQuotient                               
-      2    17440        0  9870197        0           PPQuotient                              
-           17464           9879156                    TOTAL                                   
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      4        0        0        0        0           AddGroups             
+      2       18        3     9009      579           TQuotient             
+      2    16833      251  9787262    53770           PPQuotient            
+             254             54350                    OTHER                 
+           17105           9850623                    TOTAL                 
