@@ -1,38 +1,39 @@
 
 Maximal Index 70
   How many normal groups are found: 15
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function             
-    124        2        0      279       21  (oprt.)  InverseGeneralMapping
-    420        3        0      315        8  (oprt.)  IndexInParent        
-    459        0        3       55      315  (oprt.)  Index                
-    216        5        2      642      193  (oprt.)  PreImagesRepresentat*
-     27        9        0     2195       72  (oprt.)  Kernel               
-     27       12        0     5078       18  GAP      NaturalHomomorphismB*
-  24589       19        3      353        0  (oprt.)  GeneratorsOfMagmaWit*
-     21       32        0     4248        0  GAP      SMTX_BasesMaximalSub*
-     56       41        2     7314       32  (oprt.)  IsomorphismSimplifie*
-     68       73        3    24647      193  GAP      PreImage             
-     27       13      128     2643    61251           helper               
-  51350      214        0    93492       36  GAP      Image                
-    170      242       17    76253      992  GAP      GroupHomomorphismByI*
-     15      264      663    63859   217406           PPQuotient           
-             929            281379                    TOTAL                
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    126        2        0      276       35  (oprt.)  InverseGeneralMapping 
+    426        4        0      303        8  (oprt.)  IndexInParent         
+    216        4        1      644      192  (oprt.)  PreImagesRepresentati*
+     27        6        0     1866       74  (oprt.)  Kernel                
+    465        1        6       56      303  (oprt.)  Index                 
+     27       11        0     4941      148  GAP      NaturalHomomorphismBy*
+    361       13        0     2523       21  (oprt.)  GroupHomomorphismByIm*
+  20011       14        0      351        0  (oprt.)  GeneratorsOfMagmaWith*
+     21       34        0     4529        0  GAP      SMTX_BasesMaximalSubm*
+     68       66        9    26658      532  GAP      PreImage              
+     56       88        2     6355      991  (oprt.)  IsomorphismSimplified*
+     27       24      155     2642    61251           helper                
+  51354      245        0    93481       36  GAP      Image                 
+     15      364      510   118712   144508           PPQuotient            
+            1586            555390                    OTHER                 
+            2462            818734                    TOTAL                 
 
 Maximal Index 155
   How many normal groups are found: 30
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function             
-    496        7        1      861       72  (oprt.)  InverseGeneralMapping
-   1697        7        1     1006       24  (oprt.)  IndexInParent        
-   1775        5        8      183     1006  (oprt.)  Index                
-    876       20        5     3991      548  (oprt.)  PreImagesRepresentat*
-  46592       46        0      831        0  (oprt.)  GeneratorsOfMagmaWit*
-     79       84        3    29104      378  (oprt.)  Kernel               
-     79      116        4    53860       63  GAP      NaturalHomomorphismB*
-    117      139        1    21783       66  (oprt.)  IsomorphismSimplifie*
-     49      146        0    19449        0  GAP      SMTX_BasesMaximalSub*
-     79      292     2102    66657  1043861           helper               
-    188     2540        9  1045252      647  GAP      PreImage             
- 689738     3573       10  1751692      101  GAP      Image                
-    396    90287       18   550463     1761  GAP      GroupHomomorphismByI*
-     30      723    97241   250611  3543587           PPQuotient           
-           97985           3795751                    TOTAL                
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    496        3        4      810      123  (oprt.)  InverseGeneralMapping 
+   1697        6        1     1009       25  (oprt.)  IndexInParent         
+   1775        5        5      185     1009  (oprt.)  Index                 
+    888       37        2     6795       51  (oprt.)  GroupHomomorphismByIm*
+  46391       47        1      832        0  (oprt.)  GeneratorsOfMagmaWith*
+     79       59        8    23051      384  (oprt.)  Kernel                
+    876       69        2     3990      548  (oprt.)  PreImagesRepresentati*
+     49      134        0    18523        0  GAP      SMTX_BasesMaximalSubm*
+    117      136       15    19546     2308  (oprt.)  IsomorphismSimplified*
+     79      157        3    53207      741  GAP      NaturalHomomorphismBy*
+     79      373     2144    66654  1043861           helper                
+ 689738     3755       44  1751702      101  GAP      Image                 
+    188     5211       11  2072556     2002  GAP      PreImage              
+     30     1534     9975   566936  4017310           PPQuotient            
+           11526           4585804                    TOTAL                 
