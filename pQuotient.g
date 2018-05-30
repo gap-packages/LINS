@@ -1,5 +1,9 @@
+helper := function(GenIH,O,Mu,Psi) 
+  return List([1..Length(GenIH)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(GenIH[i]^Mu)^Psi))));
+end;
+
 PPQuotient := function(G, n, H)
-  local p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, list, i, j, x, y, z, SGen, S, countvector, Psi, Q, O, GenIH, Hom;
+  local p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, list, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom;
   list := [];
   p := 2;
   Iso := IsomorphismFpGroup(H);
@@ -63,13 +67,12 @@ PPQuotient := function(G, n, H)
       od; 
       # get the subgroup with a p-Quotient in H
       S := Subgroup(M,SGen);
-      Psi := NaturalHomomorphismByNormalSubgroup(M,S);
-      Q := Image(Psi);
+      PsiHom := NaturalHomomorphismByNormalSubgroup(M,S);
+      Q := Image(PsiHom);
       O := Elements(Q);
       GenIH := GeneratorsOfGroup(IH);
-      Hom :=  GroupHomomorphismByImagesNC(IH,SymmetricGroup(Length(O)),helper(GenIH,O,Mu,Psi));
-      S := Kernel(Hom);
-      S := PreImage(Iso,S);
+      PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),helper(List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
+      S := Kernel(PhiHom);
       if Index(G, S) <= n then
         Add(list,S);
       fi;
@@ -77,8 +80,4 @@ PPQuotient := function(G, n, H)
     p := NextPrimeInt(p);
   od; 
   return list;
-end;
-
-helper := function(GenIH,O,Mu,Psi) 
-  return List([1..Length(GenIH)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(GenIH[i]^Mu)^Psi))));
 end;
