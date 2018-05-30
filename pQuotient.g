@@ -1,5 +1,5 @@
 PPQuotient := function(G, n, H)
-  local p, Iso, IH, F, GenF, ComRel, Rel, Mu, GenM, word, gen, gens, Mcomp, M, GM, MM, m, list, i, j, x, y, z, subgroup, countvector;
+  local p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, list, i, j, x, y, z, SGen, S, countvector, Psi, Q, O, GenIH, Hom;
   list := [];
   p := 2;
   Iso := IsomorphismFpGroup(H);
@@ -51,7 +51,7 @@ PPQuotient := function(G, n, H)
     GM := GModuleByMats(gens, FiniteField(p));
     MM := MTX.BasesMaximalSubmodules(GM);
     for m in MM do
-      subgroup := [];
+      SGen := [];
       # convert the vector basis into group elements of M
       m := List(m, x -> List(x, Int));
       for i in [1..Length(m)] do
@@ -59,15 +59,26 @@ PPQuotient := function(G, n, H)
         for j in [1..Length(m[i])] do
           x := GenM[j]^m[i][j] * x;
         od;
-        Add(subgroup,x);
+        Add(SGen,x);
       od; 
       # get the subgroup with a p-Quotient in H
-      subgroup := PreImage(Iso,PreImage(Mu,Subgroup(M,subgroup)));
-      if Index(G, subgroup) <= n then
-        Add(list,subgroup);
+      S := Subgroup(M,SGen);
+      Psi := NaturalHomomorphismByNormalSubgroup(M,S);
+      Q := Image(Psi);
+      O := Elements(Q);
+      GenIH := GeneratorsOfGroup(IH);
+      Hom :=  GroupHomomorphismByImages(IH,SymmetricGroup(Length(O)),helper(GenIH,O,Mu,Psi));
+      S := Kernel(Hom);
+      S := PreImage(Iso,S);
+      if Index(G, S) <= n then
+        Add(list,S);
       fi;
     od;
     p := NextPrimeInt(p);
   od; 
   return list;
+end;
+
+helper := function(GenIH,O,Mu,Psi) 
+  return List([1..Length(GenIH)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(GenIH[i]^Mu)^Psi))));
 end;

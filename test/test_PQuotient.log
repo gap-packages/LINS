@@ -1,24 +1,38 @@
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
-      0        0        0        0        0           helper                
-    133        0        1      329        4  (oprt.)  InverseGeneralMapping 
-   1908       18        0     2161        0  GAP      Image                 
-    779       23        0     7930      191  (oprt.)  PreImagesRepresentati*
-    399        3       27      186    12682  (oprt.)  IndexInParent         
-    492       28        3    12686      279  (oprt.)  Index                 
-     56       32        0     7326        0  (oprt.)  IsomorphismSimplified*
-     21       40        0     4103        0  GAP      SMTX_BasesMaximalSubm*
-    122      136       46    46556    19746  GAP      PreImage              
-     15      190      279    71782    81173           PPQuotient            
-             470            153065                    TOTAL                 
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
-      0        0        0        0        0           helper                
-    523        6        1     1017       12  (oprt.)  InverseGeneralMapping 
-   5256       50        2     7542        0  GAP      Image                 
-    117      129        0    21824        0  (oprt.)  IsomorphismSimplified*
-     49      158        0    18199        0  GAP      SMTX_BasesMaximalSubm*
-   1618        1      210      651   104480  (oprt.)  IndexInParent         
-   1854      215        3   104552      997  (oprt.)  Index                 
-   7677      397        3   158124      543  (oprt.)  PreImagesRepresentati*
-    346     3390      597  1321849   258954  GAP      PreImage              
-     30      814     4332   346300  1632010           PPQuotient            
-            5160           1980060                    TOTAL                 
+
+Maximal Index 70
+  How many normal groups are found: 15
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function             
+    124        2        0      279       21  (oprt.)  InverseGeneralMapping
+    420        3        0      315        8  (oprt.)  IndexInParent        
+    459        0        3       55      315  (oprt.)  Index                
+    216        5        2      642      193  (oprt.)  PreImagesRepresentat*
+     27        9        0     2195       72  (oprt.)  Kernel               
+     27       12        0     5078       18  GAP      NaturalHomomorphismB*
+  24589       19        3      353        0  (oprt.)  GeneratorsOfMagmaWit*
+     21       32        0     4248        0  GAP      SMTX_BasesMaximalSub*
+     56       41        2     7314       32  (oprt.)  IsomorphismSimplifie*
+     68       73        3    24647      193  GAP      PreImage             
+     27       13      128     2643    61251           helper               
+  51350      214        0    93492       36  GAP      Image                
+    170      242       17    76253      992  GAP      GroupHomomorphismByI*
+     15      264      663    63859   217406           PPQuotient           
+             929            281379                    TOTAL                
+
+Maximal Index 155
+  How many normal groups are found: 30
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function             
+    496        7        1      861       72  (oprt.)  InverseGeneralMapping
+   1697        7        1     1006       24  (oprt.)  IndexInParent        
+   1775        5        8      183     1006  (oprt.)  Index                
+    876       20        5     3991      548  (oprt.)  PreImagesRepresentat*
+  46592       46        0      831        0  (oprt.)  GeneratorsOfMagmaWit*
+     79       84        3    29104      378  (oprt.)  Kernel               
+     79      116        4    53860       63  GAP      NaturalHomomorphismB*
+    117      139        1    21783       66  (oprt.)  IsomorphismSimplifie*
+     49      146        0    19449        0  GAP      SMTX_BasesMaximalSub*
+     79      292     2102    66657  1043861           helper               
+    188     2540        9  1045252      647  GAP      PreImage             
+ 689738     3573       10  1751692      101  GAP      Image                
+    396    90287       18   550463     1761  GAP      GroupHomomorphismByI*
+     30      723    97241   250611  3543587           PPQuotient           
+           97985           3795751                    TOTAL                
