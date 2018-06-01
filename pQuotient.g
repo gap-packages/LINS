@@ -1,5 +1,5 @@
-helper := function(GenIH,O,Mu,Psi) 
-  return List([1..Length(GenIH)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(GenIH[i]^Mu)^Psi))));
+helper := function(Gens,O,Mu,Psi) 
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(Gens[i]^Mu)^Psi))));
 end;
 
 PPQuotient := function(G, n, H)
@@ -27,7 +27,7 @@ PPQuotient := function(G, n, H)
     od;
     M := F / Union(RelatorsOfFpGroup(IH), Rel, ComRel);
     Mu := IsomorphismSimplifiedFpGroup(M);
-    Mu := CompositionMapping(Mu,GroupHomomorphismByImages(IH, M));
+    Mu := CompositionMapping(Mu,GroupHomomorphismByImagesNC(IH, M));
     M := Image(Mu);
 
     # Define the group action of G on the p-Module M
@@ -69,6 +69,9 @@ PPQuotient := function(G, n, H)
       S := Subgroup(M,SGen);
       PsiHom := NaturalHomomorphismByNormalSubgroup(M,S);
       Q := Image(PsiHom);
+      if Order(Q) > n / Index(G, H) then
+        continue;
+      fi;
       O := Elements(Q);
       GenIH := GeneratorsOfGroup(IH);
       PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),helper(List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
