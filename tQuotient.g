@@ -1,5 +1,5 @@
 TQuotient := function(QQ, G, n, H)
-  local list, I, Q, LL, L, i, K, Iso, IH, PL;
+  local list, I, Q, m, LL, L, i, K, Iso, IH, PL;
   list := [];
   #Prepare the index list
   I := [];
@@ -9,14 +9,14 @@ TQuotient := function(QQ, G, n, H)
     fi;
     Add(I,Q[2]);
   od;
-  I := SSortedList(I);
   if Length(I) = 0 then
     return list;
   fi;
+  m := Maximum(I);
   # Search the LowIndex Subgroups with correct index
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
-  LL := LowIndexSubgroupsFpGroup(IH, I[Length(I)]);
+  LL := LowIndexSubgroupsFpGroup(IH, m);
   for L in LL do
     PL := PreImage(Iso, L);
     for i in I do
