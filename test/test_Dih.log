@@ -1,51 +1,54 @@
+Syntax warning: unbound global variable in ./test/test_Dih.g line 15
+  normal := ForAll(m, x -> IsNormal(g, x));
+                                     ^
 
 DihedralGroup 20
   Are all groups normal: true
   How many normal groups are found: 6
 [ D20, D10, C10, D10, C5, C2 
- ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-      6        1        0        2        0           TQuotient                                       
-     12        2        0      269        0           AddGroups                                       
-      6      140        0    35047        0           PPQuotient                                      
-              24              4888                    OTHER                                           
-             167             40208                    TOTAL                                           
+ ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      6        0        0        3        0           TQuotient             
+     12        3        0      284        0           AddGroups             
+      6       95        0     9883        0           PPQuotient            
+              98             10171                    TOTAL                 
 
 DihedralGroup 100
   Are all groups normal: true
   How many normal groups are found: 8
 [ D100, D50, C50, D50, C25, C10, C5, C2 
- ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-      8        0        0        3        0           TQuotient                                       
-     16        2        0      360        0           AddGroups                                       
-      8      376        0   127745        0           PPQuotient                                      
-             378            128109                    TOTAL                                           
+ ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      8        0        0        3        0           TQuotient             
+     16        3        0      367        0           AddGroups             
+      8      104        0    21588        0           PPQuotient            
+             107             21959                    TOTAL                 
 
 DihedralGroup 500
   Are all groups normal: true
   How many normal groups are found: 10
 [ D500, C50, D250, C250, D250, C25, C10, C125, C5, C2 
- ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     20        5        0     1042        0           AddGroups                                       
-     10       42        0     9332        0           TQuotient                                       
-     10     6772        0  3620358        0           PPQuotient                                      
-            6819           3630733                    TOTAL                                           
+ ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     20        6        0     1029        0           AddGroups             
+     10       40        0     9346        0           TQuotient             
+     10      258        0    65129        0           PPQuotient            
+             304             75505                    TOTAL                 
 
 DihedralGroup 1000
   Are all groups normal: true
   How many normal groups are found: 14
 [ D1000, C100, C125, D500, C500, D500, C50, C20, C25, C250, C10, C4, C5, C2 
- ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     28       20        0     6163        0           AddGroups                                       
-     14      106        0    29013        0           TQuotient                                       
-     14    45640        0  258863*        0           PPQuotient                                      
-           45766           259215*                    TOTAL                                           
+ ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     28       20        0     5992        0           AddGroups             
+     14       98        0    29021        0           TQuotient             
+     14      645        0   168371        0           PPQuotient            
+             763            203385                    TOTAL                 
 
 DihedralGroup 2000
   Are all groups normal: true
   How many normal groups are found: 18
-[ D2000, C125, C200, C100, C250, D1000, C1000, D1000, C25, C40, C50, C20, C500, C5, C8, C10, C4, C2 
- ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     36       69        0    27641        0           AddGroups                                       
-     18      922        0   641815        0           TQuotient                                       
-     18   330761        0  199323*        0           PPQuotient                                      
-          331752           199992*                    TOTAL                                           
+[ D2000, C125, C200, C100, C250, D1000, C1000, D1000, C25, C40, C50, C20, 
+  C500, C5, C8, C10, C4, C2 
+ ]  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     36       66        0    19719        0           AddGroups             
+     18     1142        0   641870        0           TQuotient             
+     18     2500        0   430764        0           PPQuotient            
+            3708           1092354                    TOTAL                 

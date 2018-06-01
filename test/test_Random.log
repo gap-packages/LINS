@@ -2,63 +2,62 @@
 Index up to 10
   Are all groups normal: true
   How many normal groups are found: 5
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-      5        0        0        1        0           TQuotient                                       
-     10        2        0      183        0           AddGroups                                       
-      5      155        0    26714        0           PPQuotient                                      
-             839            190751                    OTHER                                           
-             996            217650                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      5        0        0        2        0           TQuotient             
+     10        1        0      127        0           AddGroups             
+      5       63        0     6807        0           PPQuotient            
+              64              6936                    TOTAL                 
 
 Index up to 50
   Are all groups normal: true
   How many normal groups are found: 13
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     13        0        0        4        0           TQuotient                                       
-     26        4        0     1133        0           AddGroups                                       
-     13      617        0   119128        0           PPQuotient                                      
-             621            120267                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     13        0        0        4        0           TQuotient             
+     26        5        0     1133        0           AddGroups             
+     13      173        0    30637        0           PPQuotient            
+             178             31774                    TOTAL                 
 
 Index up to 70
   Are all groups normal: true
   How many normal groups are found: 15
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     15        3        0      349        0           TQuotient                                       
-     30        4        0      930        0           AddGroups                                       
-     15     1270        0   271328        0           PPQuotient                                      
-            1277            272608                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     30        4        0      923        0           AddGroups             
+     15        5        0      360        0           TQuotient             
+     15      207        0    37169        0           PPQuotient            
+             216             38453                    TOTAL                 
 
 Index up to 100
   Are all groups normal: true
   How many normal groups are found: 21
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     21        3        0      350        0           TQuotient                                       
-     42       15        0     6143        0           AddGroups                                       
-     21     2686        0   624355        0           PPQuotient                                      
-            2704            630850                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     21        3        0      345        0           TQuotient             
+     42       15        0     5324        0           AddGroups             
+     21      360        0    69251        0           PPQuotient            
+             378             74921                    TOTAL                 
 
 Index up to 125
   Are all groups normal: true
   How many normal groups are found: 24
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     24       13        0     2000        0           TQuotient                                       
-     48       18        0     6698        0           AddGroups                                       
-     24     4827        0  1209119        0           PPQuotient                                      
-            4858           1217818                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     24       12        0     2000        0           TQuotient             
+     48       22        1     6872        0           AddGroups             
+     24      431        0    97309        0           PPQuotient            
+             465            106182                    TOTAL                 
 
 Index up to 150
   Are all groups normal: true
   How many normal groups are found: 30
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     30       14        0     2007        0           TQuotient                                       
-     60       51        1    19338        0           AddGroups                                       
-     30     8569        0  5194394        0           PPQuotient                                      
-            8634           5215740                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     30       16        0     1992        0           TQuotient             
+     60       45        0    18217        0           AddGroups             
+     30      724        0   176641        0           PPQuotient            
+             785            196850                    TOTAL                 
 
 Index up to 155
   Are all groups normal: true
   How many normal groups are found: 30
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                        
-     30       13        0     2005        0           TQuotient                                       
-     60       48        0    18091        0           AddGroups                                       
-     30     8308        0  4289962        0           PPQuotient                                      
-            8369           4310059                    TOTAL                                           
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     30       13        0     1991        0           TQuotient             
+     60       47        0    19073        0           AddGroups             
+     30      768        0   175826        0           PPQuotient            
+             828            196891                    TOTAL                 
