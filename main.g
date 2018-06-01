@@ -1,7 +1,30 @@
-#The list containing the needed information of the finite non abelian characteristically simple groups
-#First entry is the order
-#Second entry is the index of a subgroup with trivial core.
+# The list containing the needed information about finite non abelian characteristically simple groups
+# First entry is the order
+# Second entry is the index of a subgroup with trivial core.
 QQ := [
+[  60,  5], 
+[ 168,  7], 
+[ 360,  6], 
+[ 504,  9],
+[ 660, 11], 
+[1092, 14], 
+[2448, 18], 
+[2520,  7],
+[3420, 20], 
+[4080, 17], 
+[5616, 13], 
+[6048, 28], 
+[6072, 24], 
+[7800, 26], 
+[7920, 11],
+[9828, 28]
+];
+
+# The list containing the needed information about the subgroups of an automorphism group
+# of a finite non abelian characteristically simple group
+# First entry is the order
+# Second entry is the index of a subgroup with trivial core.
+QQQ := [
 [  60,  5], 
 [ 120,  5], 
 [ 168,  7], 
