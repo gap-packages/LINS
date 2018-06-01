@@ -7,7 +7,7 @@ filename := "./test/test_Random.log";
 LogTo();
 LogTo(filename);
 
-for n in [10,50,70,100,125,150,155] do
+for n in [150,200,250] do
   ProfileFunctions([PPQuotient,TQuotient,AddGroups]);
   f := FreeGroup(2);
   g := f / [f.1^2, f.2^3];

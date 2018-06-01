@@ -1,0 +1,190 @@
+
+DihedralGroup 5000 up to Index 100
+  Are all groups normal: true
+  How many normal groups are found: 11
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     22        5        0     1227       31           AddGroups             
+     11        0       15        1     2478           TQuotient             
+     11       94     1040    13438   160825           PPQuotient            
+            1056            163479                    OTHER                 
+            1155            178147                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      5        1        1      156        3  (oprt.)  Core                  
+      2       13        0     2363        1  (oprt.)  LowIndexSubgroupsFpGr*
+     11        0       15        1     2478           TQuotient             
+     40       18        6     5975      702  GAP      PreImage              
+     25      144        1    10629       89  (oprt.)  IsomorphismFpGroup    
+   1910      666        0   118261        6  GAP      Image                 
+             313             40758                    OTHER                 
+            1155            178147                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    336        1        1      120        3  (oprt.)  IndexInParent         
+    259        3        1      544        2  (oprt.)  PreImagesRepresentati*
+    395        3        1      414      127  (oprt.)  Index                 
+   6717        9        0      172        0  (oprt.)  GeneratorsOfMagmaWith*
+     15        6        0      971       40  GAP      NaturalHomomorphismBy*
+     15        3        3      322      665           helper                
+     13       10        0     1415        0  GAP      SMTX_BasesMaximalSubm*
+    462       17        0     3116       29  (oprt.)  GroupHomomorphismByIm*
+     15        2       25      194     6785  (oprt.)  Kernel                
+     25      144        1    10629       89  (oprt.)  IsomorphismFpGroup    
+     93      160       11    18819     1695  (oprt.)  IsomorphismSimplified*
+   1910      666        0   118261        6  GAP      Image                 
+     11       94     1040    13438   160825           PPQuotient            
+              37              9725                    OTHER                 
+            1155            178147                    TOTAL                 
+
+DihedralGroup 5000 up to Index 250
+  Are all groups normal: true
+  How many normal groups are found: 13
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     26       11        1     2586       40           AddGroups             
+     13        0      202        2    35961           TQuotient             
+     13      390     1731    24452   200127           PPQuotient            
+            1935            236269                    OTHER                 
+            2336            263311                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      5        1        0      155        3  (oprt.)  Core                  
+     84      113       10    17616     1352  GAP      PreImage              
+     10      168        0    28338        4  (oprt.)  LowIndexSubgroupsFpGr*
+     13        0      202        2    35961           TQuotient             
+     33      493        1    14972      102  (oprt.)  IsomorphismFpGroup    
+   2840      704        0   121758        7  GAP      Image                 
+             857             80467                    OTHER                 
+            2336            263311                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    602        1        0      303        9  (oprt.)  IndexInParent         
+    313        4        0      647        3  (oprt.)  PreImagesRepresentati*
+    697        4        1      553      312  (oprt.)  Index                 
+     18        4        2      448     1071           helper                
+     18        7        0      997       40  GAP      NaturalHomomorphismBy*
+     16       11        0     1489        0  GAP      SMTX_BasesMaximalSubm*
+  12442       12        3      313        0  (oprt.)  GeneratorsOfMagmaWith*
+    920       34        0     6321       51  (oprt.)  GroupHomomorphismByIm*
+     18        2      104      219    15132  (oprt.)  Kernel                
+    193      377       20    42133     3504  (oprt.)  IsomorphismSimplified*
+     33      493        1    14972      102  (oprt.)  IsomorphismFpGroup    
+   2840      704        0   121758        7  GAP      Image                 
+     13      390     1731    24452   200127           PPQuotient            
+             293             48698                    OTHER                 
+            2336            263311                    TOTAL                 
+
+DihedralGroup 5000 up to Index 500
+  Are all groups normal: true
+  How many normal groups are found: 14
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     28       24        1     6917       48           AddGroups             
+     14        0      650        3   113904           TQuotient             
+     14      295     3267    44260   269343           PPQuotient            
+            3920            383438                    OTHER                 
+            4239            434619                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+      7        2        0      180        3  (oprt.)  Core                  
+     94      349       16    34413     1534  GAP      PreImage              
+     12      603        1   104487        5  (oprt.)  LowIndexSubgroupsFpGr*
+     14        0      650        3   113904           TQuotient             
+   3998      868        0   125285        8  GAP      Image                 
+     36     1268        2    18935      109  (oprt.)  IsomorphismFpGroup    
+            1149            151313                    OTHER                 
+            4239            434619                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     20        1        0     1016       40  GAP      NaturalHomomorphismBy*
+    837        4        0      340        9  (oprt.)  IndexInParent         
+    348        4        0      717        4  (oprt.)  PreImagesRepresentati*
+     18       11        0     1476        0  GAP      SMTX_BasesMaximalSubm*
+    981        9        4      659      350  (oprt.)  Index                 
+  18890       15        4      458        0  (oprt.)  GeneratorsOfMagmaWith*
+   1525       49        2    10477       85  (oprt.)  GroupHomomorphismByIm*
+     20        4       56      580     1834           helper                
+     20        1      347      237    31387  (oprt.)  Kernel                
+    340      732       38    84172     6172  (oprt.)  IsomorphismSimplified*
+   3998      868        0   125285        8  GAP      Image                 
+     36     1268        2    18935      109  (oprt.)  IsomorphismFpGroup    
+     14      295     3267    44260   269343           PPQuotient            
+             978            146000                    OTHER                 
+            4239            434619                    TOTAL                 
+
+DihedralGroup 5000 up to Index 1000
+  Are all groups normal: true
+  How many normal groups are found: 15
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     30       63        2    21026       65           AddGroups             
+     15      168     3342    94517   406991           PPQuotient            
+     15        2     8562        3  4140881           TQuotient             
+           11908           4548079                    OTHER                 
+           12141           4663627                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     19        4        1      523        8  (oprt.)  Core                  
+   4800      254        1   126062        9  GAP      Image                 
+    112      262       10    62923     1731  GAP      PreImage              
+     39     2027        1    23370      119  (oprt.)  IsomorphismFpGroup    
+     14     8499        0  4128313        7  (oprt.)  LowIndexSubgroupsFpGr*
+     15        2     8562        3  4140881           TQuotient             
+            1093            322430                    OTHER                 
+           12141           4663627                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    383        1        2      783        4  (oprt.)  PreImagesRepresentati*
+     22        4        0     1031       40  GAP      NaturalHomomorphismBy*
+   1245        6        0      402       11  (oprt.)  IndexInParent         
+   1476        7        7      761      414  (oprt.)  Index                 
+     20       15        0     1689        0  GAP      SMTX_BasesMaximalSubm*
+     22        7       10      624     1940           helper                
+  30417       30        3      717        0  (oprt.)  GeneratorsOfMagmaWith*
+   2598       73        5    17796      145  (oprt.)  GroupHomomorphismByIm*
+     22        2      242      252    58370  (oprt.)  Kernel                
+   4800      254        1   126062        9  GAP      Image                 
+    603      717       59   182824    10935  (oprt.)  IsomorphismSimplified*
+     39     2027        1    23370      119  (oprt.)  IsomorphismFpGroup    
+     15      168     3342    94517   406991           PPQuotient            
+            8830           4212791                    OTHER                 
+           12141           4663627                    TOTAL                 
+
+DihedralGroup 5000 up to Index 1500
+  Are all groups normal: true
+  How many normal groups are found: 16
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     32       61        4    16708       75           AddGroups             
+     16      239     4954   162674   557235           PPQuotient            
+     16        0   125539        4  993087*           TQuotient             
+          130498           998662*                    OTHER                 
+          130798           100045*                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+     27        9        1      915       14  (oprt.)  Core                  
+   5548      201        1   126679        9  GAP      Image                 
+    134      393       18    80954     2027  GAP      PreImage              
+     42     2846        1    28291      127  (oprt.)  IsomorphismFpGroup    
+     16   125441        1  992909*        8  (oprt.)  LowIndexSubgroupsFpGr*
+     16        0   125539        4  993087*           TQuotient             
+            1908            517830                    OTHER                 
+          130798           100045*                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
+    402        3        0      818        4  (oprt.)  PreImagesRepresentati*
+     23        3        0     1039       40  GAP      NaturalHomomorphismBy*
+   1672        2        3      497       14  (oprt.)  IndexInParent         
+     23        2       11      669     2089           helper                
+   1983       11        3      845      509  (oprt.)  Index                 
+     21       14        0     1741        0  GAP      SMTX_BasesMaximalSubm*
+  41082       52        1      961        0  (oprt.)  GeneratorsOfMagmaWith*
+   3589      117       10    24644      196  (oprt.)  GroupHomomorphismByIm*
+   5548      201        1   126679        9  GAP      Image                 
+     23        4      357      260    72973  (oprt.)  Kernel                
+    844     1400       89   306969    15315  (oprt.)  IsomorphismSimplified*
+     42     2846        1    28291      127  (oprt.)  IsomorphismFpGroup    
+     16      239     4954   162674   557235           PPQuotient            
+          125904           993895*                    OTHER                 
+          130798           100045*                    TOTAL                 
