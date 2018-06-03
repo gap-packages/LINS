@@ -1,7 +1,8 @@
-TQuotient := function(QQ, G, n, H)
-  local list, I, Q, m, LL, L, i, K, Iso, IH, PL;
-  list := [];
-  #Prepare the index list
+TQuotient := function(GroupsFound, n, Current, QQ)
+  local G, H, I, Q, m, LL, L, i, K, Iso, IH, PL;
+  G := GroupsFound[1].Group;
+  H := GroupsFound[Current].Group;
+    #Prepare the index list
   I := [];
   for Q in QQ do
     if Q[1] > n / Index(G,H) then
@@ -10,10 +11,10 @@ TQuotient := function(QQ, G, n, H)
     Add(I,Q[2]);
   od;
   if Length(I) = 0 then
-    return list;
+    return GroupsFound;
   fi;
   m := Maximum(I);
-  # Search the LowIndex Subgroups with correct index
+    # Search the LowIndex Subgroups with correct index
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
   LL := LowIndexSubgroupsFpGroup(IH, m);
@@ -23,11 +24,11 @@ TQuotient := function(QQ, G, n, H)
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          Add(list,K);
+          GroupsFound := AddGroup(GroupsFound,K,[1],true);
         fi;
         break;
       fi;
     od;
   od;
-  return list;
+  return GroupsFound;
 end;

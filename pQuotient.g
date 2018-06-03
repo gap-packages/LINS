@@ -2,16 +2,17 @@ helper := function(Gens,O,Mu,Psi)
   return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(Gens[i]^Mu)^Psi))));
 end;
 
-PPQuotient := function(G, n, H)
-  local p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, list, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom;
-  list := [];
+PPQuotient := function(GroupsFound, n, Current)
+  local G, H, p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom;
+  G := GroupsFound[1].Group;
+  H := GroupsFound[Current].Group;
   p := 2;
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
   F := FreeGroupOfFpGroup(IH);
   GenF := GeneratorsOfGroup(F);
   ComRel := [];
-  # Calculate the commutator relations for the p-Module M
+    # Calculate the commutator relations for the p-Module M
   for i in [1..Length(GenF)] do
     for j in [(i + 1)..Length(GenF)] do
       Add(ComRel, Comm(GenF[i], GenF[j]) );
@@ -20,7 +21,7 @@ PPQuotient := function(G, n, H)
 
   while p <= n / Index(G, H) do 
     
-    # Create the Isomorphism to the group structure of the p-Module M
+      # Create the Isomorphism to the group structure of the p-Module M
     Rel := [];
     for i in [1..Length(GenF)] do
       Add(Rel, GenF[i]^p);
@@ -30,11 +31,11 @@ PPQuotient := function(G, n, H)
     Mu := CompositionMapping(Mu,GroupHomomorphismByImagesNC(IH, M));
     M := Image(Mu);
 
-    # Define the group action of G on the p-Module M
-    # For every generator in G we store the action on M in form of a Matrix
+      # Define the group action of G on the p-Module M
+      # For every generator in G we store the action on M in form of a Matrix
     gens := [];
     GenM := GeneratorsOfGroup(M);
-    # If M is trivial we skip this prime
+      # If M is trivial we skip this prime
     if IsEmpty(GenM) then
       p := NextPrimeInt(p);
       continue;
@@ -51,12 +52,12 @@ PPQuotient := function(G, n, H)
       Add(gens,gen);
     od;
     
-    #Search the maximal submodules of GM
+      #Search the maximal submodules of GM
     GM := GModuleByMats(gens, FiniteField(p));
     MM := MTX.BasesMaximalSubmodules(GM);
     for m in MM do
       SGen := [];
-      # convert the vector basis into group elements of M
+        # convert the vector basis into group elements of M
       m := List(m, x -> List(x, Int));
       for i in [1..Length(m)] do
         x := MultiplicativeNeutralElement(M);
@@ -65,7 +66,7 @@ PPQuotient := function(G, n, H)
         od;
         Add(SGen,x);
       od; 
-      # get the subgroup with a p-Quotient in H
+        # get the subgroup with a p-Quotient in H
       S := Subgroup(M,SGen);
       PsiHom := NaturalHomomorphismByNormalSubgroup(M,S);
       Q := Image(PsiHom);
@@ -77,10 +78,10 @@ PPQuotient := function(G, n, H)
       PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),helper(List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
       S := Kernel(PhiHom);
       if Index(G, S) <= n then
-        Add(list,S);
+        GroupsFound := AddGroup(GroupsFound,S,[1,Current],true);
       fi;
     od;
     p := NextPrimeInt(p);
   od; 
-  return list;
+  return GroupsFound;
 end;

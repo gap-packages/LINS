@@ -20,8 +20,9 @@ QQ := [
 [9828, 28]
 ];
 
-# The list containing the needed information about the subgroups of an automorphism group
-# of a finite non abelian characteristically simple group
+# The list containing the needed information about the subgroups Q of an automorphism group
+# of a finite non abelian characteristically simple group T x ... x T with
+# T x ... x T subgroup of Q and Q / (T x ... x T) acts transitively on the copies of T
 # First entry is the order
 # Second entry is the index of a subgroup with trivial core.
 QQQ := [
@@ -59,19 +60,21 @@ QQQ := [
 
 # Find every normal subgroup of G up to index n
 LowNormalSubgroups := function(G, n)
-  local list, newlist, H;
+  local GroupsFound, Current;
   if not IsFpGroup(G) then
     G := Image(IsomorphismFpGroup(G));
   fi;
   #The list of all normal subgroups
-  list := [G];
-  for H in list do
+  GroupsFound := [rec(Group:=G, Index:=1, Supergroups := [])];
+  Current := 1;
+
+  while Current <= Length(GroupsFound) do
     # search for possible t-quotient subgroups in H
-    newlist := TQuotient(QQ, G, n, H);
-    AddGroups(G, list, newlist);
+    GroupsFound := TQuotient(GroupsFound, n, Current, QQ);
     # search for possible p-quotient subgroups in H
-    newlist := PPQuotient(G, n, H);
-    AddGroups(G, list, newlist);
+    GroupsFound := PPQuotient(GroupsFound, n, Current);
+    
+    Current := Current + 1;
   od;
-  return list;
+  return GroupsFound;
 end;

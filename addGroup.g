@@ -1,43 +1,64 @@
-# G is the group in which we search for normal subgroups.
-# list is the collection of all distinct normal subgroups in G we have found so far.
-# newlist is the collection of new normal subgroups we may want to add to the list.
-#
-# the method AddGroups checks for every entry in newlist 
-# if we have found a normal group which is not contained in list
-# and add such an entry to the list.
-AddGroups := function(G, list, newlist)
-  #local H, K, isEqual, add, word; 
-  local H, K, add; 
+AddGroup := function(GroupsFound, H, Supers, test)   
+  local G, Current, NewGroupsFound, K, Position, S, I, J; 
   
-  for H in newlist do
-    #Should be the group H added
-    add := true;
-    for K in list do
-      # First check if the index is equal
-      if Index(G, H) = Index(G, K) then
-        # Are the subgroups K and H identical?
-        if IsSubgroup(K,H) then
-          add := false;
-          break;
-        fi;
+    # Prepare the updated list of found groups
+  G := GroupsFound[1].Group;
+  Current := 1;
+  NewGroupsFound := [];
+  
+    # Insert every group with smaller index than H to the NewGroupsFound list.
+    # If test is enabled then check wether the group H is already contained in GroupsFound list.
+  while Current in [1..Length(GroupsFound)] and GroupsFound[Current].Index <= Index(G,H) do
+    K := GroupsFound[Current];
+    NewGroupsFound[Current] := K;
+    if test and K.Index = Index(G,H) then
+      if IsSubgroup(K.Group,H) then
+        K.Supergroups := Union(K.Supergroups,Supers);
+        return GroupsFound;
       fi;
-      
-      #isEqual := true;
-      #for word in AugmentedCosetTableInWholeGroup(K).primaryGeneratorWords do
-      #  if RewriteWord(AugmentedCosetTableInWholeGroup(H), word) = fail then
-      #    isEqual := false;
-      #    break;
-      #  fi;
-      #od;
-      #if isEqual = true then
-      #  add := false;
-      #  break;
-      #fi;
-      
-    od;
-    # The group H is a new normal group, so we want to add it to the list
-    if add = true then   
-      Add(list,H);
     fi;
+    Current := Current + 1;
   od;
+  
+    # Insert the group H to the NewGroupsFound list and store the Position.
+  Position := Current;
+  NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers);
+  H := NewGroupsFound[Position];
+  
+    # Insert every group with bigger index than H to the NewGroupsFound list.
+    # Update the information on positions of Supergroups if neccessary
+  for Current in [Position..Length(GroupsFound)] do
+    NewGroupsFound[Current+1] := GroupsFound[Current];
+    S := GroupsFound[Current].Supergroups;
+    I := Filtered(S, i -> i < Position);
+    J := Filtered(S, i -> i >= Position);
+    J := List(J, i -> i+1);
+    NewGroupsFound[Current+1].Supergroups := Union(I,J);
+  od;
+  
+    # Search for all possible Supergroups of H.
+  for Current in [1..Position-1] do
+    K := NewGroupsFound[Current];
+    if not (Current in H.Supergroups) then
+      if H.Index mod K.Index = 0 then
+        if IsSubset(K.Group,H.Group) then
+          Add(H.Supergroups,Current);
+        fi;     
+      fi;
+    fi; 
+  od;
+  
+    # Search for all possible Subgroups of H.
+  for Current in [Position+1..Length(NewGroupsFound)] do
+    K := NewGroupsFound[Current];
+    if not (Position in K.Supergroups) then
+      if K.Index mod H.Index = 0 then
+        if IsSubset(H.Group,K.Group) then
+          Add(H.Supergroups,Position);
+        fi;     
+      fi;
+    fi; 
+  od;
+  
+  return NewGroupsFound;
 end;
