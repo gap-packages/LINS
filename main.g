@@ -67,12 +67,13 @@ LowNormalSubgroups := function(G, n)
   #The list of all normal subgroups
   GroupsFound := [rec(Group:=G, Index:=1, Supergroups := [])];
   Current := 1;
-
+  GroupsFound := TQuotient(GroupsFound, n, Current, QQ);
+  
   while Current <= Length(GroupsFound) do
-    # search for possible t-quotient subgroups in H
-    GroupsFound := TQuotient(GroupsFound, n, Current, QQ);
-    # search for possible p-quotient subgroups in H
+    # search for possible p-Quotients
     GroupsFound := PPQuotient(GroupsFound, n, Current);
+    # search for possible Intersections
+    GroupsFound := FindIntersections(GroupsFound, n, Current);  
     
     Current := Current + 1;
   od;
