@@ -1,27 +1,41 @@
 
-Index up to 150
-  Are all groups normal: true
-  How many normal groups are found: 30
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
-     30       13        0     1990        0           TQuotient             
-     60       81        0    18139        0           AddGroups             
-     30     1442        0   175156        0           PPQuotient            
-            1536            195286                    TOTAL                 
-
-Index up to 200
-  Are all groups normal: true
-  How many normal groups are found: 40
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
-     80      249        0    40832        0           AddGroups             
-     40      392        0    45086        0           TQuotient             
-     40     2206        0   361832        0           PPQuotient            
-            2847            447751                    TOTAL                 
-
 Index up to 250
   Are all groups normal: true
   How many normal groups are found: 47
-  count  self/ms  chld/ms  stor/kb  chld/kb  package  function              
-     47      194        0    45125        0           TQuotient             
-     94      258        0    61423        0           AddGroups             
-     47    55033        0  113545*        0           PPQuotient            
-           55485           114611*                    TOTAL                 
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                   
+   1796       12        0      805       18  GAP      Intersection                               
+     47        2       12      145     1217           FindIntersections                          
+      1        0       22        0     2180           TQuotient                                  
+     69      608       25   260151      615           AddGroup                                   
+     47      179    12458    37215  1624136           PPQuotient                                 
+           11872           1366576                    OTHER                                      
+           12673           1664895                    TOTAL                                      
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                   
+      2        5        0      736        3  (oprt.)  LowIndexSubgroupsFpGroup                   
+     16        5        6      307      503  (oprt.)  Core                                       
+      1        0       22        0     2180           TQuotient                                  
+   9882      105        7    23005       29  GAP      Image                                      
+     95      135        5    31280      366  (oprt.)  IsomorphismFpGroup                         
+    160      169       25    51513     3591  GAP      PreImage                                   
+           12254           1558050                    OTHER                                      
+           12673           1664895                    TOTAL                                      
+
+  count  self/ms  chld/ms  stor/kb  chld/kb  package  function                                   
+    171       23        5     3027      730  GAP      NaturalHomomorphismByNormalSubgroupNC      
+     61       26       12     8839     3532           helper                                     
+   1085       45        1     7870       69  (oprt.)  GroupHomomorphismByImagesNC                
+  43293       36       12      770        0  (oprt.)  GeneratorsOfMagmaWithInverses              
+   2039       64        4    13121       16  (oprt.)  PreImagesRepresentative                    
+   9882      105        7    23005       29  GAP      Image                                      
+     95      135        5    31280      366  (oprt.)  IsomorphismFpGroup                         
+     61        6      195      570    55142  (oprt.)  Kernel                                     
+     81      319        0    43905        0  GAP      SMTX_BasesMaximalSubmodules                
+    183      493       24    49530     4006  (oprt.)  IsomorphismSimplifiedFpGroup               
+   3394    10419        0  1129288      171  (oprt.)  IndexInParent                              
+   3515       22    10420     2809  1129338  (oprt.)  Index                                      
+     47      179    12458    37215  1624136           PPQuotient                                 
+             801            313661                    OTHER                                      
+           12673           1664895                    TOTAL                                      
+
