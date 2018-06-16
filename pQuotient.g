@@ -1,55 +1,58 @@
-ExponentSum := function(n,word)
-  local rep,i,res;
-  i := 1;
-  res := List([1..n],x->0);
-  rep := ExtRepOfObj(word);
-  while Length(rep) >= 2*i do
-    res[rep[2*i-1]] := rep[2*i];
-    i := i + 1;
-  od;
-  return res;
+  #Calculate the GroupHom
+helper := function(GenM,p,Gens,O,Mu,Psi) 
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(MtoVS(GenM,p,Gens[i]^Mu))^Psi))));
 end;
 
   #Calculate the exponent vector of word in Fp
-MtoVS := function(n,p,word) 
-  return List(ExponentSum(n,word),x -> x * MultiplicativeNeutralElement(FiniteField(p))); 
-end;
-
-  #Calculate the GroupHom
-helper := function(GenM,p,Gens,O,Mu,Psi) 
-  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(MtoVS(Length(GenM),p,Gens[i]^Mu))^Psi))));
+MtoVS := function(GenM,p,word) 
+  return List([1..Length(GenM)],i -> ExponentSumWord(word![1],GenM[i]![1]) * MultiplicativeNeutralElement(FiniteField(p))); 
 end;
 
 
 PPQuotient := function(GroupsFound, n, Current)
-  local G, H, p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom, V, r;
+  local G, H, p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom, V;
   G := GroupsFound[1].Group;
   H := GroupsFound[Current].Group;
   p := 2;
   Iso := IsomorphismFpGroup(H);
   IH := Image(Iso);
+  F := FreeGroupOfFpGroup(IH);
+  GenF := GeneratorsOfGroup(F);
+  ComRel := [];
+    # Calculate the commutator relations for the p-Module M
+  for i in [1..Length(GenF)] do
+    for j in [(i + 1)..Length(GenF)] do
+      Add(ComRel, Comm(GenF[i], GenF[j]) );
+    od;
+  od;
 
   while p <= n / Index(G, H) do 
     
       # Create the Isomorphism to the group structure of the p-Module M
-    Mu := EpimorphismPGroup(IH,p,1);
+    Rel := [];
+    for i in [1..Length(GenF)] do
+      Add(Rel, GenF[i]^p);
+    od;
+    M := F / Union(RelatorsOfFpGroup(IH), Rel, ComRel);
+    Mu := IsomorphismSimplifiedFpGroup(M);
+    Mu := CompositionMapping(Mu,GroupHomomorphismByImagesNC(IH, M));
     M := Image(Mu);
 
       # Define the group action of G on the p-Module M
       # For every generator in G we store the action on M in form of a Matrix
+    gens := [];
     GenM := GeneratorsOfGroup(M);
       # If M is trivial we skip this prime
     if IsEmpty(GenM) then
       p := NextPrimeInt(p);
       continue;
     fi;
-    gens := [];
     for x in GeneratorsOfGroup(G) do
       gen := [];
       for y in GenM do
         y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
         word := Image(Mu, Image(Iso, x*y*x^(-1) ));
-        Add(gen, MtoVS(Length(GenM),p,word));
+        Add(gen, MtoVS(GenM,p,word));
       od;
       Add(gens,gen);
     od;
