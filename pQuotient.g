@@ -1,9 +1,16 @@
-helper := function(Gens,O,Mu,Psi) 
-  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]*(Gens[i]^Mu)^Psi))));
+  #Calculate the GroupHom
+helper := function(GenM,p,Gens,O,Mu,Psi) 
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(MtoVS(GenM,p,Gens[i]^Mu))^Psi))));
 end;
 
+  #Calculate the exponent vector of word in Fp
+MtoVS := function(GenM,p,word) 
+  return List([1..Length(GenM)],i -> ExponentSumWord(word![1],GenM[i]![1]) * MultiplicativeNeutralElement(FiniteField(p))); 
+end;
+
+
 PPQuotient := function(GroupsFound, n, Current)
-  local G, H, p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom;
+  local G, H, p, Iso, IH, F, GenF, ComRel, Rel, M, Mu, GenM, word, gen, gens, Mcomp, GM, MM, m, i, j, x, y, z, SGen, S, countvector, PsiHom, Q, O, GenIH, PhiHom, V;
   G := GroupsFound[1].Group;
   H := GroupsFound[Current].Group;
   p := 2;
@@ -45,9 +52,7 @@ PPQuotient := function(GroupsFound, n, Current)
       for y in GenM do
         y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
         word := Image(Mu, Image(Iso, x*y*x^(-1) ));
-        # count how often every generator of M is contained in the word.
-        countvector := List([1..Length(GenM)],i -> ExponentSumWord(word![1],GenM[i]![1]));
-        Add(gen, List(countvector, z -> MultiplicativeNeutralElement(FiniteField(p)) * z));
+        Add(gen, MtoVS(GenM,p,word));
       od;
       Add(gens,gen);
     od;
@@ -55,27 +60,18 @@ PPQuotient := function(GroupsFound, n, Current)
       #Search the maximal submodules of GM
     GM := GModuleByMats(gens, FiniteField(p));
     MM := MTX.BasesMaximalSubmodules(GM);
+    V := FiniteField(p)^(Length(GenM));
     for m in MM do
-      SGen := [];
-        # convert the vector basis into group elements of M
-      m := List(m, x -> List(x, Int));
-      for i in [1..Length(m)] do
-        x := MultiplicativeNeutralElement(M);
-        for j in [1..Length(m[i])] do
-          x := GenM[j]^m[i][j] * x;
-        od;
-        Add(SGen,x);
-      od; 
-        # get the subgroup with a p-Quotient in H
-      S := Subgroup(M,SGen);
-      PsiHom := NaturalHomomorphismByNormalSubgroup(M,S);
-      Q := Image(PsiHom);
-      if Order(Q) > n / Index(G, H) then
+      m := Subspace(V,m);
+      r := Int(Floor(Log(Float(QuoInt(n,Index(G,H))))/Log(Float(p))+0.1));
+      if Dimension(V)-Dimension(m) >= r or Dimension(V)-Dimension(m) = 0 then
         continue;
       fi;
+      PsiHom := NaturalHomomorphismBySubspace(V,m);
+      Q := Image(PsiHom);
       O := Elements(Q);
       GenIH := GeneratorsOfGroup(IH);
-      PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),helper(List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
+      PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),helper(GenM,p,List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
       S := Kernel(PhiHom);
       if Index(G, S) <= n then
         GroupsFound := AddGroup(GroupsFound,S,[1,Current],true);
