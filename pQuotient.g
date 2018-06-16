@@ -1,3 +1,4 @@
+  #Calculate the exponent n-size vector of word
 ExponentSum := function(n,word)
   local rep,i,res;
   i := 1;
