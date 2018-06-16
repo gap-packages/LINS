@@ -1,16 +1,23 @@
+##
+## Add the group H to the list GroupsFound.
+## Supers is a list of positions of supergroups in the list GroupsFound.
+## If test is true, then it is checked, if the group H is not already contained in the list GroupsFound.
+## The Group H will be inserted in the list GroupsFound after the last Group with smaller or equal index in G.
+## All references to position of supergroups will get updated in the list GroupsFound.
+##
 AddGroup := function(GroupsFound, H, Supers, test)   
   local G, Current, NewGroupsFound, K, Position, S, I, J; 
   
-    # Prepare the updated list of found groups
+  # Prepare the updated list of found groups.
   G := GroupsFound[1].Group;
   Current := 1;
   NewGroupsFound := [];
   
-    # Insert every group with smaller index than H to the NewGroupsFound list.
-    # If test is enabled then check wether the group H is already contained in GroupsFound list.
+  # Insert every group with smaller index than H to the list NewGroupsFound.
   while Current in [1..Length(GroupsFound)] and GroupsFound[Current].Index <= Index(G,H) do
     K := GroupsFound[Current];
     NewGroupsFound[Current] := K;
+    # If test is true, then check if the group H is already contained in the list GroupsFound.
     if test and K.Index = Index(G,H) then
       if IsSubgroup(K.Group,H) then
         K.Supergroups := Union(K.Supergroups,Supers);
@@ -20,13 +27,13 @@ AddGroup := function(GroupsFound, H, Supers, test)
     Current := Current + 1;
   od;
   
-    # Insert the group H to the NewGroupsFound list and store the Position.
+  # Insert the group H to the list NewGroupsFound and store the Position.
   Position := Current;
   NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers);
   H := NewGroupsFound[Position];
   
-    # Insert every group with bigger index than H to the NewGroupsFound list.
-    # Update the information on positions of Supergroups if neccessary
+  # Insert every group with bigger index than H to the NewGroupsFound list.
+  # Update the information on positions of Supergroups if neccessary.
   for Current in [Position..Length(GroupsFound)] do
     NewGroupsFound[Current+1] := GroupsFound[Current];
     S := GroupsFound[Current].Supergroups;
@@ -36,7 +43,7 @@ AddGroup := function(GroupsFound, H, Supers, test)
     NewGroupsFound[Current+1].Supergroups := Union(I,J);
   od;
   
-    # Search for all possible Supergroups of H.
+  # Search for all possible Supergroups of H.
   for Current in [1..Position-1] do
     K := NewGroupsFound[Current];
     if not (Current in H.Supergroups) then
@@ -48,7 +55,7 @@ AddGroup := function(GroupsFound, H, Supers, test)
     fi; 
   od;
   
-    # Search for all possible Subgroups of H.
+  # Search for all possible Subgroups of H.
   for Current in [Position+1..Length(NewGroupsFound)] do
     K := NewGroupsFound[Current];
     if not (Position in K.Supergroups) then
