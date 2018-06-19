@@ -42,7 +42,7 @@ InstallGlobalFunction( FindIntersections, function(GroupsFound, n, Current)
     fi;
     
     # Add the intersection to the list GroupsFound
-    GroupsFound := AddGroup(GroupsFound, Intersection(H.Group,K.Group), [Current,Other], true);
+    GroupsFound := AddGroup(GroupsFound, Intersection(H.Group,K.Group), [Other,Current], true);
   od;
   
   # Return the updated list GroupsFound

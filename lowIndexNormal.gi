@@ -101,7 +101,9 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
     # Search for possible P-Quotients
     GroupsFound := FindPQuotients(GroupsFound, n, Current);
     # Search for possible Intersections
-    GroupsFound := FindIntersections(GroupsFound, n, Current);  
+    if Current > 1 then
+      GroupsFound := FindIntersections(GroupsFound, n, Current); 
+    fi; 
     # Search for maximal G-normal subgroups in the next group
     Current := Current + 1;
   od;

@@ -101,7 +101,7 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
       
       # Add the subgroup K by calling the addGroup-function
       if Index(G, K) <= n then
-        GroupsFound := AddGroup(GroupsFound,K,[1,Current],true);
+        GroupsFound := AddGroup(GroupsFound,K,SSortedList([1,Current]),true);
       fi;
     od;
     

@@ -20,7 +20,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     # If test is true, then check if the group H is already contained in the list GroupsFound.
     if test and K.Index = Index(G,H) then
       if IsSubgroup(K.Group,H) then
-        K.Supergroups := Union(K.Supergroups,Supers);
+        UniteSet(K.Supergroups,Supers);
         return GroupsFound;
       fi;
     fi;
@@ -40,28 +40,28 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     I := Filtered(S, i -> i < Position);
     J := Filtered(S, i -> i >= Position);
     J := List(J, i -> i+1);
-    NewGroupsFound[Current+1].Supergroups := Union(I,J);
+    NewGroupsFound[Current+1].Supergroups := SSortedList(Union(I,J));
   od;
   
   # Search for all possible Supergroups of H.
-  for Current in [1..Position-1] do
+  for Current in [1..(Position-1)] do
     K := NewGroupsFound[Current];
     if not (Current in H.Supergroups) then
       if H.Index mod K.Index = 0 then
         if IsSubset(K.Group,H.Group) then
-          Add(H.Supergroups,Current);
+          AddSet(H.Supergroups,Current);
         fi;     
       fi;
     fi; 
   od;
   
   # Search for all possible Subgroups of H.
-  for Current in [Position+1..Length(NewGroupsFound)] do
+  for Current in [(Position+1)..Length(NewGroupsFound)] do
     K := NewGroupsFound[Current];
     if not (Position in K.Supergroups) then
       if K.Index mod H.Index = 0 then
         if IsSubset(H.Group,K.Group) then
-          Add(H.Supergroups,Position);
+          AddSet(K.Supergroups,Position);
         fi;     
       fi;
     fi; 
