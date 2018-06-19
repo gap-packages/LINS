@@ -93,7 +93,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   Current := 1;
   
   # Call T-Quotient Procedure on G
-  GroupsFound := FindTQuotients(GroupsFound, n, Current, QQ);
+  GroupsFound := FindTQuotients(GroupsFound, n, Current, QQQ);
   
   # Search in any group at the position Current in GroupsFound for maximal G-normal subgroups.
   # Such subgroups have a quotient of the current group that is a characterstically simple group.
