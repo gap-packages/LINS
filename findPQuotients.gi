@@ -83,9 +83,10 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
       
       # Check wether the index will be greater than n
       m := Subspace(V,m);
-      r := Int(Floor(Log(Float(QuoInt(n,Index(G,H))))/Log(Float(p))+0.1));
-      if Dimension(V)-Dimension(m) >= r or Dimension(V)-Dimension(m) = 0 then
-        #continue;
+      #r := Int(Floor(Log(Float(QuoInt(n,Index(G,H))))/Log(Float(p))+0.1));
+      r := ( Dimension(V) - Dimension(m) )*p;
+      if r > n / Index(G, H) then
+        continue;
       fi;
       
       # Calculate the natural homomorphism from V to V/m
