@@ -80,7 +80,7 @@ QQQ := [
 ## Calculate every normal subgroup of G up to index n
 ## The algorithm works only for n less equal the maximum index boundary max_index
 ##
-LowNormalSubgroups := function(G, n)
+InstallGlobalFunction( LowIndexNormal, function(G, n)
   local GroupsFound, Current;
   if not IsFpGroup(G) then
     G := Image(IsomorphismFpGroup(G));
@@ -93,13 +93,13 @@ LowNormalSubgroups := function(G, n)
   Current := 1;
   
   # Call T-Quotient Procedure on G
-  GroupsFound := TQuotient(GroupsFound, n, Current, QQ);
+  GroupsFound := FindTQuotients(GroupsFound, n, Current, QQ);
   
   # Search in any group at the position Current in GroupsFound for maximal G-normal subgroups.
   # Such subgroups have a quotient of the current group that is a characterstically simple group.
   while Current <= Length(GroupsFound) do
     # Search for possible P-Quotients
-    GroupsFound := PPQuotient(GroupsFound, n, Current);
+    GroupsFound := FindPQuotients(GroupsFound, n, Current);
     # Search for possible Intersections
     GroupsFound := FindIntersections(GroupsFound, n, Current);  
     # Search for maximal G-normal subgroups in the next group
@@ -108,4 +108,4 @@ LowNormalSubgroups := function(G, n)
   
   # Return every normal subgroup found
   return GroupsFound;
-end;
+end);

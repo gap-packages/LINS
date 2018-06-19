@@ -7,7 +7,7 @@
 ## by calling the addGroup-function
 ##
 
-FindIntersections := function(GroupsFound, n, Current)
+InstallGlobalFunction( FindIntersections, function(GroupsFound, n, Current)
   local H,K,M,F,Other,index;
   
   # If the current group is G, then continue.
@@ -47,4 +47,4 @@ FindIntersections := function(GroupsFound, n, Current)
   
   # Return the updated list GroupsFound
   return GroupsFound;
-end;
+end);

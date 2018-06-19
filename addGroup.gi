@@ -5,7 +5,7 @@
 ## The Group H will be inserted in the list GroupsFound after the last Group with smaller or equal index in G.
 ## All references to position of supergroups will get updated in the list GroupsFound.
 ##
-AddGroup := function(GroupsFound, H, Supers, test)   
+InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)   
   local G, Current, NewGroupsFound, K, Position, S, I, J; 
   
   # Prepare the updated list of found groups.
@@ -68,4 +68,4 @@ AddGroup := function(GroupsFound, H, Supers, test)
   od;
   
   return NewGroupsFound;
-end;
+end);

@@ -18,7 +18,7 @@
 ## In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H
 ## up to some sufficient large enough index.
 ##
-TQuotient := function(GroupsFound, n, Current, QQ)
+InstallGlobalFunction( FindTQuotients, function(GroupsFound, n, Current, QQ)
   local G, H, I, Q, m, LL, L, i, K, Iso, IH, PL;
   
   # References to the Groups in the list GroupsFound.
@@ -64,4 +64,4 @@ TQuotient := function(GroupsFound, n, Current, QQ)
   
   # Return the updated list GroupsFound
   return GroupsFound;
-end;
+end);

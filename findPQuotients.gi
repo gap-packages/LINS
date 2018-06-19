@@ -34,7 +34,7 @@ end;
 ## Calculate every normal subgroup K of G, such that H/K is an elementary abelian p-Group
 ## and the index in G is less equal n.
 ##
-PPQuotient := function(GroupsFound, n, Current)
+InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
   local G, H, p, Iso, IH, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K;
   
   # References to the Groups in the list GroupsFound.
@@ -110,4 +110,4 @@ PPQuotient := function(GroupsFound, n, Current)
   
   # Return the updated list GroupsFound
   return GroupsFound;
-end;
+end);
