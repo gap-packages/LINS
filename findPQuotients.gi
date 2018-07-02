@@ -1,7 +1,7 @@
 ##
-## Calculate the exponent n-size vector of word
+## Calculate the exponent sum n-size vector of word in Fp
 ##
-ExponentSum := function(n,word)
+ExponentSum := function(n,p,word)
   local rep,i,res;
   i := 1;
   res := List([1..n],x->0);
@@ -10,22 +10,16 @@ ExponentSum := function(n,word)
     res[rep[2*i-1]] := rep[2*i];
     i := i + 1;
   od;
-  return res;
+  return List(res,x -> x * MultiplicativeNeutralElement(FiniteField(p))); ;
 end;
 
-##
-## Calculate the exponent vector of word in Fp
-##
-MtoVS := function(n,p,word) 
-  return List(ExponentSum(n,word),x -> x * MultiplicativeNeutralElement(FiniteField(p))); 
-end;
 
 ##
 ## Calculate the GroupHomomorphism into the symmetric group 
 ## representing the action of H on H/K by left multiplication
 ##
 PullBackH := function(GenM,p,Gens,O,Mu,Psi) 
-  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(MtoVS(Length(GenM),p,Gens[i]^Mu))^Psi))));
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
 end;
 
 ##
@@ -68,7 +62,7 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
       for y in GenM do
         y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
         word := Image(Mu, Image(Iso, x*y*x^(-1) ));
-        Add(gen, MtoVS(Length(GenM),p,word));
+        Add(gen, ExponentSum(Length(GenM),p,word));
       od;
       Add(gens,gen);
     od;
@@ -83,7 +77,6 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
       
       # Check wether the index will be greater than n
       m := Subspace(V,m);
-      #r := Int(Floor(Log(Float(QuoInt(n,Index(G,H))))/Log(Float(p))+0.1));
       r := p^( Dimension(V) - Dimension(m) );
       if r > n / Index(G, H) then
         continue;
