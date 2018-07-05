@@ -2,31 +2,55 @@
 
 DIR=$1
 TEST=$2
-SCRIPTS="$DIR/scripts"
 TESTFILES="$DIR/testfiles"
-OUTPUT="$DIR/output/$TEST"
 LATEX="$DIR/latex"
 
+# Create all .tex files from the testfile
 cd $DIR/..
 gap64 -r -b -q -T << EOI
 Read("$TESTFILES/$TEST.g");
 EOI
 
-echo "\documentclass{test}" > $LATEX/$TEST.tex
-echo "\begin{document}" >> $LATEX/$TEST.tex
+cd $LATEX 
 
-for SUBTEST in $OUTPUT/*/; do
+
+# Base Group File
+FILE=${TEST}BaseGroup.tex
+echo "\documentclass{test}" > ./$FILE
+echo "\begin{document}" >> ./$FILE
+for SUBTEST in ./$TEST/*/; do
   SUBTEST=${SUBTEST%*/}
-  FILE=$SUBTEST/main.txt
-  $SCRIPTS/convertToTex.sh $TEST < $FILE
-  
-  for FILE in $SUBTEST/table*; do
-    $SCRIPTS/convertToTable.sh $LATEX/$TEST.tex < $FILE
-  done
+  SUBTEST=./$TEST/${SUBTEST##*/}
+  echo "\input{${SUBTEST}/header.tex}" >> ./$FILE
+  echo "\input{${SUBTEST}/main.tex}" >> ./$FILE
 done
+echo "\end{document}" >> ./$FILE
+latexmk -silent $FILE
 
-echo "\end{document}" >> $LATEX/$TEST.tex;
 
-cd $LATEX
-latexmk $TEST.tex 
-#latexmk -silent $TEST.tex test.cls
+# Base Profile File
+FILE=${TEST}BaseProfile.tex
+echo "\documentclass{test}" > ./$FILE
+echo "\begin{document}" >> ./$FILE
+for SUBTEST in ./$TEST/*/; do
+  SUBTEST=${SUBTEST%*/}
+  SUBTEST=./$TEST/${SUBTEST##*/}
+  echo "\input{${SUBTEST}/header.tex}" >> ./$FILE
+  echo "\input{${SUBTEST}/table1.tex}" >> ./$FILE
+done
+echo "\end{document}" >> ./$FILE
+latexmk -silent $FILE
+
+
+# Extended Profile File
+FILE=${TEST}ExtendedProfile.tex
+echo "\documentclass{test}" > ./$FILE
+echo "\begin{document}" >> ./$FILE
+for SUBTEST in ./$TEST/*/; do
+  SUBTEST=${SUBTEST%*/}
+  SUBTEST=./$TEST/${SUBTEST##*/}
+  echo "\input{${SUBTEST}/header.tex}" >> ./$FILE
+  echo "\input{${SUBTEST}/table2.tex}" >> ./$FILE
+done
+echo "\end{document}" >> ./$FILE
+latexmk -silent $FILE
