@@ -1,0 +1,5 @@
+#$pdflatex = 'lualatex --recorder --synctex=1 --shell-escape -halt-on-error %O %S && cp %D ../pdf/%R.pdf';
+$pdflatex = 'pdflatex --recorder --synctex=1 --shell-escape -halt-on-error %O %S && cp %D ../pdf/%R.pdf';
+$pdf_mode = 1;
+$out_dir = "../build";
+
