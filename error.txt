@@ -1,13 +1,11 @@
 gap> Read("lowIndexNormal.gd");
-gap> $680];                                                                  
-[ "$C_2*C_5$", <fp group on the generators [ f1, f2 ]>, 2000, 266.68 ]
-gap> current := last;
-[ "$C_2*C_5$", <fp group on the generators [ f1, f2 ]>, 2000, 266.68 ]
+gap> [ "$C_2*C_5$", FreeProduct(CyclicGroup(2),CyclicGroup(5)), 2000, 266.68 ];
+gap> current := last;;
 gap> groupname := current[1];
 "$C_2*C_5$"
-gap>   g := current[2];
+gap> g := current[2];
 <fp group on the generators [ f1, f2 ]>
-gap>   maxIndex := current[3];
+gap> maxIndex := current[3];
 2000
 gap> m := LowIndexNormal(g, maxIndex);
 Error, List Elements: <list>[289] must have an assigned value in
