@@ -6,6 +6,7 @@ testname := "FreeProducts";
 ProfileFunctions(AllFcts); 
 
 # Create the test folder
+Exec(Concatenation("rm -r -f ", "./tests/latex/", testname));
 Exec(Concatenation("mkdir ", "./tests/latex/", testname));
 
 ToTest := [

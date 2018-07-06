@@ -29,7 +29,9 @@ end;
 ## and the index in G is less equal n.
 ##
 InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
-  local G, H, p, Iso, IH, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K;
+  local maxPQuotientIndex, G, H, p, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K;
+  
+  maxPQuotientIndex := 1000;
   
   # References to the Groups in the list GroupsFound.
   G := GroupsFound[1].Group;
@@ -44,7 +46,9 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
   while p <= n / Index(G, H) do 
     
     # Create the Isomorphism to the group structure of the p-Module M
-    Mu := EpimorphismPGroup(IH,p,1);
+    #Mu := EpimorphismPGroup(IH,p,1);
+    P := PQuotient(IH, p, 1, maxPQuotientIndex);
+    Mu := EpimorphismQuotientSystem(P);
     M := Image(Mu);
     GenM := GeneratorsOfGroup(M);
 
