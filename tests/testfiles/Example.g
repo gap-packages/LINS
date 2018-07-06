@@ -1,6 +1,7 @@
 # Start the Testfile from the root
+# All Dependencies are read from a script
 
-testname := "example";
+testname := "Example";
 
 ProfileFunctions(AllFcts); 
 
@@ -22,11 +23,13 @@ for i in [1..Length(N)] do
   #Get some info from m
   normal := ForAll(m, x -> IsNormal(m[1].Group, x.Group));
   index := List(m, x -> x.Index);
-  supers := List(m, x -> x.Supergroups);
-  #structure := List(m, x -> StructureDescription(x.Group));
+  supers := List(m, x -> Filtered(x.Supergroups, s -> ForAny(x.Supergroups, t -> s in m[t].Supergroups) = false));
   
   # HEADER
   Header(testname, groupname, maxIndex, Length(m), i);
+  
+  # RAW
+  Raw(testname, index, supers, i);
   
   # MAIN TABLE
   MainTable(testname, index, supers, i); 

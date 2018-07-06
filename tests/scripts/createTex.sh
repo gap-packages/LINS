@@ -5,7 +5,7 @@ FILE=${TEST}${FILENAME}.tex
 echo "\documentclass{test}" > ./$FILE
 echo "\usepackage{float}" >> ./$FILE
 echo "\begin{document}" >> ./$FILE
-echo "\title{${TEST}BaseGroup} \maketitle \noindent" >> ./$FILE
+echo "\title{${TEST}${FILENAME}} \maketitle \noindent" >> ./$FILE
 for SUBTEST in ./$TEST/*/; do
   SUBTEST=${SUBTEST%*/}
   SUBTEST=./$TEST/${SUBTEST##*/}

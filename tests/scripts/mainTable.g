@@ -5,7 +5,7 @@ MainTable := function(testname, index, supers, i)
   filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/main.tex");
   
   # Create table layout
-  AppendTo(filename, "\\begin{center}", "\n", "\\begin{tabular}[H]");
+  AppendTo(filename, "\\begin{center}", "\n", "\\begin{longtable}[H]");
   AppendTo(filename, "{|| c c c ||}", "\n");
   AppendTo(filename, "\\hline", "\n");
   AppendTo(filename, "Number", " &  ", "Index", " &  ", "Supergroups", "\n", "\\\\");
@@ -17,6 +17,6 @@ MainTable := function(testname, index, supers, i)
     AppendTo(filename, "\\hline", "\n");
   od;
   
-  AppendTo(filename, "\\end{tabular}", "\n", "\\end{center}", "\n");
+  AppendTo(filename, "\\end{longtable}", "\n", "\\end{center}", "\n");
   
 end;

@@ -5,6 +5,7 @@
 \ProvidesClass{bachelorarbeit}
 
 \RequirePackage{underscore}
+\RequirePackage{longtable}
 \RequirePackage{tikz}
 \usetikzlibrary{babel}
 \RequirePackage{tikz-cd}
@@ -24,7 +25,7 @@
     \setmathfont[range=\setminus]{XITS Math}
     \setmathfont[range=\mathbb]{TeX Gyre Termes Math}
 \else
-    \RequirePackage[ngerman]{babel}
+    %\RequirePackage[ngerman]{babel}
     \RequirePackage[utf8]{inputenc}
 \fi 
 

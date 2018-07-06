@@ -1,0 +1,25 @@
+gap> Read("lowIndexNormal.gd");
+gap> $680];                                                                  
+[ "$C_2*C_5$", <fp group on the generators [ f1, f2 ]>, 2000, 266.68 ]
+gap> current := last;
+[ "$C_2*C_5$", <fp group on the generators [ f1, f2 ]>, 2000, 266.68 ]
+gap> groupname := current[1];
+"$C_2*C_5$"
+gap>   g := current[2];
+<fp group on the generators [ f1, f2 ]>
+gap>   maxIndex := current[3];
+2000
+gap> m := LowIndexNormal(g, maxIndex);
+Error, List Elements: <list>[289] must have an assigned value in
+  qs!.images{generators} := gens{[ 1 .. d ]}
+ ; at /usr/local/lib/gap4r8/lib/pquot.gi:1347 called from 
+AbelianPQuotient( qs ); at /usr/local/lib/gap4r8/lib/pquot.gi:1458 called from
+PQuotient( G, p, c, ngens 
+ ) at /usr/local/lib/gap4r8/lib/pquot.gi:1537 called from
+EpimorphismPGroup( IH, p, 1 ) at ./findPQuotients.gi:47 called from
+FindPQuotients( GroupsFound, n, Current 
+ ) at ./lowIndexNormal.gi:102 called from
+<function "LowIndexNormal">( <arguments> )
+ called from read-eval loop at line 7 of *stdin*
+you can 'return;' after assigning a value
+brk>
