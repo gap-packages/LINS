@@ -26,6 +26,11 @@ ToTest := [
 ];
 for i in [1..Length(ToTest)] do
   
+  # Too much memory for local machine
+  if i = 7 then
+    continue;
+  fi;
+  
   # Definitions
   current := ToTest[i];
   groupname := current[1];
