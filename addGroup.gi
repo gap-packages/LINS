@@ -48,7 +48,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     K := NewGroupsFound[Current];
     if not (Current in H.Supergroups) then
       if H.Index mod K.Index = 0 then
-        if IsSubset(K.Group,H.Group) then
+        if IsSubgroup(K.Group,H.Group) then
           AddSet(H.Supergroups,Current);
         fi;     
       fi;
@@ -60,7 +60,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     K := NewGroupsFound[Current];
     if not (Position in K.Supergroups) then
       if K.Index mod H.Index = 0 then
-        if IsSubset(H.Group,K.Group) then
+        if IsSubgroup(H.Group,K.Group) then
           AddSet(K.Supergroups,Position);
         fi;     
       fi;
