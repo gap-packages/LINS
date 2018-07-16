@@ -3,7 +3,10 @@
 
 testname := "FreeProducts";
 
-ProfileFunctions(AllFcts); 
+# Read Dependencies
+Read("./tests/scripts/readDependencies.g");
+
+ProfileFunctions(AllFcts);
 
 # Create the test folder
 Exec(Concatenation("rm -r -f ", "./tests/latex/", testname));
@@ -23,7 +26,7 @@ ToTest := [
 ];
 for i in [1..Length(ToTest)] do
   
-  #Define name and maxIndex
+  # Definitions
   current := ToTest[i];
   groupname := current[1];
   g := current[2];
@@ -32,16 +35,15 @@ for i in [1..Length(ToTest)] do
   # Run the LowIndexNormal procedure and save the output
   m := LowIndexNormal(g, maxIndex);
   
-  #Get some info from m
+  # Calculate information about normal subgroups
   normal := ForAll(m, x -> IsNormal(m[1].Group, x.Group));
   index := List(m, x -> x.Index);
   supers := List(m, x -> Filtered(x.Supergroups, s -> ForAny(x.Supergroups, t -> s in m[t].Supergroups) = false));
   
   # HEADER
   Header(testname, groupname, maxIndex, Length(m), i);
-  
-  # RAW
-  Raw(testname, index, supers, i);
+  filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/header.tex");
+  AppendTo(filename, "Total Magma-Time in s : ", current[4], "\\\\", "\n");
   
   # MAIN TABLE
   MainTable(testname, index, supers, i); 
@@ -50,6 +52,9 @@ for i in [1..Length(ToTest)] do
   for j in [1..Length(Fcts)] do
     ProfileTable(testname, Fcts[j], i, j);
   od;
+  
+  # RAW
+  Raw(testname, index, supers, i);
   
   ClearProfile();
 od;

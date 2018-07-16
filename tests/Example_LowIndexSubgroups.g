@@ -1,9 +1,11 @@
 # Start the Testfile from the root
-# All Dependencies are read from a script
 
 testname := "Example_LowIndexSubgroups";
 
-ProfileFunctions(Concatenation(AllFcts,LowIndexSubgroupsFpGroup,IsNormal)); 
+# Read Dependencies
+Read("./tests/scripts/readDependencies.g");
+
+ProfileFunctions(Concatenation(AllFcts,[LowIndexSubgroupsFpGroup,IsNormal])); 
 
 # Create the test folder
 Exec(Concatenation("mkdir ", "./tests/latex/", testname));
@@ -33,6 +35,8 @@ for i in [1..Length(N)] do
   # Get some info from ll
   index2 := List(ll, x -> Index(g,x));
   supers2 := List([1..Length(ll)],i->Filtered([1..(i-1)],j->IsSubgroup(ll[j],ll[i])));
+  
+  IsCorrectResult(index, supers, index2, supers2);
 
 od;
 

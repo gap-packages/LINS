@@ -5,13 +5,7 @@ TEST=$2
 
 # Create all .tex files from the testfile
 cd $DIR/..
-gap64 -r -b -q -T << EOI
-Read("./lowIndexNormal.gd");
-Read("./tests/scripts/fctsProfileDefinition.g");
-Read("./tests/scripts/header.g");
-Read("./tests/scripts/mainTable.g");
-Read("./tests/scripts/profileTable.g");
-Read("./tests/scripts/raw.g");
+gap -r -b -q -T << EOI
 Read("./tests/testfiles/$TEST.g");
 EOI
 
