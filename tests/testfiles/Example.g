@@ -32,11 +32,14 @@ for i in [1..Length(N)] do
   Header(testname, groupname, maxIndex, Length(m), i);
    
   # MAIN TABLE
-  MainTable(testname, index, supers, i);
+  CreateTable(testname, "GroupLattice", 
+  ["Number", "Index", "Supergroups"], 
+  [[1..Length(index)], index, supers], i);
 
   # PROFILING TABLES
   for j in [1..Length(Fcts)] do
-    ProfileTable(testname, Fcts[j], i, j);
+    CreateTable(testname, Concatenation("Table", String(j)), 
+    ["Count", "AbsT/s", "ChildT/s", "AbsS/gb", "ChildS/gb", "Function"], ProfileTable(Fcts[j],3,6), i);
   od;
   
   # RAW
@@ -44,3 +47,7 @@ for i in [1..Length(N)] do
   
   ClearProfile();
 od;
+
+CreateTex(testname, Length(N), "GroupLattice", ["header", "GroupLattice"]);
+CreateTex(testname, Length(N), "BasicProfile", ["header", "Table1"]);
+CreateTex(testname, Length(N), "ExtendedProfile", ["header", "Table2"]);

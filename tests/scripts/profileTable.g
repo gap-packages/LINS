@@ -1,26 +1,23 @@
-ProfileTable := function(testname, Fcts, i, j)
-    local filename, P, p;
-    
-    # Specify location
-    filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/table", String(j), ".tex");
-    
-    # Create table layout
-    AppendTo(filename, "\\begin{center}", "\n", "\\begin{longtable}[H]");
-    AppendTo(filename, "{|| c c c c c c ||}", "\n");
-    AppendTo(filename, "\\hline", "\n");
-    AppendTo(filename, "Count" , " & ", "AbsT/s", " & ", "ChildT/s", " & ", "AbsS/mb", " & ", "ChildS/mb", " & ", "Function", "\\\\" ,"\n");
-    AppendTo(filename, "\\hline", "\n");
-    
-    # Get profile info of the functions
-    P := ProfileInfo(Fcts,0,0);
-    P := P.prof;
-    
-    # Write info of each function into the table
-    for p in P do
-      AppendTo(filename, p[1] , " & ", IP(p[2] + p[3]), " & ", IP(p[3]), " & ", IP(p[4] + p[5]), " & ", IP(p[5]), " & ", p[7], "\\\\", "\n");
-      AppendTo(filename, "\\hline", "\n");
-    od;
-    
-    AppendTo(filename, "\\end{longtable}", "\n", "\\end{center}", "\n");
-    
+# k is exponent for conversion of ms
+# l is exponent for conversion of kb
+ProfileTable := function(Fcts, k, l)
+  local P, T;
+  P := ProfileInfo(Fcts,0,0);
+  P := P.prof;
+  T := [];
+  
+  # Populate List with raw data
+  T[1] := List(P, p->p[1]);
+  T[2] := List(P, p->p[2] + p[3]);
+  T[3] := List(P, p->p[3]);
+  T[4] := List(P, p->Int( (p[4] + p[5]) / 1024 ));
+  T[5] := List(P, p->Int( p[5] / 1024 ));
+  T[6] := List(P, p->p[7]);
+  
+  # Convert raw data
+  T[2] := List(T[2], x->DRAC(x,k,1));
+  T[3] := List(T[3], x->DRAC(x,k,1));
+  T[4] := List(T[4], x->DRAC(x,l,1));
+  T[5] := List(T[5], x->DRAC(x,l,1));
+  return T;
 end;

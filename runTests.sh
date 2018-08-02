@@ -11,7 +11,10 @@ DIR="${DIR}/tests"
 cp $DIR/latexConfig/latexmkrc $DIR/latex/latexmkrc
 cp $DIR/latexConfig/test.cls $DIR/latex/test.cls
 
+cd $DIR/..
 for TEST in $DIR/testfiles/*.g; do
   TEST=$(basename "$TEST" .g)
-  $DIR/scripts/runTestfile.sh $DIR $TEST 
+  gap -r -b -q -T << EOI
+    Read("./tests/testfiles/$TEST.g");
+EOI
 done

@@ -11,6 +11,6 @@ Header := function(testname, groupname, maxIndex, length, i)
   AppendTo(filename, "How many normal groups are found : ", length, "\\\\", "\n");
   P := ProfileInfo([LowIndexNormal],0,0);
   P := P.prof;
-  AppendTo(filename, "Total Time in s : ", IP(P[1][2] + P[1][3]), "\\\\", "\n");
+  AppendTo(filename, "Total Time in s : ", DRAC(P[1][2] + P[1][3],3,1), "\\\\", "\n");
   
 end;
