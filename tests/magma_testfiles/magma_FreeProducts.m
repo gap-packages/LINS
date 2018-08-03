@@ -35,6 +35,7 @@ for i in [1..#ToTest] do
     Times[j] := f[1]`Time;
     Counts[j] := f[1]`Count;
   end for;
+  Fcts := ["\"" cat x cat "\"" : x in Fcts]; 
   total_time := Times[1];
 
   filename := "tests/magma_results/" cat testname cat IntegerToString(i);

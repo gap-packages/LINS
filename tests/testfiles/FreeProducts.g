@@ -56,8 +56,17 @@ for i in [1..Length(ToTest)] do
   # PROFILING TABLES
   for j in [1..Length(Fcts)] do
     CreateTable(testname, Concatenation("Table", String(j)), 
-    ["Count", "AbsT/s", "ChildT/s", "AbsS/gb", "ChildS/gb", "Function"], ProfileTable(Fcts[j],3,6), i);
+    ["Function", "Count", "AbsT/s", "ChildT/s", "AbsS/gb", "ChildS/gb"], ProfileTable(Fcts[j],3,6), i);
   od;
+  
+  # COMPARISON MAGMA
+  Read(Concatenation("./tests/magma_results/Magma", testname, String(i)));
+  P := ProfileTable(Fcts[1],3,6);
+  filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/compare.tex");
+  PrintTo(filename, "Total Time in s in MAGMA: ", MAGMA_time, "\\\\", "\n");
+  AppendTo(filename, "Are results equal: ", IsCorrectResult(index, supers, MAGMA_index, MAGMA_supers), "\\\\", "\n");
+  CreateTable(testname, "CompareMagma",
+  ["Function", "Count_GAP", "Count_MAGMA", "Time_GAP", "Time_MAGMA"], CompareTable(P[1], P[2], P[6], MAGMA_counts, MAGMA_times, MAGMA_fcts);
   
   # RAW
   Raw(testname, index, supers, i);
@@ -68,4 +77,5 @@ od;
 CreateTex(testname, Length(N), "GroupLattice", ["header", "GroupLattice"]);
 CreateTex(testname, Length(N), "BasicProfile", ["header", "Table1"]);
 CreateTex(testname, Length(N), "ExtendedProfile", ["header", "Table2"]);
+CreateTex(testname, Length(N), "ComparisonMagma", ["header", "compare", "CompareMagma"]);
 
