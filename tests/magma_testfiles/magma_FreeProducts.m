@@ -1,6 +1,6 @@
-load "filename";
+/* Read the testfile from root */
 
-testname := "MagmaFreeProducts"
+testname := "MagmaFreeProducts";
 
 RF := recformat< name : Strings(), group, max_index : Integers() >;
 ToTest := [
@@ -16,37 +16,48 @@ rec<RF | name := "$C_2*C_{11}$", group := FreeProduct(CyclicGroup(GrpFP, 2),Cycl
 rec<RF | name := "$C_2*C_{12}$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 12)), max_index := 150>
 ];
 for i in [1..#ToTest] do
+
   SetProfile(true);
 
   F := ToTest[i]`group;
   L := LowIndexNormalSubgroups(F,ToTest[i]`max_index);
   index := [x`Index : x in L];
   supers := [x`Supergroups : x in L];
+  supers := [IndexedSetToSequence(SetToIndexedSet(x)) : x in supers];
 
   G := ProfileGraph();
   V := VertexLabels(G);
   Fcts := ["LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup"];
   Times := [];
+  Counts := [];
   for j in [1..#Fcts] do
     f := [x : x in V | Fcts[j] in x`Name];
     Times[j] := f[1]`Time;
+    Counts[j] := f[1]`Count;
   end for;
   total_time := Times[1];
 
-  filename := Concatenation("../magma/", testname, String(i));
+  filename := "tests/magma_results/" cat testname cat IntegerToString(i);
+  SetOutputFile(filename: Overwrite := true);
   PrintFile(filename, "MAGMA_index := ");
   PrintFile(filename, index);
-  PrintFile(filename, "\n");
+  PrintFile(filename,  ";\n");
   PrintFile(filename, "MAGMA_supers := ");
   PrintFile(filename, supers);
-  PrintFile(filename, "\n");
+  PrintFile(filename, ";\n");
   PrintFile(filename, "MAGMA_time := ");
   PrintFile(filename, total_time);
-  PrintFile(filename, "\n");
+  PrintFile(filename, ";\n");
   PrintFile(filename, "MAGMA_fcts := ");
   PrintFile(filename, Fcts);
-  PrintFile(filename, "\n");
+  PrintFile(filename, ";\n");
   PrintFile(filename, "MAGMA_times := ");
   PrintFile(filename, Times);
-  PrintFile(filename, "\n");
+  PrintFile(filename, ";\n");
+  PrintFile(filename, "MAGMA_counts := ");
+  PrintFile(filename, Counts);
+  PrintFile(filename, ";\n");
+  UnsetOutputFile();
+  
+  ProfileReset();
 end for;
