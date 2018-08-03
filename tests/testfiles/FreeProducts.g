@@ -76,8 +76,8 @@ for i in [1..Length(ToTest)] do
   ClearProfile();
 od;
 
-CreateTex(testname, Length(N), "GroupLattice", ["header", "GroupLattice"]);
-CreateTex(testname, Length(N), "BasicProfile", ["header", "Table1"]);
-CreateTex(testname, Length(N), "ExtendedProfile", ["header", "Table2"]);
-CreateTex(testname, Length(N), "ComparisonMagma", ["header", "compare", "CompareMagma"]);
+CreateTex(testname, Length(ToTest), "GroupLattice", ["header", "GroupLattice"]);
+CreateTex(testname, Length(ToTest), "BasicProfile", ["header", "Table1"]);
+CreateTex(testname, Length(ToTest), "ExtendedProfile", ["header", "Table2"]);
+CreateTex(testname, Length(ToTest), "ComparisonMagma", ["header", "compare", "CompareMagma"]);
 
