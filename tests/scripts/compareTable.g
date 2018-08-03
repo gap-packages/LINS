@@ -1,4 +1,4 @@
-CompareTable := function( GAP_counts, GAP_times, GAP_fcts, MAGMA_counts, MAGMA_times, MAGMA_fcts)
+CompareTable := function( GAP_fcts, GAP_counts, GAP_times, MAGMA_fcts, MAGMA_counts, MAGMA_times)
   local GAP_names, MAGMA_names, GAP_sort, MAGMA_sort, T;
   GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup"];
   MAGMA_names := [ "LowIndexNormalSubgroups", "FindPQuotients", "FindTs", "FindIntersections", "AddGroup"];

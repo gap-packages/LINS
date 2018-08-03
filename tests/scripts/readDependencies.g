@@ -7,4 +7,5 @@ Read("./tests/scripts/compareTable.g");
 Read("./tests/scripts/createTable.g");
 Read("./tests/scripts/createTex.g");
 Read("./tests/scripts/raw.g");
+LoadPackage("Grape");
 Read("./tests/scripts/isCorrectResult.g");

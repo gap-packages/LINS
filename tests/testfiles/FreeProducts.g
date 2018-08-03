@@ -43,7 +43,8 @@ for i in [1..Length(ToTest)] do
   # Calculate information about normal subgroups
   normal := ForAll(m, x -> IsNormal(m[1].Group, x.Group));
   index := List(m, x -> x.Index);
-  supers := List(m, x -> Filtered(x.Supergroups, s -> ForAny(x.Supergroups, t -> s in m[t].Supergroups) = false));
+  supers := List(m, x -> x.Supergroups);
+  supers_filtered := List(m, x -> Filtered(x.Supergroups, s -> ForAny(x.Supergroups, t -> s in m[t].Supergroups) = false));
   
   # HEADER
   Header(testname, groupname, maxIndex, Length(m), i);
@@ -51,7 +52,7 @@ for i in [1..Length(ToTest)] do
   # MAIN TABLE
   CreateTable(testname, "GroupLattice", 
   ["Number", "Index", "Supergroups"], 
-  [[1..Length(index)], index, supers], i);
+  [[1..Length(index)], index, supers_filtered], i);
 
   # PROFILING TABLES
   for j in [1..Length(Fcts)] do
@@ -64,9 +65,10 @@ for i in [1..Length(ToTest)] do
   P := ProfileTable(Fcts[1],3,6);
   filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/compare.tex");
   PrintTo(filename, "Total Time in s in MAGMA: ", MAGMA_time, "\\\\", "\n");
-  AppendTo(filename, "Are results equal: ", IsCorrectResult(index, supers, MAGMA_index, MAGMA_supers), "\\\\", "\n");
+  MAGMA_supers_filtered := List([1..Length(MAGMA_index)], x -> Filtered(MAGMA_supers[x], s -> ForAny(MAGMA_supers[x], t -> s in MAGMA_supers[t]) = false));
+  AppendTo(filename, "Are results equal: ", IsCorrectResult(index, supers_filtered, MAGMA_index, MAGMA_supers_filtered), "\\\\", "\n");
   CreateTable(testname, "CompareMagma",
-  ["Function", "Count_GAP", "Count_MAGMA", "Time_GAP", "Time_MAGMA"], CompareTable(P[1], P[2], P[6], MAGMA_counts, MAGMA_times, MAGMA_fcts);
+  ["Function", "Count_GAP", "Count_MAGMA", "Time_GAP", "Time_MAGMA"], CompareTable(P[1], P[2], P[3], MAGMA_fcts, MAGMA_counts, MAGMA_times), i);
   
   # RAW
   Raw(testname, index, supers, i);
