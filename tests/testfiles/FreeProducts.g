@@ -46,11 +46,11 @@ for i in [1..Length(ToTest)] do
   supers := List(m, x -> x.Supergroups);
   supers_filtered := List(m, x -> Filtered(x.Supergroups, s -> ForAny(x.Supergroups, t -> s in m[t].Supergroups) = false));
   
-  # RAW
-  Raw(testname, index, supers, Fcts[2], i);
-  
   # HEADER
   Header(testname, groupname, maxIndex, Length(m), i);
+  
+  # RAW
+  Raw(testname, index, supers, Fcts[2], i);
    
   # MAIN TABLE
   CreateTable(testname, "GroupLattice", 
