@@ -1,4 +1,4 @@
-Raw := function(testname, index, supers, i)
+Raw := function(testname, index, supers, Fcts, i)
   local filename;
   
   # Specify location
