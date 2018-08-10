@@ -32,7 +32,9 @@ for i in [1..#ToTest] do
   Counts := [];
   for j in [1..#Fcts] do
     f := [x : x in V | Fcts[j] in x`Name];
-    Times[j] := f[1]`Time;
+    t := f[1]`Time;
+    t := Round(t * 10);
+    Times[j] := IntegerToString(t div 10) cat "." cat IntegerToString(t mod 10);
     Counts[j] := f[1]`Count;
   end for;
   Fcts := ["\"" cat x cat "\"" : x in Fcts]; 
