@@ -1,20 +1,12 @@
 /* Read the testfile from root */
 
-testname := "MagmaFreeProducts";
+testname := "MagmaDihedral";
 
 RF := recformat< name : Strings(), group, max_index : Integers() >;
 ToTest := [
-rec<RF | name := "$C_2*C_3$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 3)), max_index := 2500>,
-rec<RF | name := "$C_2*C_4$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 4)), max_index := 500>,
-rec<RF | name := "$C_2*C_5$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 5)), max_index := 2000>,
-rec<RF | name := "$C_2*C_6$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 6)), max_index := 500>,
-rec<RF | name := "$C_2*C_7$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 7)), max_index := 1000>,
-rec<RF | name := "$C_2*C_8$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 8)), max_index := 500>,
-rec<RF | name := "$C_2*C_9$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 9)), max_index := 1000>,
-rec<RF | name := "$C_2*C_{10}$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 10)), max_index := 500>,
-rec<RF | name := "$C_2*C_{11}$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 11)), max_index := 1000>,
-rec<RF | name := "$C_2*C_{12}$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 12)), max_index := 150>
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 125>,
 ];
+
 for i in [1..#ToTest] do
 
   SetProfile(true);
