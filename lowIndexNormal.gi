@@ -5,46 +5,47 @@
 max_index := 10000;
 
 ##
-## The pregenerated list QQ will contain the following information in form of tupels of any group
+## The pregenerated list TargetsCharSimple will contain the following information in form of tupels of any group
 ## (T x T x ... x T), where T is a non-abelian simple group, 
 ## with group order up to the maximum index boundary max_index. 
 ## Let Q be such a group of interest, then the information about Q will be consisting of the following:
 ## 1 : the group order
 ## 2 : an index of some group S, that has trivial core in Q
-## The list QQ is sorted by information 1.
+## 3 : the order of the schur multiplier of Q
+## The list TargetsQuotient is sorted by information 1.
 
-QQ := [
-[  60,  5], 
-[ 168,  7], 
-[ 360,  6], 
-[ 504,  9],
-[ 660, 11], 
-[1092, 14], 
-[2448, 18], 
-[2520,  7],
-[3420, 20],
-[3600, 25],
-[4080, 17], 
-[5616, 13], 
-[6048, 28], 
-[6072, 24], 
-[7800, 26], 
-[7920, 11],
-[9828, 28]
+TargetsCharSimple := [
+[  60,  5, 2], 
+[ 168,  7, 2], 
+[ 360,  6, 4], 
+[ 504,  9, 3],
+[ 660, 11, 2], 
+[1092, 14, 2], 
+[2448, 18, 2], 
+[2520,  7, 2],
+[3420, 20, 2],
+[3600, 25, 4],
+[4080, 17, 4], 
+[5616, 13, 2], 
+[6048, 28, 2], 
+[6072, 24, 2], 
+[7800, 26, 4], 
+[7920, 11, 1],
+[9828, 28, 6]
 ];
 
 ##
-## The pregenerated list QQQ will contain the following information in form of tupels of any subgroup Q of
+## The pregenerated list TargetsQuotient will contain the following information in form of tupels of any subgroup Q of
 ## Aut(T x T x ... x T), where T is a non-abelian simple group, 
 ## such that (T x T x ... x T) is a subgroup of Q and Q / (T x T x ... x T) acts transitively on the copies of T,
 ## with group grder up to the maximum index boundary max_index. 
 ## Let Q be such a group of interest, then the information about Q will be consisting of the following:
 ## 1 : the group order
 ## 2 : an index of some group S, that has trivial core in Q
-## The list QQQ is sorted by information 1.
+## The list TargetsQuotient is sorted by information 1.
 ##
 
-QQQ := [
+TargetsQuotient := [
 [  60,  5], 
 [ 120,  5], 
 [ 168,  7], 
@@ -94,7 +95,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   Current := 1;
   
   # Call T-Quotient Procedure on G
-  GroupsFound := FindTQuotients(GroupsFound, n, Current, QQQ);
+  GroupsFound := FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
   
   # Search in any group at the position Current in GroupsFound for maximal G-normal subgroups.
   # Such subgroups have a quotient of the current group that is a characterstically simple group.
