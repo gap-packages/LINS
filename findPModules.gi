@@ -1,5 +1,29 @@
+##
+## Calculate the exponent sum n-size vector of word in Fp
+##
+ExponentSum := function(n,p,word)
+  local rep,i,res;
+  i := 1;
+  res := List([1..n],x->0);
+  rep := ExtRepOfObj(word);
+  while Length(rep) >= 2*i do
+    res[rep[2*i-1]] := rep[2*i];
+    i := i + 1;
+  od;
+  return List(res,x -> x * MultiplicativeNeutralElement(FiniteField(p))); ;
+end;
+
+
+##
+## Calculate the GroupHomomorphism into the symmetric group 
+## representing the action of H on H/K by left multiplication
+##
+PullBackH := function(GenM,p,Gens,O,Mu,Psi) 
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
+end;
+
 InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)   
-    local maxPGenerators, G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K; 
+    local maxPGenerators, G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
   maxPGenerators := 1000;
   
   # References to the Groups in the list GroupsFound.
@@ -19,8 +43,7 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
 
   # If M is trivial we skip this prime
   if IsEmpty(GenM) then
-    p := NextPrimeInt(p);
-    continue;
+    return GroupsFound;
   fi;
   
   # Define the group action of G on the p-Module M
