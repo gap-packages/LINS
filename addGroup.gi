@@ -21,7 +21,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     if test and K.Index = Index(G,H) then
       if IsSubgroup(K.Group,H) then
         UniteSet(K.Supergroups,Supers);
-        return GroupsFound;
+        return [GroupsFound,Current];
       fi;
     fi;
     Current := Current + 1;
@@ -67,5 +67,5 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     fi; 
   od;
   
-  return NewGroupsFound;
+  return [NewGroupsFound,Position];
 end);

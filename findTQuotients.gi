@@ -55,7 +55,7 @@ InstallGlobalFunction( FindTQuotients, function(GroupsFound, n, Current, QQ)
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          GroupsFound := AddGroup(GroupsFound,K,[1],true);
+          GroupsFound := AddGroup(GroupsFound,K,[1],true)[1];
         fi;
         break;
       fi;
