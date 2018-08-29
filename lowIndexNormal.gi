@@ -99,7 +99,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   
   # Search in any group at the position Current in GroupsFound for maximal G-normal subgroups.
   # Such subgroups have a quotient of the current group that is a characterstically simple group.
-  while Current <= Length(GroupsFound) do
+  while Current <= Length(GroupsFound) and GroupsFound[Current].Index <= (n / 2) do
     # Search for possible P-Quotients
     GroupsFound := FindPQuotients(GroupsFound, n, Current);
     # Search for possible Intersections
