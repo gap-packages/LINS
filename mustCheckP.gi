@@ -51,7 +51,7 @@ InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
   ordersToCheck := List( Filtered(TargetsCharSimple, Q -> Q[3] mod p = 0), Q -> Q[1]);
   for i in minSubSizes do
     for j in ordersToCheck do
-      if IsPowerOf(i, j) then
+      if i = j then
         return true;  
       fi;
     od;
