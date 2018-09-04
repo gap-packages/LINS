@@ -1,4 +1,26 @@
+ProfileTable2 := function(P, k, l)
+  local T;
+  T := [];
+  
+  # Populate List with raw data
+  T[1] := List(P, p->p[7]);
+  T[2] := List(P, p->p[1]);
+  T[3] := List(P, p->p[2] + p[3]);
+  T[4] := List(P, p->p[3]);
+  T[5] := List(P, p->Int( (p[4] + p[5]) / 1024 ));
+  T[6] := List(P, p->Int( p[5] / 1024 ));
+
+  
+  # Convert raw data
+  T[3] := List(T[3], x->DRAC(x,k,1));
+  T[4] := List(T[4], x->DRAC(x,k,1));
+  T[5] := List(T[5], x->DRAC(x,l,1));
+  T[6] := List(T[6], x->DRAC(x,l,1));
+  return T;
+end;
+
 testname := "FreeProducts";
+Read("./tests/scripts/readDependencies.g");
 ToTest := [
 ["$C_2*C_3$", FreeProduct(CyclicGroup(2),CyclicGroup(3)), 2500, 402.630],
 ["$C_2*C_4$", FreeProduct(CyclicGroup(2),CyclicGroup(4)), 500, 470.730],
@@ -13,17 +35,26 @@ ToTest := [
 ];
 
 for i in [1..Length(ToTest)] do
-   if i = 7 then
-     continue;
-   fi;
-   Read(Concatenation("./tests/magma_results/Magma", testname, String(i)));
-   Read(Concatenation("./tests/latex/", testname, "/subtest", String(i), "/raw.g"));                                                           
-   maxIndex := ToTest[i][3];
-   l := Length(Filtered(GAP_index,i->i<=maxIndex/2));                                    
-   Print(l, ":");
-   b := l - MAGMA_counts[3];
-   Print(b, "\n");
-   g := GAP_index = MAGMA_index;
-   Print(g, "\n");
+    
+  Print("--------------------------------------", "\n");
+  Print("Test : ", String(i), "\n");
+
+  Read(Concatenation("./tests/magma_results/Magma", testname, String(i)));
+  Read(Concatenation("./tests/latex/", testname, "/subtest", String(i), "/raw.g"));
+                                                              
+  g := GAP_index = MAGMA_index;
+  Print("Is index the same : ", g, "\n");
+   
+  P := ProfileTable2(GAP_profile,3,6); 
+  GAP_fcts := P[1];
+  GAP_times := P[3];
+  GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup"];
+  MAGMA_names := [ "LowIndexNormalSubgroups", "FindPQuotients", "FindTs", "FindIntersections", "AddGroup"];
+  GAP_sort := List(GAP_names, x->Position(GAP_fcts,x));
+  MAGMA_sort := List(MAGMA_names, x->Position(MAGMA_fcts,x));
+  Print("FindPQuotients without AddGroup in GAP : ", Float(GAP_times[GAP_sort[2]]) - Float(GAP_times[GAP_sort[5]]), "\n"); 
+  Print("FindPQuotients in MAGMA : ", Float(MAGMA_times[MAGMA_sort[2]]), "\n"); 
+  Print("AddGroups in GAP : ", GAP_times[GAP_sort[5]], "\n"); 
+  Print("AddGroups in MAGMA : ", MAGMA_times[MAGMA_sort[5]], "\n"); 
 od;
 
