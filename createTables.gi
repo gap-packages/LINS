@@ -1,3 +1,5 @@
+## WIP
+
 ##
 ## The pregenerated list QQ will contain the following information in form of tupels of any group
 ## (T x T x ... x T), where T is a non-abelian simple group, 
@@ -7,6 +9,26 @@
 ## 2 : an index of some group S, that has trivial core in Q
 ## 3 : group name
 ## The list QQ is sorted by information 1.
+
+
+L := [];
+
+for t in itSimple do
+  l := [];
+  a := Order(t);
+  Add(l,a); 
+                                       
+  F := Set(Factors(a));
+  prod := 1;
+  for p in F do
+    chr := CHR(t,p);
+    S := SchurMultiplier(chr);
+    prod := prod * Product(S);
+  od;
+  Add(l,prod);
+
+  Add(L,l);
+od;
 
 CreateTables := function(QQ, QQQ, maxIndex)
   local table, currentIndex, itSimple, t, i, iso, fp, name, j, q, itSubgroup, s;
