@@ -6,7 +6,7 @@ Header := function(testname, groupname, maxIndex, length, i)
   filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/header.tex");
   
   # Write header
-  AppendTo(filename, "\\textbf{", "Group : ", groupname, "}", "\\\\", "\n");
+  PrintTo(filename, "\\textbf{", "Group : ", groupname, "}", "\\\\", "\n");
   AppendTo(filename, "Searching up to index : ", maxIndex, "\\\\", "\n");
   AppendTo(filename, "How many normal groups are found : ", length, "\\\\", "\n");
   P := ProfileInfo([LowIndexNormal],0,0);
