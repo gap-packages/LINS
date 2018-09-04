@@ -26,6 +26,11 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
     local maxPGenerators, G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
   maxPGenerators := 1000;
   
+  if p in GroupsFound[Current].TriedPrimes then
+    return GroupsFound;
+  fi;
+  AddSet(GroupsFound[Current].TriedPrimes,p);
+  
   # References to the Groups in the list GroupsFound.
   G := GroupsFound[1].Group;
   H := GroupsFound[Current].Group;

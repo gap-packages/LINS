@@ -91,7 +91,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   # Group : the normal subgroup of G
   # Index : the index in G
   # SuperGroups : the position of every supergroup in the list GroupsFound
-  GroupsFound := [rec(Group:=G, Index:=1, Supergroups := [])];
+  GroupsFound := [rec(Group:=G, Index:=1, Supergroups := [], TriedPrimes := [])];
   Current := 1;
   
   # Call T-Quotient Procedure on G

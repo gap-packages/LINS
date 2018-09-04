@@ -29,7 +29,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
   
   # Insert the group H to the list NewGroupsFound and store the Position.
   Position := Current;
-  NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers);
+  NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers,TriedPrimes:=[]);
   H := NewGroupsFound[Position];
   
   # Insert every group with bigger index than H to the NewGroupsFound list.
