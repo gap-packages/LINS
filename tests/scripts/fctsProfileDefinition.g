@@ -1,10 +1,9 @@
-BasicFcts := [LowIndexNormal, FindPQuotients, FindPModules, MustCheckP, FindTQuotients, 
-FindIntersections, AddGroup];
+BasicFcts := [LowIndexNormal, FindPQuotients, FindPModules, MustCheckP, FindTQuotients, FindIntersections, AddGroup, MTX.BasesMaximalSubmodules, PullBackH];
 GSubFcts := [Index, IsomorphismFpGroup, Image];
 TSubFcts := [LowIndexSubgroupsFpGroup, PreImage, Core];
 PSubFcts := [PQuotient, MinSubgroupSizes, IsPowerOf, EpimorphismQuotientSystem, 
 PreImagesRepresentative, GeneratorsOfGroup, 
-GModuleByMats, MTX.BasesMaximalSubmodules, GroupHomomorphismByImagesNC, NaturalHomomorphismBySubspace, Kernel, PullBackH, ExponentSum, NextPrimeInt];
+GModuleByMats, GroupHomomorphismByImagesNC, NaturalHomomorphismBySubspace, Kernel, ExponentSum, NextPrimeInt];
 AISubFcts := [IsSubgroup, Intersection];
 AllFcts := Concatenation(BasicFcts,GSubFcts,TSubFcts,PSubFcts,AISubFcts);
 
