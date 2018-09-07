@@ -29,18 +29,19 @@ MAGMA_supers :=
 ;
 
 MAGMA_time := 
-1.5
+1.0
 ;
 
 MAGMA_fcts := 
-[ "LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup" ]
+[ "LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", 
+"PullBackH" ]
 ;
 
 MAGMA_times := 
-[ 1.5, 0.2, 1.3, 0.0, 0.0 ]
+[ 1.0, 0.2, 0.8, 0.0, 0.0, 0.0, 0.8, 0.0, 0.0 ]
 ;
 
 MAGMA_counts := 
-[ 1, 1, 6, 5, 21 ]
+[ 1, 1, 6, 5, 21, 34, 9, 7, 14 ]
 ;
 
