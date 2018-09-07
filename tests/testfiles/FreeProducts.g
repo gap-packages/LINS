@@ -45,7 +45,7 @@ for i in [1..Length(ToTest)] do
   Header(testname, groupname, maxIndex, Length(m), i);
   
   # RAW
-  Raw(testname, index, supers, Fcts[2], i);
+  Raw(testname, index, supers, Fcts[2], normal i);
    
   # MAIN TABLE
   CreateTable(testname, "GroupLattice", 
@@ -61,10 +61,6 @@ for i in [1..Length(ToTest)] do
   # COMPARISON MAGMA
   Read(Concatenation("./tests/magma_results/Magma", testname, String(i)));
   P := ProfileTable(Fcts[1],3,6);
-  ##filename := Concatenation("./tests/latex/", testname, "/subtest", String(i), "/compare.tex");
-  ##PrintTo(filename, "Total Time in s in MAGMA: ", MAGMA_time, "\\\\", "\n");
-  ##MAGMA_supers_filtered := List([1..Length(MAGMA_index)], x -> Filtered(MAGMA_supers[x], s -> ForAny(MAGMA_supers[x], t -> s in MAGMA_supers[t]) = false));
-  ##AppendTo(filename, "Are results equal: ", IsCorrectResult(index, supers_filtered, MAGMA_index, MAGMA_supers_filtered), "\\\\", "\n");
   CreateTable(testname, "CompareMagma",
   ["Function", "Count_GAP", "Count_MAGMA", "Time_GAP", "Time_MAGMA"], CompareTable(P[1], P[2], P[3], MAGMA_fcts, MAGMA_counts, MAGMA_times), i);
   
