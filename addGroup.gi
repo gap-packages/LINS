@@ -29,6 +29,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
   
   # Insert the group H to the list NewGroupsFound and store the Position.
   Position := Current;
+  Supers := Set(Concatenation(List(Supers, s-> Concatenation([s],GroupsFound[s].Supergroups))));
   NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers,TriedPrimes:=[]);
   H := NewGroupsFound[Position];
   
@@ -44,12 +45,12 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
   od;
   
   # Search for all possible Supergroups of H.
-  for Current in [1..(Position-1)] do
+  for Current in Reversed([1..(Position-1)]) do
     K := NewGroupsFound[Current];
     if not (Current in H.Supergroups) then
       if H.Index mod K.Index = 0 then
         if IsSubgroup(K.Group,H.Group) then
-          AddSet(H.Supergroups,Current);
+          UniteSet(H.Supergroups,Concatenation([Current],NewGroupsFound[Current].Supergroups));
         fi;     
       fi;
     fi; 
