@@ -45,7 +45,7 @@ for i in [1..Length(ToTest)] do
   Header(testname, groupname, maxIndex, Length(m), i);
   
   # RAW
-  Raw(testname, index, supers, Fcts[2], normal i);
+  Raw(testname, index, supers, Fcts[2], normal, i);
    
   # MAIN TABLE
   CreateTable(testname, "GroupLattice", 
