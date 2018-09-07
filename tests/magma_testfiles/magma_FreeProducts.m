@@ -27,7 +27,7 @@ for i in [1..#ToTest] do
 
   G := ProfileGraph();
   V := VertexLabels(G);
-  Fcts := ["LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup"];
+  Fcts := ["LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", "PullBackH"];
   Times := [];
   Counts := [];
   for j in [1..#Fcts] do
