@@ -6,7 +6,7 @@
 ## All references to position of supergroups will get updated in the list GroupsFound.
 ##
 InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)   
-  local G, Current, NewGroupsFound, K, Position, S, I, J; 
+  local G, Current, NewGroupsFound, K, Position, S, I, J, Subs; 
   
   # Prepare the updated list of found groups.
   G := GroupsFound[1].Group;
@@ -63,6 +63,9 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
       if K.Index mod H.Index = 0 then
         if IsSubgroup(H.Group,K.Group) then
           AddSet(K.Supergroups,Position);
+          for Subs in Filtered([Current+1..Length(NewGroupsFound)], i -> Current in NewGroupsFound[i].Supergroups) do
+            AddSet(NewGroupsFound[Subs].Supergroups,Position);
+          od;
         fi;     
       fi;
     fi; 
