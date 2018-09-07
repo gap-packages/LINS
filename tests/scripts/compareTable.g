@@ -1,6 +1,6 @@
 CompareTable := function( GAP_fcts, GAP_counts, GAP_times, MAGMA_fcts, MAGMA_counts, MAGMA_times)
   local GAP_names, MAGMA_names, GAP_sort, MAGMA_sort, T;
-  GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup", "MustCheckP", "FindPModules", "MTX.BasesMaximalSubmodules", "PullBackH"];
+  GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup", "MustCheckP", "FindPModules", "SMTX_BasesMaximalSubmodules", "PullBackH"];
   MAGMA_names := [ "LowIndexNormalSubgroups", "FindPQuotients", "FindTs", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", "PullBackH"];
   GAP_sort := List(GAP_names, x->Position(GAP_fcts,x));
   MAGMA_sort := List(MAGMA_names, x->Position(MAGMA_fcts,x));
