@@ -1,3 +1,4 @@
+Read("./tests/scripts/readDependencies.g");
 ProfileTable2 := function(P, k, l)
   local T;
   T := [];
@@ -20,7 +21,6 @@ ProfileTable2 := function(P, k, l)
 end;
 
 testname := "FreeProducts";
-Read("./tests/scripts/readDependencies.g");
 ToTest := [
 ["$C_2*C_3$", FreeProduct(CyclicGroup(2),CyclicGroup(3)), 2500, 402.630],
 ["$C_2*C_4$", FreeProduct(CyclicGroup(2),CyclicGroup(4)), 500, 470.730],
@@ -44,17 +44,23 @@ for i in [1..Length(ToTest)] do
                                                               
   g := GAP_index = MAGMA_index;
   Print("Is index the same : ", g, "\n");
-   
+  
+  # taken from loop
   P := ProfileTable2(GAP_profile,3,6); 
   GAP_fcts := P[1];
+  GAP_counts := P[2];
   GAP_times := P[3];
-  GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup"];
-  MAGMA_names := [ "LowIndexNormalSubgroups", "FindPQuotients", "FindTs", "FindIntersections", "AddGroup"];
+  GAP_names := ["LowIndexNormal", "FindPQuotients", "FindTQuotients", "FindIntersections", "AddGroup", "MustCheckP", "FindPModules", "SMTX_BasesMaximalSubmodules", "PullBackH"];
+  MAGMA_names := [ "LowIndexNormalSubgroups", "FindPQuotients", "FindTs", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", "PullBackH"];
   GAP_sort := List(GAP_names, x->Position(GAP_fcts,x));
   MAGMA_sort := List(MAGMA_names, x->Position(MAGMA_fcts,x));
-  Print("FindPQuotients without AddGroup in GAP : ", Float(GAP_times[GAP_sort[2]]) - Float(GAP_times[GAP_sort[5]]), "\n"); 
-  Print("FindPQuotients in MAGMA : ", Float(MAGMA_times[MAGMA_sort[2]]), "\n"); 
-  Print("AddGroups in GAP : ", GAP_times[GAP_sort[5]], "\n"); 
-  Print("AddGroups in MAGMA : ", MAGMA_times[MAGMA_sort[5]], "\n"); 
+  Print("Total Time Gap divided with Total Time MAGMA : ",  Float(GAP_times[GAP_sort[1]]) /  Float(MAGMA_times[MAGMA_sort[1]]) ,"\n");
+  Print("AddGroup in GAP : ", GAP_times[GAP_sort[5]], "\n"); 
+  Print("AddGroup in MAGMA : ", MAGMA_times[MAGMA_sort[5]], "\n"); 
+  Print("AddGroup in GAP per count : ", Float(GAP_times[GAP_sort[5]]) / Float(GAP_counts[GAP_sort[5]]) , "\n"); 
+  Print("AddGroup in MAGMA per count : ", Float(MAGMA_times[MAGMA_sort[5]]) / Float(MAGMA_counts[MAGMA_sort[5]]), "\n");
+  Print("AddGroup in GAP per count divided with MAGMA per count : ", 
+        ( Float(GAP_times[GAP_sort[5]]) / Float(GAP_counts[GAP_sort[5]]) ) / 
+        ( Float(MAGMA_times[MAGMA_sort[5]]) / Float(MAGMA_counts[MAGMA_sort[5]]) ), "\n"); 
+  
 od;
-
