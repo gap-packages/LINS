@@ -1,3 +1,14 @@
+# returns true if H is subgroup of G
+IsSubgroupFp := function(G, H)
+  local word;
+  for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
+    if RewriteWord(AugmentedCosetTableInWholeGroup(H), word) = fail then
+      return false;
+    fi;
+  od;
+  return true;
+end;
+
 ##
 ## Add the group H to the list GroupsFound.
 ## Supers is a list of positions of supergroups in the list GroupsFound.
@@ -19,7 +30,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     NewGroupsFound[Current] := K;
     # If test is true, then check if the group H is already contained in the list GroupsFound.
     if test and K.Index = Index(G,H) then
-      if IsSubgroup(K.Group,H) then
+      if IsSubgroupFp(K.Group,H) then
         UniteSet(K.Supergroups,Supers);
         return [GroupsFound,Current];
       fi;
@@ -49,7 +60,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     K := NewGroupsFound[Current];
     if not (Current in H.Supergroups) then
       if H.Index mod K.Index = 0 then
-        if IsSubgroup(K.Group,H.Group) then
+        if IsSubgroupFp(K.Group,H.Group) then
           UniteSet(H.Supergroups,Concatenation([Current],NewGroupsFound[Current].Supergroups));
         fi;     
       fi;
@@ -61,7 +72,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     K := NewGroupsFound[Current];
     if not (Position in K.Supergroups) then
       if K.Index mod H.Index = 0 then
-        if IsSubgroup(H.Group,K.Group) then
+        if IsSubgroupFp(H.Group,K.Group) then
           AddSet(K.Supergroups,Position);
           for Subs in Filtered([Current+1..Length(NewGroupsFound)], i -> Current in NewGroupsFound[i].Supergroups) do
             AddSet(NewGroupsFound[Subs].Supergroups,Position);
