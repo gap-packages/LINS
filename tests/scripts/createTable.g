@@ -18,13 +18,13 @@ CreateTable := function(testname, filename, header, table, i)
   AppendTo(filename, "\\begin{center}", "\n", "\\begin{longtable}[H]");
   AppendTo(filename, Concatenation("{|| ", Concatenation(List(header, x->"c ")), "||}", "\n"));
   AppendTo(filename, "\\hline", "\n");
-  CreateLine(filename, header));
+  CreateLine(filename, header);
   AppendTo(filename, "\\hline", "\n");
   
   # Write info of each entry into the tex table
   for j in [1..Length(table[1])] do
     line := List(table,x->x[j]);
-    CreateLine(filename, line));
+    CreateLine(filename, line);
     AppendTo(filename, "\\hline", "\n");
   od;
   
