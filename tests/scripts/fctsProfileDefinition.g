@@ -4,7 +4,7 @@ TSubFcts := [LowIndexSubgroupsFpGroup, PreImage, Core];
 PSubFcts := [PQuotient, MinSubgroupSizes, IsPowerOf, EpimorphismQuotientSystem, 
 PreImagesRepresentative, GeneratorsOfGroup, 
 GModuleByMats, GroupHomomorphismByImagesNC, NaturalHomomorphismBySubspace, Kernel, ExponentSum, NextPrimeInt];
-AISubFcts := [IsSubgroup, Intersection];
+AISubFcts := [IsSubgroupFp, Intersection];
 AllFcts := Concatenation(BasicFcts,GSubFcts,TSubFcts,PSubFcts,AISubFcts);
 
 Fcts := 
