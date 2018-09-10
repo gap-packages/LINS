@@ -5,6 +5,11 @@ testname := "MagmaDihedral";
 RF := recformat< name : Strings(), group, max_index : Integers() >;
 ToTest := [
 rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 125>,
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 250>,
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 500>,
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 1000>,
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 2000>,
+rec<RF | name := "Dih($10000$)", group := DihedralGroup(GrpFP, 10000), max_index := 4000>
 ];
 
 for i in [1..#ToTest] do
@@ -19,7 +24,7 @@ for i in [1..#ToTest] do
 
   G := ProfileGraph();
   V := VertexLabels(G);
-  Fcts := ["LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup"];
+  Fcts := ["LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", "PullBackH"];
   Times := [];
   Counts := [];
   for j in [1..#Fcts] do

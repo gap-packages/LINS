@@ -21,7 +21,7 @@ ToTest := [
 ["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 4000]
 ];
 for i in [1..Length(ToTest)] do
-    
+  
   # Definitions
   current := ToTest[i];
   groupname := current[1];
@@ -41,7 +41,7 @@ for i in [1..Length(ToTest)] do
   Header(testname, groupname, maxIndex, Length(m), i);
   
   # RAW
-  Raw(testname, index, supers, Fcts[2], i);
+  Raw(testname, index, supers, Fcts[2], normal, i);
    
   # MAIN TABLE
   CreateTable(testname, "GroupLattice", 
