@@ -2,7 +2,7 @@
 IsSubgroupFp := function(G, H)
   local word;
   for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
-    if RewriteWord(AugmentedCosetTableInWholeGroup(H), word) = fail then
+    if RewriteWord(AugmentedCosetTableInWholeGroup(G), word) = fail then
       return false;
     fi;
   od;
