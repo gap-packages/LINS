@@ -12,13 +12,21 @@ ProfileFunctions(AllFcts);
 Exec(Concatenation("rm -r -f ", "./tests/latex/", testname));
 Exec(Concatenation("mkdir ", "./tests/latex/", testname));
 
+# computes a presentation of the dihedral group of size 2*n
+DihedralGroupFP := function(n)
+  local F,G;
+  F := FreeGroup(2);
+  G := GeneratorsOfGroup(F);
+  return F / [G[1]^n, G[2]^2, (G[1]*G[2])^2];
+end;
+
 ToTest := [
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 125],
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 250],
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 500],
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 1000],
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 2000],
-["Dih($10000$)", Image(IsomorphismFpGroup(DihedralGroup(2*10000))), 4000]
+["Dih($10000$)", DihedralGroupFP(10000), 125],
+["Dih($10000$)", DihedralGroupFP(10000), 250],
+["Dih($10000$)", DihedralGroupFP(10000), 500],
+["Dih($10000$)", DihedralGroupFP(10000), 1000],
+["Dih($10000$)", DihedralGroupFP(10000), 2000],
+["Dih($10000$)", DihedralGroupFP(10000), 4000]
 ];
 for i in [1..Length(ToTest)] do
   
