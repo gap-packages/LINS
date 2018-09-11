@@ -1,0 +1,28 @@
+MAGMA_index := 
+[ 1, 2 ]
+;
+
+MAGMA_supers := 
+[
+    [],
+    [ 1 ]
+]
+;
+
+MAGMA_time := 
+0.7
+;
+
+MAGMA_fcts := 
+[ "LowIndexNormalSubgroups", "FindTs", "FindPQuotients", "FindIntersections", "AddGroup", "MustCheckP", "TryPModules", "MaximalSubmodulesH", 
+"PullBackH" ]
+;
+
+MAGMA_times := 
+[ 0.7, 0.6, 0.1, 0.0, 0.0, 0.0, 0.1, 0.0, -1 ]
+;
+
+MAGMA_counts := 
+[ 1, 1, 2, 1, 1, 4, 5, 1, -1 ]
+;
+
