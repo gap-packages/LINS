@@ -14,11 +14,14 @@ Exec(Concatenation("mkdir ", "./tests/latex/", testname));
 
 # computes a presentation of the dihedral group of size 2*n
 DihedralGroupFP := function(n)
-  local F,G;
-  F := FreeGroup(2);
-  G := GeneratorsOfGroup(F);
-  return F / [G[1]^n, G[2]^2, (G[1]*G[2])^2];
+  return Image(IsomorphismFpGroup(DihedralGroup(10000)));
 end;
+#DihedralGroupFP := function(n)
+#  local F,G;
+#  F := FreeGroup(2);
+#  G := GeneratorsOfGroup(F);
+#  return F / [G[1]^n, G[2]^2, (G[1]*G[2])^2];
+#end;
 
 ToTest := [
 ["Dih($10000$)", DihedralGroupFP(10000), 125],
