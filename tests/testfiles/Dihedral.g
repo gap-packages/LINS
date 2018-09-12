@@ -14,7 +14,7 @@ Exec(Concatenation("mkdir ", "./tests/latex/", testname));
 
 # computes a presentation of the dihedral group of size 2*n
 DihedralGroupFP := function(n)
-  return Image(IsomorphismFpGroup(DihedralGroup(10000)));
+  return Image(IsomorphismFpGroup(DihedralGroup(2*n)));
 end;
 #DihedralGroupFP := function(n)
 #  local F,G;
