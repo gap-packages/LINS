@@ -13,16 +13,8 @@ Exec(Concatenation("rm -r -f ", "./tests/latex/", testname));
 Exec(Concatenation("mkdir ", "./tests/latex/", testname));
 
 ToTest := [
-["$C_2*C_3$", FreeProduct(CyclicGroup(2),CyclicGroup(3)), 2500, 402.630],
-["$C_2*C_4$", FreeProduct(CyclicGroup(2),CyclicGroup(4)), 500, 470.730],
-["$C_2*C_5$", FreeProduct(CyclicGroup(2),CyclicGroup(5)), 2000, 266.680],
-["$C_2*C_6$", FreeProduct(CyclicGroup(2),CyclicGroup(6)), 500, 917.500],
-["$C_2*C_7$", FreeProduct(CyclicGroup(2),CyclicGroup(7)), 1000, 46.200],
-["$C_2*C_8$", FreeProduct(CyclicGroup(2),CyclicGroup(8)), 500, 2765.470],
-["$C_2*C_9$", FreeProduct(CyclicGroup(2),CyclicGroup(9)), 1000, 333.740],
-["$C_2*C_{10}$", FreeProduct(CyclicGroup(2),CyclicGroup(10)), 500, 243.420],
-["$C_2*C_{11}$", FreeProduct(CyclicGroup(2),CyclicGroup(11)), 1000, 58.270],
-["$C_2*C_{12}$", FreeProduct(CyclicGroup(2),CyclicGroup(12)), 150, 270.790]
+["$C_2*C_3$", FreeProduct(CyclicGroup(2),CyclicGroup(3)), 10000],
+["$C_2*C_8$", FreeProduct(CyclicGroup(2),CyclicGroup(8)), 10000],
 ];
 for i in [1..Length(ToTest)] do
   
