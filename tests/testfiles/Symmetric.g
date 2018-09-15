@@ -61,7 +61,7 @@ for i in [1..Length(ToTest)] do
   Read(Concatenation("./tests/magma_results/Magma", testname, String(i)));
   MAGMA_time := DRAC_MAGMA(MAGMA_time);
   MAGMA_times := List(MAGMA_times, t->DRAC_MAGMA(t));
-  PrintTo(Concatenation("./tests/latex/", testname, "/subtest", String(i), "/CompareMagmaHeader"), "Total Time (in s) in MAGMA", MAGMA_time);
+  PrintTo(Concatenation("./tests/latex/", testname, "/subtest", String(i), "/CompareMagmaHeader"), "Total Time (in s) in MAGMA: ", MAGMA_time);
   P := ProfileTable(Fcts[1],3,6);
   CreateTable(testname, "CompareMagma",
   ["Function", "Count_GAP", "Count_MAGMA", "Time_GAP", "Time_MAGMA"], CompareTable(P[1], P[2], P[3], MAGMA_fcts, MAGMA_counts, MAGMA_times), i);
