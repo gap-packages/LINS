@@ -1,19 +1,19 @@
 ##
 ## This finds the sizes of the minimal normal subgroups of
-## G/H, where H is the group in the ’Current’ position in the list.
+## G/H, where H is the group in the position Current in the list.
 ##
-MinSubgroupSizes := function(GroupsFound, Current)
+InstallGlobalFunction(MinSubgroupSizes, function(GroupsFound, Current)
   local m, minSupergroups;
   
   m := GroupsFound[Current].Supergroups;
   minSupergroups := Filtered(m, s -> ForAny(m, t -> s in GroupsFound[t].Supergroups) = false);
   
   return List(minSupergroups, x -> Index(GroupsFound[1].Group, GroupsFound[Current].Group) / Index(GroupsFound[1].Group, GroupsFound[x].Group) );
-end;
+end);
 
 ## For positive integers a,b
 ## return true if a is some power of b;
-IsPowerOf := function(a, b)
+InstallGlobalFunction(IsPowerOf, function(a, b)
   local c;
   
   c := a;
@@ -25,10 +25,12 @@ IsPowerOf := function(a, b)
   od;
     
   return true;  
-end;
+end);
 
+##
 ## This function returns the size of the group GL(r,p).
-OGL := function(r, p)
+##
+InstallGlobalFunction(OGL, function(r, p)
   local i,j;
   
   i := 1;
@@ -37,8 +39,12 @@ OGL := function(r, p)
   od;
   
   return i;
-end;
+end);
 
+##
+## This function checks if p-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.
+## n is the maximal index, p a prime, index is the index of some group H and minSubSizes are the sizes computed by a call of MinSubgroupSizes on H.
+##
 InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
   local i,j, ordersToCheck, r;
   
@@ -48,6 +54,7 @@ InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
     fi;
   od;
   
+  # orders of Characteristically Simple Groups, where p is a divisor of the order of the schur multiplier
   ordersToCheck := List( Filtered(TargetsCharSimple, Q -> Q[3] mod p = 0), Q -> Q[1]);
   for i in minSubSizes do
     for j in ordersToCheck do

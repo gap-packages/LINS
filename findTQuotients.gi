@@ -4,7 +4,7 @@
 ## Calculate every normal subgroup K of G, such that the quotient H/K is 
 ## isomorphic to some non-abelian group Q, where QQ has stored some information about Q,
 ## and the index [G:K] is less equal n,
-## and add any such group K to the List GroupsFound by calling the AddGroup-function
+## and add any such group K to the List GroupsFound by calling the AddGroup-function.
 ##
 ##
 ## The pregenerated list QQ will contain the following information in form of tupels of any such group Q
