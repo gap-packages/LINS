@@ -23,6 +23,11 @@ InstallGlobalFunction(PullBackH, function(GenM,p,Gens,O,Mu,Psi)
 end);
 
 ##
+## maximal Generators of the PQuotient.
+##
+LINS_maxPGenerators := 1000;
+
+##
 ## Let the group G be located in the list GroupsFound at position 1.
 ## Let the group H be located in the list GroupsFound at position Current.
 ## Calculate every normal subgroup K of G, such that H/K is a p-Group
@@ -33,10 +38,7 @@ end);
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
 ##
 InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)   
-  local maxPGenerators, G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
-  
-  # maximal Generators of the PQuotient.
-  maxPGenerators := 1000;
+  local G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
   
   # Check if p-Quotients have been computed already from this group
   if p in GroupsFound[Current].TriedPrimes then
@@ -53,7 +55,7 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
   IH := Image(Iso);
   
   # Create the Isomorphism to the group structure of the p-Module M
-  P := PQuotient(IH, p, 1, maxPGenerators);
+  P := PQuotient(IH, p, 1, LINS_maxPGenerators);
   Mu := EpimorphismQuotientSystem(P);
   M := Image(Mu);
   GenM := GeneratorsOfGroup(M);

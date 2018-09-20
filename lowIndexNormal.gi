@@ -2,7 +2,7 @@
 ## The maximum index boundary the algorithm can work with
 ##
 
-max_index := 10000;
+LINS_maxIndex := 10000;
 
 ##
 ## The pregenerated list TargetsCharSimple will contain the following information in form of tupels of any group
@@ -85,6 +85,11 @@ TargetsQuotient := [
 ##
 InstallGlobalFunction( LowIndexNormal, function(G, n)
   local GroupsFound, Current;
+  
+  # Check if we can work with the index
+  if n > LINS_maxIndex then 
+    ErrorNoReturn("The index exceedes the maximal index boundary of the algorithm"); 
+  fi;
   
   # Convert the group into an fp-group if possible.
   if not IsFpGroup(G) then
