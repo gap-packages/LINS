@@ -1,11 +1,20 @@
 DeclareGlobalFunction( "LowIndexNormal" );
-DeclareGlobalFunction( "FindTQuotients" );
-DeclareGlobalFunction( "MustCheckP" );
-DeclareGlobalFunction( "FindPModules" );
-DeclareGlobalFunction( "FindPQuotients" );
-DeclareGlobalFunction( "FindIntersections" );
+
+DeclareGlobalFunction( "IsSubgroupFp" );
 DeclareGlobalFunction( "AddGroup" );
 
+DeclareGlobalFunction( "FindTQuotients" );
+
+DeclareGlobalFunction( "MinSubgroupSizes" );
+DeclareGlobalFunction( "IsPowerOf" );
+DeclareGlobalFunction( "OGL" );
+DeclareGlobalFunction( "MustCheckP" );
+DeclareGlobalFunction( "ExponentSum" );
+DeclareGlobalFunction( "PullBackH" );
+DeclareGlobalFunction( "FindPModules" );
+DeclareGlobalFunction( "FindPQuotients" );
+
+DeclareGlobalFunction( "FindIntersections" );
 
 Read("./lowIndexNormal.gi");
 Read("./findTQuotients.gi");

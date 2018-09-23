@@ -1,5 +1,8 @@
-# returns true if H is subgroup of G
-IsSubgroupFp := function(G, H)
+##
+## Returns true if H is a subgroup of G.
+## Both H and G must be subgroups of the same finitely presented group.
+##
+InstallGlobalFunction(IsSubgroupFp, function(G, H)
   local word;
   for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
     if RewriteWord(AugmentedCosetTableInWholeGroup(G), word) = fail then
@@ -7,14 +10,15 @@ IsSubgroupFp := function(G, H)
     fi;
   od;
   return true;
-end;
+end);
 
 ##
 ## Add the group H to the list GroupsFound.
 ## Supers is a list of positions of supergroups in the list GroupsFound.
 ## If test is true, then it is checked, if the group H is not already contained in the list GroupsFound.
-## The Group H will be inserted in the list GroupsFound after the last Group with smaller or equal index in G.
-## All references to position of supergroups will get updated in the list GroupsFound.
+## The group H will be inserted in the list GroupsFound after the last group with smaller or equal index in G.
+## All references to positions of supergroups will get updated in the list GroupsFound.
+## The function returns a tupel with the updated list and the position where H can be found in the new list.
 ##
 InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)   
   local G, Current, NewGroupsFound, K, Position, S, I, J, Subs; 

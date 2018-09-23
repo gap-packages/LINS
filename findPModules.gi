@@ -1,7 +1,7 @@
 ##
 ## Calculate the exponent sum n-size vector of word in Fp
 ##
-ExponentSum := function(n,p,word)
+InstallGlobalFunction(ExponentSum, function(n,p,word)
   local rep,i,res;
   i := 1;
   res := List([1..n],x->0);
@@ -11,21 +11,36 @@ ExponentSum := function(n,p,word)
     i := i + 1;
   od;
   return List(res,x -> x * MultiplicativeNeutralElement(FiniteField(p))); ;
-end;
+end);
 
 
 ##
 ## Calculate the GroupHomomorphism into the symmetric group 
-## representing the action of H on H/K by left multiplication
+## representing the action of H on H/K by multiplication
 ##
-PullBackH := function(GenM,p,Gens,O,Mu,Psi) 
+InstallGlobalFunction(PullBackH, function(GenM,p,Gens,O,Mu,Psi) 
   return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
-end;
+end);
 
+##
+## maximal Generators of the PQuotient.
+##
+LINS_maxPGenerators := 1000;
+
+##
+## Let the group G be located in the list GroupsFound at position 1.
+## Let the group H be located in the list GroupsFound at position Current.
+## Calculate every normal subgroup K of G, such that H/K is a p-Group
+## and the index in G is less equal n.
+##
+## We construct a module over the groupring (F_p G) and compute maximal submodules of this module.
+## These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian p-Quotients.
+## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
+##
 InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)   
-    local maxPGenerators, G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
-  maxPGenerators := 1000;
+  local G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
   
+  # Check if p-Quotients have been computed already from this group
   if p in GroupsFound[Current].TriedPrimes then
     return GroupsFound;
   fi;
@@ -40,8 +55,7 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
   IH := Image(Iso);
   
   # Create the Isomorphism to the group structure of the p-Module M
-  #Mu := EpimorphismPGroup(IH,p,1);
-  P := PQuotient(IH, p, 1, maxPGenerators);
+  P := PQuotient(IH, p, 1, LINS_maxPGenerators);
   Mu := EpimorphismQuotientSystem(P);
   M := Image(Mu);
   GenM := GeneratorsOfGroup(M);
@@ -93,6 +107,7 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
     if Index(G, K) <= n then
       NewGroup := AddGroup(GroupsFound,K,SSortedList([1,Current]),true);
       GroupsFound := NewGroup[1];
+      # If the index is sufficient small, compute p-Quotients from the subgroup K
       if p <= n / Index(G, K) then
         GroupsFound := FindPModules(GroupsFound, n, NewGroup[2], p);
       fi;

@@ -10,9 +10,8 @@
 ## 3 : group name
 ## The list QQ is sorted by information 1.
 
-
+## Code for Computation of Order of Schur Multiplier
 L := [];
-
 for t in itSimple do
   l := [];
   a := Order(t);

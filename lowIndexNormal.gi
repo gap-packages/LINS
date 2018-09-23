@@ -2,7 +2,7 @@
 ## The maximum index boundary the algorithm can work with
 ##
 
-max_index := 10000;
+LINS_maxIndex := 10000;
 
 ##
 ## The pregenerated list TargetsCharSimple will contain the following information in form of tupels of any group
@@ -13,6 +13,7 @@ max_index := 10000;
 ## 2 : an index of some group S, that has trivial core in Q
 ## 3 : the order of the schur multiplier of Q
 ## The list TargetsQuotient is sorted by information 1.
+##
 
 TargetsCharSimple := [
 [  60,  5, 2], 
@@ -84,9 +85,17 @@ TargetsQuotient := [
 ##
 InstallGlobalFunction( LowIndexNormal, function(G, n)
   local GroupsFound, Current;
+  
+  # Check if we can work with the index
+  if n > LINS_maxIndex then 
+    ErrorNoReturn("The index exceedes the maximal index boundary of the algorithm"); 
+  fi;
+  
+  # Convert the group into an fp-group if possible.
   if not IsFpGroup(G) then
     G := Image(IsomorphismFpGroup(G));
   fi;
+  
   # Initialize the list of already found normal subgroups consisting of records of the following form:
   # Group : the normal subgroup of G
   # Index : the index in G
@@ -97,8 +106,6 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   # Call T-Quotient Procedure on G
   GroupsFound := FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
   
-  # Search in any group at the position Current in GroupsFound for maximal G-normal subgroups.
-  # Such subgroups have a quotient of the current group that is a characterstically simple group.
   while Current <= Length(GroupsFound) and GroupsFound[Current].Index <= (n / 2) do
     # Search for possible P-Quotients
     GroupsFound := FindPQuotients(GroupsFound, n, Current);
@@ -106,10 +113,10 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
     if Current > 1 then
       GroupsFound := FindIntersections(GroupsFound, n, Current); 
     fi; 
-    # Search for maximal G-normal subgroups in the next group
+    # Search for normal subgroups in the next group
     Current := Current + 1;
   od;
   
-  # Return every normal subgroup found
+  # Return every normal subgroup
   return GroupsFound;
 end);
