@@ -4,8 +4,10 @@ testname := "MagmaLargeIndex";
 
 RF := recformat< name : Strings(), group, max_index : Integers() >;
 ToTest := [
-rec<RF | name := "$C_2*C_3$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 3)), max_index := 10000>,
-rec<RF | name := "$C_2*C_8$", group := FreeProduct(CyclicGroup(GrpFP, 2),CyclicGroup(GrpFP, 8)), max_index := 10000>
+rec<RF | name := "$C_2*C_3$", group := FreeProduct(CyclicGroup(GrpFP, 
+2),CyclicGroup(GrpFP, 3)), max_index := 5000>,
+rec<RF | name := "$C_2*C_8$", group := FreeProduct(CyclicGroup(GrpFP, 
+2),CyclicGroup(GrpFP, 8)), max_index := 2000>
 ];
 for i in [1..#ToTest] do
 
