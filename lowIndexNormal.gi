@@ -12,7 +12,7 @@ LINS_maxIndex := 10000;
 ## 1 : the group order
 ## 2 : an index of some group S, that has trivial core in Q
 ## 3 : the order of the schur multiplier of Q
-## The list TargetsQuotient is sorted by information 1.
+## The list TargetsCharSimple is sorted by information 1.
 ##
 
 TargetsCharSimple := [
