@@ -1,6 +1,7 @@
 ##
 ## Returns true if H is a subgroup of G.
 ## Both H and G must be subgroups of the same finitely presented group.
+## We need coset tables of both H and G in the supergroup.
 ##
 InstallGlobalFunction(IsSubgroupFp, function(G, H)
   local word;
@@ -21,7 +22,16 @@ end);
 ## The function returns a tupel with the updated list and the position where H can be found in the new list.
 ##
 InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)   
-  local G, Current, NewGroupsFound, K, Position, S, I, J, Subs; 
+  local 
+    G,                      # the parent group, which is stored at the first position in GroupsFound
+    NewGroupsFound,         # the updated list of groups after insertion of H
+    Current,                # Loop variable, position of current group to be inserted
+    K,                      # the group (record) at position Current
+    Position,               # the position, where H is inserted
+    S,                      # supergroups entry of K
+    I,                      # set of positions
+    J,                      # set of positions
+    Subs;                   # subgroups of K
   
   # Prepare the updated list of found groups.
   G := GroupsFound[1].Group;

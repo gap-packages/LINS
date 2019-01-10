@@ -81,7 +81,7 @@ TargetsQuotient := [
 
 ##
 ## Calculate every normal subgroup of G up to index n
-## The algorithm works only for n less equal the maximum index boundary max_index
+## The algorithm works only for n less equal the maximum index bound max_index
 ##
 InstallGlobalFunction( LowIndexNormal, function(G, n)
   local GroupsFound, Current;

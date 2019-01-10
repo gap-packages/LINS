@@ -2,7 +2,10 @@
 ## Calculate the exponent sum n-size vector of word in Fp
 ##
 InstallGlobalFunction(ExponentSum, function(n,p,word)
-  local rep,i,res;
+  local 
+    rep,      # exponent Representaton of word, that are tupels (a,b), such that a^b is a subword of word
+    i,        # loop variable
+    res;      # exponent sum n-size vector of word
   i := 1;
   res := List([1..n],x->0);
   rep := ExtRepOfObj(word);
@@ -38,7 +41,32 @@ LINS_maxPGenerators := 1000;
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
 ##
 InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)   
-  local G, H, Iso, IH, P, M, Mu, GenM, word, gen, gens, GM, MM, m, i, j, x, y, V, r, PsiHom, Q, O, GenIH, PhiHom, K, NewGroup; 
+  local 
+    G,        # the parent group, which is stored at the first position in GroupsFound
+    H,        # the group (record) at position Current
+    Iso,      # isomorphism from H into fp-group
+    IH,       # fp-group, image of Iso
+    P,        # p-quotient of IH of class 1
+    Mu,       # epimorphism from IH into P 
+    M,        # pc-group, image of Mu
+    GenM,     # generators of M, basis of Fp-G module M
+    gens,     # list of matrices, action of generators of G on M 
+    x,        # loop variable, generator of G
+    y,        # loop variable, generator of M identified by Mu and Iso with word in H
+    word,     # word in M, y^x via a "conjugation" action of G on M
+    gen,      # Fp-matrix, action of some generator of G on M
+    GM,       # MeatAxe module, representation of Fp-G module M by gens
+    MM,       # list of maximal modules of GM
+    m,        # loop variable, maximal module
+    V,        # Vectorspace Fp^n, where n is the dimension of GM
+    r,        # index of m in V, which equals index of K in H
+    PsiHom,   # epimorphism from V to V/m
+    Q,        # vector space, image of PsiHom
+    O,        # elements of Q
+    GenIH,    # generators of IH
+    PhiHom,   # epimorphism from H into p-quotient H/K, identification of Q as a quotient of H via Mu
+    K,        # subgroup of H with p-quotient, normal in G
+    NewGroup; # record (list, position) after inserting K into GroupsFound
   
   # Check if p-Quotients have been computed already from this group
   if p in GroupsFound[Current].TriedPrimes then
@@ -115,4 +143,4 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
   od;  
   
   return GroupsFound;
-end);             
+end);

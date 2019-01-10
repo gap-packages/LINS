@@ -8,7 +8,13 @@
 ##
 
 InstallGlobalFunction( FindIntersections, function(GroupsFound, n, Current)
-  local H,K,M,F,Other,index;
+  local 
+    H,          # the group (record) at postion Current
+    Other,      # Loop variable, position of group to insersect
+    K,          # the group (record) at position Other
+    M,          # smallest supergroup (record) of H and K, being HK
+    index,      # index of the intersection of H and K
+    F;          # list of groups (positions), which could be the insersection of H and K
   
   # If the current group is G, then continue.
   if Current = 1 then

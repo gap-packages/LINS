@@ -5,7 +5,10 @@
 ## and the index in G is less equal n.
 ##
 InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
-  local G, H, p;
+  local 
+    G,      # the parent group, which is stored at the first position in GroupsFound
+    H,      # the group (record) at position Current
+    p;      # loop variable, prime integer
   
   # References to the Groups in the list GroupsFound.
   G := GroupsFound[1].Group;

@@ -19,7 +19,19 @@
 ## up to some sufficient large enough index.
 ##
 InstallGlobalFunction( FindTQuotients, function(GroupsFound, n, Current, QQ)
-  local G, H, I, Q, m, LL, L, i, K, Iso, IH, PL;
+  local 
+    G,      # the parent group, which is stored at the first position in GroupsFound
+    H,      # the group (record) at position Current
+    I,      # index list  
+    Q,      # loop variable, entry of QQ
+    m,      # maximum of I
+    Iso,    # isomorphism from H into fp-group
+    IH,     # fp-group, image of Iso
+    LL,     # list of all subgroups of IH with index at most m
+    L,      # loop variable, subgroup in LL
+    i,      # loop variable, index in I
+    PL,     # preimage of L in Iso
+    K;      # normal core of PL, subgroup of H with T-quotient
   
   # References to the Groups in the list GroupsFound.
   G := GroupsFound[1].Group;
