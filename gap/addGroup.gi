@@ -1,3 +1,16 @@
+#############################################################################
+##
+##  This file is part of LINS, a package for the GAP computer algebra system
+##  which provides a method for the computation of normal subgroups in a
+##  finitely presented group.
+##
+##  This files's authors include Friedrich Rober.
+##
+##  SPDX-License-Identifier: GPL-3.0-or-later
+##
+#############################################################################
+
+
 ##
 ## Returns true if H is a subgroup of G.
 ## Both H and G must be subgroups of the same finitely presented group.
@@ -21,8 +34,8 @@ end);
 ## All references to positions of supergroups will get updated in the list GroupsFound.
 ## The function returns a tupel with the updated list and the position where H can be found in the new list.
 ##
-InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)   
-  local 
+InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
+  local
     G,                      # the parent group, which is stored at the first position in GroupsFound
     NewGroupsFound,         # the updated list of groups after insertion of H
     Current,                # Loop variable, position of current group to be inserted
@@ -32,12 +45,12 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     I,                      # set of positions
     J,                      # set of positions
     Subs;                   # subgroups of K
-  
+
   # Prepare the updated list of found groups.
   G := GroupsFound[1].Group;
   Current := 1;
   NewGroupsFound := [];
-  
+
   # Insert every group with smaller index than H to the list NewGroupsFound.
   while Current in [1..Length(GroupsFound)] and GroupsFound[Current].Index <= Index(G,H) do
     K := GroupsFound[Current];
@@ -51,13 +64,13 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     fi;
     Current := Current + 1;
   od;
-  
+
   # Insert the group H to the list NewGroupsFound and store the Position.
   Position := Current;
   Supers := Set(Concatenation(List(Supers, s-> Concatenation([s],GroupsFound[s].Supergroups))));
   NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers,TriedPrimes:=[]);
   H := NewGroupsFound[Position];
-  
+
   # Insert every group with bigger index than H to the NewGroupsFound list.
   # Update the information on positions of Supergroups if neccessary.
   for Current in [Position..Length(GroupsFound)] do
@@ -68,7 +81,7 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
     J := List(J, i -> i+1);
     NewGroupsFound[Current+1].Supergroups := SSortedList(Union(I,J));
   od;
-  
+
   # Search for all possible Supergroups of H.
   for Current in Reversed([1..(Position-1)]) do
     K := NewGroupsFound[Current];
@@ -76,11 +89,11 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
       if H.Index mod K.Index = 0 then
         if IsSubgroupFp(K.Group,H.Group) then
           UniteSet(H.Supergroups,Concatenation([Current],NewGroupsFound[Current].Supergroups));
-        fi;     
+        fi;
       fi;
-    fi; 
+    fi;
   od;
-  
+
   # Search for all possible Subgroups of H.
   for Current in [(Position+1)..Length(NewGroupsFound)] do
     K := NewGroupsFound[Current];
@@ -91,10 +104,10 @@ InstallGlobalFunction(AddGroup, function(GroupsFound, H, Supers, test)
           for Subs in Filtered([Current+1..Length(NewGroupsFound)], i -> Current in NewGroupsFound[i].Supergroups) do
             AddSet(NewGroupsFound[Subs].Supergroups,Position);
           od;
-        fi;     
+        fi;
       fi;
-    fi; 
+    fi;
   od;
-  
+
   return [NewGroupsFound,Position];
 end);

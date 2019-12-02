@@ -1,13 +1,25 @@
+#############################################################################
+##
+##  This file is part of LINS, a package for the GAP computer algebra system
+##  which provides a method for the computation of normal subgroups in a
+##  finitely presented group.
+##
+##  This files's authors include Friedrich Rober.
+##
+##  SPDX-License-Identifier: GPL-3.0-or-later
+##
+#############################################################################
+
 ##
 ## This finds the sizes of the minimal normal subgroups of
 ## G/H, where H is the group in the position Current in the list.
 ##
 InstallGlobalFunction(MinSubgroupSizes, function(GroupsFound, Current)
   local m, minSupergroups;
-  
+
   m := GroupsFound[Current].Supergroups;
   minSupergroups := Filtered(m, s -> ForAny(m, t -> s in GroupsFound[t].Supergroups) = false);
-  
+
   return List(minSupergroups, x -> Index(GroupsFound[1].Group, GroupsFound[Current].Group) / Index(GroupsFound[1].Group, GroupsFound[x].Group) );
 end);
 
@@ -15,7 +27,7 @@ end);
 ## return true if a is some power of b;
 InstallGlobalFunction(IsPowerOf, function(a, b)
   local c;
-  
+
   c := a;
   while c > 1 do
     if c mod b = 0 then
@@ -23,8 +35,8 @@ InstallGlobalFunction(IsPowerOf, function(a, b)
     else return false;
     fi;
   od;
-    
-  return true;  
+
+  return true;
 end);
 
 ##
@@ -32,12 +44,12 @@ end);
 ##
 InstallGlobalFunction(OGL, function(r, p)
   local i,j;
-  
+
   i := 1;
   for j in [0..(r-1)] do
     i := i * (p^r - p^j);
   od;
-  
+
   return i;
 end);
 
@@ -47,23 +59,23 @@ end);
 ##
 InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
   local i,j, ordersToCheck, r;
-  
+
   for i in minSubSizes do
     if IsPowerOf(i, p) then
       return false;
     fi;
   od;
-  
+
   # orders of Characteristically Simple Groups, where p is a divisor of the order of the schur multiplier
   ordersToCheck := List( Filtered(TargetsCharSimple, Q -> Q[3] mod p = 0), Q -> Q[1]);
   for i in minSubSizes do
     for j in ordersToCheck do
       if i = j then
-        return true;  
+        return true;
       fi;
     od;
   od;
-  
+
   r := 1;
   while p^(r+1) <= n / index do
     r := r+1;
@@ -71,6 +83,6 @@ InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
   if OGL(r, p) mod index = 0 then
     return true;
   fi;
-  
+
   return false;
 end);
