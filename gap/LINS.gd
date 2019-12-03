@@ -142,3 +142,6 @@ DeclareGlobalFunction( "LINS_PullBackH" );
 #! @Arguments GroupsFound, n, Current
 #! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_FindIntersections" );
+
+DeclareGlobalFunction( "LINS_CreateTargetsCharSimple" );
+DeclareGlobalFunction( "LINS_CreateTargetsQuotients" );
