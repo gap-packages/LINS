@@ -60,9 +60,9 @@ PackageDoc := rec(
 
 Dependencies := rec(
   GAP := ">= 4.11",
-  NeededOtherPackages := [ ],
+  NeededOtherPackages := [  ],
   SuggestedOtherPackages := [ ],
-  ExternalConditions := [ ],
+  ExternalConditions := [ ["grape", ">=4.8.3"] ],
 ),
 
 AvailabilityTest := ReturnTrue,

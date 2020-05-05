@@ -5,6 +5,7 @@ env:
     #- GAP_PKGS_TO_CLONE="SOME_PACKAGE"
     # list of package to compile; io and profiling are always needed for coverage reports
     #- GAP_PKGS_TO_BUILD="io profiling SOME_OTHER_PACKAGE"
+    - GAP_PKGS_TO_BUILD="io profiling grape"
 
 addons:
   apt_packages:
