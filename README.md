@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.com/FriedrichRober/LINS.svg?branch=master)](https://travis-ci.com/FriedrichRober/LINS)
+[![Code Coverage](https://codecov.io/gh/FriedrichRober/LINS/coverage.svg?branch=master&token=)](https://codecov.io/gh/FriedrichRober/LINS)
+
 # The GAP package LINS
 
 To do

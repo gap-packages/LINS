@@ -10,8 +10,8 @@ SetPackageInfo( rec(
 
 PackageName := "LINS",
 Subtitle := "",
-Version := "0.1",
-Date := "08/01/2019", # dd/mm/yyyy format
+Version := "0.2",
+Date := "07/05/2020", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -59,7 +59,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.9",
+  GAP := ">= 4.11",
   NeededOtherPackages := [ ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],
