@@ -62,7 +62,7 @@ Dependencies := rec(
   GAP := ">= 4.11",
   NeededOtherPackages := [  ],
   SuggestedOtherPackages := [ ],
-  ExternalConditions := [ ["grape", ">=4.8.3"] ],
+  ExternalConditions := [ ],
 ),
 
 AvailabilityTest := ReturnTrue,
