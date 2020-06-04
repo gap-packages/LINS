@@ -17,7 +17,7 @@
 ## Calculate every normal subgroup K of G, such that the quotient H/K is
 ## isomorphic to some non-abelian group Q, where QQ has stored some information about Q,
 ## and the index [G:K] is less equal n,
-## and add any such group K to the List GroupsFound by calling the AddGroup-function.
+## and add any such group K to the List GroupsFound by calling the LINS_AddGroup-function.
 ##
 ##
 ## The pregenerated list QQ will contain the following information in form of tupels of any such group Q
@@ -31,7 +31,7 @@
 ## In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H
 ## up to some sufficient large enough index.
 ##
-InstallGlobalFunction( FindTQuotients, function(GroupsFound, n, Current, QQ)
+InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
     H,      # the group (record) at position Current
@@ -73,14 +73,14 @@ InstallGlobalFunction( FindTQuotients, function(GroupsFound, n, Current, QQ)
 
   # Search every subgroup L with an index in G contained in I.
   # Then calculate the core of L and try to add the new Group
-  # to the list GroupsFound by calling AddGroup-function
+  # to the list GroupsFound by calling LINS_AddGroup-function
   for L in LL do
     PL := PreImage(Iso, L);
     for i in I do
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          GroupsFound := AddGroup(GroupsFound,K,[1],true)[1];
+          GroupsFound := LINS_AddGroup(GroupsFound,K,[1],true)[1];
         fi;
         break;
       fi;

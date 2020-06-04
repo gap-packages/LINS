@@ -14,7 +14,7 @@
 ## This finds the sizes of the minimal normal subgroups of
 ## G/H, where H is the group in the position Current in the list.
 ##
-InstallGlobalFunction(MinSubgroupSizes, function(GroupsFound, Current)
+InstallGlobalFunction(LINS_MinSubgroupSizes, function(GroupsFound, Current)
   local m, minSupergroups;
 
   m := GroupsFound[Current].Supergroups;
@@ -25,7 +25,7 @@ end);
 
 ## For positive integers a,b
 ## return true if a is some power of b;
-InstallGlobalFunction(IsPowerOf, function(a, b)
+InstallGlobalFunction(LINS_IsPowerOf, function(a, b)
   local c;
 
   c := a;
@@ -42,7 +42,7 @@ end);
 ##
 ## This function returns the size of the group GL(r,p).
 ##
-InstallGlobalFunction(OGL, function(r, p)
+InstallGlobalFunction(LINS_OGL, function(r, p)
   local i,j;
 
   i := 1;
@@ -55,13 +55,13 @@ end);
 
 ##
 ## This function checks if p-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.
-## n is the maximal index, p a prime, index is the index of some group H and minSubSizes are the sizes computed by a call of MinSubgroupSizes on H.
+## n is the maximal index, p a prime, index is the index of some group H and minSubSizes are the sizes computed by a call of LINS_MinSubgroupSizes on H.
 ##
-InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
+InstallGlobalFunction(LINS_MustCheckP, function(n, p, index, minSubSizes)
   local i,j, ordersToCheck, r;
 
   for i in minSubSizes do
-    if IsPowerOf(i, p) then
+    if LINS_IsPowerOf(i, p) then
       return false;
     fi;
   od;
@@ -80,7 +80,7 @@ InstallGlobalFunction(MustCheckP, function(n, p, index, minSubSizes)
   while p^(r+1) <= n / index do
     r := r+1;
   od;
-  if OGL(r, p) mod index = 0 then
+  if LINS_OGL(r, p) mod index = 0 then
     return true;
   fi;
 

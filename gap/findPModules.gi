@@ -14,7 +14,7 @@
 ##
 ## Calculate the exponent sum n-size vector of word in Fp
 ##
-InstallGlobalFunction(ExponentSum, function(n,p,word)
+InstallGlobalFunction(LINS_ExponentSum, function(n,p,word)
   local
     rep,      # exponent Representaton of word, that are tupels (a,b), such that a^b is a subword of word
     i,        # loop variable
@@ -34,8 +34,8 @@ end);
 ## Calculate the GroupHomomorphism into the symmetric group
 ## representing the action of H on H/K by multiplication
 ##
-InstallGlobalFunction(PullBackH, function(GenM,p,Gens,O,Mu,Psi)
-  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
+InstallGlobalFunction(LINS_PullBackH, function(GenM,p,Gens,O,Mu,Psi)
+  return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(LINS_ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
 end);
 
 ##
@@ -53,7 +53,7 @@ LINS_maxPGenerators := 1000;
 ## These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian p-Quotients.
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
 ##
-InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
+InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
   local
     G,        # the parent group, which is stored at the first position in GroupsFound
     H,        # the group (record) at position Current
@@ -114,7 +114,7 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
     for y in GenM do
       y := PreImagesRepresentative(Iso,PreImagesRepresentative(Mu,y));
       word := Image(Mu, Image(Iso, x*y*x^(-1) ));
-      Add(gen, ExponentSum(Length(GenM),p,word));
+      Add(gen, LINS_ExponentSum(Length(GenM),p,word));
     od;
     Add(gens,gen);
   od;
@@ -141,16 +141,16 @@ InstallGlobalFunction(FindPModules, function(GroupsFound, n, Current, p)
     GenIH := GeneratorsOfGroup(IH);
 
     # Calculate the subgroup K with H/K being an elementary abelian p-Group
-    PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),PullBackH(GenM,p,List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
+    PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),LINS_PullBackH(GenM,p,List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
     K := Kernel(PhiHom);
 
-    # Add the subgroup K by calling the addGroup-function
+    # Add the subgroup K by calling the LINS_AddGroup-function
     if Index(G, K) <= n then
-      NewGroup := AddGroup(GroupsFound,K,SSortedList([1,Current]),true);
+      NewGroup := LINS_AddGroup(GroupsFound,K,SSortedList([1,Current]),true);
       GroupsFound := NewGroup[1];
       # If the index is sufficient small, compute p-Quotients from the subgroup K
       if p <= n / Index(G, K) then
-        GroupsFound := FindPModules(GroupsFound, n, NewGroup[2], p);
+        GroupsFound := LINS_FindPModules(GroupsFound, n, NewGroup[2], p);
       fi;
     fi;
   od;
