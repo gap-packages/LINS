@@ -17,10 +17,10 @@
 ## Calculate all pairwise intersections of the group H
 ## with all other groups in the list GroupsFound that are stored before the position Current.
 ## Add any normal subgroup found as an intersection and index in G less equal n,
-## by calling the addGroup-function
+## by calling the LINS_AddGroup-function
 ##
 
-InstallGlobalFunction( FindIntersections, function(GroupsFound, n, Current)
+InstallGlobalFunction( LINS_FindIntersections, function(GroupsFound, n, Current)
   local
     H,          # the group (record) at postion Current
     Other,      # Loop variable, position of group to insersect
@@ -61,7 +61,7 @@ InstallGlobalFunction( FindIntersections, function(GroupsFound, n, Current)
     fi;
 
     # Add the intersection to the list GroupsFound
-    GroupsFound := AddGroup(GroupsFound, Intersection(H.Group,K.Group), [Other,Current], false)[1];
+    GroupsFound := LINS_AddGroup(GroupsFound, Intersection(H.Group,K.Group), [Other,Current], false)[1];
   od;
 
   # Return the updated list GroupsFound

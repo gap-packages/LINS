@@ -17,7 +17,7 @@
 ## Calculate every normal subgroup K of G, such that H/K is a p-Group
 ## and the index in G is less equal n.
 ##
-InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
+InstallGlobalFunction(LINS_FindPQuotients, function(GroupsFound, n, Current)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
     H,      # the group (record) at position Current
@@ -32,9 +32,9 @@ InstallGlobalFunction(FindPQuotients, function(GroupsFound, n, Current)
   while p <= n / Index(G, H) do
 
     # Check according to some rules whether the p-Quotients will be computed by Intersections.
-    if( MustCheckP(n, p, Index(G, H), MinSubgroupSizes(GroupsFound, Current)) ) then
+    if( LINS_MustCheckP(n, p, Index(G, H), LINS_MinSubgroupSizes(GroupsFound, Current)) ) then
       # Compute all p-Groups from H.
-      GroupsFound := FindPModules(GroupsFound, n, Current, p);
+      GroupsFound := LINS_FindPModules(GroupsFound, n, Current, p);
     fi;
 
     # Check the next prime.

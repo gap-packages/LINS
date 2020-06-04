@@ -117,14 +117,14 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   Current := 1;
 
   # Call T-Quotient Procedure on G
-  GroupsFound := FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
+  GroupsFound := LINS_FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
 
   while Current <= Length(GroupsFound) and GroupsFound[Current].Index <= (n / 2) do
     # Search for possible P-Quotients
-    GroupsFound := FindPQuotients(GroupsFound, n, Current);
+    GroupsFound := LINS_FindPQuotients(GroupsFound, n, Current);
     # Search for possible Intersections
     if Current > 1 then
-      GroupsFound := FindIntersections(GroupsFound, n, Current);
+      GroupsFound := LINS_FindIntersections(GroupsFound, n, Current);
     fi;
     # Search for normal subgroups in the next group
     Current := Current + 1;
