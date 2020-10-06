@@ -131,6 +131,10 @@ DeclareGlobalFunction( "LINS_ExponentSum" );
 #! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_PullBackH" );
 
+DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
+DeclareGlobalFunction( "LINS_MaxPowerSmallerInt" );
+
+
 #! @Description
 #! Let the group G be located in the list <A>GroupsFound</A> at position 1.
 #! Let the group H be located in the list <A>GroupsFound</A> at position <A>Current</A>.

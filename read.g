@@ -12,3 +12,5 @@ ReadPackage( "LINS", "gap/findPModules.gi");
 ReadPackage( "LINS", "gap/findPQuotients.gi");
 ReadPackage( "LINS", "gap/findIntersections.gi");
 ReadPackage( "LINS", "gap/addGroup.gi");
+ReadPackage( "LINS", "gap/helpers.gi");
+
