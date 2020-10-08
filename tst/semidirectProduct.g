@@ -17,7 +17,7 @@ TestSemidirectProduct := function()
 
     n := 2000;
     n3 := Int(n / 3);
-    L := LowIndexNormalSubgroups(G, n);
+    L := LowIndexNormal(G, n);
 
     # We enumerate all normal subgroups that we would expect to find from a theoratical point of view.
     # For this we track the positions in our list L of groups that we expected.
@@ -25,10 +25,11 @@ TestSemidirectProduct := function()
     expected := ListWithIdenticalEntries(Length(L), false);
     expected[1] := true;
     # We iterate though the primes smaller n.
-    # For each prime we have a cerain subgraph or normal subgroups, that we would expect to find.
+    # For each prime we have a cerain subgraph of normal subgroups, that we would expect to find.
     # The subgraph begins in the lattice group L and each quotient has order p or p^2.
     # The missing expected groups are intersections of groups of the above subgraphs.
     primes := LINS_AllPrimesUpTo(n3);
+    subgraphs := [];
 
     # For p = 3, we expect to find the following subgraph:
     #
@@ -67,24 +68,28 @@ TestSemidirectProduct := function()
     # Further the intersection of these 4 groups is a group of index 9.
     # Then we expect to find exactly one normal subgroup of index 3 * 3 ^ i.
     Remove(primes, 2);
+    subgraph := [];
     for i in [1 .. 4] do
-        if L[1 + i]!.Index = 3 then
+        if L[1 + i].Index = 3 then
             expected[1 + i] := true;
         else
             return false;
         fi;
     od;
     for i in [1 .. LINS_MaxPowerSmallerInt(n3, 3)] do
-        pos := PositionProperty(L, x -> x!.Index = 3 * 3 ^ i);
+        pos := PositionProperty(L, x -> x.Index = 3 * 3 ^ i);
         if pos = fail then
             return false;
         else
             expected[pos] := true;
+            Add(subgraph, pos);
         fi;
     od;
+    Add(subgraphs, subgraph);
 
     for p in primes do
-        # In this case 3 | (p - 1), we expect to find the following subgraph:
+        subgraph := [];
+        # In the case 3 | (p - 1), we expect to find the following subgraph:
         #
         # Legend:
         # L is the lattice group i.e. the additive group Z ^ 2.
@@ -116,22 +121,21 @@ TestSemidirectProduct := function()
         # Thus we expect to find exactly (i + 1) normal subgroups of index (3 * p ^ i).
         if RemInt(p - 1, 3) = 0 then
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p)] do
-                pos := PositionProperty(L, x -> x!.Index = 3 * p ^ i);
+                pos := PositionProperty(L, x -> x.Index = 3 * p ^ i);
                 if pos = fail then
-                    Print("false");
                     return false;
                 else
                     for j in [0 .. i] do
-                        if L[pos + j]!.Index = 3 * p ^ i then
+                        if L[pos + j].Index = 3 * p ^ i then
                             expected[pos + j] := true;
+                            Add(subgraph, pos + j);
                         else
                             return false;
-                            Print("false");
                         fi;
                     od;
                 fi;
             od;
-        # In this case 3 ∤ (p - 1), we expect to find the following subgraph:
+        # In the case 3 ∤ (p - 1), we expect to find the following subgraph:
         #
         # Legend:
         # L is the lattice group i.e. the additive group Z^2.
@@ -163,13 +167,42 @@ TestSemidirectProduct := function()
         # Thus we expect to find exactly one group at index 3 * p ^ (2 * i)
         else
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p ^ 2)] do
-                pos := PositionProperty(L, x -> x!.Index = 3 * p ^ (2 * i));
-                if pos = fail or L[pos]!.Group <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
-                    Print("false");
+                pos := PositionProperty(L, x -> x.Index = 3 * p ^ (2 * i));
+                if pos = fail or L[pos].Group <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
                     return false;
+                else
+                    expected[pos] := true;
+                    Add(subgraph, pos);
+                fi;
+            od;
+        fi;
+        Add(subgraphs, subgraph);
+    od;
+
+    # The intersections of the subgroups in subgraphs are the missing normal subgroups
+    for nrIntersections in [2 .. Length(subgraphs)] do
+        iterSubgraphs := IteratorOfCombinations([1 .. Length(subgraphs)], nrIntersections);
+        while not IsDoneIterator(iterSubgraphs) do
+            subgraphSelection := NextIterator(iterSubgraphs);
+            iterSubgroups := IteratorOfCartesianProduct(subgraphs{subgraphSelection});
+            while not IsDoneIterator(iterSubgroups) do
+                subgroupSelection := NextIterator(iterSubgroups);
+                # index of intersection
+                index := 3 * Product(subgroupSelection, i -> L[i].Index / 3);
+                if index > n then
+                    continue;
+                fi;
+                # pos of intersection
+                pos := PositionProperty(L, x -> ForAll(subgroupSelection, i -> i in x.Supergroups));
+                if pos = fail then
+                    return fail;
                 else
                     expected[pos] := true;
                 fi;
             od;
-        fi;
+            if ForAll(expected, value -> value = true) then
+                return true;
+            fi;
+        od;
     od;
+end);
