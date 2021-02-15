@@ -1,5 +1,5 @@
 TestSemidirectProduct := function()
-    local F, R, G, n, L, expected, primes, p, i, j, pos;
+    local F, R, G, a, b, c, n, n3, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, index;
     # <a, b> = Z ^ 2 and <c> = C_3
     # c := [ [ 0, -1 ], [ 1, -1 ] ];
     # c in GL(2, Z) and |c| = 3
@@ -42,25 +42,25 @@ TestSemidirectProduct := function()
     #
     #                  G
     #                  |
-    #                 3|--+--+--+
+    #                3 |--+--+--+
     #                  |  |  |  |
     #                  L  *  *  *
     #                  |  |  |  |
-    #                 3|  |  |  |
-    #                  |--+--+--+
-    #                  *
-    #                  |
-    #                 3|
-    #                  |
-    #                 3 L
-    #                  |
-    #                 3|
+    #                3 |--+--+--+
     #                  |
     #                  *
     #                  |
-    #                 3|
+    #                3 |
     #                  |
-    #                 9 L
+    #                3^1 L
+    #                  |
+    #                3 |
+    #                  |
+    #                  *
+    #                  |
+    #                3 |
+    #                  |
+    #                3^2 L
     #                  |
     #                  -
     #
@@ -80,6 +80,8 @@ TestSemidirectProduct := function()
         pos := PositionProperty(L, x -> x.Index = 3 * 3 ^ i);
         if pos = fail then
             return false;
+        elif IsEvenInt(i) and L[pos].Group <> Subgroup(G, [a ^ (3 ^ (i/2)), b ^ (3 ^ (i/2))]) then
+                return false;
         else
             expected[pos] := true;
             Add(subgraph, pos);
@@ -164,7 +166,7 @@ TestSemidirectProduct := function()
         #                  |
         #                  -
         #
-        # Thus we expect to find exactly one group at index 3 * p ^ (2 * i)
+        # Thus we expect to find exactly one group of index 3 * p ^ (2 * i)
         else
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p ^ 2)] do
                 pos := PositionProperty(L, x -> x.Index = 3 * p ^ (2 * i));
@@ -205,4 +207,4 @@ TestSemidirectProduct := function()
             fi;
         od;
     od;
-end);
+end;
