@@ -1,4 +1,4 @@
-[![CI](https://github.com/FriedrichRober/LINS/workflows/CI/badge.svg)](https://github.com/FriedrichRober/LINS/actions?query=workflow%3ACI+branch%3Amain)
+[![CI](https://github.com/FriedrichRober/LINS/workflows/CI/badge.svg)](https://github.com/FriedrichRober/LINS/actions?query=workflow%3ACI+branch%3Amaster)
 [![Code Coverage](https://codecov.io/gh/FriedrichRober/LINS/coverage.svg?branch=master&token=)](https://codecov.io/gh/FriedrichRober/LINS)
 
 # The GAP package LINS
