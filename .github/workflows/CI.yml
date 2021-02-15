@@ -1,0 +1,47 @@
+name: CI
+
+# Trigger the workflow on push or pull request
+on:
+  push:
+    branches: ['master']
+  pull_request:
+
+jobs:
+  # The CI test job
+  test:
+    name: ${{ matrix.gap-branch }} - HPCGAP ${{ matrix.HPCGAP }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        gap-branch:
+          - master
+          - stable-4.11
+        HPCGAP: ['no']
+
+    steps:
+      - uses: fkirc/skip-duplicate-actions@master
+      - uses: actions/checkout@v2
+      - uses: gap-actions/setup-gap-for-packages@v1
+        with:
+          GAPBRANCH: ${{ matrix.gap-branch }}
+          HPCGAP: ${{ matrix.HPCGAP }}
+          GAP_PKGS_TO_BUILD: "io profiling grape"
+      - uses: gap-actions/run-test-for-packages@v1
+
+  # The documentation job
+  manual:
+    name: Build manuals
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: gap-actions/setup-gap-for-packages@v1
+      - uses: gap-actions/compile-documentation-for-packages@v1
+        with:
+          use-latex: 'true'
+      - name: 'Upload documentation'
+        uses: actions/upload-artifact@v1
+        with:
+          name: manual
+          path: ./doc/manual.pdf
