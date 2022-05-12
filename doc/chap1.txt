@@ -4,5 +4,8 @@
   [33X[0;0YThis  package  provides an algorithm for computing the normal subgroups of a
   finitely presented group up to some given index bound.[133X
   
-  [33X[0;0YThis algorithm is based on work of Derek Holt and David Firth.[133X
+  [33X[0;0YThis  algorithm  is  based on work of Derek Holt and David Firth. Derek Holt
+  and  David  Firth  implemented this algorithm in the algebra software MAGMA.
+  The  current  implementation in GAP uses a table of groups that was computed
+  by Derek Holt.[133X
   

@@ -3,10 +3,11 @@
                                      [1X LINS [101X
   
   
-                                       [1X [101X
+    [1X provides an algorithm for computing the normal subgroups of a finitely
+                 presented group up to some given index bound. [101X
   
   
-                                      0.2
+                                      0.3
   
   
                                    7 May 2020
@@ -28,18 +29,18 @@
   2 [33X[0;0YLINS[133X
     2.1 [33X[0;0YLINS[133X
       2.1-1 LowIndexNormal
-      2.1-2 IsSubgroupFp
-      2.1-3 AddGroup
-      2.1-4 FindTQuotients
-      2.1-5 MustCheckP
-      2.1-6 FindPModules
-      2.1-7 FindPQuotients
-      2.1-8 MinSubgroupSizes
-      2.1-9 IsPowerOf
-      2.1-10 OGL
-      2.1-11 ExponentSum
-      2.1-12 PullBackH
-      2.1-13 FindIntersections
+      2.1-2 LINS_IsSubgroupFp
+      2.1-3 LINS_AddGroup
+      2.1-4 LINS_FindTQuotients
+      2.1-5 LINS_MustCheckP
+      2.1-6 LINS_FindPModules
+      2.1-7 LINS_FindPQuotients
+      2.1-8 LINS_MinSubgroupSizes
+      2.1-9 LINS_IsPowerOf
+      2.1-10 LINS_OGL
+      2.1-11 LINS_ExponentSum
+      2.1-12 LINS_PullBackH
+      2.1-13 LINS_FindIntersections
   3 [33X[0;0YLicense[133X
   
   

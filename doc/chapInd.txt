@@ -2,19 +2,19 @@
   
   [1XIndex[101X
   
-  [2XAddGroup[102X 2.1-3 
-  [2XExponentSum[102X 2.1-11 
-  [2XFindIntersections[102X 2.1-13 
-  [2XFindPModules[102X 2.1-6 
-  [2XFindPQuotients[102X 2.1-7 
-  [2XFindTQuotients[102X 2.1-4 
-  [2XIsPowerOf[102X 2.1-9 
-  [2XIsSubgroupFp[102X 2.1-2 
+  [2XLINS_AddGroup[102X 2.1-3 
+  [2XLINS_ExponentSum[102X 2.1-11 
+  [2XLINS_FindIntersections[102X 2.1-13 
+  [2XLINS_FindPModules[102X 2.1-6 
+  [2XLINS_FindPQuotients[102X 2.1-7 
+  [2XLINS_FindTQuotients[102X 2.1-4 
+  [2XLINS_IsPowerOf[102X 2.1-9 
+  [2XLINS_IsSubgroupFp[102X 2.1-2 
+  [2XLINS_MinSubgroupSizes[102X 2.1-8 
+  [2XLINS_MustCheckP[102X 2.1-5 
+  [2XLINS_OGL[102X 2.1-10 
+  [2XLINS_PullBackH[102X 2.1-12 
   [2XLowIndexNormal[102X 2.1-1 
-  [2XMinSubgroupSizes[102X 2.1-8 
-  [2XMustCheckP[102X 2.1-5 
-  [2XOGL[102X 2.1-10 
-  [2XPullBackH[102X 2.1-12 
   
   
   -------------------------------------------------------

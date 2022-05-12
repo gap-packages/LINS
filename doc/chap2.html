@@ -26,18 +26,18 @@
 </span>
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87C66F9B7E2F25A2">2.1-1 LowIndexNormal</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7CEF76EA83F206BE">2.1-2 IsSubgroupFp</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7E144E1B800C0E4E">2.1-3 AddGroup</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X804B00D2780A6CA2">2.1-4 FindTQuotients</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80682B6885311823">2.1-5 MustCheckP</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X86CBF20D7D0DF5F3">2.1-6 FindPModules</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X80D5BAD5875266CE">2.1-7 FindPQuotients</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B7328E7806C7812">2.1-8 MinSubgroupSizes</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X85B1E41A78346EC9">2.1-9 IsPowerOf</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BA846B9821CB847">2.1-10 OGL</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F6CE7D079F849EF">2.1-11 ExponentSum</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X802AA96F8084E0ED">2.1-12 PullBackH</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8736DD4A7C581F08">2.1-13 FindIntersections</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X852814F27E8BBBE6">2.1-2 LINS_IsSubgroupFp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X840E337381E9D3E8">2.1-3 LINS_AddGroup</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7DFEF56484FFCD42">2.1-4 LINS_FindTQuotients</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X84BAAC9C7D358C24">2.1-5 LINS_MustCheckP</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7F0C9015849093EC">2.1-6 LINS_FindPModules</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7D604F6384617745">2.1-7 LINS_FindPQuotients</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7A9EEAA37A865606">2.1-8 LINS_MinSubgroupSizes</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7C10055C79D5D42B">2.1-9 LINS_IsPowerOf</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X811C0DCF7FB37E13">2.1-10 LINS_OGL</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X789E958C879E5CDE">2.1-11 LINS_ExponentSum</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X798B48298250C9BD">2.1-12 LINS_PullBackH</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7927D90979F014DF">2.1-13 LINS_FindIntersections</a></span>
 </div></div>
 </div>
 
@@ -56,89 +56,89 @@
 
 <p>Given a finitely presented group <var class="Arg">G</var> and some index bound <var class="Arg">n</var>, this will compute all normal subgroups of <var class="Arg">G</var> with index at most <var class="Arg">n</var>.</p>
 
-<p><a id="X7CEF76EA83F206BE" name="X7CEF76EA83F206BE"></a></p>
+<p><a id="X852814F27E8BBBE6" name="X852814F27E8BBBE6"></a></p>
 
-<h5>2.1-2 IsSubgroupFp</h5>
+<h5>2.1-2 LINS_IsSubgroupFp</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsSubgroupFp</code>( <var class="Arg">H</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_IsSubgroupFp</code>( <var class="Arg">H</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a boolean</p>
 
 <p>Given two subgroups <var class="Arg">H</var> and <var class="Arg">G</var> of some finitely presented supergroup, this returns true if H is a subgroup of G.</p>
 
-<p><a id="X7E144E1B800C0E4E" name="X7E144E1B800C0E4E"></a></p>
+<p><a id="X840E337381E9D3E8" name="X840E337381E9D3E8"></a></p>
 
-<h5>2.1-3 AddGroup</h5>
+<h5>2.1-3 LINS_AddGroup</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; AddGroup</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">H</var>, <var class="Arg">Supers</var>, <var class="Arg">test</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_AddGroup</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">H</var>, <var class="Arg">Supers</var>, <var class="Arg">test</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: [list, positive integer]</p>
 
 <p>Adds the group <var class="Arg">H</var> to the list <var class="Arg">GroupsFound</var>. Let G denote the group at the first position of <var class="Arg">GroupsFound</var>, which shall be a supergroup of all groups contained in the list. <var class="Arg">Supers</var> is a list of positions of supergroups in the list <var class="Arg">GroupsFound</var>. If <var class="Arg">test</var> is true, then it is checked, if the group <var class="Arg">H</var> is not already contained in the list <var class="Arg">GroupsFound</var>. The group <var class="Arg">H</var> will be inserted in the list <var class="Arg">GroupsFound</var> after the last group with smaller or equal index in G. All references to positions of supergroups will get updated in the list <var class="Arg">GroupsFound</var>. The function returns a tupel with the updated list and the position where <var class="Arg">H</var> can be found in the new list.</p>
 
-<p><a id="X804B00D2780A6CA2" name="X804B00D2780A6CA2"></a></p>
+<p><a id="X7DFEF56484FFCD42" name="X7DFEF56484FFCD42"></a></p>
 
-<h5>2.1-4 FindTQuotients</h5>
+<h5>2.1-4 LINS_FindTQuotients</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindTQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">QQ</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that the quotient H/K is isomorphic to some non-abelian group Q, where QQ has stored some information about Q, and the index [G:K] is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the AddGroup-function.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindTQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">QQ</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that the quotient H/K is isomorphic to some non-abelian group Q, where QQ has stored some information about Q, and the index [G:K] is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
 
 <p>The pregenerated list QQ will contain the following information in form of tupels of any such group Q with group order up to the maximum index boundary max_index. Let Q be such a group of interest, then the information about Q will be consisting of the following: 1 : the group order 2 : an index of some group S, that has trivial core in Q The list QQ is sorted by information 1. Then any normal subgroup K of G, such that the quotient H/K is isomorphic to some Q in the list QQ can be found as the normal core of a subgroup L of H, that has an index equal to information 2. In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H up to some sufficient large enough index.</p>
 
-<p><a id="X80682B6885311823" name="X80682B6885311823"></a></p>
+<p><a id="X84BAAC9C7D358C24" name="X84BAAC9C7D358C24"></a></p>
 
-<h5>2.1-5 MustCheckP</h5>
+<h5>2.1-5 LINS_MustCheckP</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MustCheckP</code>( <var class="Arg">n</var>, <var class="Arg">p</var>, <var class="Arg">index</var>, <var class="Arg">minSubSizes</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_MustCheckP</code>( <var class="Arg">n</var>, <var class="Arg">p</var>, <var class="Arg">index</var>, <var class="Arg">minSubSizes</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Returns: a boolean</p>
 
-<p>Let <var class="Arg">n</var> be the maximal index, <var class="Arg">p</var> a prime, <var class="Arg">index</var> the index of some group H and <var class="Arg">minSubSizes</var> the sizes computed by a call of MinSubgroupSizes on H. This function checks if <var class="Arg">p</var>-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.</p>
+<p>Let <var class="Arg">n</var> be the maximal index, <var class="Arg">p</var> a prime, <var class="Arg">index</var> the index of some group H and <var class="Arg">minSubSizes</var> the sizes computed by a call of LINS_MinSubgroupSizes on H. This function checks if <var class="Arg">p</var>-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.</p>
 
-<p><a id="X86CBF20D7D0DF5F3" name="X86CBF20D7D0DF5F3"></a></p>
+<p><a id="X7F0C9015849093EC" name="X7F0C9015849093EC"></a></p>
 
-<h5>2.1-6 FindPModules</h5>
+<h5>2.1-6 LINS_FindPModules</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindPModules</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a <var class="Arg">p</var>-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the AddGroup-function.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindPModules</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a <var class="Arg">p</var>-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
 
 <p>We construct a module over the groupring (F_<var class="Arg">p</var> G) and compute maximal submodules of this module. These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian <var class="Arg">p</var>-Quotients. Then we call the method on the found subgroups so we compute all <var class="Arg">p</var>-Quotients and not only the elementary abelian ones.</p>
 
-<p><a id="X80D5BAD5875266CE" name="X80D5BAD5875266CE"></a></p>
+<p><a id="X7D604F6384617745" name="X7D604F6384617745"></a></p>
 
-<h5>2.1-7 FindPQuotients</h5>
+<h5>2.1-7 LINS_FindPQuotients</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindPQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. If MustCheckP return true, then we calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a p-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the AddGroup-function.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindPQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. If LINS_MustCheckP return true, then we calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a p-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
 
-<p><a id="X7B7328E7806C7812" name="X7B7328E7806C7812"></a></p>
+<p><a id="X7A9EEAA37A865606" name="X7A9EEAA37A865606"></a></p>
 
-<h5>2.1-8 MinSubgroupSizes</h5>
+<h5>2.1-8 LINS_MinSubgroupSizes</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinSubgroupSizes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X85B1E41A78346EC9" name="X85B1E41A78346EC9"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_MinSubgroupSizes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X7C10055C79D5D42B" name="X7C10055C79D5D42B"></a></p>
 
-<h5>2.1-9 IsPowerOf</h5>
+<h5>2.1-9 LINS_IsPowerOf</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsPowerOf</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X7BA846B9821CB847" name="X7BA846B9821CB847"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_IsPowerOf</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X811C0DCF7FB37E13" name="X811C0DCF7FB37E13"></a></p>
 
-<h5>2.1-10 OGL</h5>
+<h5>2.1-10 LINS_OGL</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; OGL</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X7F6CE7D079F849EF" name="X7F6CE7D079F849EF"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_OGL</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X789E958C879E5CDE" name="X789E958C879E5CDE"></a></p>
 
-<h5>2.1-11 ExponentSum</h5>
+<h5>2.1-11 LINS_ExponentSum</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ExponentSum</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X802AA96F8084E0ED" name="X802AA96F8084E0ED"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_ExponentSum</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X798B48298250C9BD" name="X798B48298250C9BD"></a></p>
 
-<h5>2.1-12 PullBackH</h5>
+<h5>2.1-12 LINS_PullBackH</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; PullBackH</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X8736DD4A7C581F08" name="X8736DD4A7C581F08"></a></p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_PullBackH</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p><a id="X7927D90979F014DF" name="X7927D90979F014DF"></a></p>
 
-<h5>2.1-13 FindIntersections</h5>
+<h5>2.1-13 LINS_FindIntersections</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; FindIntersections</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate all pairwise intersections of the group H with all other groups in the list <var class="Arg">GroupsFound</var> that are stored before the position <var class="Arg">Current</var>. Add any normal subgroup found as an intersection and index in G less equal <var class="Arg">n</var>, by calling the AddGroup-function.</p>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindIntersections</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate all pairwise intersections of the group H with all other groups in the list <var class="Arg">GroupsFound</var> that are stored before the position <var class="Arg">Current</var>. Add any normal subgroup found as an intersection and index in G less equal <var class="Arg">n</var>, by calling the LINS_AddGroup-function.</p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
