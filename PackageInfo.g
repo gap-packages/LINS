@@ -29,7 +29,7 @@ Persons := [
 
 #SourceRepository := rec( Type := "TODO", URL := "URL" ),
 #IssueTrackerURL := "TODO",
-PackageWWWHome := "https://FriedrichRober.github.io/LINS/"
+PackageWWWHome := "https://FriedrichRober.github.io/LINS/",
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL     := Concatenation( ~.PackageWWWHome,
