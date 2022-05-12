@@ -41,7 +41,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   Current := 1;
 
   # Call T-Quotient Procedure on G
-  GroupsFound := LINS_FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
+  GroupsFound := LINS_FindTQuotients(GroupsFound, n, Current, LINS_TargetsQuotient);
 
   # Compute all primes up to n
   primes := LINS_AllPrimesUpTo(n);

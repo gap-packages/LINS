@@ -11,16 +11,16 @@
 #############################################################################
 
 ##
-## The pregenerated list TargetsCharSimple will contain the following information in form of tupels of any group
+## The pregenerated list LINS_TargetsCharSimple will contain the following information in form of tupels of any group
 ## (T x T x ... x T), where T is a non-abelian simple group,
 ## with group order up to the maximum index boundary max_index.
 ## Let Q be such a group of interest, then the information about Q will be consisting of the following:
 ## 1 : the group order
 ## 2 : the primes dividing the schur multiplier of Q
 ## 3 : name of the group T^d
-## The list TargetsCharSimple is sorted by information 1.
+## The list LINS_TargetsCharSimple is sorted by information 1.
 ##
-TargetsCharSimple :=
+BindGlobal("LINS_TargetsCharSimple",
 [ [              60,           [ 2 ],          "A5^1" ],
   [             168,           [ 2 ],    "PSL(2,7)^1" ],
   [             360,        [ 2, 3 ],          "A6^1" ],
@@ -127,4 +127,5 @@ TargetsCharSimple :=
   [         9095592,           [ 2 ],  "PSL(2,263)^1" ],
   [         9732420,           [ 2 ],  "PSL(2,269)^1" ],
   [         9951120,           [ 2 ],  "PSL(2,271)^1" ],
-  [         9999360,             [ ],    "PSL(5,2)^1" ] ];
+  [         9999360,             [ ],    "PSL(5,2)^1" ] ]
+);
