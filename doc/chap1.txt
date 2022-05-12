@@ -1,0 +1,8 @@
+  
+  [1X1 [33X[0;0YIntroduction[133X[101X
+  
+  [33X[0;0YThis  package  provides an algorithm for computing the normal subgroups of a
+  finitely presented group up to some given index bound.[133X
+  
+  [33X[0;0YThis algorithm is based on work of Derek Holt and David Firth.[133X
+  
