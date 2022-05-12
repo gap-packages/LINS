@@ -1,4 +1,4 @@
-TestSemidirectProduct := function()
+TestSemidirectProduct := function(n)
     local F, R, G, a, b, c, n, n3, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, index;
     # <a, b> = Z ^ 2 and <c> = C_3
     # c := [ [ 0, -1 ], [ 1, -1 ] ];
@@ -14,8 +14,6 @@ TestSemidirectProduct := function()
     b := G.2;
     c := G.3;
 
-
-    n := 2000;
     n3 := Int(n / 3);
     L := LowIndexNormal(G, n);
 
