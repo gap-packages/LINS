@@ -14,7 +14,7 @@
 ## The maximum index boundary the algorithm can work with
 ##
 
-LINS_maxIndex := 100000;
+BindGlobal("LINS_maxIndex", 10000000);
 
 ##
 ## Calculate every normal subgroup of G up to index n
