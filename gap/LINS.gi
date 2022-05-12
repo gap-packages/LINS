@@ -21,7 +21,7 @@ BindGlobal("LINS_maxIndex", 10000000);
 ## The algorithm works only for n less equal the maximum index bound max_index
 ##
 InstallGlobalFunction( LowIndexNormal, function(G, n)
-  local GroupsFound, Current;
+  local GroupsFound, Current, primes;
 
   # Check if we can work with the index
   if n > LINS_maxIndex then
@@ -43,9 +43,12 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
   # Call T-Quotient Procedure on G
   GroupsFound := LINS_FindTQuotients(GroupsFound, n, Current, TargetsQuotient);
 
+  # Compute all primes up to n
+  primes := LINS_AllPrimesUpTo(n);
+
   while Current <= Length(GroupsFound) and GroupsFound[Current].Index <= (n / 2) do
     # Search for possible P-Quotients
-    GroupsFound := LINS_FindPQuotients(GroupsFound, n, Current);
+    GroupsFound := LINS_FindPQuotients(GroupsFound, n, Current, primes);
     # Search for possible Intersections
     if Current > 1 then
       GroupsFound := LINS_FindIntersections(GroupsFound, n, Current);
