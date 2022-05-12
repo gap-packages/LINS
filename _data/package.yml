@@ -20,7 +20,7 @@ packageinfo: https://FriedrichRober.github.io/LINS/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://FriedrichRober.github.io/LINS//LINS-0.3.tar.gz
+      url: https://github.com/FriedrichRober/LINS/releases/download/v0.3/LINS-0.3.tar.gz
 
 abstract: |
 
