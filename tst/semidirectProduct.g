@@ -1,5 +1,5 @@
 TestSemidirectProduct := function(n)
-    local F, R, G, a, b, c, n, n3, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, index;
+    local F, R, G, a, b, c, n3, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, minIndex, index;
     # <a, b> = Z ^ 2 and <c> = C_3
     # c := [ [ 0, -1 ], [ 1, -1 ] ];
     # c in GL(2, Z) and |c| = 3
@@ -65,10 +65,13 @@ TestSemidirectProduct := function(n)
     # Thus we expect to find exactly 4 normal subgroups of index 3, one of which is L.
     # Further the intersection of these 4 groups is a group of index 9.
     # Then we expect to find exactly one normal subgroup of index 3 * 3 ^ i.
-    Remove(primes, 2);
+    Remove(primes, 2); # remove 3 from primes
     subgraph := [];
     for i in [1 .. 4] do
         if L[1 + i].Index = 3 then
+            if expected[1 + i] = true then
+                Error("Subgroup has already been visited. This is unexpected!");
+            fi;
             expected[1 + i] := true;
         else
             return false;
@@ -81,6 +84,9 @@ TestSemidirectProduct := function(n)
         elif IsEvenInt(i) and L[pos].Group <> Subgroup(G, [a ^ (3 ^ (i/2)), b ^ (3 ^ (i/2))]) then
                 return false;
         else
+            if expected[pos] = true then
+                Error("Subgroup has already been visited. This is unexpected!");
+            fi;
             expected[pos] := true;
             Add(subgraph, pos);
         fi;
@@ -127,6 +133,9 @@ TestSemidirectProduct := function(n)
                 else
                     for j in [0 .. i] do
                         if L[pos + j].Index = 3 * p ^ i then
+                            if expected[pos + j] = true then
+                                Error("Subgroup has already been visited. This is unexpected!");
+                            fi;
                             expected[pos + j] := true;
                             Add(subgraph, pos + j);
                         else
@@ -171,6 +180,9 @@ TestSemidirectProduct := function(n)
                 if pos = fail or L[pos].Group <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
                     return false;
                 else
+                    if expected[pos] = true then
+                        Error("Subgroup has already been visited. This is unexpected!");
+                    fi;
                     expected[pos] := true;
                     Add(subgraph, pos);
                 fi;
@@ -179,30 +191,83 @@ TestSemidirectProduct := function(n)
         Add(subgraphs, subgraph);
     od;
 
+    # Remove every empty subgraph
+    pos := Position(subgraphs, []);
+    while pos <> fail do
+        Remove(subgraphs, pos);
+        pos := Position(subgraphs, []);
+    od;
+
+    # Sort by smallest index of subgraph
+    SortBy(subgraphs, subgraph -> L[subgraph[1]].Index);
+
     # The intersections of the subgroups in subgraphs are the missing normal subgroups
     for nrIntersections in [2 .. Length(subgraphs)] do
-        iterSubgraphs := IteratorOfCombinations([1 .. Length(subgraphs)], nrIntersections);
-        while not IsDoneIterator(iterSubgraphs) do
-            subgraphSelection := NextIterator(iterSubgraphs);
-            iterSubgroups := IteratorOfCartesianProduct(subgraphs{subgraphSelection});
-            while not IsDoneIterator(iterSubgroups) do
-                subgroupSelection := NextIterator(iterSubgroups);
+        iterSubgraphs := EmptyPlist(nrIntersections);
+        iterSubgraphs[1] := Iterator([1 .. Length(subgraphs)]);
+        subgraphSelection := EmptyPlist(nrIntersections);
+        minIndex := EmptyPlist(nrIntersections + 1); # shift by 1 to the right
+        minIndex[1] := 3;
+        i := 1;
+        while i > 0 do
+            if IsDoneIterator(iterSubgraphs[i]) then
+                Unbind(iterSubgraphs[i]);
+                Unbind(subgraphSelection[i]);
+                Unbind(minIndex[i]);
+                i := i - 1;
+                continue;
+            fi;
+            subgraphSelection[i] := NextIterator(iterSubgraphs[i]);
+            minIndex[i + 1] := minIndex[i] * L[subgraphs[subgraphSelection[i]][1]].Index / 3;
+            if minIndex[i + 1] > n then
+                Unbind(iterSubgraphs[i]);
+                Unbind(subgraphSelection[i]);
+                Unbind(minIndex[i + 1]);
+                i := i - 1;
+                continue;
+            fi;
+            if i < nrIntersections then
+                iterSubgraphs[i + 1] := Iterator([subgraphSelection[i] + 1 .. Length(subgraphs)]);
+                i := i + 1;
+                continue;
+            fi;
+            # i = nrIntersection and minIndex[i + 1] <= n
+            iterSubgroups := List(subgraphSelection, k -> Iterator(subgraphs[k]));
+            subgroupSelection := EmptyPlist(nrIntersections);
+            j := 1;
+            while j > 0 do
+                if IsDoneIterator(iterSubgroups[j]) then
+                    iterSubgroups[j] := Iterator(subgraphs[subgraphSelection[j]]);
+                    Unbind(subgroupSelection[j]);
+                    j := j - 1;
+                    continue;
+                fi;
+                subgroupSelection[j] := NextIterator(iterSubgroups[j]);
+                if j < nrIntersections then
+                    j := j + 1;
+                    continue;
+                fi;
                 # index of intersection
                 index := 3 * Product(subgroupSelection, i -> L[i].Index / 3);
                 if index > n then
+                    iterSubgroups[j] := Iterator(subgraphs[subgraphSelection[j]]);
+                    Unbind(subgroupSelection[j]);
+                    j := j - 1;
                     continue;
                 fi;
                 # pos of intersection
                 pos := PositionProperty(L, x -> ForAll(subgroupSelection, i -> i in x.Supergroups));
                 if pos = fail then
-                    return fail;
+                    return false;
                 else
+                    if expected[pos] = true then
+                        Error("Subgroup has already been visited. This is unexpected!");
+                    fi;
                     expected[pos] := true;
                 fi;
             od;
-            if ForAll(expected, value -> value = true) then
-                return true;
-            fi;
         od;
     od;
+
+    return ForAll(expected, value -> value = true);
 end;
