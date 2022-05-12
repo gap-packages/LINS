@@ -9,8 +9,8 @@
 SetPackageInfo( rec(
 
 PackageName := "LINS",
-Subtitle := "",
-Version := "0.2",
+Subtitle := "provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.",
+Version := "0.3",
 Date := "07/05/2020", # dd/mm/yyyy format
 
 Persons := [
@@ -29,7 +29,7 @@ Persons := [
 
 #SourceRepository := rec( Type := "TODO", URL := "URL" ),
 #IssueTrackerURL := "TODO",
-PackageWWWHome := "https://TODO/",
+PackageWWWHome := "https://FriedrichRober.github.io/LINS/",
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL     := Concatenation( ~.PackageWWWHome,
@@ -55,7 +55,7 @@ PackageDoc := rec(
   HTMLStart := "doc/chap0.html",
   PDFFile   := "doc/manual.pdf",
   SixFile   := "doc/manual.six",
-  LongTitle := "Provides a method for the computation of normal subgroups in a finitely presented group",
+  LongTitle := "provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.",
 ),
 
 Dependencies := rec(
