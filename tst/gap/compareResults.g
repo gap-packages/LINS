@@ -22,16 +22,16 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
         [1 .. m],
         x -> Filtered(
             supersUnfiltered[x],
-            s -> ForAny(supersUnfiltered[x], t -> s in supersUnfiltered[t]) = false
-            )
-        );
+            s -> ForAny(
+                supersUnfiltered[x],
+                t -> s in supersUnfiltered[t]) = false));
     supersCor := List(
         [1 .. m],
         x -> Filtered(
             supersUnfilteredCor[x],
-            s -> ForAny(supersUnfilteredCor[x], t -> s in supersUnfilteredCor[t]) = false
-            )
-        );
+            s -> ForAny(
+                supersUnfilteredCor[x],
+                t -> s in supersUnfilteredCor[t]) = false));
 
     # Compare the graph induced by subgroup relations
     # where the nodes of the graph are coloured by index
@@ -40,25 +40,19 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
         Group( () ),
         Concatenation(List(
             [1 .. m],
-            i -> List(supers[i], s->[s, i])
-            )),
-        m,
-        );
+            i -> List(supers[i], s->[s, i]))),
+        m);
     gamma := rec(
         graph := gamma,
-        colourClasses := colour,
-        );
+        colourClasses := colour);
     gammaCor := EdgeOrbitsGraph(
         Group( () ),
         Concatenation(List(
             [1 .. m],
-            i -> List(supersCor[i], s -> [s, i])
-            )),
-        m,
-        );
+            i -> List(supersCor[i], s -> [s, i]))),
+        m);
     gammaCor := rec(
         graph := gammaCor,
-        colourClasses := colour,
-        );
+        colourClasses := colour);
     return IsIsomorphicGraph(gamma, gammaCor);
 end;
