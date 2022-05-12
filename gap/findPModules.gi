@@ -41,7 +41,7 @@ end);
 ##
 ## maximal Generators of the PQuotient.
 ##
-LINS_maxPGenerators := 1000;
+BindGlobal("LINS_maxPGenerators", 1000);
 
 ##
 ## Let the group G be located in the list GroupsFound at position 1.

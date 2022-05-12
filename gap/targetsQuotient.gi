@@ -11,7 +11,7 @@
 #############################################################################
 
 ##
-## The pregenerated list TargetsQuotient will contain the following information in form of tupels of any subgroup Q of
+## The pregenerated list LINS_TargetsQuotient will contain the following information in form of tupels of any subgroup Q of
 ## Aut(T x T x ... x T), where T is a non-abelian simple group,
 ## such that (T x T x ... x T) is a subgroup of Q and Q acts transitively on the copies of T,
 ## with group order up to the maximum index boundary max_index.
@@ -19,9 +19,9 @@
 ## 1 : the group order
 ## 2 : an index of some group S, that has trivial core in Q
 ## 3 : name of the group T^d
-## The list TargetsQuotient is sorted by information 1.
+## The list LINS_TargetsQuotient is sorted by information 1.
 ##
-TargetsQuotient :=
+BindGlobal("LINS_TargetsQuotient",
 [ [              60,               5,          "A5^1" ],
   [             120,               5,          "A5^1" ],
   [             168,               7,    "PSL(2,7)^1" ],
@@ -293,4 +293,5 @@ TargetsQuotient :=
   [        99283968,             513,    "PSU(3,8)^1" ],
   [       113799168,              24,    "PSL(2,7)^3" ],
   [       113799168,              48,    "PSL(2,7)^3" ],
-  [       227598336,              48,    "PSL(2,7)^3" ] ];
+  [       227598336,              48,    "PSL(2,7)^3" ] ]
+);

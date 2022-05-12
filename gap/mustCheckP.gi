@@ -67,7 +67,7 @@ InstallGlobalFunction(LINS_MustCheckP, function(n, p, index, minSubSizes)
   od;
 
   # orders of Characteristically Simple Groups, where p is a divisor of the order of the schur multiplier
-  ordersToCheck := List( Filtered(TargetsCharSimple, Q -> p in Q[2]), Q -> Q[1]);
+  ordersToCheck := List( Filtered(LINS_TargetsCharSimple, Q -> p in Q[2]), Q -> Q[1]);
   for i in minSubSizes do
     for j in ordersToCheck do
       if i = j then
