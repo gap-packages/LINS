@@ -156,7 +156,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p)
 
     # Add the subgroup K by calling the LINS_AddGroup-function
     if Index(G, K) <= n then
-      rK := LINS_AddGroup(gr, K, true);
+      rK := LINS_AddGroup(gr, K, [rH], true);
       # If the index is sufficient small, compute p-Quotients from the subgroup K
       if p <= n / Index(G, K) then
         LINS_FindPModules(gr, rK, p);

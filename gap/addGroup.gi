@@ -49,7 +49,7 @@ end);
 InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   local
     G,                      # the parent group, which is stored at the first position in GroupsFound
-    rH, rK, pos, level, AllSupergroups,
+    rH, rK, pos, level, allSupergroups, allSubgroups,
     NewGroupsFound,         # the updated list of groups after insertion of H
     Current,                # Loop variable, position of current group to be inserted
     K,                      # the group (record) at position Current
@@ -78,18 +78,19 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
         return rK;
       fi;
     od;
+    Add(gr!.Levels[pos].Nodes, rH);
   fi;
 
   # Search for all possible Supergroups of H.
-  AllSupergroups := Set(LINS_allNodes(rH, Supergroups, false));
+  allSupergroups := Set(LINS_allNodes(rH, Supergroups, false));
   for level in Reversed(gr!.Levels{[1 .. pos - 1]}) do
     for rK in level.Nodes do
       K := Grp(rK);
-      if not (rK in AllSupergroups) then
+      if not (rK in allSupergroups) then
         if Index(rH) mod Index(rK) = 0 then
           if LINS_IsSubgroupFp(K, H) then
             LINS_UpdateRelations(rK, rH);
-            UniteSet(AllSupergroups, LINS_allNodes(rK, Supergroups, false));
+            UniteSet(allSupergroups, LINS_allNodes(rK, Supergroups, false));
           fi;
         fi;
       fi;
@@ -97,15 +98,15 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   od;
 
   # Search for all possible Subgroups of H.
-  AllSubgroups := Set(LINS_allNodes(rH, Subgroups, false));
+  allSubgroups := Set(LINS_allNodes(rH, Subgroups, false));
   for level in gr!.Levels{[pos + 1 .. Length(gr!.Levels)]} do
     for rK in level.Nodes do
       K := Grp(rK);
-      if not (rK in AllSubgroups) then
+      if not (rK in allSubgroups) then
         if Index(rK) mod Index(rH) = 0 then
           if LINS_IsSubgroupFp(H, K) then
             LINS_UpdateRelations(rH, rK);
-            UniteSet(AllSubgroups, LINS_allNodes(rK, Subgroups, false));
+            UniteSet(allSubgroups, LINS_allNodes(rK, Subgroups, false));
           fi;
         fi;
       fi;

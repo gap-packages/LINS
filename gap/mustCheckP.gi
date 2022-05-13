@@ -18,7 +18,7 @@
 ## G/H, where H is the group in the position Current in the list.
 #############################################################################
 
-InstallGlobalFunction(LINS_MinSubgroupSizes, function(gr, rH)
+InstallGlobalFunction(LINS_MinSubgroupSizes, function(rH)
   return List(Supergroups(rH), rK -> Index(rH) / Index(rK) );
 end);
 
