@@ -23,7 +23,7 @@ BindGlobal( "LinsNodeFamily",
 BindGlobal( "LinsNodeType",
   NewType(LinsNodeFamily, IsLinsNode and IsAttributeStoringRep));
 
-DeclareOperation( "LinsNode", [ IsGroup, IsPosInt, IsList, IsList ]);
+DeclareOperation( "LinsNode", [ IsGroup, IsPosInt, IsList ]);
 
 # DeclareAttribute( "Grp", IsLinsNode, "mutable" );
 
