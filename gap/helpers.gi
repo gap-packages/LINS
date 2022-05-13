@@ -1,6 +1,24 @@
-# FIXME: Move me into GAP
-# Helper function to compute all primes up to a given integer via a prime sieve
-# Code snippet by @behrends
+#############################################################################
+##  helpers.gi
+#############################################################################
+##
+##  This file is part of the LINS package.
+##
+##  This file's authors include Friedrich Rober.
+##
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
+##
+#############################################################################
+
+
+#############################################################################
+## FIXME: Move me into GAP
+## Helper function to compute all primes up to a given integer via a prime sieve
+## Code snippet by @behrends
+#############################################################################
+
 InstallGlobalFunction(LINS_AllPrimesUpTo,
 function(n)
     local i, j, sieve, result;

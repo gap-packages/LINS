@@ -1,17 +1,19 @@
 #############################################################################
+##  findTQuotients.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
 
-##
+#############################################################################
 ## Let the group G be located in the list GroupsFound at position 1.
 ## Let the group H be located in the list GroupsFound at position Current.
 ## Calculate every normal subgroup K of G, such that the quotient H/K is
@@ -30,7 +32,8 @@
 ## can be found as the normal core of a subgroup L of H, that has an index equal to information 2.
 ## In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H
 ## up to some sufficient large enough index.
-##
+#############################################################################
+
 InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound

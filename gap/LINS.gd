@@ -1,12 +1,14 @@
 #############################################################################
+##  LINS.gd
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
@@ -101,35 +103,13 @@ DeclareGlobalFunction( "LINS_FindPModules" );
 #! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_FindPQuotients" );
 
-#! @Description
-#! @Returns
-#! @Arguments
-#! @ChapterInfo LINS, LINS
+
 DeclareGlobalFunction( "LINS_MinSubgroupSizes" );
-
-#! @Description
-#! @Returns
-#! @Arguments
-#! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_IsPowerOf" );
-
-#! @Description
-#! @Returns
-#! @Arguments
-#! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_OGL" );
-
-#! @Description
-#! @Returns
-#! @Arguments
-#! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_ExponentSum" );
-
-#! @Description
-#! @Returns
-#! @Arguments
-#! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_PullBackH" );
+
 
 DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
 DeclareGlobalFunction( "LINS_MaxPowerSmallerInt" );

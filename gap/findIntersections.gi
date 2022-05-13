@@ -1,24 +1,26 @@
 #############################################################################
+##  findIntersections.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
 
-##
+#############################################################################
 ## Let the group G be located in the list GroupsFound at position 1.
 ## Let the group H be located in the list GroupsFound at position Current.
 ## Calculate all pairwise intersections of the group H
 ## with all other groups in the list GroupsFound that are stored before the position Current.
 ## Add any normal subgroup found as an intersection and index in G less equal n,
 ## by calling the LINS_AddGroup-function
-##
+#############################################################################
 
 InstallGlobalFunction( LINS_FindIntersections, function(GroupsFound, n, Current)
   local
