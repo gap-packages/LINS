@@ -82,7 +82,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   fi;
 
   # Search for all possible Supergroups of H.
-  allSupergroups := Set(LINS_allNodes(rH, Supergroups, false));
+  allSupergroups := LINS_allNodes(rH, Supergroups, false);
   for level in Reversed(gr!.Levels{[1 .. pos - 1]}) do
     for rK in level.Nodes do
       K := Grp(rK);
@@ -90,7 +90,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
         if Index(rH) mod Index(rK) = 0 then
           if LINS_IsSubgroupFp(K, H) then
             LINS_UpdateRelations(rK, rH);
-            UniteSet(allSupergroups, LINS_allNodes(rK, Supergroups, false));
+            DuplicateFreeList(Concatenation(allSupergroups, LINS_allNodes(rK, Supergroups, false)));
           fi;
         fi;
       fi;
@@ -98,7 +98,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   od;
 
   # Search for all possible Subgroups of H.
-  allSubgroups := Set(LINS_allNodes(rH, Subgroups, false));
+  allSubgroups := LINS_allNodes(rH, Subgroups, false);
   for level in gr!.Levels{[pos + 1 .. Length(gr!.Levels)]} do
     for rK in level.Nodes do
       K := Grp(rK);
@@ -106,7 +106,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
         if Index(rK) mod Index(rH) = 0 then
           if LINS_IsSubgroupFp(H, K) then
             LINS_UpdateRelations(rH, rK);
-            UniteSet(allSubgroups, LINS_allNodes(rK, Subgroups, false));
+            DuplicateFreeList(Concatenation(allSubgroups, LINS_allNodes(rK, Subgroups, false)));
           fi;
         fi;
       fi;

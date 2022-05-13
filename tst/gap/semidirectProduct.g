@@ -256,7 +256,7 @@ TestSemidirectProduct := function(n)
                     continue;
                 fi;
                 # pos of intersection
-                pos := PositionProperty(L, x -> ForAll(subgroupSelection, i -> i in x.Supergroups));
+                pos := PositionProperty(L, x -> ForAll(subgroupSelection, i -> i in x!.Supergroups));
                 if pos = fail then
                     return false;
                 else

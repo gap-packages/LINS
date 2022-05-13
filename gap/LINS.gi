@@ -47,9 +47,6 @@ end);
 
 InstallMethod( \=, "for Lins Node", [IsLinsNode, IsLinsNode], IsIdenticalObj);
 
-InstallMethod( \<, "for Lins Node", [IsLinsNode, IsLinsNode], {r, s} -> Grp(r) < Grp(s));
-
-
 InstallMethod( ViewObj, "for Lins Node", [IsLinsNode],
 function(r)
 	Print("<lins node of index ", Index(r), ">");
