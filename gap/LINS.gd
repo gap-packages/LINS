@@ -12,6 +12,50 @@
 ##
 #############################################################################
 
+# The category:
+DeclareCategory( "IsLinsNode", IsObject );
+
+# The family:
+BindGlobal( "LinsNodeFamily",
+  NewFamily("LinsNodeFamily", IsLinsNode));
+
+# The type:
+BindGlobal( "LinsNodeType",
+  NewType(LinsNodeFamily, IsLinsNode and IsAttributeStoringRep));
+
+DeclareOperation( "LinsNode", [ IsGroup, IsPosInt, IsList, IsList ]);
+
+# DeclareAttribute( "Grp", IsLinsNode, "mutable" );
+
+# DeclareAttribute( "Index", IsLinsNode, "mutable" );
+
+DeclareAttribute( "Supergroups", IsLinsNode, "mutable" );
+
+DeclareAttribute( "Subgroups", IsLinsNode, "mutable" );
+
+DeclareAttribute( "TriedPrimes", IsLinsNode, "mutable" );
+
+DeclareProperty( "IsCut", IsLinsNode, "mutable" );
+
+# The category:
+DeclareCategory( "IsLinsGraph", IsObject );
+
+# The family:
+BindGlobal( "LinsGraphFamily",
+  NewFamily("LinsGraphFamily", IsLinsGraph));
+
+# The type:
+BindGlobal( "LinsGraphType",
+  NewType(LinsGraphFamily, IsLinsGraph and IsAttributeStoringRep));
+
+DeclareOperation( "LinsGraph", [ IsGroup , IsPosInt]);
+
+DeclareAttribute( "Output", IsLinsGraph, "mutable" );
+
+DeclareAttribute( "IndexBound", IsLinsGraph, "mutable" );
+
+DeclareAttribute( "Root", IsLinsGraph, "mutable" );
+
 
 #! @Description
 #! Given a finitely presented group <A>G</A> and some index bound <A>n</A>,
