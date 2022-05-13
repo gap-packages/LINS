@@ -13,8 +13,8 @@
 #############################################################################
 
 
-InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt, IsList, IsList ],
-function(G, i, supergroups, triedPrimes)
+InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt, IsList ],
+function(G, i, supergroups)
 	local r;
 
 	r := rec(
@@ -22,16 +22,11 @@ function(G, i, supergroups, triedPrimes)
 		Index := i,
 		Supergroups := supergroups,
 		Subgroups := [],
-		TriedPrimes := triedPrimes);
+		TriedPrimes := []);
 
 	Objectify( LinsNodeType, r );
 
 	return r;
-end);
-
-InstallOtherMethod( LinsNode, "for three arguments", [ IsGroup, IsPosInt, IsList ],
-function(G, i, supergroups)
-	return LinsNode(G, i, supergroups, []);
 end);
 
 InstallMethod( LinsGraph, "standard method", [ IsGroup, IsPosInt ],
@@ -168,7 +163,7 @@ BindGlobal("LINS_maxIndex", 10000000);
 #############################################################################
 
 InstallGlobalFunction( LowIndexNormal, function(G, n)
-	local GroupsFound, Current, primes;
+	local gr, i, level, r, primes;
 
 	# Check if we can work with the index
 	if n > LINS_maxIndex then
@@ -180,30 +175,31 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
 		G := Image(IsomorphismFpGroup(G));
 	fi;
 
-	# Initialize the list of already found normal subgroups consisting of records of the following form:
-	# Group : the normal subgroup of G
-	# Index : the index in G
-	# SuperGroups : the position of every supergroup in the list GroupsFound
-	GroupsFound := [rec(Group:=G, Index:=1, Supergroups := [], TriedPrimes := [])];
-	Current := 1;
+	gr := LinsGraph(G, n);
 
 	# Call T-Quotient Procedure on G
-	GroupsFound := LINS_FindTQuotients(GroupsFound, n, Current, LINS_TargetsQuotient);
+	LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient);
 
 	# Compute all primes up to n
 	primes := LINS_AllPrimesUpTo(n);
+	i := 1;
 
-	while Current <= Length(GroupsFound) and GroupsFound[Current].Index <= (n / 2) do
-		# Search for possible P-Quotients
-		GroupsFound := LINS_FindPQuotients(GroupsFound, n, Current, primes);
-		# Search for possible Intersections
-		if Current > 1 then
-			GroupsFound := LINS_FindIntersections(GroupsFound, n, Current);
+	while i <= Length(gr!.Levels) do
+		level := gr!.Levels[i];
+		if level.Index > (n / 2) then
+			break;
 		fi;
-		# Search for normal subgroups in the next group
-		Current := Current + 1;
+		for r in level.Nodes do
+			# Search for possible P-Quotients
+			LINS_FindPQuotients(gr, r, primes);
+			# Search for possible Intersections
+			if i > 1 then
+				LINS_FindIntersections(gr, r);
+			fi;
+		od;
+		i := i + 1;
 	od;
 
 	# Return every normal subgroup
-	return GroupsFound;
+	return gr;
 end);

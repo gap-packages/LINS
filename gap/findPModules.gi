@@ -61,9 +61,10 @@ BindGlobal("LINS_maxPGenerators", 1000);
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
 #############################################################################
 
-InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
+InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p)
   local
     G,        # the parent group, which is stored at the first position in GroupsFound
+    n, rK,
     H,        # the group (record) at position Current
     Iso,      # isomorphism from H into fp-group
     IH,       # fp-group, image of Iso
@@ -90,14 +91,15 @@ InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
     NewGroup; # record (list, position) after inserting K into GroupsFound
 
   # Check if p-Quotients have been computed already from this group
-  if p in GroupsFound[Current].TriedPrimes then
-    return GroupsFound;
+  if p in TriedPrimes(rH) then
+    return;
   fi;
-  AddSet(GroupsFound[Current].TriedPrimes,p);
+  AddSet(TriedPrimes(rH), p);
 
   # References to the Groups in the list GroupsFound.
-  G := GroupsFound[1].Group;
-  H := GroupsFound[Current].Group;
+  G :=Grp(Root(gr));
+  n := IndexBound(gr);
+  H := Grp(rH);
 
   # Isomorphism onto the fp-group of H
   Iso := IsomorphismFpGroup(H);
@@ -111,7 +113,7 @@ InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
 
   # If M is trivial we skip this prime
   if IsEmpty(GenM) then
-    return GroupsFound;
+    return;
   fi;
 
   # Define the group action of G on the p-Module M
@@ -154,14 +156,11 @@ InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
 
     # Add the subgroup K by calling the LINS_AddGroup-function
     if Index(G, K) <= n then
-      NewGroup := LINS_AddGroup(GroupsFound,K,SSortedList([1,Current]),true);
-      GroupsFound := NewGroup[1];
+      rK := LINS_AddGroup(gr, K, true);
       # If the index is sufficient small, compute p-Quotients from the subgroup K
       if p <= n / Index(G, K) then
-        GroupsFound := LINS_FindPModules(GroupsFound, n, NewGroup[2], p);
+        LINS_FindPModules(gr, rK, p);
       fi;
     fi;
   od;
-
-  return GroupsFound;
 end);

@@ -20,28 +20,27 @@
 ## and the index in G is less equal n.
 #############################################################################
 
-InstallGlobalFunction(LINS_FindPQuotients, function(GroupsFound, n, Current, primes)
+InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
+    n,
     H,      # the group (record) at position Current
     p;      # loop variable, prime integer
 
   # References to the Groups in the list GroupsFound.
-  G := GroupsFound[1].Group;
-  H := GroupsFound[Current].Group;
+  G := Grp(Root(gr));
+  n := IndexBound(gr);
+  H := Grp(rH);
 
   # Search for p-Quotients for every prime small enough.
   for p in primes do
-    if p > n / Index(G, H) then
+    if p > n / Index(rH) then
       break;
     fi;
     # Check according to some rules whether the p-Quotients will be computed by Intersections.
-    if( LINS_MustCheckP(n, p, Index(G, H), LINS_MinSubgroupSizes(GroupsFound, Current)) ) then
+    if( LINS_MustCheckP(n, p, Index(rH), LINS_MinSubgroupSizes(rH)) ) then
       # Compute all p-Groups from H.
-      GroupsFound := LINS_FindPModules(GroupsFound, n, Current, p);
+      LINS_FindPModules(gr, rH, p);
     fi;
   od;
-
-  # Return the updated list GroupsFound.
-  return GroupsFound;
 end);

@@ -18,13 +18,8 @@
 ## G/H, where H is the group in the position Current in the list.
 #############################################################################
 
-InstallGlobalFunction(LINS_MinSubgroupSizes, function(GroupsFound, Current)
-  local m, minSupergroups;
-
-  m := GroupsFound[Current].Supergroups;
-  minSupergroups := Filtered(m, s -> ForAny(m, t -> s in GroupsFound[t].Supergroups) = false);
-
-  return List(minSupergroups, x -> Index(GroupsFound[1].Group, GroupsFound[Current].Group) / Index(GroupsFound[1].Group, GroupsFound[x].Group) );
+InstallGlobalFunction(LINS_MinSubgroupSizes, function(gr, rH)
+  return List(Supergroups(rH), rK -> Index(rH) / Index(rK) );
 end);
 
 

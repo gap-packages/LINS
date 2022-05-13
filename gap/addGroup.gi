@@ -30,6 +30,13 @@ InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
 end);
 
 
+# K < H
+BindGlobal("LINS_UpdateRelations",
+function(rH, rK)
+  Add(Supergroups(rK), rH);
+  Add(Subgroups(rH), rK);
+end);
+
 #############################################################################
 ## Add the group H to the list GroupsFound.
 ## Supers is a list of positions of supergroups in the list GroupsFound.
@@ -39,80 +46,71 @@ end);
 ## The function returns a tupel with the updated list and the position where H can be found in the new list.
 #############################################################################
 
-InstallGlobalFunction(LINS_AddGroup, function(GroupsFound, H, Supers, test)
+InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   local
     G,                      # the parent group, which is stored at the first position in GroupsFound
+    rH, rK, pos, level, AllSupergroups,
     NewGroupsFound,         # the updated list of groups after insertion of H
     Current,                # Loop variable, position of current group to be inserted
     K,                      # the group (record) at position Current
-    Position,               # the position, where H is inserted
     S,                      # supergroups entry of K
     I,                      # set of positions
     J,                      # set of positions
     Subs;                   # subgroups of K
 
-  # Prepare the updated list of found groups.
-  G := GroupsFound[1].Group;
-  Current := 1;
-  NewGroupsFound := [];
+  G := Grp(Root(gr));
+  rH := LinsNode(H, Index(G, H), Supers);
 
-  # Insert every group with smaller index than H to the list NewGroupsFound.
-  while Current in [1..Length(GroupsFound)] and GroupsFound[Current].Index <= Index(G,H) do
-    K := GroupsFound[Current];
-    NewGroupsFound[Current] := K;
-    # If test is true, then check if the group H is already contained in the list GroupsFound.
-    if test and K.Index = Index(G,H) then
-      if LINS_IsSubgroupFp(K.Group,H) then
-        UniteSet(K.Supergroups,Supers);
-        return [GroupsFound,Current];
-      fi;
+  # Search for correct level
+  pos := PositionProperty(gr!.Levels, level -> level.Index = rH!.Index);
+  if pos = fail then
+    pos := PositionProperty(gr!.Levels, level -> level.Index > rH!.Index);
+    if pos = fail then
+      pos := Length(gr!.Levels) + 1;
     fi;
-    Current := Current + 1;
-  od;
-
-  # Insert the group H to the list NewGroupsFound and store the Position.
-  Position := Current;
-  Supers := Set(Concatenation(List(Supers, s-> Concatenation([s],GroupsFound[s].Supergroups))));
-  NewGroupsFound[Position] := rec(Group:=H,Index:=Index(G,H),Supergroups:=Supers,TriedPrimes:=[]);
-  H := NewGroupsFound[Position];
-
-  # Insert every group with bigger index than H to the NewGroupsFound list.
-  # Update the information on positions of Supergroups if neccessary.
-  for Current in [Position..Length(GroupsFound)] do
-    NewGroupsFound[Current+1] := GroupsFound[Current];
-    S := GroupsFound[Current].Supergroups;
-    I := Filtered(S, i -> i < Position);
-    J := Filtered(S, i -> i >= Position);
-    J := List(J, i -> i+1);
-    NewGroupsFound[Current+1].Supergroups := SSortedList(Union(I,J));
-  od;
+    Add(gr!.Levels, rec(Index := rH!.Index, Nodes := [rH]), pos);
+  # If test is true, then check if the group H is already contained in the list.
+  elif test then
+    level := gr!.Levels[pos];
+    for rK in level.Nodes do
+      K := Grp(rK);
+      if LINS_IsSubgroupFp(K,H) then
+        return rK;
+      fi;
+    od;
+  fi;
 
   # Search for all possible Supergroups of H.
-  for Current in Reversed([1..(Position-1)]) do
-    K := NewGroupsFound[Current];
-    if not (Current in H.Supergroups) then
-      if H.Index mod K.Index = 0 then
-        if LINS_IsSubgroupFp(K.Group,H.Group) then
-          UniteSet(H.Supergroups,Concatenation([Current],NewGroupsFound[Current].Supergroups));
+  AllSupergroups := Set(LINS_allNodes(rH, Supergroups, false));
+  for level in Reversed(gr!.Levels{[1 .. pos - 1]}) do
+    for rK in level.Nodes do
+      K := Grp(rK);
+      if not (rK in AllSupergroups) then
+        if Index(rH) mod Index(rK) = 0 then
+          if LINS_IsSubgroupFp(K, H) then
+            LINS_UpdateRelations(rK, rH);
+            UniteSet(AllSupergroups, LINS_allNodes(rK, Supergroups, false));
+          fi;
         fi;
       fi;
-    fi;
+    od;
   od;
 
   # Search for all possible Subgroups of H.
-  for Current in [(Position+1)..Length(NewGroupsFound)] do
-    K := NewGroupsFound[Current];
-    if not (Position in K.Supergroups) then
-      if K.Index mod H.Index = 0 then
-        if LINS_IsSubgroupFp(H.Group,K.Group) then
-          AddSet(K.Supergroups,Position);
-          for Subs in Filtered([Current+1..Length(NewGroupsFound)], i -> Current in NewGroupsFound[i].Supergroups) do
-            AddSet(NewGroupsFound[Subs].Supergroups,Position);
-          od;
+  AllSubgroups := Set(LINS_allNodes(rH, Subgroups, false));
+  for level in gr!.Levels{[pos + 1 .. Length(gr!.Levels)]} do
+    for rK in level.Nodes do
+      K := Grp(rK);
+      if not (rK in AllSubgroups) then
+        if Index(rK) mod Index(rH) = 0 then
+          if LINS_IsSubgroupFp(H, K) then
+            LINS_UpdateRelations(rH, rK);
+            UniteSet(AllSubgroups, LINS_allNodes(rK, Subgroups, false));
+          fi;
         fi;
       fi;
-    fi;
+    od;
   od;
 
-  return [NewGroupsFound,Position];
+  return rH;
 end);

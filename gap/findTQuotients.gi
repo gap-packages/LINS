@@ -34,9 +34,10 @@
 ## up to some sufficient large enough index.
 #############################################################################
 
-InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ)
+InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
+    n,
     H,      # the group (record) at position Current
     I,      # index list
     Q,      # loop variable, entry of QQ
@@ -50,8 +51,9 @@ InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ
     K;      # normal core of PL, subgroup of H with T-quotient
 
   # References to the Groups in the list GroupsFound.
-  G := GroupsFound[1].Group;
-  H := GroupsFound[Current].Group;
+  G := Grp(Root(gr));
+  n := IndexBound(gr);
+  H := Grp(rH);
 
   # Calculate the index list.
   I := [];
@@ -64,7 +66,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ
 
   # If the index list is empty, return the list GroupsFound.
   if Length(I) = 0 then
-    return GroupsFound;
+    return;
   fi;
 
   # Calculate every subgroup of H up to the maximum index in I
@@ -83,13 +85,10 @@ InstallGlobalFunction( LINS_FindTQuotients, function(GroupsFound, n, Current, QQ
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          GroupsFound := LINS_AddGroup(GroupsFound,K,[1],true)[1];
+          LINS_AddGroup(gr, K, [1], true);
         fi;
         break;
       fi;
     od;
   od;
-
-  # Return the updated list GroupsFound
-  return GroupsFound;
 end);
