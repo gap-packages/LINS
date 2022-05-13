@@ -25,10 +25,10 @@
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
   local
     H,          # the group (record) at postion Current
-    n, rK, AllSupergroups, supers, subs, pos, level,
+    n, rK, allSupergroups, supers, subs, pos, level,
     Other,      # Loop variable, position of group to insersect
     K,          # the group (record) at position Other
-    M,          # smallest supergroup (record) of H and K, being HK
+    rM,          # smallest supergroup (record) of H and K, being HK
     index,      # index of the intersection of H and K
     F;          # list of groups (positions), which could be the insersection of H and K
 
@@ -41,23 +41,23 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
 
   # Calculate intersections with every other group
   # in the list GroupsFound that are stored before the position Current
-  AllSupergroups := LINS_allNodes(rH, Supergroups, false);
+  allSupergroups := LINS_allNodes(rH, Supergroups, false);
   for level in gr!.Levels{[1 .. PositionProperty(gr!.Levels, level -> level.Index = Index(rH))]} do
     for rK in level.Nodes do
       if rK = rH then
         break;
       fi;
       # If the other group is a supergroup of H, then continue;
-      if rK in AllSupergroups then
+      if rK in allSupergroups then
         continue;
       fi;
       K := Grp(rK);
 
       # Find the smallest supergroup of H and K. (which is HK)
-      supers := Intersection(Supergroups(H),Supergroups(K));
+      supers := Intersection(allSupergroups, LINS_allNodes(rK, Supergroups, false));
       pos := PositionMinimum(List(supers, Index));
-      M := supers[pos];
-      index := K!.Index * H!.Index / M!.Index;
+      rM := supers[pos];
+      index := rK!.Index * rH!.Index / rM!.Index;
 
       # Check if we need to calculate the intersection
       if index >= n then

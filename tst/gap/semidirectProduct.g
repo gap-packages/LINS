@@ -15,7 +15,7 @@ TestSemidirectProduct := function(n)
     c := G.3;
 
     n3 := Int(n / 3);
-    L := LowIndexNormal(G, n);
+    L := List(LowIndexNormal(G, n));
 
     # We enumerate all normal subgroups that we would expect to find from a theoratical point of view.
     # For this we track the positions in our list L of groups that we expected.
@@ -68,7 +68,7 @@ TestSemidirectProduct := function(n)
     Remove(primes, 2); # remove 3 from primes
     subgraph := [];
     for i in [1 .. 4] do
-        if L[1 + i].Index = 3 then
+        if L[1 + i]!.Index = 3 then
             if expected[1 + i] = true then
                 Error("Subgroup has already been visited. This is unexpected!");
             fi;
@@ -78,10 +78,10 @@ TestSemidirectProduct := function(n)
         fi;
     od;
     for i in [1 .. LINS_MaxPowerSmallerInt(n3, 3)] do
-        pos := PositionProperty(L, x -> x.Index = 3 * 3 ^ i);
+        pos := PositionProperty(L, x -> x!.Index = 3 * 3 ^ i);
         if pos = fail then
             return false;
-        elif IsEvenInt(i) and L[pos].Group <> Subgroup(G, [a ^ (3 ^ (i/2)), b ^ (3 ^ (i/2))]) then
+        elif IsEvenInt(i) and L[pos]!.Grp <> Subgroup(G, [a ^ (3 ^ (i/2)), b ^ (3 ^ (i/2))]) then
                 return false;
         else
             if expected[pos] = true then
@@ -127,12 +127,12 @@ TestSemidirectProduct := function(n)
         # Thus we expect to find exactly (i + 1) normal subgroups of index (3 * p ^ i).
         if RemInt(p - 1, 3) = 0 then
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p)] do
-                pos := PositionProperty(L, x -> x.Index = 3 * p ^ i);
+                pos := PositionProperty(L, x -> x!.Index = 3 * p ^ i);
                 if pos = fail then
                     return false;
                 else
                     for j in [0 .. i] do
-                        if L[pos + j].Index = 3 * p ^ i then
+                        if L[pos + j]!.Index = 3 * p ^ i then
                             if expected[pos + j] = true then
                                 Error("Subgroup has already been visited. This is unexpected!");
                             fi;
@@ -176,8 +176,8 @@ TestSemidirectProduct := function(n)
         # Thus we expect to find exactly one group of index 3 * p ^ (2 * i)
         else
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p ^ 2)] do
-                pos := PositionProperty(L, x -> x.Index = 3 * p ^ (2 * i));
-                if pos = fail or L[pos].Group <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
+                pos := PositionProperty(L, x -> x!.Index = 3 * p ^ (2 * i));
+                if pos = fail or L[pos]!.Grp <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
                     return false;
                 else
                     if expected[pos] = true then
@@ -199,7 +199,7 @@ TestSemidirectProduct := function(n)
     od;
 
     # Sort by smallest index of subgraph
-    SortBy(subgraphs, subgraph -> L[subgraph[1]].Index);
+    SortBy(subgraphs, subgraph -> L[subgraph[1]]!.Index);
 
     # The intersections of the subgroups in subgraphs are the missing normal subgroups
     for nrIntersections in [2 .. Length(subgraphs)] do
@@ -218,7 +218,7 @@ TestSemidirectProduct := function(n)
                 continue;
             fi;
             subgraphSelection[i] := NextIterator(iterSubgraphs[i]);
-            minIndex[i + 1] := minIndex[i] * L[subgraphs[subgraphSelection[i]][1]].Index / 3;
+            minIndex[i + 1] := minIndex[i] * L[subgraphs[subgraphSelection[i]][1]]!.Index / 3;
             if minIndex[i + 1] > n then
                 Unbind(iterSubgraphs[i]);
                 Unbind(subgraphSelection[i]);
@@ -248,7 +248,7 @@ TestSemidirectProduct := function(n)
                     continue;
                 fi;
                 # index of intersection
-                index := 3 * Product(subgroupSelection, i -> L[i].Index / 3);
+                index := 3 * Product(subgroupSelection, i -> L[i]!.Index / 3);
                 if index > n then
                     iterSubgroups[j] := Iterator(subgraphs[subgraphSelection[j]]);
                     Unbind(subgroupSelection[j]);

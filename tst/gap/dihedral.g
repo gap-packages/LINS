@@ -9,18 +9,18 @@ TestDihedral := function(N)
     fi;
     n := N / 2;
     G := DihedralGroup(N);
-    L := LowIndexNormal(G, N);
+    L := List(LowIndexNormal(G, N));
     Current := 2;
     if IsEvenInt(n) then
         for k in [1 .. 2] do
-            if Order(L[Current].Group) <> n then
+            if Order(L[Current]!.Grp) <> n then
                 return false;
             fi;
             Current := Current + 1;
         od;
     fi;
     for k in Reversed(DivisorsInt(n)) do
-        if Order(L[Current].Group) <> k then
+        if Order(L[Current]!.Grp) <> k then
                 return false;
         fi;
         Current := Current + 1;

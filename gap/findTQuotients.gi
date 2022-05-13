@@ -85,7 +85,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ)
       if Index(G,PL) = i then
         K := Core(G, PL);
         if Index(G,K) <= n then
-          LINS_AddGroup(gr, K, [1], true);
+          LINS_AddGroup(gr, K, [rH], true);
         fi;
         break;
       fi;
