@@ -1,21 +1,24 @@
 #############################################################################
+##  addGroup.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
 
-##
+#############################################################################
 ## Returns true if H is a subgroup of G.
 ## Both H and G must be subgroups of the same finitely presented group.
 ## We need coset tables of both H and G in the supergroup.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
   local word;
   for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
@@ -26,14 +29,16 @@ InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
   return true;
 end);
 
-##
+
+#############################################################################
 ## Add the group H to the list GroupsFound.
 ## Supers is a list of positions of supergroups in the list GroupsFound.
 ## If test is true, then it is checked, if the group H is not already contained in the list GroupsFound.
 ## The group H will be inserted in the list GroupsFound after the last group with smaller or equal index in G.
 ## All references to positions of supergroups will get updated in the list GroupsFound.
 ## The function returns a tupel with the updated list and the position where H can be found in the new list.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_AddGroup, function(GroupsFound, H, Supers, test)
   local
     G,                      # the parent group, which is stored at the first position in GroupsFound

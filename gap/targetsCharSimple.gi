@@ -1,16 +1,19 @@
 #############################################################################
+##  targetsCharSimple.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
-##
+
+#############################################################################
 ## The pregenerated list LINS_TargetsCharSimple will contain the following information in form of tupels of any group
 ## (T x T x ... x T), where T is a non-abelian simple group,
 ## with group order up to the maximum index boundary max_index.
@@ -19,7 +22,8 @@
 ## 2 : the primes dividing the schur multiplier of Q
 ## 3 : name of the group T^d
 ## The list LINS_TargetsCharSimple is sorted by information 1.
-##
+#############################################################################
+
 BindGlobal("LINS_TargetsCharSimple",
 [ [              60,           [ 2 ],          "A5^1" ],
   [             168,           [ 2 ],    "PSL(2,7)^1" ],

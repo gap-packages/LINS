@@ -1,16 +1,19 @@
 #############################################################################
+##  targetsQuotient.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
-##
+
+#############################################################################
 ## The pregenerated list LINS_TargetsQuotient will contain the following information in form of tupels of any subgroup Q of
 ## Aut(T x T x ... x T), where T is a non-abelian simple group,
 ## such that (T x T x ... x T) is a subgroup of Q and Q acts transitively on the copies of T,
@@ -20,7 +23,8 @@
 ## 2 : an index of some group S, that has trivial core in Q
 ## 3 : name of the group T^d
 ## The list LINS_TargetsQuotient is sorted by information 1.
-##
+#############################################################################
+
 BindGlobal("LINS_TargetsQuotient",
 [ [              60,               5,          "A5^1" ],
   [             120,               5,          "A5^1" ],

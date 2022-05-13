@@ -1,25 +1,30 @@
 #############################################################################
+##  LINS.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
-##
+
+#############################################################################
 ## The maximum index boundary the algorithm can work with
-##
+#############################################################################
 
 BindGlobal("LINS_maxIndex", 10000000);
 
-##
+
+#############################################################################
 ## Calculate every normal subgroup of G up to index n
 ## The algorithm works only for n less equal the maximum index bound max_index
-##
+#############################################################################
+
 InstallGlobalFunction( LowIndexNormal, function(G, n)
   local GroupsFound, Current, primes;
 

@@ -1,22 +1,25 @@
 #############################################################################
+##  findPQuotients.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
 
-##
+#############################################################################
 ## Let the group G be located in the list GroupsFound at position 1.
 ## Let the group H be located in the list GroupsFound at position Current.
 ## Calculate every normal subgroup K of G, such that H/K is a p-Group
 ## and the index in G is less equal n.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_FindPQuotients, function(GroupsFound, n, Current, primes)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound

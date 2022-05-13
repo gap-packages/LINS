@@ -1,19 +1,22 @@
 #############################################################################
+##  findPModules.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
 
-##
+#############################################################################
 ## Calculate the exponent sum n-size vector of word in Fp
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_ExponentSum, function(n,p,word)
   local
     rep,      # exponent Representaton of word, that are tupels (a,b), such that a^b is a subword of word
@@ -30,20 +33,24 @@ InstallGlobalFunction(LINS_ExponentSum, function(n,p,word)
 end);
 
 
-##
+#############################################################################
 ## Calculate the GroupHomomorphism into the symmetric group
 ## representing the action of H on H/K by multiplication
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_PullBackH, function(GenM,p,Gens,O,Mu,Psi)
   return List([1..Length(Gens)],i->PermList(List([1..Length(O)],j->Position(O,O[j]+(LINS_ExponentSum(Length(GenM),p,Gens[i]^Mu))^Psi))));
 end);
 
-##
+
+#############################################################################
 ## maximal Generators of the PQuotient.
-##
+#############################################################################
+
 BindGlobal("LINS_maxPGenerators", 1000);
 
-##
+
+#############################################################################
 ## Let the group G be located in the list GroupsFound at position 1.
 ## Let the group H be located in the list GroupsFound at position Current.
 ## Calculate every normal subgroup K of G, such that H/K is a p-Group
@@ -52,7 +59,8 @@ BindGlobal("LINS_maxPGenerators", 1000);
 ## We construct a module over the groupring (F_p G) and compute maximal submodules of this module.
 ## These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian p-Quotients.
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_FindPModules, function(GroupsFound, n, Current, p)
   local
     G,        # the parent group, which is stored at the first position in GroupsFound

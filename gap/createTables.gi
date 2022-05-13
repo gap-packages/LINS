@@ -1,19 +1,25 @@
 #############################################################################
+##  createTables.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
-# Computation of LINS_TargetsQuotient table from minIndex to maxIndex.
-# Return the requested part of the table.
-# Will compute information on all targets Inn(T^d) <= Q <= Aut(T^d)
-# such that minIndex < |T|^d <= maxIndex.
+
+#############################################################################
+## Computation of LINS_TargetsQuotient table from minIndex to maxIndex.
+## Return the requested part of the table.
+## Will compute information on all targets Inn(T^d) <= Q <= Aut(T^d)
+## such that minIndex < |T|^d <= maxIndex.
+#############################################################################
+
 InstallGlobalFunction(LINS_CreateTargetsQuotients,
 function(minIndex, maxIndex)
   local targets, itSimple, T, maxExp, minExp, d, Td, factors, aut, inn, nice, canditates, perms, g, images, i, t, j, Q, subgroups, S, core, entry;
@@ -90,11 +96,15 @@ function(minIndex, maxIndex)
   return targets;
 end;
 
-# Computation of LINS_TargetsCharSimple table.
-# Return the requested part of the table.
-# Will compute the primes dividing the schur multiplier of all groups T^d
-# such that minIndex < |T|^d <= maxIndex.
-# Dependent on cohomolo package.
+
+#############################################################################
+## Computation of LINS_TargetsCharSimple table.
+## Return the requested part of the table.
+## Will compute the primes dividing the schur multiplier of all groups T^d
+## such that minIndex < |T|^d <= maxIndex.
+## Dependent on cohomolo package.
+#############################################################################
+
 InstallGlobalFunction(LINS_CreateTargetsCharSimple,
 function(minIndex, maxIndex)
   local targets, itSimple, T, maxExp, minExp, mult, p, d, entry;

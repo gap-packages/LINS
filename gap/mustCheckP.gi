@@ -1,19 +1,23 @@
 #############################################################################
+##  mustCheckP.gi
+#############################################################################
 ##
-##  This file is part of LINS, a package for the GAP computer algebra system
-##  which provides a method for the computation of normal subgroups in a
-##  finitely presented group.
+##  This file is part of the LINS package.
 ##
-##  This files's authors include Friedrich Rober.
+##  This file's authors include Friedrich Rober.
 ##
-##  SPDX-License-Identifier: GPL-3.0-or-later
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
 ##
 #############################################################################
 
-##
+
+#############################################################################
 ## This finds the sizes of the minimal normal subgroups of
 ## G/H, where H is the group in the position Current in the list.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_MinSubgroupSizes, function(GroupsFound, Current)
   local m, minSupergroups;
 
@@ -23,8 +27,11 @@ InstallGlobalFunction(LINS_MinSubgroupSizes, function(GroupsFound, Current)
   return List(minSupergroups, x -> Index(GroupsFound[1].Group, GroupsFound[Current].Group) / Index(GroupsFound[1].Group, GroupsFound[x].Group) );
 end);
 
+
+#############################################################################
 ## For positive integers a,b
 ## return true if a is some power of b;
+#############################################################################
 InstallGlobalFunction(LINS_IsPowerOf, function(a, b)
   local c;
 
@@ -39,9 +46,11 @@ InstallGlobalFunction(LINS_IsPowerOf, function(a, b)
   return true;
 end);
 
-##
+
+#############################################################################
 ## This function returns the size of the group GL(r,p).
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_OGL, function(r, p)
   local i,j;
 
@@ -53,10 +62,12 @@ InstallGlobalFunction(LINS_OGL, function(r, p)
   return i;
 end);
 
-##
+
+#############################################################################
 ## This function checks if p-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.
 ## n is the maximal index, p a prime, index is the index of some group H and minSubSizes are the sizes computed by a call of LINS_MinSubgroupSizes on H.
-##
+#############################################################################
+
 InstallGlobalFunction(LINS_MustCheckP, function(n, p, index, minSubSizes)
   local i,j, ordersToCheck, r;
 
