@@ -27,7 +27,7 @@ which creates a subdirectory called `LINS/`.
 ## Documentation
 
 You can read the documentation online at
->   <https://FriedrichRober.github.io/WPE/doc/chap0.html>
+>   <https://FriedrichRober.github.io/LINS/doc/chap0.html>
 
 If you want to access it from within GAP by entering `?LINS` on the GAP prompt,
 you first have to build the manual by using `gap makedoc.g` from within the `LINS/` root directory.
