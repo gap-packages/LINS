@@ -25,7 +25,7 @@
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
   local
     H,          # the group (record) at postion Current
-    n, rK, allSupergroups, supers, subs, pos, level,
+    n, rK, allSupergroups, allSubgroups, supers, subs, pos, level, xgroups,
     Other,      # Loop variable, position of group to insersect
     K,          # the group (record) at position Other
     rM,          # smallest supergroup (record) of H and K, being HK
@@ -42,6 +42,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
   # Calculate intersections with every other group
   # in the list GroupsFound that are stored before the position Current
   allSupergroups := LINS_allNodes(rH, Supergroups, false);
+  allSubgroups := LINS_allNodes(rH, Subgroups, false);
   for level in gr!.Levels{[1 .. PositionProperty(gr!.Levels, level -> level.Index = Index(rH))]} do
     for rK in level.Nodes do
       if rK = rH then
@@ -54,7 +55,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
       K := Grp(rK);
 
       # Find the smallest supergroup of H and K. (which is HK)
-      supers := Intersection(allSupergroups, LINS_allNodes(rK, Supergroups, false));
+      xgroups := LINS_allNodes(rK, Supergroups, false);
+      supers := Filtered(allSupergroups, s -> s in xgroups);
       pos := PositionMinimum(List(supers, Index));
       rM := supers[pos];
       index := rK!.Index * rH!.Index / rM!.Index;
@@ -65,7 +67,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
       fi;
 
       # Check if the intersection has been already calculated
-      subs := Intersection(LINS_allNodes(rH, Subgroups, false), LINS_allNodes(rK, Subgroups, false));
+      xgroups := LINS_allNodes(rK, Subgroups, false);
+      subs := Filtered(allSubgroups, s -> s in xgroups);
       if not (index in List(subs, Index)) then
         # Add the intersection to the list GroupsFound
         LINS_AddGroup(gr, Intersection(H, K), [rH, rK], false);
