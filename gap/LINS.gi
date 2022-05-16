@@ -13,14 +13,14 @@
 #############################################################################
 
 
-InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt, IsList ],
-function(G, i, supergroups)
+InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt ],
+function(G, i)
 	local r;
 
 	r := rec(
 		Grp := G,
 		Index := i,
-		Supergroups := supergroups,
+		Supergroups := [],
 		Subgroups := [],
 		TriedPrimes := []);
 
@@ -33,12 +33,11 @@ InstallMethod( LinsGraph, "standard method", [ IsGroup, IsPosInt ],
 function(G, n)
 	local gr, r;
 
-	r := LinsNode(G, 1, []);
+	r := LinsNode(G, 1);
 	gr := rec(
 		Root := r,
 		IndexBound := n,
-		Levels := [ rec(Index := 1, Nodes := [r]) ],
-		);
+		Levels := [ rec(Index := 1, Nodes := [r]) ]);
 
 	Objectify( LinsGraphType, gr );
 

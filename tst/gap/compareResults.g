@@ -3,21 +3,21 @@
 CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 
-    L := LowIndexNormal(G, n);
+    L := List(LowIndexNormal(G, n));
 
     # All groups have to be normal
-    if ForAny(L, x -> not IsNormal(L[1].Group, x.Group)) then
+    if ForAny(L, x -> not IsNormal(L[1]!.Grp, x!.Grp)) then
         return false;
     fi;
 
     # Compare the index lists
-    index := List(L, x -> x.Index);
+    index := List(L, x -> x!.Index);
     if index <> indexCor then
         return false;
     fi;
     m := Length(index);
 
-    supersUnfiltered := List(L, x -> x.Supergroups);
+    supersUnfiltered := List(L, x -> List(x!.Supergroups, r -> Position(L, r)));
     supers := List(
         [1 .. m],
         x -> Filtered(

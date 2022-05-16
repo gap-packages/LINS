@@ -1,5 +1,5 @@
 TestSemidirectProduct := function(n)
-    local F, R, G, a, b, c, n3, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, minIndex, index;
+    local F, R, G, a, b, c, n3, gr, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, minIndex, index;
     # <a, b> = Z ^ 2 and <c> = C_3
     # c := [ [ 0, -1 ], [ 1, -1 ] ];
     # c in GL(2, Z) and |c| = 3
@@ -15,7 +15,8 @@ TestSemidirectProduct := function(n)
     c := G.3;
 
     n3 := Int(n / 3);
-    L := List(LowIndexNormal(G, n));
+    gr := LowIndexNormal(G, n);
+    L := List(gr);
 
     # We enumerate all normal subgroups that we would expect to find from a theoratical point of view.
     # For this we track the positions in our list L of groups that we expected.

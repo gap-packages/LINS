@@ -71,7 +71,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
       subs := Filtered(allSubgroups, s -> s in xgroups);
       if not (index in List(subs, Index)) then
         # Add the intersection to the list GroupsFound
-        LINS_AddGroup(gr, Intersection(H, K), [rH, rK], false);
+        LINS_AddGroup(gr, Intersection(K, H), [rK, rH], true);
       fi;
     od;
   od;

@@ -31,11 +31,51 @@ end);
 
 
 # K < H
-BindGlobal("LINS_UpdateRelations",
+BindGlobal("LINS_AddRelations",
 function(rH, rK)
   Add(Supergroups(rK), rH);
   Add(Subgroups(rH), rK);
+  # Stable Sort
+  SortBy(Supergroups(rK), Index);
+  SortBy(Subgroups(rH), Index);
 end);
+
+# K < H
+BindGlobal("LINS_RemoveRelations",
+function(rH, rK)
+  local pos;
+  pos := Position(Supergroups(rK), rH);
+  Remove(Supergroups(rK), pos);
+  pos := Position(Subgroups(rH), rK);
+  Remove(Subgroups(rH), pos);
+end);
+
+BindGlobal("LINS_UpdateRelations",
+function(rH)
+  local subs, supers, toRemove, rK, rL, pair;
+  subs := LINS_allNodes(rH, Subgroups, false);
+  toRemove := [];
+  for rK in Supergroups(rH) do
+    for rL in Subgroups(rK) do
+      if rL in subs then
+        Add(toRemove, [rK, rL]);
+      fi;
+    od;
+  od;
+  supers := LINS_allNodes(rH, Supergroups, false);
+  for rK in Subgroups(rH) do
+    for rL in Supergroups(rK) do
+      if rL in supers then
+        Add(toRemove, [rL, rK]);
+      fi;
+    od;
+  od;
+  toRemove := DuplicateFreeList(toRemove);
+  for pair in toRemove do
+    LINS_RemoveRelations(pair[1], pair[2]);
+  od;
+end);
+
 
 #############################################################################
 ## Add the group H to the list GroupsFound.
@@ -59,10 +99,11 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
     Subs;                   # subgroups of K
 
   G := Grp(Root(gr));
-  rH := LinsNode(H, Index(G, H), Supers);
+  rH := LinsNode(H, Index(G, H));
 
   # Search for correct level
   pos := PositionProperty(gr!.Levels, level -> level.Index = rH!.Index);
+  # level does not exist
   if pos = fail then
     pos := PositionProperty(gr!.Levels, level -> level.Index > rH!.Index);
     if pos = fail then
@@ -70,27 +111,29 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
     fi;
     Add(gr!.Levels, rec(Index := rH!.Index, Nodes := [rH]), pos);
   # If test is true, then check if the group H is already contained in the list.
-  elif test then
+  else
     level := gr!.Levels[pos];
-    for rK in level.Nodes do
-      K := Grp(rK);
-      if LINS_IsSubgroupFp(K,H) then
-        return rK;
-      fi;
-    od;
-    Add(gr!.Levels[pos].Nodes, rH);
+    if test then
+      for rK in level.Nodes do
+        K := Grp(rK);
+        if LINS_IsSubgroupFp(K,H) then
+          return rK;
+        fi;
+      od;
+    fi;
+    Add(level.Nodes, rH);
   fi;
 
   # Search for all possible Supergroups of H.
-  allSupergroups := LINS_allNodes(rH, Supergroups, false);
+  allSupergroups := [];
   for level in Reversed(gr!.Levels{[1 .. pos - 1]}) do
     for rK in level.Nodes do
       K := Grp(rK);
       if not (rK in allSupergroups) then
         if Index(rH) mod Index(rK) = 0 then
           if LINS_IsSubgroupFp(K, H) then
-            LINS_UpdateRelations(rK, rH);
-            DuplicateFreeList(Concatenation(allSupergroups, LINS_allNodes(rK, Supergroups, false)));
+            LINS_AddRelations(rK, rH);
+            allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, LINS_allNodes(rK, Supergroups, false)));
           fi;
         fi;
       fi;
@@ -98,20 +141,23 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
   od;
 
   # Search for all possible Subgroups of H.
-  allSubgroups := LINS_allNodes(rH, Subgroups, false);
+  allSubgroups := [];
+  SortBy(allSubgroups, Index);
   for level in gr!.Levels{[pos + 1 .. Length(gr!.Levels)]} do
     for rK in level.Nodes do
       K := Grp(rK);
       if not (rK in allSubgroups) then
         if Index(rK) mod Index(rH) = 0 then
           if LINS_IsSubgroupFp(H, K) then
-            LINS_UpdateRelations(rH, rK);
-            DuplicateFreeList(Concatenation(allSubgroups, LINS_allNodes(rK, Subgroups, false)));
+            LINS_AddRelations(rH, rK);
+            allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, LINS_allNodes(rK, Subgroups, false)));
           fi;
         fi;
       fi;
     od;
   od;
+
+  LINS_UpdateRelations(rH);
 
   return rH;
 end);
