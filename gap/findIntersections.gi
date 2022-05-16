@@ -57,7 +57,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
       # Find the smallest supergroup of H and K. (which is HK)
       xgroups := LINS_allNodes(rK, Supergroups, false);
       supers := Filtered(allSupergroups, s -> s in xgroups);
-      pos := PositionMinimum(List(supers, Index));
+      pos := PositionMaximum(List(supers, Index));
       rM := supers[pos];
       index := rK!.Index * rH!.Index / rM!.Index;
 
