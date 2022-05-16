@@ -11,7 +11,7 @@ TestTProduct := function(T, d)
     for k in Reversed([1 .. d]) do
         # number of choices to choose k direct factors
         for l in [1 .. Binomial(d, k)] do
-            if Order(L[Current].Group) <> Order(T) ^ k then
+            if Order(L[Current]!.Grp) <> Order(T) ^ k then
                 return false;
             fi;
             Current := Current + 1;
