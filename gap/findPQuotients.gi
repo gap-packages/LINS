@@ -20,7 +20,7 @@
 ## and the index in G is less equal n.
 #############################################################################
 
-InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes)
+InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
     n,
@@ -40,7 +40,7 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes)
     # Check according to some rules whether the p-Quotients will be computed by Intersections.
     if( LINS_MustCheckP(n, p, Index(rH), LINS_MinSubgroupSizes(rH)) ) then
       # Compute all p-Groups from H.
-      LINS_FindPModules(gr, rH, p);
+      LINS_FindPModules(gr, rH, p, opts);
     fi;
   od;
 end);

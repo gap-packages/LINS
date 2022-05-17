@@ -22,7 +22,7 @@
 ## by calling the LINS_AddGroup-function
 #############################################################################
 
-InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
+InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
   local
     H,          # the group (record) at postion Current
     n, rK, rU, U, allSupergroups, allSubgroups, supers, subs, pos, level, xgroups,
@@ -72,8 +72,10 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH)
       if not (index in List(subs, Index)) then
         # Add the intersection to the list GroupsFound
         U := Intersection(K, H);
-        LINS_SetParent(U, G);
-        rU := LINS_AddGroup(gr, U, [rK, rH], false);
+        if opts.DoSetParent then
+          LINS_SetParent(U, G);
+        fi;
+        rU := LINS_AddGroup(gr, U, [rK, rH], false, opts);
         Add(allSubgroups, rU);
       fi;
     od;
