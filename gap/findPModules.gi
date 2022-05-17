@@ -153,6 +153,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p)
     # Calculate the subgroup K with H/K being an elementary abelian p-Group
     PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),LINS_PullBackH(GenM,p,List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
     K := Kernel(PhiHom);
+    LINS_SetParent(K, G);
 
     # Add the subgroup K by calling the LINS_AddGroup-function
     if Index(G, K) <= n then
