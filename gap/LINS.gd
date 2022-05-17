@@ -151,8 +151,6 @@ DeclareGlobalFunction( "LINS_FindPQuotients" );
 DeclareGlobalFunction( "LINS_MinSubgroupSizes" );
 DeclareGlobalFunction( "LINS_IsPowerOf" );
 DeclareGlobalFunction( "LINS_OGL" );
-DeclareGlobalFunction( "LINS_ExponentSum" );
-DeclareGlobalFunction( "LINS_PullBackH" );
 
 
 DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
