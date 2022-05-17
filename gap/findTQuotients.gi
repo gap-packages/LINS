@@ -82,8 +82,9 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ)
   for L in LL do
     PL := PreImage(Iso, L);
     for i in I do
-      if Index(G,PL) = i then
+      if Index(H,PL) = i then
         K := Core(G, PL);
+        LINS_SetParent(K, G);
         if Index(G,K) <= n then
           LINS_AddGroup(gr, K, [rH], true);
         fi;
