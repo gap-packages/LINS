@@ -25,7 +25,7 @@
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
   local
     H,          # the group (record) at postion Current
-    n, rK, rU, U, allSupergroups, allSubgroups, supers, subs, pos, level, xgroups,
+    rG, G, n, rK, rU, U, allSupergroups, allSubgroups, supers, subs, pos, level, xgroups,
     Other,      # Loop variable, position of group to insersect
     K,          # the group (record) at position Other
     rM,          # smallest supergroup (record) of H and K, being HK
@@ -33,9 +33,11 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
     F;          # list of groups (positions), which could be the insersection of H and K
 
   # If the current group is G, then continue.
-  if Root(gr) = rH then
+  rG := Root(gr);
+  if rG = rH then
     return;
   fi;
+  G := Grp(rG);
   H := Grp(rH);
   n := IndexBound(gr);
 
