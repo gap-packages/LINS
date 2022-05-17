@@ -177,7 +177,7 @@ end);
 #############################################################################
 
 InstallGlobalFunction( LowIndexNormal, function(args...)
-	local G, n, opts, gr, i, level, r, primes;
+	local G, n, phi, opts, gr, i, level, r, primes;
 
 	if Length(args) < 2 or Length(args) > 3 then
 		ErrorNoReturn("Unknown number of arguments!");
@@ -198,10 +198,15 @@ InstallGlobalFunction( LowIndexNormal, function(args...)
 
 	# Convert the group into an fp-group if possible.
 	if not IsFpGroup(G) then
-		G := Image(IsomorphismFpGroup(G));
+		phi := IsomorphismFpGroup(G);
+		G := Image(phi);
 	fi;
 
 	gr := LinsGraph(G, n);
+
+	if IsBound(phi) then
+		gr!.iso := phi;
+	fi;
 
 	# Call T-Quotient Procedure on G
 	LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient, opts);
