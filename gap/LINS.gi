@@ -181,9 +181,9 @@ end);
 
 # Calculate the index list out of the targets
 BindGlobal( "LINS_FilterTQuotientsStd",
-function(gr, rG, rH, QQ)
+function(gr, rH, QQ)
 local G, H, n, I, Q;
-	G := Grp(rG);
+	G := Grp(Root(gr));
 	H := Grp(rH);
 	n := IndexBound(gr);
 	I := [];
@@ -198,7 +198,7 @@ end);
 
 # Whether to compute the intersection of the groups rH and rK
 # with the given index.
-BindGlobal( "LINS_DoIntersection",
+BindGlobal( "LINS_DoIntersectionStd",
 function(gr, rH, rK, index)
 	return true;
 end);
