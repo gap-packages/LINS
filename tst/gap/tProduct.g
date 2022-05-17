@@ -5,7 +5,7 @@ TestTProduct := function(T, d)
     local G, n, L, Current, k, l;
     G := DirectProduct(List([1 .. d], i -> T));
     n := Order(T) ^ d;
-    L := List(LowIndexNormal(G, n));
+    L := List(LowIndexNormalSubgroups(G, n));
     Current := 1;
     # k is number of factors
     for k in Reversed([1 .. d]) do
