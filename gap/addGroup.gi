@@ -21,14 +21,15 @@
 
 InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
   local word;
+
   for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
     if RewriteWord(AugmentedCosetTableInWholeGroup(G), word) = fail then
       return false;
     fi;
   od;
+
   return true;
 end);
-
 
 # K < H
 BindGlobal("LINS_AddRelations",
@@ -44,6 +45,7 @@ end);
 BindGlobal("LINS_RemoveRelations",
 function(rH, rK)
   local pos;
+
   pos := Position(MinimalSupergroups(rK), rH);
   Remove(MinimalSupergroups(rK), pos);
   pos := Position(MinimalSubgroups(rH), rK);
@@ -53,6 +55,7 @@ end);
 BindGlobal("LINS_UpdateRelations",
 function(rH)
   local subs, supers, toRemove, rK, rL, pair;
+
   subs := LINS_allNodes(rH, MinimalSubgroups, false);
   toRemove := [];
   for rK in MinimalSupergroups(rH) do
