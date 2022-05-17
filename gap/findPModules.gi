@@ -61,7 +61,7 @@ BindGlobal("LINS_maxPGenerators", 1000);
 ## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
 #############################################################################
 
-InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p)
+InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
   local
     G,        # the parent group, which is stored at the first position in GroupsFound
     n, rK,
@@ -153,11 +153,13 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p)
     # Calculate the subgroup K with H/K being an elementary abelian p-Group
     PhiHom :=  GroupHomomorphismByImagesNC(H,SymmetricGroup(Length(O)),LINS_PullBackH(GenM,p,List(GeneratorsOfGroup(H),x->Image(Iso,x)),O,Mu,PsiHom));
     K := Kernel(PhiHom);
-    LINS_SetParent(K, G);
+    if opts.DoSetParent then
+      LINS_SetParent(K, G);
+    fi;
 
     # Add the subgroup K by calling the LINS_AddGroup-function
     if Index(G, K) <= n then
-      rK := LINS_AddGroup(gr, K, [rH], true);
+      rK := LINS_AddGroup(gr, K, [rH], true, opts);
       # If the index is sufficient small, compute p-Quotients from the subgroup K
       if p <= n / Index(G, K) then
         LINS_FindPModules(gr, rK, p);

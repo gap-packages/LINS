@@ -34,7 +34,7 @@
 ## up to some sufficient large enough index.
 #############################################################################
 
-InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ)
+InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
   local
     G,      # the parent group, which is stored at the first position in GroupsFound
     n,
@@ -84,9 +84,11 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ)
     for i in I do
       if Index(H,PL) = i then
         K := Core(G, PL);
-        LINS_SetParent(K, G);
+        if opts.DoSetParent then
+          LINS_SetParent(K, G);
+        fi;
         if Index(G,K) <= n then
-          LINS_AddGroup(gr, K, [rH], true);
+          LINS_AddGroup(gr, K, [rH], true, opts);
         fi;
         break;
       fi;

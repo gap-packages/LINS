@@ -155,14 +155,41 @@ end);
 
 BindGlobal("LINS_maxIndex", 10000000);
 
+# Default options, immutable entries
+BindGlobal( "LINS_DefaultOptions", Immutable(rec(
+    DoSetParent := true
+)));
+
+BindGlobal( "LINS_SetOptions",
+function(optionsBase, optionsUpdate)
+    local r;
+    for r in RecNames(optionsUpdate) do
+        if not IsBound(optionsBase.(r)) then
+            ErrorNoReturn("Invalid option: ", r);
+        fi;
+        optionsBase.(r) := optionsUpdate.(r);
+    od;
+end);
 
 #############################################################################
 ## Calculate every normal subgroup of G up to index n
 ## The algorithm works only for n less equal the maximum index bound max_index
 #############################################################################
 
-InstallGlobalFunction( LowIndexNormal, function(G, n)
-	local gr, i, level, r, primes;
+InstallGlobalFunction( LowIndexNormal, function(args...)
+	local G, n, opts, gr, i, level, r, primes;
+
+	if Length(args) < 2 or Length(args) > 3 then
+		ErrorNoReturn("Unknown number of arguments!");
+	fi;
+
+	G := args[1];
+	n := args[2];
+
+	opts := ShallowCopy(LINS_DefaultOptions);
+	if Length(args) = 3 then
+		LINS_SetOptions(opts, args[3]);
+	fi;
 
 	# Check if we can work with the index
 	if n > LINS_maxIndex then
@@ -177,7 +204,7 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
 	gr := LinsGraph(G, n);
 
 	# Call T-Quotient Procedure on G
-	LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient);
+	LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient, opts);
 
 	# Compute all primes up to n
 	primes := LINS_AllPrimesUpTo(n);
@@ -190,10 +217,10 @@ InstallGlobalFunction( LowIndexNormal, function(G, n)
 		fi;
 		for r in level.Nodes do
 			# Search for possible P-Quotients
-			LINS_FindPQuotients(gr, r, primes);
+			LINS_FindPQuotients(gr, r, primes, opts);
 			# Search for possible Intersections
 			if i > 1 then
-				LINS_FindIntersections(gr, r);
+				LINS_FindIntersections(gr, r, opts);
 			fi;
 		od;
 		i := i + 1;

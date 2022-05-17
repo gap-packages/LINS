@@ -89,7 +89,7 @@ end);
 ## The function returns a tupel with the updated list and the position where H can be found in the new list.
 #############################################################################
 
-InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test)
+InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
   local
     G,                      # the parent group, which is stored at the first position in GroupsFound
     rH, rK, pos, level, allSupergroups, allSubgroups,

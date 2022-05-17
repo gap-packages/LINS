@@ -157,6 +157,7 @@ DeclareGlobalFunction( "LINS_PullBackH" );
 
 DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
 DeclareGlobalFunction( "LINS_MaxPowerSmallerInt" );
+DeclareGlobalFunction( "LINS_SetParent" );
 
 
 #! @Description
