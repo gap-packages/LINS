@@ -14,19 +14,19 @@ TestDihedral := function(N)
     if IsEvenInt(n) then
         for k in [1 .. 2] do
             if Order(L[Current]!.Grp) <> n then
-                return false;
+                Error("LINS did not find D(", n, ")!");
             fi;
             Current := Current + 1;
         od;
     fi;
     for k in Reversed(DivisorsInt(n)) do
         if Order(L[Current]!.Grp) <> k then
-                return false;
+            Error("LINS did not find C(", k, ")!");
         fi;
         Current := Current + 1;
     od;
     if Current <= Length(L) then
-        return false;
+        Error("LINS found too many subgroups!");
     fi;
     return true;
 end;

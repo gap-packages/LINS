@@ -75,15 +75,15 @@ TestSemidirectProduct := function(n)
             fi;
             expected[1 + i] := true;
         else
-            return false;
+            Error("LINS did not find 3-quotient subgroup of index ", 3);
         fi;
     od;
     for i in [1 .. LINS_MaxPowerSmallerInt(n3, 3)] do
         pos := PositionProperty(L, x -> x!.Index = 3 * 3 ^ i);
         if pos = fail then
-            return false;
+            Error("LINS did not find 3-quotient subgroup of index ", 3 * 3 ^ i);
         elif IsEvenInt(i) and L[pos]!.Grp <> Subgroup(G, [a ^ (3 ^ (i/2)), b ^ (3 ^ (i/2))]) then
-                return false;
+            Error("LINS did not find correct 3-quotient subgroup of index ", 3 * 3 ^ i);
         else
             if expected[pos] = true then
                 Error("Subgroup has already been visited. This is unexpected!");
@@ -130,7 +130,7 @@ TestSemidirectProduct := function(n)
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p)] do
                 pos := PositionProperty(L, x -> x!.Index = 3 * p ^ i);
                 if pos = fail then
-                    return false;
+                    Error("LINS did not find any ", p, "-quotient subgroup of index ", 3 * p ^ i);
                 else
                     for j in [0 .. i] do
                         if L[pos + j]!.Index = 3 * p ^ i then
@@ -140,7 +140,7 @@ TestSemidirectProduct := function(n)
                             expected[pos + j] := true;
                             Add(subgraph, pos + j);
                         else
-                            return false;
+                            Error("LINS did not find enough ", p, "-quotient subgroups of index ", 3 * p ^ i);
                         fi;
                     od;
                 fi;
@@ -179,7 +179,7 @@ TestSemidirectProduct := function(n)
             for i in [1 .. LINS_MaxPowerSmallerInt(n3, p ^ 2)] do
                 pos := PositionProperty(L, x -> x!.Index = 3 * p ^ (2 * i));
                 if pos = fail or L[pos]!.Grp <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
-                    return false;
+                    Error("LINS did not find ", p, "-quotient subgroup of index ", 3 * p ^ (2 * i));
                 else
                     if expected[pos] = true then
                         Error("Subgroup has already been visited. This is unexpected!");
@@ -259,7 +259,7 @@ TestSemidirectProduct := function(n)
                 # pos of intersection
                 pos := PositionProperty(L, x -> Index(x) = index and ForAll(subgroupSelection, i -> L[i] in LINS_allNodes(x, MinimalSupergroups, false)));
                 if pos = fail then
-                    return false;
+                    Error("LINS did not find intersection of the subgroups with index list ", List(subgroupSelection, L[i]!.Index));
                 else
                     if expected[pos] = true then
                         Error("Subgroup has already been visited. This is unexpected!");
