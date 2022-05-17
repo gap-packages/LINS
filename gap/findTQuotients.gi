@@ -35,63 +35,65 @@
 #############################################################################
 
 InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
-  local
-    G,      # the parent group, which is stored at the first position in GroupsFound
-    n,
-    H,      # the group (record) at position Current
-    I,      # index list
-    Q,      # loop variable, entry of QQ
-    m,      # maximum of I
-    Iso,    # isomorphism from H into fp-group
-    IH,     # fp-group, image of Iso
-    LL,     # list of all subgroups of IH with index at most m
-    L,      # loop variable, subgroup in LL
-    i,      # loop variable, index in I
-    PL,     # preimage of L in Iso
-    K;      # normal core of PL, subgroup of H with T-quotient
+	local
+	G,      # the parent group, which is stored at the first position in GroupsFound
+	n,		# index bound
+	H,      # the group (record) at position Current
+	I,      # index list
+	Q,      # loop variable, entry of QQ
+	m,      # maximum of I
+	Iso,    # isomorphism from H into fp-group
+	IH,     # fp-group, image of Iso
+	LL,     # list of all subgroups of IH with index at most m
+	L,      # loop variable, subgroup in LL
+	i,      # loop variable, index in I
+	PL,     # preimage of L in Iso
+	K;      # normal core of PL, subgroup of H with T-quotient
 
-  # References to the Groups in the list GroupsFound.
-  G := Grp(Root(gr));
-  n := IndexBound(gr);
-  H := Grp(rH);
+	# References to the Groups in the list GroupsFound.
+	G := Grp(Root(gr));
+	n := IndexBound(gr);
+	H := Grp(rH);
 
-  # Calculate the index list.
-  I := [];
-  for Q in QQ do
-    if Q[1] > n / Index(G,H) then
-      break;
-    fi;
-    Add(I,Q[2]);
-  od;
+	# Calculate the index list.
+	I := [];
+	for Q in QQ do
+		if Q[1] > n / Index(G,H) then
+			break;
+		fi;
+		Add(I,Q[2]);
+	od;
 
-  # If the index list is empty, return the list GroupsFound.
-  if Length(I) = 0 then
-    return;
-  fi;
+	# If the index list is empty, return the list GroupsFound.
+	if Length(I) = 0 then
+		return;
+	fi;
 
-  # Calculate every subgroup of H up to the maximum index in I
-  # by calling the Low-Index-Subgroups-Prodecure.
-  m := Maximum(I);
-  Iso := IsomorphismFpGroup(H);
-  IH := Image(Iso);
-  LL := LowIndexSubgroupsFpGroup(IH, m);
+	# Calculate every subgroup of H up to the maximum index in I
+	# by calling the Low-Index-Subgroups-Prodecure.
+	m := Maximum(I);
+	Iso := IsomorphismFpGroup(H);
+	IH := Image(Iso);
+	LL := LowIndexSubgroupsFpGroup(IH, m);
 
-  # Search every subgroup L with an index in G contained in I.
-  # Then calculate the core of L and try to add the new Group
-  # to the list GroupsFound by calling LINS_AddGroup-function
-  for L in LL do
-    PL := PreImage(Iso, L);
-    for i in I do
-      if Index(H,PL) = i then
-        K := Core(G, PL);
-        if opts.DoSetParent then
-          LINS_SetParent(K, G);
-        fi;
-        if Index(G,K) <= n then
-          LINS_AddGroup(gr, K, [rH], true, opts);
-        fi;
-        break;
-      fi;
-    od;
-  od;
+	# Search every subgroup L with an index in G contained in I.
+	# Then calculate the core of L and try to add the new Group
+	# to the list GroupsFound by calling LINS_AddGroup-function
+	for L in LL do
+		PL := PreImage(Iso, L);
+		for i in I do
+			if Index(H,PL) = i then
+				K := Core(G, PL);
+				if opts.DoSetParent then
+					LINS_SetParent(K, G);
+				fi;
+
+				if Index(G,K) <= n then
+					LINS_AddGroup(gr, K, [rH], true, opts);
+				fi;
+
+				break;
+			fi;
+		od;
+	od;
 end);
