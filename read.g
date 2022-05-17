@@ -16,7 +16,6 @@
 ##
 #############################################################################
 
-ReadPackage( "LINS", "gap/LINS.gd");
 
 ReadPackage( "LINS", "gap/targetsQuotient.gi"); 
 ReadPackage( "LINS", "gap/targetsCharSimple.gi"); 
