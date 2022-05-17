@@ -76,7 +76,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	n := IndexBound(gr);
 
 	# Calculate the index list.
-	I := opts.FilterTQuotients(gr, rG, rH, QQ);
+	I := opts.FilterTQuotients(gr, rH, QQ);
 
 	# If the index list is empty, return the list GroupsFound.
 	if Length(I) = 0 then
