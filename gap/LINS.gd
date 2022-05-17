@@ -67,7 +67,7 @@ DeclareAttribute( "Root", IsLinsGraph, "mutable" );
 #! @Returns a list of groups
 #! @Arguments G, n
 #! @ChapterInfo LINS, LINS
-DeclareGlobalFunction( "LowIndexNormal" );
+DeclareGlobalFunction( "LowIndexNormalSubgroups" );
 
 #! @Description
 #! Given two subgroups <A>H</A> and <A>G</A> of some finitely presented supergroup,

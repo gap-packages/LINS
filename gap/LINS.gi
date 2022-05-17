@@ -235,7 +235,7 @@ end);
 ## The algorithm works only for n less equal the maximum index bound max_index
 #############################################################################
 
-InstallGlobalFunction( LowIndexNormal, function(args...)
+InstallGlobalFunction( LowIndexNormalSubgroups, function(args...)
 	local G, n, phi, opts, gr, i, level, r, primes;
 
 	if Length(args) < 2 or Length(args) > 3 then
