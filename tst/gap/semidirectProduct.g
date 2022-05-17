@@ -23,10 +23,10 @@ TestSemidirectProduct := function(n)
     # At the end the list expected should only contain true.
     expected := ListWithIdenticalEntries(Length(L), false);
     expected[1] := true;
-    # We iterate though the primes smaller n.
+    # We iterate though the primes smaller n/3.
     # For each prime we have a cerain subgraph of normal subgroups, that we would expect to find.
     # The subgraph begins in the lattice group L and each quotient has order p or p^2.
-    # The missing expected groups are intersections of groups of the above subgraphs.
+    # The missing expected groups are exactly the intersections of groups of the above subgraphs.
     primes := LINS_AllPrimesUpTo(n3);
     subgraphs := [];
 
@@ -214,7 +214,7 @@ TestSemidirectProduct := function(n)
             if IsDoneIterator(iterSubgraphs[i]) then
                 Unbind(iterSubgraphs[i]);
                 Unbind(subgraphSelection[i]);
-                Unbind(minIndex[i]);
+                Unbind(minIndex[i + 1]);
                 i := i - 1;
                 continue;
             fi;
@@ -270,5 +270,9 @@ TestSemidirectProduct := function(n)
         od;
     od;
 
-    return ForAll(expected, value -> value = true);
+    if ForAny(expected, value -> value = false) then
+        Error("LINS found too many subgroups!");
+    fi;
+
+    return true;
 end;

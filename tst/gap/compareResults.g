@@ -7,13 +7,13 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
 
     # All groups have to be normal
     if ForAny(L, x -> not IsNormal(L[1]!.Grp, x!.Grp)) then
-        return false;
+        Error("LINS found a subgroup that is not normal!");
     fi;
 
     # Compare the index lists
     index := List(L, x -> x!.Index);
     if index <> indexCor then
-        return false;
+        Error("LINS index list differs from correct one!");
     fi;
     m := Length(index);
 
@@ -54,5 +54,10 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     gammaCor := rec(
         graph := gammaCor,
         colourClasses := colour);
-    return IsIsomorphicGraph(gamma, gammaCor);
+
+    if not IsIsomorphicGraph(gamma, gammaCor) then
+        Error("LINS subgroup lattice differs from correct one!");
+    fi;
+
+    return true;
 end;
