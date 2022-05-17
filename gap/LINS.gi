@@ -128,6 +128,16 @@ function(r, next, shouldIncludeSelf)
 	return allNodes;
 end);
 
+InstallMethod( Supergroups, "for Lins Node", [ IsLinsNode],
+function(r)
+	return LINS_allNodes(r, MinimalSupergroups, false);
+end);
+
+InstallMethod( Subgroups, "for Lins Node", [ IsLinsNode],
+function(r)
+	return LINS_allNodes(r, MinimalSubgroups, false);
+end);
+
 InstallOtherMethod( ListOp, "for Lins Graph", [ IsLinsGraph ],
 function(gr)
 	return Concatenation(List(gr!.Levels, level -> level.Nodes));
