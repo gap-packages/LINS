@@ -12,13 +12,13 @@ TestTProduct := function(T, d)
         # number of choices to choose k direct factors
         for l in [1 .. Binomial(d, k)] do
             if Order(L[Current]!.Grp) <> Order(T) ^ k then
-                return false;
+                Error("LINS did not find enough copies of T^{", k, "}!");
             fi;
             Current := Current + 1;
         od;
     od;
     if Current <= Length(L) then
-        return false;
+         Error("LINS found too many subgroups!");
     fi;
     return true;
 end;

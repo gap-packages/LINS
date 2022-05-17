@@ -3,7 +3,7 @@
 CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 
-    L := List(LowIndexNormal(G, n));
+    L := List(LowIndexNormal(G, n, rec(DoSetParent := false)));
 
     # All groups have to be normal
     if ForAny(L, x -> not IsNormal(L[1]!.Grp, x!.Grp)) then
