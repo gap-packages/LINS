@@ -20,8 +20,8 @@ function(G, i)
 	r := rec(
 		Grp := G,
 		Index := i,
-		Supergroups := [],
-		Subgroups := [],
+		MinimalSupergroups := [],
+		MinimalSubgroups := [],
 		TriedPrimes := []);
 
 	Objectify( LinsNodeType, r );
@@ -67,14 +67,14 @@ function(r)
 	return r!.Index;
 end);
 
-InstallMethod( Supergroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( MinimalSupergroups, "for Lins Node", [ IsLinsNode],
 function(r)
-	return r!.Supergroups;
+	return r!.MinimalSupergroups;
 end);
 
-InstallMethod( Subgroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( MinimalSubgroups, "for Lins Node", [ IsLinsNode],
 function(r)
-	return r!.Subgroups;
+	return r!.MinimalSubgroups;
 end);
 
 InstallMethod( TriedPrimes, "for Lins Node", [ IsLinsNode ],
@@ -100,8 +100,8 @@ InstallOtherMethod( Root, "for Lins Node", [ IsLinsNode ],
 function(r)
 	local s;
 	s := r;
-	while not IsEmpty(Supergroups(s)) do
-		s := Supergroups(s)[1];
+	while not IsEmpty(MinimalSupergroups(s)) do
+		s := MinimalSupergroups(s)[1];
 	od;
 	return s;
 end);

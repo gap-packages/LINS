@@ -19,7 +19,7 @@
 #############################################################################
 
 InstallGlobalFunction(LINS_MinSubgroupSizes, function(rH)
-  return List(Supergroups(rH), rK -> Index(rH) / Index(rK) );
+  return List(MinimalSupergroups(rH), rK -> Index(rH) / Index(rK) );
 end);
 
 
