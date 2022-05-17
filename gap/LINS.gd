@@ -91,27 +91,6 @@ DeclareGlobalFunction( "LINS_IsSubgroupFp" );
 #! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_AddGroup" );
 
-#! @Description
-#! Let the group G be located in the list <A>GroupsFound</A> at position 1.
-#! Let the group H be located in the list <A>GroupsFound</A> at position <A>Current</A>.
-#! Calculate every normal subgroup K of G, such that the quotient H/K is
-#! isomorphic to some non-abelian group Q, where QQ has stored some information about Q,
-#! and the index [G:K] is less equal <A>n</A>,
-#! and add any such group K to the List <A>GroupsFound</A> by calling the LINS_AddGroup-function.
-#!
-#! The pregenerated list QQ will contain the following information in form of tupels of any such group Q
-#! with group order up to the maximum index boundary max_index.
-#! Let Q be such a group of interest, then the information about Q will be consisting of the following:
-#! 1 : the group order
-#! 2 : an index of some group S, that has trivial core in Q
-#! The list QQ is sorted by information 1.
-#! Then any normal subgroup K of G, such that the quotient H/K is isomorphic to some Q in the list QQ
-#! can be found as the normal core of a subgroup L of H, that has an index equal to information 2.
-#! In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H
-#! up to some sufficient large enough index.
-#! @Returns
-#! @Arguments GroupsFound, n, Current, QQ
-#! @ChapterInfo LINS, LINS
 DeclareGlobalFunction( "LINS_FindTQuotients" );
 
 #! @Description
