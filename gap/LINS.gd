@@ -25,9 +25,9 @@ BindGlobal( "LinsNodeType",
 
 DeclareOperation( "LinsNode", [ IsGroup, IsPosInt ]);
 
-# DeclareAttribute( "Grp", IsLinsNode, "mutable" );
+# DeclareAttribute( "Grp", IsLinsNode, "mutable" ); # already defined in recog
 
-# DeclareAttribute( "Index", IsLinsNode, "mutable" );
+# DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
 
 DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
 
@@ -36,6 +36,10 @@ DeclareAttribute( "MinimalSubgroups", IsLinsNode, "mutable" );
 DeclareAttribute( "TriedPrimes", IsLinsNode, "mutable" );
 
 DeclareProperty( "IsCut", IsLinsNode, "mutable" );
+
+DeclareAttribute( "Supergroups", IsLinsNode, "mutable" );
+
+DeclareAttribute( "Subgroups", IsLinsNode, "mutable" );
 
 # The category:
 DeclareCategory( "IsLinsGraph", IsObject );
