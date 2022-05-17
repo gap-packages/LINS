@@ -17,7 +17,7 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     fi;
     m := Length(index);
 
-    supersUnfiltered := List(L, x -> List(x!.Supergroups, r -> Position(L, r)));
+    supersUnfiltered := List(L, x -> List(x!.MinimalSupergroups, r -> Position(L, r)));
     supers := List(
         [1 .. m],
         x -> Filtered(

@@ -29,9 +29,9 @@ DeclareOperation( "LinsNode", [ IsGroup, IsPosInt ]);
 
 # DeclareAttribute( "Index", IsLinsNode, "mutable" );
 
-DeclareAttribute( "Supergroups", IsLinsNode, "mutable" );
+DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
 
-DeclareAttribute( "Subgroups", IsLinsNode, "mutable" );
+DeclareAttribute( "MinimalSubgroups", IsLinsNode, "mutable" );
 
 DeclareAttribute( "TriedPrimes", IsLinsNode, "mutable" );
 
