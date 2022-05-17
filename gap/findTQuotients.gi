@@ -63,40 +63,40 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	I,      # [pos-int]: 	every index we need to check
 	m,      # pos-int: 		maximum of `I`
 	Iso,    # isomorphism: 	from `H` into fp-group
-	IH,     # fp-group: 	image of `Iso`, isomorphic to `H`
+	IH,     # fp-group: 	image under `Iso`, isomorphic to `H`
 	LL,     # [group]: 		all subgroups of `IH` with index at most `m`
 	L,      # group: 		loop var, subgroup in `LL`
 	i,      # pos-int: 		loop var, index in `I`
-	PL,     # group: 		preimage of `L` in `Iso`
-	K;      # group: 		normal core of `PL`, subgroup of `H` (with Q-quotient)
+	PL,     # group: 		preimage of `L` under `Iso`, subgroup of `H`
+	K;      # group: 		normal core of `PL` in `G`, subgroup of `H` (with Q-quotient)
 
-	# References to the Groups in the list GroupsFound.
+	# Initialize data from input
 	G := Grp(Root(gr));
 	H := Grp(rH);
 	n := IndexBound(gr);
 
-	# Calculate the index list.
+	# Calculate the index list `I`.
 	I := opts.FilterTQuotients(gr, rH, QQ);
 
-	# If the index list is empty, return the list GroupsFound.
+	# If the index list is empty, we have nothing to do.
 	if Length(I) = 0 then
 		return;
 	fi;
 
-	# Calculate every subgroup of H up to the maximum index in I
-	# by calling the Low-Index-Subgroups-Prodecure.
+	# Calculate every subgroup of `H` up to the maximum index in `I`
+	# by calling `LowIndexSubgroups`.
 	m := Maximum(I);
 	Iso := IsomorphismFpGroup(H);
 	IH := Image(Iso);
 	LL := LowIndexSubgroupsFpGroup(IH, m);
 
-	# Search every subgroup L with an index in H contained in I.
-	# Then calculate the core of L and try to add the new subgroup.
+	# Search every subgroup `L` with an index in `H` contained in `I`.
+	# Then calculate the core of `L` and try to add the new subgroup to `gr`.
 	for L in LL do
 		PL := PreImage(Iso, L);
 		for i in I do
 			if Index(H, PL) = i then
-				# Compute normal core, a subgroup of H (with Q-quotient)
+				# Compute normal core, a subgroup of `H` (with Q-quotient)
 				K := Core(G, PL);
 				if opts.DoSetParent then
 					LINS_SetParent(K, G);
