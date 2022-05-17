@@ -165,9 +165,58 @@ end);
 
 BindGlobal("LINS_maxIndex", 10000000);
 
+# Should subgroups under rH be computed?
+BindGlobal( "LINS_DoCutStd",
+function(gr, rH)
+	return false;
+end);
+
+# Should the search be terminated?
+# We have computed the subgroups under rK
+# and are about to compute the subgroups under rH.
+BindGlobal( "LINS_DoTerminateStd",
+function(gr, rK, rH)
+	return false;
+end);
+
+# Calculate the index list out of the targets
+BindGlobal( "LINS_FilterTQuotientsStd",
+function(gr, rG, rH, QQ)
+local G, H, n, I, Q;
+	G := Grp(rG);
+	H := Grp(rH);
+	n := IndexBound(gr);
+	I := [];
+	for Q in QQ do
+		if Q[1] > n / Index(G,H) then
+			break;
+		fi;
+		Add(I, Q[2]);
+	od;
+	return I;
+end);
+
+# Whether to compute the intersection of the groups rH and rK
+# with the given index.
+BindGlobal( "LINS_DoIntersection",
+function(gr, rH, rK, index)
+	return true;
+end);
+
+# Whether to compute p-quotients under rH for the prime p
+BindGlobal( "LINS_DoPQuotientStd",
+function(gr, rH, p)
+	return true;
+end);
+
 # Default options, immutable entries
 BindGlobal( "LINS_DefaultOptions", Immutable(rec(
-    DoSetParent := true
+    DoSetParent := true,
+	DoCut := LINS_DoCutStd,
+	DoTerminate := LINS_DoTerminateStd,
+	FilterTQuotients := LINS_FilterTQuotientsStd,
+	DoIntersection := LINS_DoIntersectionStd,
+	DoPQuotient := LINS_DoPQuotientStd
 )));
 
 BindGlobal( "LINS_SetOptions",
