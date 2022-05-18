@@ -193,7 +193,7 @@ function(gr, rH, rK)
 	return false;
 end);
 
-# Calculate the index list from the targets
+# Compute the index list from the targets
 BindGlobal( "LINS_FilterTQuotientsStd",
 function(gr, rH, QQ)
 local G, H, n, I, Q;

@@ -33,8 +33,8 @@
 ##  Let the group $H$ be located in the node `rH`.
 ##  Let $n$ be the index bound of the LINS graph `gr`.
 ##
-##  Compute all pairwise intersections of the group $H$
-##  with all preceding groups in `gr` of index in $G$ at most $n$.
+##  Compute all pairwise intersections $U$ of the group $H$
+##  with all preceding groups in `gr`, where $[G : U] <= n$.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)

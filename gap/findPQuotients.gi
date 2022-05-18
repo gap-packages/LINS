@@ -135,7 +135,7 @@ end);
 #############################################################################
 ##  Description:
 ##
-##  Calculate the exponent sum `n`-size vector of `word` in GF(`p`)
+##  Compute the exponent sum `n`-size vector of `word` in GF(`p`)
 #############################################################################
 
 BindGlobal("LINS_ExponentSum", function(n, p, word)
@@ -203,7 +203,7 @@ BindGlobal("LINS_maxPGenerators", 1000);
 ##  Let the group $H$ be located in the node `rH`.
 ##  Let $n$ be the index bound of the LINS graph `gr`.
 ##
-##  Calculate every normal subgroup $K$ of $G$,
+##  Compute every normal subgroup $K$ of $G$,
 ##  such that $[G:K] <= n$ and the quotient $H/K$ is a `p`-group.
 ##
 ##  We construct a module over the groupring $GF(p) G$ and compute maximal submodules of this module.
@@ -287,7 +287,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 		Add(gens, gen);
 	od;
 
-	# Calculate the maximal submodules of `M`
+	# Compute the maximal submodules of `M`
 	GM := GModuleByMats(gens, FiniteField(p));
 	MM := MTX.BasesMaximalSubmodules(GM);
 	V := FiniteField(p) ^ (Length(GenM));
@@ -303,13 +303,13 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			continue;
 		fi;
 
-		# Calculate the natural homomorphism from `V` to $V/m$
+		# Compute the natural homomorphism from `V` to $V/m$
 		PsiHom := NaturalHomomorphismBySubspace(V, m);
 		Q := Image(PsiHom);
 		O := Elements(Q);
 		GenIH := GeneratorsOfGroup(IH);
 
-		# Calculate the subgroup `K` with $H/K$ being an
+		# Compute the subgroup `K` with $H/K$ being an
 		# elementary abelian `p`-group
 		PhiHom :=  GroupHomomorphismByImagesNC(H, SymmetricGroup(Length(O)),
 			LINS_PullBackH(GenM, p, List(GeneratorsOfGroup(H), x->Image(Iso, x)), O, Mu, PsiHom));
