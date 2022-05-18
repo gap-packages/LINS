@@ -17,14 +17,7 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     fi;
     m := Length(index);
 
-    supersUnfiltered := List(L, x -> List(x!.MinimalSupergroups, r -> Position(L, r)));
-    supers := List(
-        [1 .. m],
-        x -> Filtered(
-            supersUnfiltered[x],
-            s -> ForAny(
-                supersUnfiltered[x],
-                t -> s in supersUnfiltered[t]) = false));
+    supers := List(L, x -> List(x!.MinimalSupergroups, r -> Position(L, r)));
     supersCor := List(
         [1 .. m],
         x -> Filtered(

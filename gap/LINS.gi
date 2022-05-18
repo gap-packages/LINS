@@ -89,14 +89,10 @@ function(r)
 end);
 
 BindGlobal( "LINS_allNodes",
-function(r, next, shouldIncludeSelf)
+function(r, next)
 	local queue, s, t, nextNodes, allNodes;
 	queue := [r];
-	if shouldIncludeSelf then
-		allNodes := [r];
-	else
-		allNodes := [];
-	fi;
+	allNodes := [];
 	while not IsEmpty(queue) do
 		s := Remove(queue, 1);
 		nextNodes := next(s);
@@ -112,12 +108,12 @@ end);
 
 InstallMethod( Supergroups, "for Lins Node", [ IsLinsNode],
 function(r)
-	return LINS_allNodes(r, MinimalSupergroups, false);
+	return LINS_allNodes(r, MinimalSupergroups);
 end);
 
 InstallMethod( Subgroups, "for Lins Node", [ IsLinsNode],
 function(r)
-	return LINS_allNodes(r, MinimalSubgroups, false);
+	return LINS_allNodes(r, MinimalSubgroups);
 end);
 
 

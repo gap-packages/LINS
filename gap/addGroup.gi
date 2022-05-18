@@ -56,7 +56,7 @@ BindGlobal("LINS_UpdateRelations",
 function(rH)
   local subs, supers, toRemove, rK, rL, pair;
 
-  subs := LINS_allNodes(rH, MinimalSubgroups, false);
+  subs := Subgroups(rH);
   toRemove := [];
   for rK in MinimalSupergroups(rH) do
     for rL in MinimalSubgroups(rK) do
@@ -65,7 +65,7 @@ function(rH)
       fi;
     od;
   od;
-  supers := LINS_allNodes(rH, MinimalSupergroups, false);
+  supers := Supergroups(rH);
   for rK in MinimalSubgroups(rH) do
     for rL in MinimalSupergroups(rK) do
       if rL in supers then
@@ -136,7 +136,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
         if Index(rH) mod Index(rK) = 0 then
           if LINS_IsSubgroupFp(K, H) then
             LINS_AddRelations(rK, rH);
-            allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, LINS_allNodes(rK, MinimalSupergroups, false)));
+            allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, Supergroups(rK)));
           fi;
         fi;
       fi;
@@ -153,7 +153,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
         if Index(rK) mod Index(rH) = 0 then
           if LINS_IsSubgroupFp(H, K) then
             LINS_AddRelations(rH, rK);
-            allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, LINS_allNodes(rK, MinimalSubgroups, false)));
+            allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, Subgroups(rK)));
           fi;
         fi;
       fi;
