@@ -36,8 +36,8 @@ DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
 DeclareAttribute( "MinimalSubgroups", IsLinsNode, "mutable" );
 DeclareAttribute( "TriedPrimes", IsLinsNode, "mutable" );
 DeclareProperty( "IsCut", IsLinsNode, "mutable" );
-DeclareAttribute( "Supergroups", IsLinsNode, "mutable" );
-DeclareAttribute( "Subgroups", IsLinsNode, "mutable" );
+DeclareOperation( "Supergroups", [IsLinsNode]);
+DeclareOperation( "Subgroups", [IsLinsNode]);
 
 
 #############################################################################
