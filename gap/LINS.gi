@@ -160,10 +160,10 @@ end);
 
 
 #############################################################################
-## The maximum index boundary the algorithm can work with
+## The maximum index bound the algorithm can work with
 #############################################################################
 
-BindGlobal("LINS_maxIndex", 10000000);
+BindGlobal("LINS_MaxIndex", 10000000);
 
 # Should subgroups under rH be computed?
 BindGlobal( "LINS_DoCutStd",
@@ -251,8 +251,9 @@ InstallGlobalFunction( LowIndexNormalSubgroups, function(args...)
 	fi;
 
 	# Check if we can work with the index
-	if n > LINS_maxIndex then
-		ErrorNoReturn("The index exceedes the maximal index boundary of the algorithm");
+	if n > LINS_MaxIndex then
+		Error("The index exceeds the maximal index bound N = ", LINS_MaxIndex, " of the algorithm!\n",
+			  "If you proceed, not all normal subgroups of index larger than N may be found.\n");
 	fi;
 
 	# Convert the group into an fp-group if possible.

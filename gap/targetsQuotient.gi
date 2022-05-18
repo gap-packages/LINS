@@ -35,7 +35,7 @@
 ##  information on any subgroup $Q$ of $Aut(T x T x ... x T)$,
 ##  such that $(T x T x ... x T)$ is a subgroup of $Q$
 ##  and $Q$ acts transitively on the set of copies of $T$,
-##  with group order $|Q|$ up to the maximum index bound `LINS_maxIndex`.
+##  with group order $|Q|$ up to the maximum index bound `LINS_MaxIndex`.
 ##
 ##  Let $Q$ be such a group of interest,
 ##  then the information about $Q$ will be consisting of the following:
