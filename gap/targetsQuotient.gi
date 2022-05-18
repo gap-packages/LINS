@@ -39,7 +39,7 @@
 ##  with group order $|Q|$ up to the maximum index bound `LINS_MaxIndex`.
 ##
 ##  Let $Q$ be such a group of interest,
-##  then the information about $Q$ will be consisting of the following:
+##  then the information about $Q$ consists of the following:
 ##
 ##  - 1 : the group order $|Q|$
 ##  - 2 : an index of some non-trivial subgroup $S < Q$,

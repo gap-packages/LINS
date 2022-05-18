@@ -12,16 +12,30 @@
 ##
 #############################################################################
 
-
 #############################################################################
-## The pregenerated list LINS_TargetsCharSimple will contain the following information in form of tupels of any group
-## (T x T x ... x T), where T is a non-abelian simple group,
-## with group order up to the maximum index boundary max_index.
-## Let Q be such a group of interest, then the information about Q will be consisting of the following:
-## 1 : the group order
-## 2 : the primes dividing the schur multiplier of Q
-## 3 : name of the group T^d
-## The list LINS_TargetsCharSimple is sorted by information 1.
+##  LINS_TargetsCharSimple
+#############################################################################
+##  Usage:
+##
+##  The function `LINS_MustCheckP` uses this.
+#############################################################################
+##  Description:
+##
+##  The list was computed by the code in `addGroup.gi`.
+##
+##  Let $T$ be a non-abelian simple group.
+##  This is a pregenerated list contains information
+##  on any group $Q = (T x T x ... x T)$
+##  with group order $|Q|$ up to the maximum index bound `LINS_MaxIndex`.
+##
+##  Let $Q$ be such a group of interest,
+##  then the information about Q consists of the following:
+##
+##  - 1 : the group order $|Q|$
+##  - 2 : the primes dividing the schur multiplier of $Q$
+##  - 3 : name of the group $T ^ d$
+##
+##  The list `LINS_TargetsCharSimple` is sorted by information $1$.
 #############################################################################
 
 BindGlobal("LINS_TargetsCharSimple",
