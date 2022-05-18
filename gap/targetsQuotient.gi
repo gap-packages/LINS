@@ -12,17 +12,40 @@
 ##
 #############################################################################
 
-
 #############################################################################
-## The pregenerated list LINS_TargetsQuotient will contain the following information in form of tupels of any subgroup Q of
-## Aut(T x T x ... x T), where T is a non-abelian simple group,
-## such that (T x T x ... x T) is a subgroup of Q and Q acts transitively on the copies of T,
-## with group order up to the maximum index boundary max_index.
-## Let Q be such a group of interest, then the information about Q will be consisting of the following:
-## 1 : the group order
-## 2 : an index of some group S, that has trivial core in Q
-## 3 : name of the group T^d
-## The list LINS_TargetsQuotient is sorted by information 1.
+##  LINS_TargetsQuotient
+#############################################################################
+##  Usage:
+##
+##  The main function `LowIndexNormalSubgroups` calls the function
+##
+##                      `LINS_FindTQuotients`
+##
+##  with the argument `QQ` set to this.
+#############################################################################
+##  Description:
+##
+##  This is a pregenerated list following the specifications
+##  for the argument `QQ` in the function `LINS_FindTQuotients`.
+##
+##  The list was computed by the code in `addGroup.gi`.
+##
+##  Let $T$ be a non-abelian simple group.
+##  Then the pregenerated list `LINS_TargetsQuotient` contains
+##  information on any subgroup $Q$ of $Aut(T x T x ... x T)$,
+##  such that $(T x T x ... x T)$ is a subgroup of $Q$
+##  and $Q$ acts transitively on the set of copies of $T$,
+##  with group order $|Q|$ up to the maximum index bound `LINS_maxIndex`.
+##
+##  Let $Q$ be such a group of interest,
+##  then the information about $Q$ will be consisting of the following:
+##
+##  - 1 : the group order $|Q|$
+##  - 2 : an index of some non-trivial subgroup $S < Q$,
+##        that has trivial core in $Q$
+##  - 3 : name of the group $T ^ d$
+##
+##  The list `LINS_TargetsQuotient` is sorted by information $1$.
 #############################################################################
 
 BindGlobal("LINS_TargetsQuotient",
