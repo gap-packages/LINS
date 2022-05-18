@@ -1,7 +1,17 @@
-# The normal subgroups of D(2n) are classified as follows
-# 1. D(2n)
-# 2. C(k) for k dividing n
-# 3. if n is even, two times D(n)
+#############################################################################
+##  TestDihedral
+#############################################################################
+##  Description:
+##
+##  For an integer `N`,
+##  this tests all normal subgroups of the dihedral group D(2n)
+##
+##  The normal subgroups of D(2n) are classified as follows:
+##  - 1. D(2n)
+##  - 2. C(k) for k dividing n
+##  - 3. if n is even, two times D(n)
+#############################################################################
+
 TestDihedral := function(N)
     local G,L,Current,n,k;
     if not IsEvenInt(N) then

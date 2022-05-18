@@ -1,5 +1,19 @@
-# This compares the output of LowIndexNormalSubgroupsSearch with a precomputed result.
-# The precomputed result was created by LowIndexNormalSubgroupsSearch in the past.
+#############################################################################
+##  CompareResults
+#############################################################################
+##  Description:
+##
+##  This function compares the output of `LowIndexNormalSubgroupsSearch`
+##  with a precomputed result from a previous run.
+##
+##  For a group `G`, an integer `n`, a correct index list `indexCor` and
+##  a correct supergroups list `supersUnfilteredCor`, it construct a partial
+##  lattice of normal subgroups of `G` up to `n` from this data
+##  as well as from a `LowIndexNormalSubgroupsSearch` call.
+##  Finally, it tests both graphs for isomorphism
+##  with the GAP package "grape".
+#############################################################################
+
 CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 

@@ -1,6 +1,17 @@
-# The normal subgroups of T^d = T_1 x ... x T_d are precisely 
-# all the direct products that can be constructed 
-# from set {T_1, ..., T_d}.
+#############################################################################
+##  TestTProduct
+#############################################################################
+##  Description:
+##
+##  For a non-abelian simple group `T` and an integer `d`,
+##  this tests all normal subgroups of $T ^ d$.
+##
+##  The normal subgroups of T ^ d = T_1 x ... x T_d are precisely
+##  all the direct products that can be constructed
+##  from set {T_1, ..., T_d}.
+#############################################################################
+
+
 TestTProduct := function(T, d)
     local G, n, L, Current, k, l;
     G := DirectProduct(List([1 .. d], i -> T));

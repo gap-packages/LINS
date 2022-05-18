@@ -1,3 +1,39 @@
+#############################################################################
+##  MaxPowerSmallerInt
+#############################################################################
+##  Description:
+##
+##  For integers `n` and `a`,
+##  this returns the maximal integer `i`, such that $a ^ i < n$.
+##
+#############################################################################
+
+MaxPowerSmallerInt := function(n, a)
+    local i, j;
+    i := 0;
+    j := 1;
+    while a ^ j <= n do
+        i := j;
+        j := j + 1;
+    od;
+    return i;
+end;
+
+
+#############################################################################
+##  TestSemidirectProduct
+#############################################################################
+##  Description:
+##
+##  For an integer `n`,
+##  this tests the normal subgroups of the semidirect product
+##
+##                          $G = Z ^ 2 ><| C_3$
+##
+##  up to index `n`.
+##
+##  The normal subgroups of $G$ are described below in the comments.
+#############################################################################
 TestSemidirectProduct := function(n)
     local F, R, G, a, b, c, n3, gr, L, expected, subgraphs, subgraph, primes, p, i, j, pos, nrIntersections, iterSubgraphs, iterSubgroups, subgraphSelection, subgroupSelection, minIndex, index;
     # <a, b> = Z ^ 2 and <c> = C_3
@@ -78,7 +114,7 @@ TestSemidirectProduct := function(n)
             Error("LINS did not find 3-quotient subgroup of index ", 3);
         fi;
     od;
-    for i in [1 .. LINS_MaxPowerSmallerInt(n3, 3)] do
+    for i in [1 .. MaxPowerSmallerInt(n3, 3)] do
         pos := PositionProperty(L, x -> x!.Index = 3 * 3 ^ i);
         if pos = fail then
             Error("LINS did not find 3-quotient subgroup of index ", 3 * 3 ^ i);
@@ -127,7 +163,7 @@ TestSemidirectProduct := function(n)
         #
         # Thus we expect to find exactly (i + 1) normal subgroups of index (3 * p ^ i).
         if RemInt(p - 1, 3) = 0 then
-            for i in [1 .. LINS_MaxPowerSmallerInt(n3, p)] do
+            for i in [1 .. MaxPowerSmallerInt(n3, p)] do
                 pos := PositionProperty(L, x -> x!.Index = 3 * p ^ i);
                 if pos = fail then
                     Error("LINS did not find any ", p, "-quotient subgroup of index ", 3 * p ^ i);
@@ -176,7 +212,7 @@ TestSemidirectProduct := function(n)
         #
         # Thus we expect to find exactly one group of index 3 * p ^ (2 * i)
         else
-            for i in [1 .. LINS_MaxPowerSmallerInt(n3, p ^ 2)] do
+            for i in [1 .. MaxPowerSmallerInt(n3, p ^ 2)] do
                 pos := PositionProperty(L, x -> x!.Index = 3 * p ^ (2 * i));
                 if pos = fail or L[pos]!.Grp <> Subgroup(G, [a ^ (p ^ i), b ^ (p ^ i)]) then
                     Error("LINS did not find ", p, "-quotient subgroup of index ", 3 * p ^ (2 * i));

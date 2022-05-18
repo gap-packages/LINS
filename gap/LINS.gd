@@ -97,8 +97,6 @@ DeclareGlobalFunction( "LINS_IsSubgroupFp" );
 DeclareGlobalFunction( "LINS_SetParent" );
 
 DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
-DeclareGlobalFunction( "LINS_MaxPowerSmallerInt" );
-
 
 #############################################################################
 ## functions for precomputed data
