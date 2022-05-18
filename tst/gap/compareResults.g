@@ -1,9 +1,9 @@
-# This compares the output of LowIndexNormalSubgroups with a precomputed result.
-# The precomputed result was created by LowIndexNormalSubgroups in the past.
+# This compares the output of LowIndexNormalSubgroupsSearch with a precomputed result.
+# The precomputed result was created by LowIndexNormalSubgroupsSearch in the past.
 CompareResults := function(G, n, indexCor, supersUnfilteredCor)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 
-    L := List(LowIndexNormalSubgroups(G, n, rec(DoSetParent := false)));
+    L := List(LowIndexNormalSubgroupsSearch(G, n, rec(DoSetParent := false)));
 
     # All groups have to be normal
     if ForAny(L, x -> not IsNormal(L[1]!.Grp, x!.Grp)) then
