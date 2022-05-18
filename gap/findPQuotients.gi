@@ -12,19 +12,14 @@
 ##
 #############################################################################
 
-#############################################################################
-## This finds the sizes of the minimal normal subgroups of
-## G/H, where H is the group in the position Current in the list.
-#############################################################################
-
-BindGlobal("LINS_MinSubgroupSizes", function(rH)
-  	return List(MinimalSupergroups(rH), rK -> Index(rH) / Index(rK) );
-end);
-
 
 #############################################################################
-## For positive integers a,b
-## return true if a is some power of b;
+##  LINS_IsPowerOf
+#############################################################################
+##  Description:
+##
+##  For positive integers `a` and `b`
+##  returns true if `a` is some power of `b`;
 #############################################################################
 BindGlobal("LINS_IsPowerOf", function(a, b)
 	local c;
@@ -32,7 +27,7 @@ BindGlobal("LINS_IsPowerOf", function(a, b)
 	c := a;
 	while c > 1 do
 		if c mod b = 0 then
-			c := QuoInt(c,b);
+			c := QuoInt(c, b);
 		else
 			return false;
 		fi;
@@ -43,15 +38,20 @@ end);
 
 
 #############################################################################
-## This function returns the size of the group GL(r,p).
+##  LINS_OGL
+#############################################################################
+##  Description:
+##
+##  For a positive integer `s` and a prime `p`,
+##  returns the size of the group $GL(s, p)$.
 #############################################################################
 
-BindGlobal("LINS_OGL", function(r, p)
-  	local i,j;
+BindGlobal("LINS_OGL", function(s, p)
+  	local i, j;
 
   	i := 1;
-	for j in [0..(r-1)] do
-		i := i * (p^r - p^j);
+	for j in [0 .. (s - 1)] do
+		i := i * (p ^ s - p ^ j);
 	od;
 
 	return i;
@@ -59,23 +59,51 @@ end);
 
 
 #############################################################################
-## This function checks if p-Quotients have to be computed.
-## Otherwise the groups can be expressed as Intersections of bigger groups.
-## n is the maximal index, p a prime, index is the index of some group H
-## and minSubSizes are the sizes computed by a call of LINS_MinSubgroupSizes on H.
+##  LINS_MustCheckP
+#############################################################################
+##  Input:
+##
+##  - rH : 		LINS node in a LINS graph gr
+##  - n  : 		index bound
+##  - p  :		prime
+#############################################################################
+##  Usage:
+##
+##  The function `LINS_FindPQuotients` calls this function.
+#############################################################################
+##  Description:
+##
+##  Returns true if `p`-quotients need to be computed explicitly.
+##  Otherwise the groups can be expressed as intersections of larger groups.
 #############################################################################
 
-InstallGlobalFunction(LINS_MustCheckP, function(n, p, index, minSubSizes)
-	local i,j, ordersToCheck, r;
+InstallGlobalFunction(LINS_MustCheckP, function(rH, n, p)
+	local index, minSubSizes, i, j, ordersToCheck, s;
 
+	# Let the group $G$ be located in the root node of the LINS graph `gr`.
+	# Let the group $H$ be located in the node `rH`.
+
+	# $[G : H]$
+	index := Index(rH);
+
+	# sizes of minimal normal subgroups of $G/H$
+	minSubSizes := List(MinimalSupergroups(rH), rK -> Index(rH) / Index(rK));
+
+	# Has the quotient G/H a non-trivial normal `p`-subgroup?
+	# If yes, then do not compute `p`-quotients under $H$.
 	for i in minSubSizes do
 		if LINS_IsPowerOf(i, p) then
 			return false;
 		fi;
 	od;
 
-	# orders of Characteristically Simple Groups, where p is a divisor of the order of the schur multiplier
-	ordersToCheck := List( Filtered(LINS_TargetsCharSimple, Q -> p in Q[2]), Q -> Q[1]);
+	# orders of characteristically simple groups,
+	# where `p` is a divisor of the order of the schur multiplier.
+	ordersToCheck := List(Filtered(LINS_TargetsCharSimple, Q -> p in Q[2]), Q -> Q[1]);
+
+	# Has the quotient $G/H$ a minimal normal subgroup isomorphic to $T ^ d$,
+	# where $T$ is non abelian simple and `p` divides $|Mult(T)|$?
+	# If yes, then compute p-quotients under $H$.
 	for i in minSubSizes do
 		for j in ordersToCheck do
 			if i = j then
@@ -84,28 +112,39 @@ InstallGlobalFunction(LINS_MustCheckP, function(n, p, index, minSubSizes)
 		od;
 	od;
 
-	r := 1;
-	while p^(r+1) <= n / index do
-		r := r+1;
+	# maximal integer $s$ such that $[G : H] * p ^ s <= n$
+	s := 1;
+	while p ^ (s + 1) <= n / index do
+		s := s + 1;
 	od;
 
-	if LINS_OGL(r, p) mod index = 0 then
+	# Does $[G : H]$ divide $|GL(s, p)|$?
+	# If yes, then compute `p`-quotients under $H$.
+	if LINS_OGL(s, p) mod index = 0 then
 		return true;
 	fi;
 
+	# All above questions were answered with no.
+	# Do not compute `p`-quotients under $H$.
 	return false;
 end);
 
 
 #############################################################################
-## Calculate the exponent sum n-size vector of word in Fp
+##  LINS_ExponentSum
+#############################################################################
+##  Description:
+##
+##  Calculate the exponent sum `n`-size vector of `word` in GF(`p`)
 #############################################################################
 
-BindGlobal("LINS_ExponentSum", function(n,p,word)
+BindGlobal("LINS_ExponentSum", function(n, p, word)
 	local
-	rep,      # exponent Representaton of word, that are tupels (a,b), such that a^b is a subword of word
-	i,        # loop variable
-	res;      # exponent sum n-size vector of word
+	rep,    # [(letter, pos-int)]: 	exponent representaton of word, i.e.
+			#						a tuple $(a, b)$ represents the subword
+			#						$a ^ b$ of `word`
+	i,      # pos-int:				loop variable
+	res;    # [int]:				exponent sum `n`-size vector of `word`
 
 	i := 1;
 	res := List([1 .. n], x -> 0);
@@ -120,8 +159,12 @@ end);
 
 
 #############################################################################
-## Calculate the GroupHomomorphism into the symmetric group
-## representing the action of H on H/K by multiplication
+##  LINS_PullBackH
+#############################################################################
+##  Description:
+##
+##  Compute the group homomorphism into the symmetric group
+##  representing the action of H on H/K by multiplication
 #############################################################################
 
 BindGlobal("LINS_PullBackH", function(GenM, p, Gens, O, Mu, Psi)
@@ -171,7 +214,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	MM,       # list of maximal modules of GM
 	m,        # loop variable, maximal module
 	V,        # Vectorspace Fp^n, where n is the dimension of GM
-	r,        # index of m in V, which equals index of K in H
+	s,        # index of m in V, which equals index of K in H
 	PsiHom,   # epimorphism from V to V/m
 	Q,        # vector space, image of PsiHom
 	O,        # elements of Q
@@ -230,8 +273,8 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 		# Check wether the index will be greater than n
 		m := Subspace(V, m);
-		r := p ^ ( Dimension(V) - Dimension(m) );
-		if r > n / Index(G, H) then
+		s := p ^ ( Dimension(V) - Dimension(m) );
+		if s > n / Index(G, H) then
 			continue;
 		fi;
 
@@ -261,33 +304,54 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	od;
 end);
 
+
 #############################################################################
-## Let the group G be located in the list GroupsFound at position 1.
-## Let the group H be located in the list GroupsFound at position Current.
-## Calculate every normal subgroup K of G, such that H/K is a p-Group
-## and the index in G is less equal n.
+##  LINS_FindTQuotients
+#############################################################################
+##  Input:
+##
+##	- gr : 		LINS graph
+##  - rH : 		LINS node in gr
+##  - primes : 	set containing all primes up to `IndexBound(gr)`
+##  - opts : 	LINS options (see documentation)
+#############################################################################
+##  Usage:
+##
+##  The main function `LowIndexNormalSubgroupsSearch` calls this function
+##  in the main loop.
+#############################################################################
+##  Description:
+##
+##  Let the group $G$ be located in the root node of the LINS graph `gr`.
+##  Let the group $H$ be located in the node `rH`.
+##  Let $n$ be the index bound of the LINS graph `gr`.
+##
+##  Compute every normal subgroup $K$ of $G$, such that $[G:K] <= n$
+##  and $H/K$ is a $p$-group for a prime $p$ contained in `primes`,
+##  if `LINS_MustCheckP` says that $p$ needs to be explicitly considered.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 	local
-	G,      # the parent group, which is stored at the first position in GroupsFound
-	n,		# index bound
-	H,      # the group (record) at position Current
-	p;      # loop variable, prime integer
+	G,      # group: 		located in the root node of LINS graph `gr`.
+	H,      # group: 		located in the node `rH`.
+	n,		# pos-int: 		index bound of LINS graph `gr`.
+	p;      # pos-int:		loop variable, prime in `primes`.
 
-	# References to the Groups in the list GroupsFound.
+	# Initialize data from input
 	G := Grp(Root(gr));
 	n := IndexBound(gr);
 	H := Grp(rH);
 
-	# Search for p-Quotients for every prime small enough.
+	# Search for p-quotients for every prime small enough.
 	for p in primes do
 		if p > n / Index(rH) then
 			break;
 		fi;
-		# Check according to some rules whether the p-Quotients will be computed by Intersections.
-		if( LINS_MustCheckP(n, p, Index(rH), LINS_MinSubgroupSizes(rH)) ) then
-			# Compute all p-Groups from H.
+		# Check according to some rules whether the p-quotients
+		# will be computed by intersections.
+		if LINS_MustCheckP(rH, n, p) then
+			# Compute all p-quotients under H.
 			LINS_FindPModules(gr, rH, p, opts);
 		fi;
 	od;
