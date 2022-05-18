@@ -53,9 +53,3 @@ function(n, a)
     od;
     return i;
 end);
-
-InstallGlobalFunction(LINS_SetParent,
-function(H, G)
-    SetParent(H, G);
-    SetIsNormalInParent(H, true);
-end);

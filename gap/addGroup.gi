@@ -31,6 +31,15 @@ InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
   return true;
 end);
 
+#############################################################################
+## Sets parent and attributes for subgroup
+#############################################################################
+InstallGlobalFunction(LINS_SetParent,
+function(H, G)
+    SetParent(H, G);
+    SetIsNormalInParent(H, true);
+end);
+
 # K < H
 BindGlobal("LINS_AddRelations",
 function(rH, rK)
