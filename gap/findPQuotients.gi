@@ -180,7 +180,7 @@ end);
 ## maximal generators of a p-quotient.
 #############################################################################
 
-BindGlobal("LINS_maxPGenerators", 1000);
+BindGlobal("LINS_MaxPGenerators", 1000);
 
 
 #############################################################################
@@ -264,7 +264,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	IH := Image(Iso);
 
 	# Create the Isomorphism to the group structure of the `p`-Module `M`
-	P := PQuotient(IH, p, 1, LINS_maxPGenerators);
+	P := PQuotient(IH, p, 1, LINS_MaxPGenerators);
 	Mu := EpimorphismQuotientSystem(P);
 	M := Image(Mu);
 	GenM := GeneratorsOfGroup(M);
