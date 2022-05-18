@@ -24,42 +24,53 @@
 ##				certain non-abelian groups (see below)
 ##  - opts : 	LINS options (see documentation)
 #############################################################################
+##  Usage:
+##
+##  The main function `LowIndexNormalSubgroups` calls this function with
+##
+##						`rH` = `Root(gr)`,
+##						`QQ` = `LINS_TargetsQuotient`.
+#############################################################################
 ##  Description:
 ##
-##  Let the group $G$ be located in the root of the LINS graph `gr`.
+##  Let the group $G$ be located in the root node of the LINS graph `gr`.
 ##  Let the group $H$ be located in the node `rH`.
+##  Let $n$ be the index bound of the LINS graph `gr`.
+##
 ##  Calculate every normal subgroup $K$ of $G$,
-##  such that the quotient $H/K$ is
-##  isomorphic to some non-abelian group $Q$,
-##  where `QQ` has stored some information about $Q$,
-##  and the index $[G:K]$ is less equal $n$.
+##  such that $[G:K] <= n$ and the quotient $H/K$ is
+##  isomorphic to some non-abelian group $Q$ contained in `QQ`,
+##  that has a non-trivial subgroup with trivial core.
 ##  Add any such group $K$ to the LINS graph `gr`.
 ##
 ##
-##  The pregenerated list `QQ` will contain the following information
-##  in form of tuples of any such group $Q$
-##  with group order up to the maximum index boundary `LINS_maxIndex`.
-##  Let $Q$ be such a group of interest,
-##  then the information about $Q$ will be consisting of the following:
+##  The list `QQ` must contain the following information
+##  in form of tuples for any such group $Q$:
 ##
-##  - 1 : the group order
-##  - 2 : an index of some group $S$, that has trivial core in $Q$
+##  - 1 : the group order $|Q|$
+##  - 2 : an index of some non-trivial subgroup $S < Q$,
+##		  that has trivial core in $Q$
 ##
 ##  The list $QQ$ is sorted by information $1$.
+##
 ##  Then any normal subgroup $K$ of $G$,
-##  such that the quotient $H/K$ is isomorphic to some $Q$ in the list $QQ$,
-##  can be found as the normal core of a subgroup $L$ of $H$,
+##  such that the quotient $H/K$ is isomorphic to some $Q$ contained in `QQ`,
+##  can be found as the normal core in $G$ of a subgroup $L$ of $H$,
 ##  that has an index equal to information $2$.
 ##  In order to find the subgroup $L$ of $H$,
 ##  we use `LowIndexSubgroups` to calculate every subgroup of $H$
 ##  up to some sufficiently large enough index.
+##
+##  Note however, that a group $K$ found by this function
+##  must not necessarily have a quotient $H/K$
+##  that is isomorphic to some $Q$ contained in `QQ`.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	local
-	G,      # group: 		located in the root of LINS graph `gr`.
+	G,      # group: 		located in the root node of LINS graph `gr`.
 	H,      # group: 		located in the node `rH`.
-	n,		# pos-int: 		index bound
+	n,		# pos-int: 		index bound of LINS graph `gr`.
 	I,      # [pos-int]: 	every index we need to check
 	m,      # pos-int: 		maximum of `I`
 	Iso,    # isomorphism: 	from `H` into fp-group
