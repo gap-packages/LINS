@@ -13,6 +13,14 @@
 #############################################################################
 
 
+#############################################################################
+#############################################################################
+##
+## LINS Node
+##
+#############################################################################
+#############################################################################
+
 InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt ],
 function(G, i)
 	local r;
@@ -29,33 +37,12 @@ function(G, i)
 	return r;
 end);
 
-InstallMethod( LinsGraph, "standard method", [ IsGroup, IsPosInt ],
-function(G, n)
-	local gr, r;
-
-	r := LinsNode(G, 1);
-	gr := rec(
-		Root := r,
-		IndexBound := n,
-		Levels := [ rec(Index := 1, Nodes := [r]) ]);
-
-	Objectify( LinsGraphType, gr );
-
-	return gr;
-end);
-
 InstallMethod( \=, "for Lins Node", [IsLinsNode, IsLinsNode], IsIdenticalObj);
 
 InstallMethod( ViewObj, "for Lins Node", [IsLinsNode],
 function(r)
 	Print("<lins node of index ", Index(r), ">");
 end);
-
-InstallMethod( ViewObj, "for Lins Graph Node", [IsLinsGraph],
-function(gr)
-	Print("<lins graph found ", Length(List(gr)), " normal subgroups up to index ", IndexBound(gr), ">");
-end);
-
 
 InstallOtherMethod( Grp, "for Lins Node", [ IsLinsNode ],
 function(r)
@@ -89,11 +76,6 @@ function(r)
 	else
 		return false;
 	fi;
-end);
-
-InstallMethod( Root, "for Lins Graph", [ IsLinsGraph ],
-function(r)
-	return r!.Root;
 end);
 
 InstallOtherMethod( Root, "for Lins Node", [ IsLinsNode ],
@@ -138,11 +120,45 @@ function(r)
 	return LINS_allNodes(r, MinimalSubgroups, false);
 end);
 
+
+#############################################################################
+#############################################################################
+##
+## LINS Graph
+##
+#############################################################################
+#############################################################################
+
+InstallMethod( LinsGraph, "standard method", [ IsGroup, IsPosInt ],
+function(G, n)
+	local gr, r;
+
+	r := LinsNode(G, 1);
+	gr := rec(
+		Root := r,
+		IndexBound := n,
+		Levels := [ rec(Index := 1, Nodes := [r]) ]);
+
+	Objectify( LinsGraphType, gr );
+
+	return gr;
+end);
+
+InstallMethod( ViewObj, "for Lins Graph Node", [IsLinsGraph],
+function(gr)
+	Print("<lins graph found ", Length(List(gr)), " normal subgroups up to index ", IndexBound(gr), ">");
+end);
+
+
+InstallMethod( Root, "for Lins Graph", [ IsLinsGraph ],
+function(r)
+	return r!.Root;
+end);
+
 InstallOtherMethod( ListOp, "for Lins Graph", [ IsLinsGraph ],
 function(gr)
 	return Concatenation(List(gr!.Levels, level -> level.Nodes));
 end);
-
 
 InstallMethod( Output, "for Lins Graph", [ IsLinsGraph ],
 function(gr)
@@ -160,10 +176,12 @@ end);
 
 
 #############################################################################
-## The maximum index bound the algorithm can work with
 #############################################################################
-
-BindGlobal("LINS_MaxIndex", 10000000);
+##
+## LINS Options
+##
+#############################################################################
+#############################################################################
 
 # Should subgroups under rH be computed?
 BindGlobal( "LINS_DoCutStd",
@@ -175,11 +193,11 @@ end);
 # We have computed the subgroups under rK
 # and are about to compute the subgroups under rH.
 BindGlobal( "LINS_DoTerminateStd",
-function(gr, rK, rH)
+function(gr, rH, rK)
 	return false;
 end);
 
-# Calculate the index list out of the targets
+# Calculate the index list from the targets
 BindGlobal( "LINS_FilterTQuotientsStd",
 function(gr, rH, QQ)
 local G, H, n, I, Q;
@@ -230,11 +248,19 @@ function(optionsBase, optionsUpdate)
     od;
 end);
 
+
 #############################################################################
-## Calculate every normal subgroup of G up to index n
-## The algorithm works only for n less equal the maximum index bound max_index
+#############################################################################
+##
+## Low Index Normal Subgroups
+##
+#############################################################################
 #############################################################################
 
+# The maximal index bound for the algorithm `LowIndexNormalSubgroups`
+BindGlobal("LINS_MaxIndex", 10000000);
+
+# See documentation
 InstallGlobalFunction( LowIndexNormalSubgroups, function(args...)
 	local G, n, phi, opts, gr, i, level, r, primes;
 
