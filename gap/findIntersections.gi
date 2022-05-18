@@ -14,65 +14,89 @@
 
 
 #############################################################################
-## Let the group G be located in the list GroupsFound at position 1.
-## Let the group H be located in the list GroupsFound at position Current.
-## Calculate all pairwise intersections of the group H
-## with all other groups in the list GroupsFound that are stored before the position Current.
-## Add any normal subgroup found as an intersection and index in G less equal n,
-## by calling the LINS_AddGroup-function
+##  LINS_FindIntersections
+#############################################################################
+##  Input:
+##
+##	- gr : 		LINS graph
+##  - rH : 		LINS node in gr
+##  - opts : 	LINS options (see documentation)
+#############################################################################
+##  Usage:
+##
+##  The main function `LowIndexNormalSubgroupsSearch` calls this function
+##  in the main loop.
+#############################################################################
+##  Description:
+##
+##  Let the group $G$ be located in the root node of the LINS graph `gr`.
+##  Let the group $H$ be located in the node `rH`.
+##  Let $n$ be the index bound of the LINS graph `gr`.
+##
+##  Compute all pairwise intersections of the group $H$
+##  with all preceding groups in `gr` of index in $G$ at most $n$.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
   	local
-	H,          # the group (record) at postion Current
-	rG, G, n, rK, rU, U, allSupergroups, allSubgroups, supers, subs, pos, level, xgroups,
-	Other,      # Loop variable, position of group to insersect
-	K,          # the group (record) at position Other
-	rM,          # smallest supergroup (record) of H and K, being HK
-	index,      # index of the intersection of H and K
-	F;          # list of groups (positions), which could be the insersection of H and K
+	rG,				# LINS node:	root node of LINS graph 'gr'.
+	G,      		# group: 		located in the root node `rG`.
+	H,      		# group: 		located in the node `rH`.
+	n,				# pos-int: 		index bound of LINS graph `gr`.
+	allSupergroups,	# [LINS node]:	supergroups of `rH`
+	allSubgroups,	# [LINS node]:	subgroups of `rH`
+	level,			# LINS level:	loop var
+	rK,				# LINS node:	loop var, preceding group in `gr`
+	K,      		# group: 		located in the node `rK`
+	xgroups,		# [LINS node]:	super/sub-groups of `rK`
+	supers,			# [LINS node]:  shared supergroups of `rH` and `rK`
+	subs,			# [LINS node]:  shared subgroups of `rH` and `rK`
+	rM,          	# LINS node:	smallest supergroup of `H` and `K`, being $HK$
+	index;      	# pos-int:		index of the intersection of `H` and `K`
+	U,				# group:		intersection of `H` and `K`
+	rU;				# LINS node:	containing group `U`
 
-	# If the current group is G, then continue.
+	# If the current group is `G`, then continue.
 	rG := Root(gr);
 	if rG = rH then
 		return;
 	fi;
+
+	# Initialize data
 	G := Grp(rG);
 	H := Grp(rH);
 	n := IndexBound(gr);
-
-	# Calculate intersections with every other group
-	# in the list GroupsFound that are stored before the position Current
 	allSupergroups := Supergroups(rH);
 	allSubgroups := Subgroups(rH);
+
+	# Main iteration over all preceding groups in `gr`
 	for level in gr!.Levels{[1 .. PositionProperty(gr!.Levels, level -> level.Index = Index(rH))]} do
 		for rK in level.Nodes do
 			if rK = rH then
 				break;
 			fi;
-			# If the other group is a supergroup of H, then continue;
+			# If `K` is a supergroup of `H`, then continue.
 			if rK in allSupergroups then
 				continue;
 			fi;
 			K := Grp(rK);
 
-			# Find the smallest supergroup of H and K. (which is HK)
+			# Find the smallest supergroup of `H` and `K`. (which is $HK$)
 			xgroups := Supergroups(rK);
 			supers := Filtered(allSupergroups, s -> s in xgroups);
-			pos := PositionMaximum(List(supers, Index));
-			rM := supers[pos];
+			rM := supers[PositionMaximum(List(supers, Index))];
 			index := rK!.Index * rH!.Index / rM!.Index;
 
-			# Check if we need to calculate the intersection
+			# Check if we need to compute the intersection
 			if index >= n then
 				continue;
 			fi;
 
-			# Check if the intersection has been already calculated
+			# Check if the intersection has been already computed
 			xgroups := Subgroups(rK);
 			subs := Filtered(allSubgroups, s -> s in xgroups);
 			if not (index in List(subs, Index)) then
-				# Add the intersection to the list GroupsFound
+				# Add the intersection to LINS graph `gr`
 				U := Intersection(K, H);
 				if opts.DoSetParent then
 					LINS_SetParent(U, G);
