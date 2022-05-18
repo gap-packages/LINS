@@ -69,7 +69,7 @@ end);
 #############################################################################
 ##  Usage:
 ##
-##  The function `LINS_FindPQuotients` calls this function.
+##  The function `LINS_FindPQuotients` calls this function in the main loop.
 #############################################################################
 ##  Description:
 ##
@@ -177,54 +177,78 @@ end);
 
 
 #############################################################################
-## maximal Generators of the PQuotient.
+## maximal generators of a p-quotient.
 #############################################################################
 
 BindGlobal("LINS_maxPGenerators", 1000);
 
 
 #############################################################################
-## Let the group G be located in the root of gr.
-## Let the group H be located in the node rH.
-## Calculate every normal subgroup K of G, such that H/K is a p-Group
-## and the index in G is less equal n.
+##  LINS_FindPModules
+#############################################################################
+##  Input:
 ##
-## We construct a module over the groupring (F_p G) and compute maximal submodules of this module.
-## These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian p-Quotients.
-## Then we call the method on the found subgroups so we compute all p-Quotients and not only the elementary abelian ones.
+##	- gr : 		LINS graph
+##  - rH : 		LINS node in gr
+##  - p : 		prime
+##  - opts : 	LINS options (see documentation)
+#############################################################################
+##  Usage:
+##
+##  The function `LINS_FindPQuotients` calls this function in the main loop.
+#############################################################################
+##  Description:
+##
+##  Let the group $G$ be located in the root node of the LINS graph `gr`.
+##  Let the group $H$ be located in the node `rH`.
+##  Let $n$ be the index bound of the LINS graph `gr`.
+##
+##  Calculate every normal subgroup $K$ of $G$,
+##  such that $[G:K] <= n$ and the quotient $H/K$ is a `p`-group.
+##
+##  We construct a module over the groupring $GF(p) G$ and compute maximal submodules of this module.
+##  These submodules can be translated into subgroups of $H$,
+##  which turn out to be exactly all elementary abelian `p`-quotients under $H$.
+##  Then we call this function on the found subgroups again.
+##  Thus, after these iterative calls, we have computed
+##  all `p`-quotients under $H$ and not only the elementary abelian ones.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	local
-	G,        # the parent group, which is stored in the root of gr
-	n,        # index bound
-	H,        # the current group, contained in node rH
-	Iso,      # isomorphism from H into fp-group
-	IH,       # fp-group, image of Iso
-	P,        # p-quotient of IH of class 1
-	Mu,       # epimorphism from IH into P
-	M,        # pc-group, image of Mu
-	GenM,     # generators of M, basis of Fp-G module M
-	gens,     # list of matrices, action of generators of G on M
-	x,        # loop variable, generator of G
-	y,        # loop variable, generator of M identified by Mu and Iso with word in H
-	word,     # word in M, y^x via a "conjugation" action of G on M
-	gen,      # Fp-matrix, action of some generator of G on M
-	GM,       # MeatAxe module, representation of Fp-G module M by gens
-	MM,       # list of maximal modules of GM
-	m,        # loop variable, maximal module
-	V,        # Vectorspace Fp^n, where n is the dimension of GM
-	s,        # index of m in V, which equals index of K in H
-	PsiHom,   # epimorphism from V to V/m
-	Q,        # vector space, image of PsiHom
-	O,        # elements of Q
-	GenIH,    # generators of IH
-	PhiHom,   # epimorphism from H into p-quotient H/K, identification of Q as a quotient of H via Mu
-	K,        # subgroup of H with p-quotient, normal in G
-	rK,       # node containing K
-	NewGroup; # record (list, position) after inserting K into GroupsFound
+	G,      # group: 		located in the root node of LINS graph `gr`.
+	H,      # group: 		located in the node `rH`.
+	n,		# pos-int: 		index bound of LINS graph `gr`.
+	Iso,    # isomorphism:	from `H` into fp-group
+	IH,     # fp-group: 	image under `Iso`, isomorphic to `H`
+	P,      # quotsys:		p-quotient of `IH` of class 1
+	Mu,     # epimorphism:	from `IH` into `P`
+	M,      # pc-group: 	image under `Mu`
+	GenM,   # [elm]:		generators of `M`, basis of $GF(p) G$ module `M`
+	gens,   # [matrix]:		matrices, action of generators of `G` on `M`
+	x,      # elm:			loop var, generator of `G`
+	y,      # elm:			loop var, elm of `H` with maps
+			#				under `Mu` and `Iso` to a generator of `M`
+	word,   # elm:			word in `M`, $y ^ x$ via a
+		    #				"conjugation" action of `G` on `M`
+	gen,    # matrix:		over $GF(p)$, encoding action of `x` on `M`
+	GM,     # module: 		from MeatAxe, representation of
+			#				$GF(p) G$ module `M` by `gens`
+	MM,     # [module]:		from MeatAxe, all maximal modules of `GM`
+	m,      # module:		loop variable, maximal module in `MM`
+	V,      # vectorspace: 	$GF(p) ^ d$, where $d$ is the dimension of `GM`
+	s,      # pos-int:		index of `m` in `V`, which equals index $[H : K]$
+	PsiHom, # epimorphism:	from `V` to $V/m$
+	Q,      # vectorspace: 	image under `PsiHom`
+	O,      # [elm]:		all elements of Q, in bijection with
+			#				elements of $H/K$
+	GenIH,  # [elm]:		generators of `IH`
+	PhiHom, # epimorphism: 	from `H` into `p`-quotient $H/K$, identification
+			#				of `Q` as a quotient of `H` via `Mu`
+	K,      # group:		subgroup of `H` with `p`-quotient, normal in `G`
+	rK;     # LINS node: 	containing `K`
 
-	# Check if p-Quotients have been computed already from this group
+	# Check if `p`-quotients have been computed already from this group
 	if p in TriedPrimes(rH) then
 		return;
 	fi;
@@ -235,23 +259,23 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	G :=Grp(Root(gr));
 	H := Grp(rH);
 
-	# Isomorphism onto the fp-group of H
+	# Isomorphism onto the fp-group of `H`
 	Iso := IsomorphismFpGroup(H);
 	IH := Image(Iso);
 
-	# Create the Isomorphism to the group structure of the p-Module M
+	# Create the Isomorphism to the group structure of the `p`-Module `M`
 	P := PQuotient(IH, p, 1, LINS_maxPGenerators);
 	Mu := EpimorphismQuotientSystem(P);
 	M := Image(Mu);
 	GenM := GeneratorsOfGroup(M);
 
-	# If M is trivial we skip this prime
+	# If `M` is trivial we skip this prime
 	if IsEmpty(GenM) then
 		return;
 	fi;
 
-	# Define the group action of G on the p-Module M
-	# For every generator in G we store the action on M in form of a Matrix
+	# Define the group action of `G` on the `p`-Module `M`
+	# For every generator in `G` we store the action on `M` in form of a matrix
 	gens := [];
 	for x in GeneratorsOfGroup(G) do
 		gen := [];
@@ -263,28 +287,30 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 		Add(gens, gen);
 	od;
 
-	# Calculate the maximal submodules of M
+	# Calculate the maximal submodules of `M`
 	GM := GModuleByMats(gens, FiniteField(p));
 	MM := MTX.BasesMaximalSubmodules(GM);
 	V := FiniteField(p) ^ (Length(GenM));
 
-	# Translate every submodule of M into a normal subgroup of H with elementary abelian p-Quotient
+	# Translate every submodule of `M` into a normal subgroup of `H`
+	# with elementary abelian `p`-quotient
 	for m in MM do
 
-		# Check wether the index will be greater than n
+		# Check wether the index will be greater than `n`
 		m := Subspace(V, m);
 		s := p ^ ( Dimension(V) - Dimension(m) );
 		if s > n / Index(G, H) then
 			continue;
 		fi;
 
-		# Calculate the natural homomorphism from V to V/m
+		# Calculate the natural homomorphism from `V` to $V/m$
 		PsiHom := NaturalHomomorphismBySubspace(V, m);
 		Q := Image(PsiHom);
 		O := Elements(Q);
 		GenIH := GeneratorsOfGroup(IH);
 
-		# Calculate the subgroup K with H/K being an elementary abelian p-Group
+		# Calculate the subgroup `K` with $H/K$ being an
+		# elementary abelian `p`-group
 		PhiHom :=  GroupHomomorphismByImagesNC(H, SymmetricGroup(Length(O)),
 			LINS_PullBackH(GenM, p, List(GeneratorsOfGroup(H), x->Image(Iso, x)), O, Mu, PsiHom));
 
@@ -293,10 +319,11 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			LINS_SetParent(K, G);
 		fi;
 
-		# Add the subgroup K by calling the LINS_AddGroup-function
+		# Add the subgroup `K` to LINS graph `gr`
 		if Index(G, K) <= n then
 			rK := LINS_AddGroup(gr, K, [rH], true, opts);
-			# If the index is sufficient small, compute p-Quotients from the subgroup K
+			# If the index is sufficient small,
+			# compute `p`-quotients under the subgroup `K`
 			if p <= n / Index(G, K) then
 				LINS_FindPModules(gr, rK, p, opts);
 			fi;
@@ -306,7 +333,7 @@ end);
 
 
 #############################################################################
-##  LINS_FindTQuotients
+##  LINS_FindPQuotients
 #############################################################################
 ##  Input:
 ##
