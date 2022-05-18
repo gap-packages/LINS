@@ -26,7 +26,7 @@
 #############################################################################
 ##  Usage:
 ##
-##  The main function `LowIndexNormalSubgroups` calls this function with
+##  The main function `LowIndexNormalSubgroupsSearch` calls this function with
 ##
 ##						`rH` = `Root(gr)`,
 ##						`QQ` = `LINS_TargetsQuotient`.

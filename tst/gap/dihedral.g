@@ -9,7 +9,7 @@ TestDihedral := function(N)
     fi;
     n := N / 2;
     G := DihedralGroup(N);
-    L := List(LowIndexNormalSubgroups(G, N));
+    L := List(LowIndexNormalSubgroupsSearch(G, N));
     Current := 2;
     if IsEvenInt(n) then
         for k in [1 .. 2] do

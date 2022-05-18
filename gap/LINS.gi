@@ -253,11 +253,11 @@ end);
 #############################################################################
 #############################################################################
 
-# The maximal index bound for the algorithm `LowIndexNormalSubgroups`
+# The maximal index bound for the algorithm `LowIndexNormalSubgroupsSearch`
 BindGlobal("LINS_MaxIndex", 10000000);
 
 # See documentation
-InstallGlobalFunction( LowIndexNormalSubgroups, function(args...)
+InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	local G, n, phi, opts, gr, i, level, r, primes;
 
 	if Length(args) < 2 or Length(args) > 3 then

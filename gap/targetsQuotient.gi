@@ -17,7 +17,7 @@
 #############################################################################
 ##  Usage:
 ##
-##  The main function `LowIndexNormalSubgroups` calls the function
+##  The main function `LowIndexNormalSubgroupsSearch` calls the function
 ##
 ##                      `LINS_FindTQuotients`
 ##

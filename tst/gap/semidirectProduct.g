@@ -15,7 +15,7 @@ TestSemidirectProduct := function(n)
     c := G.3;
 
     n3 := Int(n / 3);
-    gr := LowIndexNormalSubgroups(G, n);
+    gr := LowIndexNormalSubgroupsSearch(G, n);
     L := List(gr);
 
     # We enumerate all normal subgroups that we would expect to find from a theoratical point of view.
