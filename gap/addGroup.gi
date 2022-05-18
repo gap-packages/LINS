@@ -145,7 +145,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
         if Index(rH) mod Index(rK) = 0 then
           if LINS_IsSubgroupFp(K, H) then
             LINS_AddRelations(rK, rH);
-            allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, Supergroups(rK)));
+            allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, [rK], Supergroups(rK)));
           fi;
         fi;
       fi;
@@ -162,7 +162,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
         if Index(rK) mod Index(rH) = 0 then
           if LINS_IsSubgroupFp(H, K) then
             LINS_AddRelations(rH, rK);
-            allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, Subgroups(rK)));
+            allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, [rK], Subgroups(rK)));
           fi;
         fi;
       fi;
