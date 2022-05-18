@@ -257,7 +257,7 @@ TestSemidirectProduct := function(n)
                     continue;
                 fi;
                 # pos of intersection
-                pos := PositionProperty(L, x -> Index(x) = index and ForAll(subgroupSelection, i -> L[i] in LINS_allNodes(x, MinimalSupergroups, false)));
+                pos := PositionProperty(L, x -> Index(x) = index and ForAll(subgroupSelection, i -> L[i] in Supergroups(x)));
                 if pos = fail then
                     Error("LINS did not find intersection of the subgroups with index list ", List(subgroupSelection, L[i]!.Index));
                 else
