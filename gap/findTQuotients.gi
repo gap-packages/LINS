@@ -37,7 +37,7 @@
 ##  Let the group $H$ be located in the node `rH`.
 ##  Let $n$ be the index bound of the LINS graph `gr`.
 ##
-##  Calculate every normal subgroup $K$ of $G$,
+##  Compute every normal subgroup $K$ of $G$,
 ##  such that $[G:K] <= n$ and the quotient $H/K$ is
 ##  isomorphic to some non-abelian group $Q$ contained in `QQ`,
 ##  that has a non-trivial subgroup with trivial core.
@@ -87,7 +87,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	H := Grp(rH);
 	n := IndexBound(gr);
 
-	# Calculate the index list `I`.
+	# Compute the index list `I`.
 	I := opts.FilterTQuotients(gr, rH, QQ);
 
 	# If the index list is empty, we have nothing to do.
@@ -95,7 +95,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 		return;
 	fi;
 
-	# Calculate every subgroup of `H` up to the maximum index in `I`
+	# Compute every subgroup of `H` up to the maximum index in `I`
 	# by calling `LowIndexSubgroups`.
 	m := Maximum(I);
 	Iso := IsomorphismFpGroup(H);
