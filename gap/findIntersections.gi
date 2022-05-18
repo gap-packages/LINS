@@ -52,7 +52,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	supers,			# [LINS node]:  shared supergroups of `rH` and `rK`
 	subs,			# [LINS node]:  shared subgroups of `rH` and `rK`
 	rM,          	# LINS node:	smallest supergroup of `H` and `K`, being $HK$
-	index;      	# pos-int:		index of the intersection of `H` and `K`
+	index,      	# pos-int:		index of the intersection of `H` and `K`
 	U,				# group:		intersection of `H` and `K`
 	rU;				# LINS node:	containing group `U`
 
