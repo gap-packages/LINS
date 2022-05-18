@@ -79,7 +79,8 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	L,      # group: 		loop var, subgroup in `LL`
 	i,      # pos-int: 		loop var, index in `I`
 	PL,     # group: 		preimage of `L` under `Iso`, subgroup of `H`
-	K;      # group: 		normal core of `PL` in `G`, subgroup of `H` (with Q-quotient)
+	K;      # group: 		normal core of `PL` in `G`,
+			# 				subgroup of `H` (with Q-quotient)
 
 	# Initialize data from input
 	G := Grp(Root(gr));
