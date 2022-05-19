@@ -248,7 +248,9 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	PhiHom, # epimorphism: 	from `H` into `p`-quotient $H/K$, identification
 			#				of `Q` as a quotient of `H` via `Mu`
 	K,      # group:		subgroup of `H` with `p`-quotient, normal in `G`
-	rK;     # LINS node: 	containing `K`
+	rK,     # LINS node: 	containing `K`
+	isNew,	# boolean:		whether the group `K` is new in `gr`
+	data;	# tuple:		[`rK`, `isNew`]
 
 	# Check if `p`-quotients have been computed already from this group
 	if p in TriedPrimes(rH) then
@@ -327,10 +329,10 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 		# Add the subgroup `K` to LINS graph `gr`
 		if Index(G, K) <= n then
-			rK := LINS_AddGroup(gr, K, [rH], true, opts);
-			if rK = false then
-				rK := rH;
-			elif opts.DoTerminate(gr, rH, rK) then
+			data := LINS_AddGroup(gr, K, [rH], true, opts);
+			rK := data[1];
+			isNew := data[2];
+			if isNew and opts.DoTerminate(gr, rH, rK) then
 				gr!.TerminatedUnder := rH;
 				gr!.TerminatedAt := rK;
 				return true;

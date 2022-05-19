@@ -127,8 +127,8 @@ end);
 ##  Description:
 ##
 ##  Adds the group `H` to the LINS graph `gr`.
-##  Returns false, if `H` was already contained in `gr`,
-##  otherwise the LINS node `rH` that contains `H`.
+##  Returns a tuple with the LINS node `rH` that contains `H`
+##  and a boolean indicating if the group is a new found subgroup in `gr`.
 #############################################################################
 
 InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
@@ -165,7 +165,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
 			for rK in level.Nodes do
 				K := Grp(rK);
 				if LINS_IsSubgroupFp(K,H) then
-					return false;
+					return [rK, false];
 				fi;
 			od;
 		fi;
@@ -210,5 +210,5 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
 	# Thus we need to update the relations for the super/sub-groups of `H`.
 	LINS_UpdateRelations(rH);
 
-	return rH;
+	return [rH, true];
 end);

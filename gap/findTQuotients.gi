@@ -82,7 +82,9 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	PL,     # group: 		preimage of `L` under `Iso`, subgroup of `H`
 	K,      # group: 		normal core of `PL` in `G`,
 			# 				subgroup of `H` (with Q-quotient)
-	rK;		# LINS node:	containing group `K`
+	rK,		# LINS node:	containing group `K`
+	isNew,	# boolean:		whether the group `K` is new in `gr`
+	data;	# tuple:		[`rK`, `isNew`]
 
 	# Initialize data from input
 	G := Grp(Root(gr));
@@ -117,8 +119,10 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 				fi;
 
 				if Index(G, K) <= n then
-					rK := LINS_AddGroup(gr, K, [rH], true, opts);
-					if rK <> false and opts.DoTerminate(gr, rH, rK) then
+					data := LINS_AddGroup(gr, K, [rH], true, opts);
+					rK := data[1];
+					isNew := data[2];
+					if isNew and opts.DoTerminate(gr, rH, rK) then
 						gr!.TerminatedUnder := rH;
 						gr!.TerminatedAt := rK;
 						return true;
