@@ -4,7 +4,7 @@
 ##  Description:
 ##
 ##  For integers `n` and `a`,
-##  this returns the maximal integer `i`, such that $a ^ i < n$.
+##  this returns the maximal integer `i`, such that $a ^ i <= n$.
 ##
 #############################################################################
 
