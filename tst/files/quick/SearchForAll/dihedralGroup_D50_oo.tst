@@ -3,6 +3,6 @@
 # index = oo
 #############################################################################
 
-gap> ReadPackage("LINS", "tst/gap/dihedral.g");;
+gap> ReadPackage("LINS", "tst/gap/SearchForAll/dihedral.g");;
 gap> TestDihedral(50);
 true
