@@ -43,7 +43,6 @@
 ##  that has a non-trivial subgroup with trivial core.
 ##  Add any such group $K$ to the LINS graph `gr`.
 ##
-##
 ##  The list `QQ` must contain the following information
 ##  in form of tuples for any such group $Q$:
 ##
@@ -64,6 +63,8 @@
 ##  Note however, that a group $K$ found by this function
 ##  must not necessarily have a quotient $H/K$
 ##  that is isomorphic to some $Q$ contained in `QQ`.
+##
+##  Returns true if the search in `gr` can be terminated.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
@@ -79,8 +80,9 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	L,      # group: 		loop var, subgroup in `LL`
 	i,      # pos-int: 		loop var, index in `I`
 	PL,     # group: 		preimage of `L` under `Iso`, subgroup of `H`
-	K;      # group: 		normal core of `PL` in `G`,
+	K,      # group: 		normal core of `PL` in `G`,
 			# 				subgroup of `H` (with Q-quotient)
+	rK;		# LINS node:	containing group `K`
 
 	# Initialize data from input
 	G := Grp(Root(gr));
@@ -92,7 +94,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 
 	# If the index list is empty, we have nothing to do.
 	if Length(I) = 0 then
-		return;
+		return false;
 	fi;
 
 	# Compute every subgroup of `H` up to the maximum index in `I`
@@ -115,11 +117,18 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 				fi;
 
 				if Index(G, K) <= n then
-					LINS_AddGroup(gr, K, [rH], true, opts);
+					rK := LINS_AddGroup(gr, K, [rH], true, opts);
+					if opts.DoTerminate(gr, rH, rK) then
+						gr!.TerminatedUnder := rH;
+						gr!.TerminatedAt := rK;
+						return true;
+					fi;
 				fi;
 
 				break;
 			fi;
 		od;
 	od;
+
+	return false;
 end);

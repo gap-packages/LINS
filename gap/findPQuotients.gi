@@ -212,6 +212,8 @@ BindGlobal("LINS_MaxPGenerators", 1000);
 ##  Then we call this function on the found subgroups again.
 ##  Thus, after these iterative calls, we have computed
 ##  all `p`-quotients under $H$ and not only the elementary abelian ones.
+##
+##  Returns true if the search in `gr` can be terminated.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
@@ -250,7 +252,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 	# Check if `p`-quotients have been computed already from this group
 	if p in TriedPrimes(rH) then
-		return;
+		return false;
 	fi;
 	AddSet(TriedPrimes(rH), p);
 
@@ -271,7 +273,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 	# If `M` is trivial we skip this prime
 	if IsEmpty(GenM) then
-		return;
+		return false;
 	fi;
 
 	# Define the group action of `G` on the `p`-Module `M`
@@ -322,6 +324,11 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 		# Add the subgroup `K` to LINS graph `gr`
 		if Index(G, K) <= n then
 			rK := LINS_AddGroup(gr, K, [rH], true, opts);
+			if opts.DoTerminate(gr, rH, rK) then
+				gr!.TerminatedUnder := rH;
+				gr!.TerminatedAt := rK;
+				return true;
+			fi;
 			# If the index is sufficient small,
 			# compute `p`-quotients under the subgroup `K`
 			if p <= n / Index(G, K) then
@@ -329,6 +336,8 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			fi;
 		fi;
 	od;
+
+	return false;
 end);
 
 
@@ -356,19 +365,23 @@ end);
 ##  Compute every normal subgroup $K$ of $G$, such that $[G:K] <= n$
 ##  and $H/K$ is a $p$-group for a prime $p$ contained in `primes`,
 ##  if `LINS_MustCheckP` says that $p$ needs to be explicitly considered.
+##
+##  Returns true if the search in `gr` can be terminated.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 	local
-	G,      # group: 		located in the root node of LINS graph `gr`.
-	H,      # group: 		located in the node `rH`.
-	n,		# pos-int: 		index bound of LINS graph `gr`.
-	p;      # pos-int:		loop variable, prime in `primes`.
+	G,      # group: 		located in the root node of LINS graph `gr`
+	H,      # group: 		located in the node `rH`
+	n,		# pos-int: 		index bound of LINS graph `gr`
+	p,      # pos-int:		loop variable, prime in `primes`
+	res;	# boolean:		whether the search in `gr` can be terminated
 
 	# Initialize data from input
 	G := Grp(Root(gr));
 	n := IndexBound(gr);
 	H := Grp(rH);
+	res := false;
 
 	# Search for p-quotients for every prime small enough.
 	for p in primes do
@@ -377,9 +390,14 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 		fi;
 		# Check according to some rules whether the p-quotients
 		# will be computed by intersections.
-		if LINS_MustCheckP(rH, n, p) then
+		if opts.DoPQuotient(gr, rH, p) and LINS_MustCheckP(rH, n, p) then
 			# Compute all p-quotients under H.
-			LINS_FindPModules(gr, rH, p, opts);
+			res := LINS_FindPModules(gr, rH, p, opts);
+		fi;
+		if res then
+			break;
 		fi;
 	od;
+
+	return res;
 end);

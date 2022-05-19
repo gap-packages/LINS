@@ -179,15 +179,16 @@ end);
 ####=====================================================================####
 #############################################################################
 
-# Should subgroups under rH be computed?
+# Should subgroups under `rH` be computed?
 BindGlobal( "LINS_DoCutStd",
 function(gr, rH)
 	return false;
 end);
 
 # Should the search be terminated?
-# We have computed the subgroups under rK
-# and are about to compute the subgroups under rH.
+# We are currently computing the subgroups under `rH`.
+# We have computed the normal subgroup `rK`.
+# This function may write data to `gr!.Output`.
 BindGlobal( "LINS_DoTerminateStd",
 function(gr, rH, rK)
 	return false;
@@ -210,14 +211,14 @@ local G, H, n, I, Q;
 	return I;
 end);
 
-# Whether to compute the intersection of the groups rH and rK
+# Whether to compute the intersection of the groups `rH` and `rK`
 # with the given index.
 BindGlobal( "LINS_DoIntersectionStd",
 function(gr, rH, rK, index)
 	return true;
 end);
 
-# Whether to compute p-quotients under rH for the prime p
+# Whether to compute `p`-quotients under `rH` for the prime `p`
 BindGlobal( "LINS_DoPQuotientStd",
 function(gr, rH, p)
 	return true;
@@ -258,7 +259,7 @@ BindGlobal("LINS_MaxIndex", 10000000);
 
 # See documentation
 InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
-	local G, n, phi, opts, gr, i, level, r, primes;
+	local G, n, phi, opts, gr, i, level, r, s, primes, res;
 
 	if Length(args) < 2 or Length(args) > 3 then
 		ErrorNoReturn("Unknown number of arguments!");
@@ -291,7 +292,10 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	fi;
 
 	# Call T-Quotient Procedure on G
-	LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient, opts);
+	res := LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient, opts);
+	if res then
+		return gr;
+	fi;
 
 	# Compute all primes up to n
 	primes := LINS_AllPrimesUpTo(n);
@@ -303,11 +307,21 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 			break;
 		fi;
 		for r in level.Nodes do
+			if opts.DoCut(gr, r) then
+				r!.IsCut := true;
+				continue;
+			fi;
 			# Search for possible P-Quotients
-			LINS_FindPQuotients(gr, r, primes, opts);
+			res := LINS_FindPQuotients(gr, r, primes, opts);
+			if res then
+				return gr;
+			fi;
 			# Search for possible Intersections
 			if i > 1 then
-				LINS_FindIntersections(gr, r, opts);
+				res := LINS_FindIntersections(gr, r, opts);
+				if res then
+					return gr;
+				fi;
 			fi;
 		od;
 		i := i + 1;

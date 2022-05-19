@@ -35,6 +35,8 @@
 ##
 ##  Compute all pairwise intersections $U$ of the group $H$
 ##  with all preceding groups in `gr`, where $[G : U] <= n$.
+##
+##  Returns true if the search in `gr` can be terminated.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
@@ -59,7 +61,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	# If the current group is `G`, then continue.
 	rG := Root(gr);
 	if rG = rH then
-		return;
+		return false;
 	fi;
 
 	# Initialize data
@@ -74,6 +76,9 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 		for rK in level.Nodes do
 			if rK = rH then
 				break;
+			fi;
+			if IsCut(rK) then
+				continue;
 			fi;
 			# If `K` is a supergroup of `H`, then continue.
 			if rK in allSupergroups then
@@ -95,7 +100,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 			# Check if the intersection has been already computed
 			xgroups := Subgroups(rK);
 			subs := Filtered(allSubgroups, s -> s in xgroups);
-			if not (index in List(subs, Index)) then
+			if opts.DoIntersection(gr, rH, rK, index) and not (index in List(subs, Index)) then
 				# Add the intersection to LINS graph `gr`
 				U := Intersection(K, H);
 				if opts.DoSetParent then
@@ -103,8 +108,15 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 				fi;
 
 				rU := LINS_AddGroup(gr, U, [rK, rH], false, opts);
+				if opts.DoTerminate(gr, rH, rU) then
+					gr!.TerminatedUnder := rH;
+					gr!.TerminatedAt := rU;
+					return true;
+				fi;
 				Add(allSubgroups, rU);
 			fi;
 		od;
 	od;
+
+	return false;
 end);
