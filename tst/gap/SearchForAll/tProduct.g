@@ -28,6 +28,13 @@ TestTProduct := function(T, d)
             Current := Current + 1;
         od;
     od;
+
+    # trivial group
+    if Order(L[Current]!.Grp) <> 1 then
+        Error("LINS did not find trivial group!");
+    fi;
+    Current := Current + 1;
+
     if Current <= Length(L) then
          Error("LINS found too many subgroups!");
     fi;
