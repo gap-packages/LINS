@@ -3,6 +3,6 @@
 # index = 1000
 #############################################################################
 
-gap> ReadPackage("LINS", "tst/gap/semidirectProduct.g");;
+gap> ReadPackage("LINS", "tst/gap/SearchForAll/semidirectProduct.g");;
 gap> TestSemidirectProduct(1000);
 true

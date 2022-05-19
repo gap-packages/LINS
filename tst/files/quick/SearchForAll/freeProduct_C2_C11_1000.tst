@@ -3,7 +3,7 @@
 # index = 1000
 #############################################################################
 
-gap> ReadPackage("LINS", "tst/gap/compareResults.g");;
+gap> ReadPackage("LINS", "tst/gap/SearchForAll/compareResults.g");;
 
 #############################################################################
 # Initialize Pre-Computed Data
