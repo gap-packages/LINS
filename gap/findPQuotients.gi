@@ -328,7 +328,9 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 		# Add the subgroup `K` to LINS graph `gr`
 		if Index(G, K) <= n then
 			rK := LINS_AddGroup(gr, K, [rH], true, opts);
-			if opts.DoTerminate(gr, rH, rK) then
+			if rK = false then
+				rK := rH;
+			elif opts.DoTerminate(gr, rH, rK) then
 				gr!.TerminatedUnder := rH;
 				gr!.TerminatedAt := rK;
 				return true;
