@@ -55,7 +55,7 @@ end);
 # with the given index.
 BindGlobal( "LINS_Index_DoIntersection",
 function(gr, rH, rK, index)
-	if RemInt(index, gr!.Index) = 0 then
+	if RemInt(gr!.Index, index) = 0 then
 		return true;
 	fi;
 	return false;
