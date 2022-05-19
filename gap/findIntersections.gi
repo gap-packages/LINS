@@ -56,7 +56,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	rM,          	# LINS node:	smallest supergroup of `H` and `K`, being $HK$
 	index,      	# pos-int:		index of the intersection of `H` and `K`
 	U,				# group:		intersection of `H` and `K`
-	rU;				# LINS node:	containing group `U`
+	rU,				# LINS node:	containing group `U`
+	data;			# tuple:		[`rU`, `isNew`]
 
 	# If the current group is `G`, then continue.
 	rG := Root(gr);
@@ -107,7 +108,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 					LINS_SetParent(U, G);
 				fi;
 
-				rU := LINS_AddGroup(gr, U, [rK, rH], false, opts);
+				data := LINS_AddGroup(gr, U, [rK, rH], false, opts);
+				rU := data[1];
 				if opts.DoTerminate(gr, rH, rU) then
 					gr!.TerminatedUnder := rH;
 					gr!.TerminatedAt := rU;
