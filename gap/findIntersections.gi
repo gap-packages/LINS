@@ -93,7 +93,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 			index := rK!.Index * rH!.Index / rM!.Index;
 
 			# Check if we need to compute the intersection
-			if index >= n then
+			if index > n then
 				continue;
 			fi;
 
