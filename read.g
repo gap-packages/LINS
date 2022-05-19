@@ -28,3 +28,5 @@ ReadPackage( "LINS", "gap/addGroup.gi");
 ReadPackage( "LINS", "gap/findTQuotients.gi");
 ReadPackage( "LINS", "gap/findPQuotients.gi");
 ReadPackage( "LINS", "gap/findIntersections.gi");
+
+ReadPackage( "LINS", "gap/LINS_Index.gi");

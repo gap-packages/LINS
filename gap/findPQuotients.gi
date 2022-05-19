@@ -305,6 +305,10 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			continue;
 		fi;
 
+		if not opts.DoPModule(gr, rH, p, s * rH!.Index) then
+			continue;
+		fi;
+
 		# Compute the natural homomorphism from `V` to $V/m$
 		PsiHom := NaturalHomomorphismBySubspace(V, m);
 		Q := Image(PsiHom);

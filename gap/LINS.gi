@@ -179,8 +179,14 @@ end);
 ####=====================================================================####
 #############################################################################
 
+# Append data to the LINS graph
+BindGlobal( "LINS_InitGraph",
+function(gr)
+	return;
+end);
+
 # Should subgroups under `rH` be computed?
-BindGlobal( "LINS_DoCutStd",
+BindGlobal( "LINS_DoCut",
 function(gr, rH)
 	return false;
 end);
@@ -189,13 +195,13 @@ end);
 # We are currently computing the subgroups under `rH`.
 # We have computed the normal subgroup `rK`.
 # This function may write data to `gr!.Output`.
-BindGlobal( "LINS_DoTerminateStd",
+BindGlobal( "LINS_DoTerminate",
 function(gr, rH, rK)
 	return false;
 end);
 
 # Compute the index list from the targets
-BindGlobal( "LINS_FilterTQuotientsStd",
+BindGlobal( "LINS_FilterTQuotients",
 function(gr, rH, QQ)
 local G, H, n, I, Q;
 	G := Grp(Root(gr));
@@ -213,25 +219,34 @@ end);
 
 # Whether to compute the intersection of the groups `rH` and `rK`
 # with the given index.
-BindGlobal( "LINS_DoIntersectionStd",
+BindGlobal( "LINS_DoIntersection",
 function(gr, rH, rK, index)
 	return true;
 end);
 
 # Whether to compute `p`-quotients under `rH` for the prime `p`
-BindGlobal( "LINS_DoPQuotientStd",
+BindGlobal( "LINS_DoPQuotient",
 function(gr, rH, p)
+	return true;
+end);
+
+# Whether to compute the elem. abelian `p`-quotient of given index
+# under `rH` for the prime `p`
+BindGlobal( "LINS_DoPModule",
+function(gr, rH, p, index)
 	return true;
 end);
 
 # Default options, immutable entries
 BindGlobal( "LINS_DefaultOptions", Immutable(rec(
     DoSetParent := true,
-	DoCut := LINS_DoCutStd,
-	DoTerminate := LINS_DoTerminateStd,
-	FilterTQuotients := LINS_FilterTQuotientsStd,
-	DoIntersection := LINS_DoIntersectionStd,
-	DoPQuotient := LINS_DoPQuotientStd
+	InitGraph := LINS_InitGraph,
+	DoCut := LINS_DoCut,
+	DoTerminate := LINS_DoTerminate,
+	FilterTQuotients := LINS_FilterTQuotients,
+	DoIntersection := LINS_DoIntersection,
+	DoPQuotient := LINS_DoPQuotient,
+	DoPModule := LINS_DoPModule
 )));
 
 BindGlobal( "LINS_SetOptions",
@@ -286,6 +301,7 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	fi;
 
 	gr := LinsGraph(G, n);
+	opts.InitGraph(gr);
 
 	if IsBound(phi) then
 		gr!.iso := phi;
