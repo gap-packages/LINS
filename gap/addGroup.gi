@@ -127,7 +127,8 @@ end);
 ##  Description:
 ##
 ##  Adds the group `H` to the LINS graph `gr`.
-##  Returns the LINS node `rH` that contains `H`.
+##  Returns false, if `H` was already contained in `gr`,
+##  otherwise the LINS node `rH` that contains `H`.
 #############################################################################
 
 InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
@@ -164,7 +165,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
 			for rK in level.Nodes do
 				K := Grp(rK);
 				if LINS_IsSubgroupFp(K,H) then
-					return rK;
+					return false;
 				fi;
 			od;
 		fi;

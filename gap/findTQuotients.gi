@@ -118,7 +118,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 
 				if Index(G, K) <= n then
 					rK := LINS_AddGroup(gr, K, [rH], true, opts);
-					if opts.DoTerminate(gr, rH, rK) then
+					if rK <> false and opts.DoTerminate(gr, rH, rK) then
 						gr!.TerminatedUnder := rH;
 						gr!.TerminatedAt := rK;
 						return true;
