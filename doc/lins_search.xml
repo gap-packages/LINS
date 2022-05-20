@@ -6,17 +6,96 @@ This chapter is for advanced users and those interested in a brief introduction 
 <Section Label="LINS Search Strategy">
 <Heading>LINS Search Strategy</Heading>
 
-In this section, we briefly introduce the basic search strategy for normal subgroups.
+In this section, we briefly introduce the basic search strategy for normal subgroups. <P/>
+
+TODO
 
 </Section>
 
 <Section Label="LINS Target Tables">
 <Heading>LINS Target Tables</Heading>
 
+TODO
+
 </Section>
 
 <Section Label="LINS Search Options">
 <Heading>LINS Search Options</Heading>
+
+The method <C>LowIndexNormalSubgroupsSearch</C> allows an optional argument <A>opts</A> which must be a record
+and modifies the search for the execution of only this single command. <P/>
+
+The following components of <A>opts</A> are supported.
+
+<List>
+<Mark><C>DoSetParent</C></Mark>
+<Item>
+<K>true</K> to set parent of every subgroup to the group <A>G</A> that is contained in the root of the search graph.
+It also sets the property <C>IsNormalInParent</C> to <K>true</K> for every subgroup. <P/>
+
+This should be only disabled for debugging or testing purposes.
+</Item>
+<Mark><C>InitGraph</C></Mark>
+<Item>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>.
+It can popullate the record object <A>gr</A> via calls like <C>gr!.NAME = VALUE</C>
+in order to initialize certain components that might be needed by other functions later on.
+</Item>
+<Mark><C>DoCut</C></Mark>
+<Item>
+a function that takes as arguments a <K>LinsGraph</K> <A>gr</A> and a <K>LinsNode</K> <A>rH</A>. <P/>
+Returns <K>true</K> if subgroups under <A>rH</A> should not be computed,
+i.e. the branch will be cut under the node <A>rH</A>.
+</Item>
+<Mark><C>DoTerminate</C></Mark>
+<Item>
+a function that takes as arguments a <K>LinsGraph</K> <A>gr</A> and two <K>LinsNodes</K> <A>rH</A> and <A>rK</A>
+We are currently computing the subgroups under <A>rH</A>.
+We have computed the normal subgroup <A>rK</A>.
+This function may write data to <C>gr!.Output`</C>.
+Make sure to initalize this via the option <C>InitGraph</C> (for example to an empty list),
+since it is not bound by default. <P/>
+Returns <K>true</K> if the search can be terminated.
+</Item>
+<Mark><C>FilterTQuotients</C></Mark>
+<Item>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A> and a list of targets <A>QQ</A>
+following the specifications of <C>LINS_FindTQuotients</C>. <P/>
+
+For a call via <C>LowIndexNormalSubgroupsSearch</C>, we have <C>rH = Root(gr)</C> and <C>QQ = LINS_TargetsQuotient</C>. <P/>
+
+Returns an index list from the targets <A>QQ</A>, that will be used by <C>LINS_FindTQuotients</C>.
+</Item>
+<Mark><C>DoIntersection</C></Mark>
+<Item>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, two <K>LinsNodes</K> <A>rH</A> and <A>rK</A>, and a positive integer <A>i</A>. Let <M>G</M> be the group that is contained in the root of the search graph. <P/>
+
+Returns <K>true</K> if the intersection <M>U</M> of the groups in <A>rH</A> and <A>rK</A> with index <M>[G : U] = i</M> should be computed.
+</Item>
+<Mark><C>DoPQuotient</C></Mark>
+<Item>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A> and a prime <A>p</A>. <P/>
+
+Returns <K>true</K> if <A>p</A>-quotients under <A>rH</A> should be computed for the prime <A>p</A>.
+</Item>
+<Mark><C>DoPModule</C></Mark>
+<Item>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A>, a prime <A>p</A> and a positive integer <A>i</A>. Let <M>G</M> be the group that is contained in the root of the search graph. <P/>
+
+Returns <K>true</K> if the normal subgroup <M>K</M> of index <M>[G : K] = i</M>
+with elementary abelian <A>p</A>-quotient in <A>rH</A> should be computed.</Item>
+</List>
+
+</Section>
+
+<Section Label="LINS Custom Search Functions">
+<Heading>LINS Custom Search Functions</Heading>
+
+In this section we explain how to write a custom search function by using the options for <C>LowIndexNormalSubgroupsSearch</C>. <P/>
+
+We explain this on the example of <C>LowIndexNormalSubgroupsSearchForIndex</C>. <P/>
+
+TODO
 
 </Section>
 
