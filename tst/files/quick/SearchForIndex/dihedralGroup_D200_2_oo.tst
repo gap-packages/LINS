@@ -1,9 +1,9 @@
 #############################################################################
 # G = D_200
 # index = 13
-# nrSubgroups = 5
+# nrSubgroups = oo
 #############################################################################
 
 gap> ReadPackage("LINS", "tst/gap/SearchForIndex/dihedral.g");;
-gap> TestDihedral(200, 2, 5);
+gap> TestDihedral(200, 2, infinity);
 true
