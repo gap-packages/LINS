@@ -75,7 +75,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearch" );
 
 
 #! @Description
-#! Given a finitely presented group <A>G</A>, some index <A>n</A> and an integer <A>l</A>,
+#! Given a finitely presented group <A>G</A>, some index <A>n</A> and an integer (or infinity) <A>l</A>,
 #! this will try to find <A>l</A> normal subgroups of <A>G</A> with index <A>n</A>.
 #! @Returns a list of groups
 #! @Arguments G, n, l

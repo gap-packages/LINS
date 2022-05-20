@@ -84,6 +84,18 @@ end);
 InstallGlobalFunction( LowIndexNormalSubgroupsSearchForIndex, function(G, n, l)
 	local opts, initGraph;
 
+	if not IsGroup(G) then
+		ErrorNoReturn("<G> must be a group!");
+	fi;
+
+	if not IsPosInt(n) then
+		ErrorNoReturn("<n> must be a positive integer!");
+	fi;
+
+	if not (IsPosInt(l) or IsInfinity(l)) then
+		ErrorNoReturn("<l> must be a positive integer or infinity!");
+	fi;
+
 	initGraph := LINS_Index_InitGraph_Wrapper(n, l);
 
 	opts := rec(

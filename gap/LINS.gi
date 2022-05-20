@@ -21,7 +21,7 @@
 ####=====================================================================####
 #############################################################################
 
-InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt ],
+InstallMethod( LinsNode, "standard method", [ IsGroup, IsPosInt],
 function(G, i)
 	local r;
 
@@ -282,6 +282,14 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 
 	G := args[1];
 	n := args[2];
+
+	if not IsGroup(G) then
+		ErrorNoReturn("<G> must be a group!");
+	fi;
+
+	if not IsPosInt(n) then
+		ErrorNoReturn("<n> must be a positive integer!");
+	fi;
 
 	opts := ShallowCopy(LINS_DefaultOptions);
 	if Length(args) = 3 then
