@@ -1,0 +1,131 @@
+<Chapter Label="Intro">
+<Heading>Introduction</Heading>
+
+This chapter serves as an introduction of the package &LINS;.
+
+<Section Label="Intro Overview">
+<Heading>Overview</Heading>
+
+The package &LINS; provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound. <P/>
+
+Moreover it provides an interface for searching in the normal subgroup lattice of a finitely presented group.
+For example, one can use this interface to search for <M>l</M> normal subgroups of index <M>n</M>. <P/>
+
+The algorithm is based on work of Derek Holt and David Firth.
+They have implemented this algorithm in the algebra software MAGMA. <P/>
+
+The current implementation in &GAP; uses a table of groups that was computed by the code in <F>createTables.gi</F>.
+
+</Section>
+
+<Section Label="Examples">
+<Heading>Examples</Heading>
+
+In this section we present example sessions which demonstrate
+how to use the search methods provided by &LINS;. <P/>
+
+<Subsection>
+<Heading>Example : all normal subgroups up to index <M>n</M></Heading>
+
+We compute all normal subgroups in <M>D_{50}</M>,
+the dihedral group of size <M>50</M>.
+<Example><![CDATA[
+gap> n := 50;
+gap> G := DihedralGroup(n);
+<pc group of size 50 with 3 generators>
+]]></Example>
+
+The search algorithm automatically translates the group into a finitely presented group
+via a call to <C>IsomorphismFpGroup</C>.
+<Example><![CDATA[
+gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+<lins graph found 4 normal subgroups up to index 50>
+gap> r := Root(gr);
+<lins node of index 1>
+gap> H := Grp(r);
+<fp group of size 50 on the generators [ F1, F2, F3 ]>
+gap> Iso := Isomorphism(gr);
+[ f1, f2, f3 ] -> [ F1, F2, F3 ]
+gap> Source(Iso) = G;
+gap> Range(Iso) = H;
+]]></Example>
+
+In order to get all nodes from the search graph, we need to use <C>List</C>.
+As expected, the algorithm finds <M>D_{50}, C_{25}, C_5</M>
+and the trivial group.
+<Example><![CDATA[
+gap> L := List(gr);
+[ <lins node of index 1>, <lins node of index 2>, <lins node of index 10>, 
+  <lins node of index 50> ]
+gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
+[ "D50", "C25", "C5", "1" ]
+]]></Example>
+
+</Subsection>
+
+<Subsection>
+<Heading>Example : all normal subgroups of index <M>n</M></Heading>
+
+We compute all normal subgroups of index <M>5^2 = 25</M> in <M>C_5^4</M>,
+the direct product of <M>4</M> copies of the cyclic group of order <M>5</M>:
+<Example><![CDATA[
+gap> p := 5;;
+gap> d := 4;;
+gap> C := CyclicGroup(5);;
+gap> G := DirectProduct(ListWithIdenticalEntries(d, C));
+<pc group of size 625 with 4 generators>
+]]></Example>
+
+Again, the search algorithm automatically translates the group into a finitely presented group
+via a call to <C>IsomorphismFpGroup</C>.
+<Example><![CDATA[
+gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);
+<lins graph found 963 normal subgroups up to index 25>
+]]></Example>
+
+Now we are not interested in all normal subgroups that the search graph considered,
+but only in those of index <M>25</M>. Thus we need to use <C>Output</C>.
+As expected, the algorithm only finds groups of the isomorphism type <M>C_5^2</M>.
+<Example><![CDATA[
+gap> L := Output(gr);;
+gap> Length(L);
+806
+gap> IsoTypes := DuplicateFreeList(List(L, node -> StructureDescription(Grp(node))));
+[ "C5 x C5" ]
+]]></Example>
+
+</Subsection>
+
+<Subsection>
+<Heading>Example : a normal subgroup of index <M>n</M></Heading>
+
+We compute a normal subgroup of index <M>3 \cdot 5 = 15</M> in
+<M>C_3 \times C_3 \times C_4 \times C_5</M>,
+a direct product of cyclic groups:
+<Example><![CDATA[
+gap> pList := [3, 3, 4, 5];;
+gap> G := DirectProduct(List(pList, p -> CyclicGroup(p)));
+<pc group of size 60 with 4 generators>
+]]></Example>
+
+Again, the search algorithm automatically translates the group into a finitely presented group
+via a call to <C>IsomorphismFpGroup</C>.
+<Example><![CDATA[
+gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);
+<lins graph found 7 normal subgroups up to index 15>
+]]></Example>
+
+We use <C>Output</C> in order to get the normal subgroup of index <M>15</M>.
+As expected, the algorithm finds a group of the isomorphism type <M>C_{12} = C_3 \times C_4</M>.
+<Example><![CDATA[
+gap> L := Output(gr);
+[ <lins node of index 15> ]
+gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
+[ "C12" ]
+]]></Example>
+
+</Subsection>
+
+</Section>
+
+</Chapter>

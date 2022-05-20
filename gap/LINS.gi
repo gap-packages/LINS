@@ -170,6 +170,19 @@ function(gr)
 	return gr!.IndexBound;
 end);
 
+InstallMethod( LinsOptions, "for Lins Graph", [ IsLinsGraph ],
+function(gr)
+	return gr!.Options;
+end);
+
+InstallMethod( Isomorphism, "for Lins Graph", [ IsLinsGraph ],
+function(gr)
+	if IsBound(gr!.Iso) then
+		return gr!.Iso;
+	else
+		return IdentityMapping(Grp(Root(gr)));
+	fi;
+end);
 
 #############################################################################
 ####=====================================================================####
@@ -309,10 +322,11 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	fi;
 
 	gr := LinsGraph(G, n);
+	gr!.Options := opts;
 	opts.InitGraph(gr);
 
 	if IsBound(phi) then
-		gr!.iso := phi;
+		gr!.Iso := phi;
 	fi;
 
 	# Call T-Quotient Procedure on G
@@ -353,4 +367,9 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 
 	# Return every normal subgroup
 	return gr;
+end);
+
+# See documentation
+InstallGlobalFunction( LowIndexNormalSubgroupsSearchForAll, function(G, n)
+	return LowIndexNormalSubgroupsSearch(G, n);
 end);
