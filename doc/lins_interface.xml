@@ -1,0 +1,72 @@
+<Chapter Label="LINS Interface">
+<Heading>LINS Interface</Heading>
+
+This chapter explains the provided search methods
+and the interface to the search graph structure <C>LinsGraph</C>.
+
+<Section Label="LINS Graph">
+<Heading>LINS Graph</Heading>
+
+All search methods in &LINS; return a <C>LinsGraph</C>
+encoding a partial normal subgroup lattice of a finitely presented group <M>G</M>.
+
+A <C>LinsGraph</C> is a graph, where each node is a <C>LinsNode</C> that contains a normal subgroup <M>H</M> of <M>G</M>
+and pointers to the minimal <M>G</M>-normal super/sub-groups of <M>H</M>, i.e. its neighbours in the graph.
+The directed edges of the graph are therefore encoded directly into the nodes.
+
+<ManSection>
+<Meth Name="List" Arg="gr" Label="for a lins graph"/>
+<Description>
+Returns a list of all <C>LinsNodes</C> in the graph <A>gr</A>. <P/>
+The nodes are sorted by index in increasing order,
+e.g. the root node is at the first position.
+</Description>
+</ManSection>
+
+<#Include Label="Output">
+<#Include Label="Root">
+<#Include Label="IndexBound">
+<#Include Label="LinsOptions">
+<#Include Label="Isomorphism">
+
+</Section>
+
+<Section Label="LINS Node">
+<Heading>LINS Node</Heading>
+
+A <C>LinsNode</C> is a part of the search graph structure <C>LinsGraph</C> (see <Ref Sect="LINS Graph"/>).
+As such, all methods are with respect to the search graph, where the node is contained in.
+
+<ManSection>
+<Meth Name="Grp" Arg="rH" Label="for a lins node"/>
+<Description>
+Returns the group contained in the node.
+</Description>
+</ManSection>
+
+<ManSection>
+<Meth Name="Index" Arg="rH" Label="for a lins node"/>
+<Description>
+Let <M>G</M> be the group contained in the root node
+and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
+Returns the index <M>[G : H]</M>.
+</Description>
+</ManSection>
+
+<#Include Label="MinimalSupergroups">
+<#Include Label="MinimalSubgroups">
+<#Include Label="Supergroups">
+<#Include Label="Subgroups">
+
+</Section>
+
+<Section Label="LINS Search Functions">
+<Heading>LINS Search Functions</Heading>
+
+<#Include Label="LowIndexNormalSubgroupsSearch">
+<#Include Label="LowIndexNormalSubgroupsSearchForAll">
+<#Include Label="LowIndexNormalSubgroupsSearchForIndex">
+
+</Section>
+
+</Chapter>
