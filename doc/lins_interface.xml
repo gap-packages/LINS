@@ -18,8 +18,12 @@ The directed edges of the graph are therefore encoded directly into the nodes.
 <Meth Name="List" Arg="gr" Label="for a lins graph"/>
 <Description>
 Returns a list of all <C>LinsNodes</C> in the graph <A>gr</A>. <P/>
+
 The nodes are sorted by index in increasing order,
 e.g. the root node is at the first position.
+
+In order to get a list containing only the normal subgroups
+that the search graph attempted to find, use <Ref Func="ComputedNormalSubgroups"/>. <P/>
 </Description>
 </ManSection>
 

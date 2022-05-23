@@ -112,7 +112,7 @@ DeclareOperation( "LinsGraph", [ IsGroup , IsPosInt]);
 ## <Description>
 ## 	 Returns the normal subgroups that the search graph attempted to find. <P/>
 ##   If the <C>ComputedNormalSubgroups</C> component of the graph is not set,
-##   this defaults to a call of <C>List</C>.
+##   this defaults to a call of <Ref Meth="List" Label="for a lins graph"/>.
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
@@ -173,7 +173,7 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
+##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
@@ -195,7 +195,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearch" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
+##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
@@ -222,7 +222,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearchForAll" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
+##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
