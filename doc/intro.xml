@@ -36,7 +36,8 @@ gap> G := DihedralGroup(n);
 ]]></Example>
 
 The search algorithm automatically translates the group into a finitely presented group
-via a call to <C>IsomorphismFpGroup</C>.
+via a call to <C>IsomorphismFpGroup</C>. <Br/>
+The translation is stored as an <C>Isomorphism</C> inside the lins graph.
 <Example><![CDATA[
 gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
 <lins graph found 4 normal subgroups up to index 50>
@@ -47,7 +48,9 @@ gap> H := Grp(r);
 gap> Iso := Isomorphism(gr);
 [ f1, f2, f3 ] -> [ F1, F2, F3 ]
 gap> Source(Iso) = G;
+true
 gap> Range(Iso) = H;
+true
 ]]></Example>
 
 In order to get all nodes from the search graph, we need to use <C>List</C>.
@@ -85,7 +88,22 @@ gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);
 
 Now we are not interested in all normal subgroups that the search graph considered,
 but only in those of index <M>25</M>. Thus we need to use <C>Output</C>.
-As expected, the algorithm only finds groups of the isomorphism type <M>C_5^2</M>.
+For a prime <M>p</M>, and integers <M>d, s \in \mathbb{N}</M>,
+the number of subgroups of order <M>p^s</M> of an elementary abelian <M>p</M>-group of order <M>p^d</M>
+is exactly
+<Alt Not="Text,HTML"><Display>
+\frac
+{\left(p^d - 1\right)\left(p^d - p\right) \cdots \left(p^d - p^{s-1}\right)}
+{\left(p^s - 1\right)\left(p^s - p\right) \cdots \left(p^s - p^{s-1}\right)}\;.
+</Display></Alt>
+<Alt Only="Text,HTML"><Display Mode="M">
+( (p^d - 1)(p^d - p) \cdots (p^d - p^{(s-1)}) ) / ( (p^s - 1)(p^s - p) \cdots (p^s - p^{(s-1)}) ) .
+</Display></Alt>
+Thus we expect to find
+<Alt Not="Text,HTML"><M>\frac{(5^4-1) \cdot (5^4-5)}{(5^2 - 1) \cdot (5^2 - 5)} = 806</M></Alt>
+<Alt Only="Text,HTML"><M>( (5^4-1) \cdot (5^4-5) ) / ( (5^2 - 1) \cdot (5^2 - 5) ) = 806</M></Alt>
+normal subgroups of index <M>25</M>. <Br/>
+Furthermore, all subgroups need to be of the isomorphism type <M>C_5^2</M>.
 <Example><![CDATA[
 gap> L := Output(gr);;
 gap> Length(L);
