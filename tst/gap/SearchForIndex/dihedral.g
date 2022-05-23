@@ -20,7 +20,7 @@ TestDihedral := function(N, m, l)
     fi;
     n := N / 2;
     G := DihedralGroup(N);
-    L := Output(LowIndexNormalSubgroupsSearchForIndex(G, m, l));
+    L := ComputedNormalSubgroups(LowIndexNormalSubgroupsSearchForIndex(G, m, l));
 
     if m = 2 then
         # two times D(n) and C(n/2)

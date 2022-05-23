@@ -51,7 +51,7 @@ TestSemidirectProduct := function(n, l)
 
     n3 := Int(n / 3);
     gr := LowIndexNormalSubgroupsSearchForIndex(G, n, l);
-    L := Output(gr);
+    L := ComputedNormalSubgroups(gr);
 
     factors := PrimePowersInt(n);
     nrFactors := Length(factors) / 2;

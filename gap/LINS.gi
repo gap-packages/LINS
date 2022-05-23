@@ -156,10 +156,10 @@ function(gr)
 	return Concatenation(List(gr!.Levels, level -> level.Nodes));
 end);
 
-InstallMethod( Output, "for Lins Graph", [ IsLinsGraph ],
+InstallMethod( ComputedNormalSubgroups, "for Lins Graph", [ IsLinsGraph ],
 function(gr)
-	if IsBound(gr!.Output) then
-		return gr!.Output;
+	if IsBound(gr!.ComputedNormalSubgroups) then
+		return gr!.ComputedNormalSubgroups;
 	else
 		return List(gr);
 	fi;
@@ -207,7 +207,7 @@ end);
 # Should the search be terminated?
 # We are currently computing the subgroups under `rH`.
 # We have computed the normal subgroup `rK`.
-# This function may write data to `gr!.Output`.
+# This function may write data to `gr!.ComputedNormalSubgroups`.
 BindGlobal( "LINS_DoTerminate",
 function(gr, rH, rK)
 	return false;

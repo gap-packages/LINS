@@ -106,17 +106,17 @@ BindGlobal( "LinsGraphType",
 
 DeclareOperation( "LinsGraph", [ IsGroup , IsPosInt]);
 
-## <#GAPDoc Label="Output">
+## <#GAPDoc Label="ComputedNormalSubgroups">
 ## <ManSection>
-## <Attr Name="Output" Arg="gr"/>
+## <Attr Name="ComputedNormalSubgroups" Arg="gr"/>
 ## <Description>
 ## 	 Returns the normal subgroups that the search graph attempted to find. <P/>
-##   If the <C>Output</C> component of the graph is not set,
+##   If the <C>ComputedNormalSubgroups</C> component of the graph is not set,
 ##   this defaults to a call of <C>List</C>.
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareAttribute( "Output", IsLinsGraph, "mutable" );
+DeclareAttribute( "ComputedNormalSubgroups", IsLinsGraph, "mutable" );
 
 ## <#GAPDoc Label="IndexBound">
 ## <ManSection>
@@ -225,7 +225,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearchForAll" );
 ##   In particular, if <A>l</A> is <C>infinity</C>, all normal subgroups of <A>G</A>
 ##   with index <A>n</A> will be computed. <P/>
 ##
-##   Furthermore, if <A>l</A> is a positive integer and the <C>Output</C> of the graph
+##   Furthermore, if <A>l</A> is a positive integer and the <C>ComputedNormalSubgroups</C> of the graph
 ##   has less than <A>l</A> nodes, then all normal subgroups of <A>G</A>
 ##   with index <A>n</A> were computed. <P/>
 ##

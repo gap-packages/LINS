@@ -23,7 +23,7 @@ e.g. the root node is at the first position.
 </Description>
 </ManSection>
 
-<#Include Label="Output">
+<#Include Label="ComputedNormalSubgroups">
 <#Include Label="Root">
 <#Include Label="IndexBound">
 <#Include Label="LinsOptions">

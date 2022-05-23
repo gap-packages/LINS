@@ -87,7 +87,7 @@ gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);
 ]]></Example>
 
 Now we are not interested in all normal subgroups that the search graph considered,
-but only in those of index <M>25</M>. Thus we need to use <C>Output</C>.
+but only in those of index <M>25</M>. Thus we need to use <C>ComputedNormalSubgroups</C>.
 For a prime <M>p</M>, and integers <M>d, s \in \mathbb{N}</M>,
 the number of subgroups of order <M>p^s</M> of an elementary abelian <M>p</M>-group of order <M>p^d</M>
 is exactly
@@ -105,7 +105,7 @@ Thus we expect to find
 normal subgroups of index <M>25</M>. <Br/>
 Furthermore, all subgroups need to be of the isomorphism type <M>C_5^2</M>.
 <Example><![CDATA[
-gap> L := Output(gr);;
+gap> L := ComputedNormalSubgroups(gr);;
 gap> Length(L);
 806
 gap> IsoTypes := DuplicateFreeList(List(L, node -> StructureDescription(Grp(node))));
@@ -133,10 +133,10 @@ gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);
 <lins graph found 7 normal subgroups up to index 15>
 ]]></Example>
 
-We use <C>Output</C> in order to get the normal subgroup of index <M>15</M>.
+We use <C>ComputedNormalSubgroups</C> in order to get the normal subgroup of index <M>15</M>.
 As expected, the algorithm finds a group of the isomorphism type <M>C_{12} = C_3 \times C_4</M>.
 <Example><![CDATA[
-gap> L := Output(gr);
+gap> L := ComputedNormalSubgroups(gr);
 [ <lins node of index 15> ]
 gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
 [ "C12" ]
