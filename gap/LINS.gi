@@ -175,7 +175,7 @@ function(gr)
 	return gr!.Options;
 end);
 
-InstallMethod( Isomorphism, "for Lins Graph", [ IsLinsGraph ],
+InstallOtherMethod( IsomorphismFpGroup, "for Lins Graph", [ IsLinsGraph ],
 function(gr)
 	if IsBound(gr!.Iso) then
 		return gr!.Iso;

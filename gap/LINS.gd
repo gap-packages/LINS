@@ -150,15 +150,6 @@ DeclareAttribute( "LinsRoot", IsLinsGraph, "mutable" );
 ## <#/GAPDoc>
 DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 
-## <#GAPDoc Label="Isomorphism">
-## <ManSection>
-## <Attr Name="Isomorphism" Arg="gr"/>
-## <Description>
-## 	 Returns the isomorphism from the original group of the search onto the fp-group contained in the root.
-## </Description>
-## </ManSection>
-## <#/GAPDoc>
-DeclareAttribute( "Isomorphism", IsLinsGraph, "mutable" );
 
 #############################################################################
 ## Main functions
@@ -182,7 +173,7 @@ DeclareAttribute( "Isomorphism", IsLinsGraph, "mutable" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="Isomorphism"/>).
+##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
@@ -204,7 +195,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearch" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="Isomorphism"/>).
+##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
@@ -231,7 +222,7 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearchForAll" );
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
 ##	 The group will be automatically replaced with an fp-group
-##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="Isomorphism"/>).
+##   via a call to <C>IsomorphismFpGroup</C> (see <Ref Func="IsomorphismFpGroup"/>).
 ## </Description>
 ## <Returns>
 ##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>

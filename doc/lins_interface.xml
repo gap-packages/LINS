@@ -27,7 +27,14 @@ e.g. the root node is at the first position.
 <#Include Label="LinsRoot">
 <#Include Label="IndexBound">
 <#Include Label="LinsOptions">
-<#Include Label="Isomorphism">
+
+<ManSection>
+<Attr Name="IsomorphismFpGroup" Arg="gr" Label="for a lins graph"/>
+<Description>
+Returns the isomorphism from the original group of the search
+onto the fp-group contained in the root.
+</Description>
+</ManSection>
 
 </Section>
 
