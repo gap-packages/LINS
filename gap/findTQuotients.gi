@@ -64,7 +64,9 @@
 ##  must not necessarily have a quotient $H/K$
 ##  that is isomorphic to some $Q$ contained in `QQ`.
 ##
-##  Returns true if the search in `gr` can be terminated.
+##  Returns a tuple [doTerminate, nrSubgroups].
+##  - doTerminate is true if the search in `gr` can be terminated.
+##  - nrSubgroups is the number of newly found normal subgroups.
 #############################################################################
 
 InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
@@ -84,19 +86,24 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 			# 				subgroup of `H` (with Q-quotient)
 	rK,		# LINS node:	containing group `K`
 	isNew,	# boolean:		whether the group `K` is new in `gr`
+	nrFound,# pos-int:		number of newly found normal subgroups
 	data;	# tuple:		[`rK`, `isNew`]
 
 	# Initialize data from input
 	G := Grp(LinsRoot(gr));
 	H := Grp(rH);
 	n := IndexBound(gr);
+	nrFound := 0;
 
 	# Compute the index list `I`.
-	I := opts.FilterTQuotients(gr, rH, QQ);
+	I := Set(opts.FilterTQuotients(gr, rH, QQ));
+
+	Info(InfoLINS, 3, LINS_tab3,
+		"Search with index list ", LINS_red, I, LINS_black, ".");
 
 	# If the index list is empty, we have nothing to do.
 	if Length(I) = 0 then
-		return false;
+		return [false, 0];
 	fi;
 
 	# Compute every subgroup of `H` up to the maximum index in `I`
@@ -105,6 +112,10 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	Iso := IsomorphismFpGroup(H);
 	IH := Image(Iso);
 	LL := LowIndexSubgroupsFpGroup(IH, m);
+	Info(InfoLINS, 3, LINS_tab3,
+		LINS_blue, "LowIndexSubgroups ", LINS_black, "computed ",
+		LINS_red, Length(LL), LINS_black, " subgroups up to index ",
+		LINS_red, m, LINS_black, ".");
 
 	# Search every subgroup `L` with an index in `H` contained in `I`.
 	# Then calculate the core of `L` and try to add the new subgroup to `gr`.
@@ -122,10 +133,16 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 					data := LINS_AddGroup(gr, K, [rH], true, opts);
 					rK := data[1];
 					isNew := data[2];
+					if isNew then
+						nrFound := nrFound + 1;
+						Info(InfoLINS, 3, LINS_tab3,
+							"Found new normal subgroup ", LINS_red, "K = ", K, LINS_black,
+							" of index ", LINS_red, Index(G, K), LINS_black, ".");
+					fi;
 					if isNew and opts.DoTerminate(gr, rH, rK) then
 						gr!.TerminatedUnder := rH;
 						gr!.TerminatedAt := rK;
-						return true;
+						return [true, nrFound];
 					fi;
 				fi;
 
@@ -134,5 +151,5 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 		od;
 	od;
 
-	return false;
+	return [false, nrFound];
 end);

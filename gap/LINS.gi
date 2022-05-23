@@ -287,7 +287,7 @@ BindGlobal("LINS_MaxIndex", 10000000);
 
 # See documentation
 InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
-	local G, n, phi, opts, gr, i, level, r, s, primes, res;
+	local G, n, phi, opts, gr, i, j, l, level, r, s, primes, data, nrFound, res, par;
 
 	if Length(args) < 2 or Length(args) > 3 then
 		ErrorNoReturn("Unknown number of arguments!");
@@ -317,9 +317,15 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 
 	# Convert the group into an fp-group if possible.
 	if not IsFpGroup(G) then
+		Info(InfoLINS, 1, LINS_tab1,
+			"Input group gets translated into an fp-group.");
+
 		phi := IsomorphismFpGroup(G);
 		G := Image(phi);
 	fi;
+
+	Info(InfoLINS, 1, LINS_tab1,
+		"Initialize lins graph with group ", LINS_red, "G = ", G, LINS_black, ".");
 
 	gr := LinsGraph(G, n);
 	gr!.Options := opts;
@@ -329,8 +335,17 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 		gr!.Iso := phi;
 	fi;
 
-	# Call T-Quotient Procedure on G
-	res := LINS_FindTQuotients(gr, LinsRoot(gr), LINS_TargetsQuotient, opts);
+	# Search for possible T-Quotients
+	Info(InfoLINS, 2, LINS_tab2,
+		"Compute ", LINS_blue, "T-Quotients ", LINS_black, "under ", LINS_red, "G", LINS_black, ".");
+
+	data := LINS_FindTQuotients(gr, LinsRoot(gr), LINS_TargetsQuotient, opts);
+	res := data[1];
+	nrFound := data[2];
+
+	Info(InfoLINS, 2, LINS_tab2,
+		"Found ", LINS_red, nrFound, LINS_black, " new normal subgroup(s).");
+
 	if res then
 		return gr;
 	fi;
@@ -344,26 +359,74 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 		if level.Index > (n / 2) then
 			break;
 		fi;
+
+		Info(InfoLINS, 1, LINS_tab1,
+			"Index level ", LINS_red, level.Index, LINS_black, " contains ",
+			LINS_red, Length(level.Nodes), LINS_black, " group(s).");
+
 		for r in level.Nodes do
+			Info(InfoLINS, 2, LINS_tab2,
+				"Search under group ",
+				LINS_red, "H = ", Grp(r), LINS_black, ".");
+
 			if opts.DoCut(gr, r) then
+				Info(InfoLINS, 2, LINS_tab2,
+					"Cut branch under ", LINS_red, "H", LINS_black, ".");
+
 				r!.IsCut := true;
 				continue;
 			fi;
+
 			# Search for possible P-Quotients
-			res := LINS_FindPQuotients(gr, r, primes, opts);
+			Info(InfoLINS, 2, LINS_tab2,
+				"Compute ", LINS_blue, "P-Quotients ", LINS_black, "under ",
+				LINS_red, "H", LINS_black, ".");
+
+			data := LINS_FindPQuotients(gr, r, primes, opts);
+			res := data[1];
+			nrFound := data[2];
+
+			Info(InfoLINS, 2, LINS_tab2,
+				"Found ", LINS_red, nrFound, LINS_black, " new normal subgroup(s).");
+
 			if res then
 				return gr;
 			fi;
+
 			# Search for possible Intersections
-			if i > 1 then
-				res := LINS_FindIntersections(gr, r, opts);
-				if res then
-					return gr;
-				fi;
+			if i = 1 then
+				continue;
+			fi;
+
+			Info(InfoLINS, 2, LINS_tab2,
+				"Compute ", LINS_blue, "Intersections ", LINS_black, "under ",
+				LINS_red, "H", LINS_black, ".");
+
+			data := LINS_FindIntersections(gr, r, opts);
+			res := data[1];
+			nrFound := data[2];
+
+			Info(InfoLINS, 2, LINS_tab2,
+				"Found ", LINS_red, nrFound, LINS_black, " new normal subgroup(s).");
+
+			if res then
+				return gr;
 			fi;
 		od;
 		i := i + 1;
 	od;
+
+	if InfoLevel(InfoLINS) >= 1 then
+		Info(InfoLINS, 1, LINS_tab1,
+			"\033[1mTerminate search. Print remaining levels.\033[0m");
+
+		for j in [i .. Length(gr!.Levels)] do
+			level := gr!.Levels[j];
+			Info(InfoLINS, 1, LINS_tab1,
+				"Index level ", LINS_red, level.Index, LINS_black, " contains ",
+				LINS_red, Length(level.Nodes), LINS_black, " group(s).");
+		od;
+	fi;
 
 	# Return every normal subgroup
 	return gr;

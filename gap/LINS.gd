@@ -14,6 +14,25 @@
 
 
 #############################################################################
+## Info Class
+#############################################################################
+
+# Info Level 1: print number of normal subgroups for each index level
+# Info Level 2: print number of normal subgroups found by each procedure
+# Info Level 3: print every time a normal subgroup is found.
+DeclareInfoClass( "InfoLINS" );
+SetInfoLevel( InfoLINS, 0 );
+
+# strings for info class
+BindGlobal("LINS_tab1", "");
+BindGlobal("LINS_tab2", "  ");
+BindGlobal("LINS_tab3", "    ");
+BindGlobal("LINS_black", "\033[30m");
+BindGlobal("LINS_red", "\033[31m");
+BindGlobal("LINS_blue", "\033[34m");
+
+
+#############################################################################
 ## LINS Node
 #############################################################################
 

@@ -213,7 +213,9 @@ BindGlobal("LINS_MaxPGenerators", 1000);
 ##  Thus, after these iterative calls, we have computed
 ##  all `p`-quotients under $H$ and not only the elementary abelian ones.
 ##
-##  Returns true if the search in `gr` can be terminated.
+##  Returns a tuple [doTerminate, nrSubgroups].
+##  - doTerminate is true if the search in `gr` can be terminated.
+##  - nrSubgroups is the number of newly found normal subgroups.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
@@ -250,11 +252,12 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	K,      # group:		subgroup of `H` with `p`-quotient, normal in `G`
 	rK,     # LINS node: 	containing `K`
 	isNew,	# boolean:		whether the group `K` is new in `gr`
+	nrFound,# pos-int:		number of newly found normal subgroups
 	data;	# tuple:		[`rK`, `isNew`]
 
 	# Check if `p`-quotients have been computed already from this group
 	if p in TriedPrimes(rH) then
-		return false;
+		return [false, 0];
 	fi;
 	AddSet(TriedPrimes(rH), p);
 
@@ -262,6 +265,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 	n := IndexBound(gr);
 	G :=Grp(LinsRoot(gr));
 	H := Grp(rH);
+	nrFound := 0;
 
 	# Isomorphism onto the fp-group of `H`
 	Iso := IsomorphismFpGroup(H);
@@ -275,7 +279,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 	# If `M` is trivial we skip this prime
 	if IsEmpty(GenM) then
-		return false;
+		return [false, 0];
 	fi;
 
 	# Define the group action of `G` on the `p`-Module `M`
@@ -332,10 +336,17 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			data := LINS_AddGroup(gr, K, [rH], true, opts);
 			rK := data[1];
 			isNew := data[2];
+			if isNew then
+				nrFound := nrFound + 1;
+				Info(InfoLINS, 3, LINS_tab3,
+					"Prime ", LINS_red, "p = ", p, LINS_black, ". ",
+					"Found new normal subgroup ", LINS_red, "K = ", K, LINS_black,
+					" of index ", LINS_red, Index(G, K), LINS_black, ".");
+			fi;
 			if isNew and opts.DoTerminate(gr, rH, rK) then
 				gr!.TerminatedUnder := rH;
 				gr!.TerminatedAt := rK;
-				return true;
+				return [true, nrFound];
 			fi;
 			# If the index is sufficient small,
 			# compute `p`-quotients under the subgroup `K`
@@ -345,7 +356,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 		fi;
 	od;
 
-	return false;
+	return [false, nrFound];
 end);
 
 
@@ -374,7 +385,9 @@ end);
 ##  and $H/K$ is a $p$-group for a prime $p$ contained in `primes`,
 ##  if `LINS_MustCheckP` says that $p$ needs to be explicitly considered.
 ##
-##  Returns true if the search in `gr` can be terminated.
+##  Returns a tuple [doTerminate, nrSubgroups].
+##  - doTerminate is true if the search in `gr` can be terminated.
+##  - nrSubgroups is the number of newly found normal subgroups.
 #############################################################################
 
 InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
@@ -383,13 +396,16 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 	H,      # group: 		located in the node `rH`
 	n,		# pos-int: 		index bound of LINS graph `gr`
 	p,      # pos-int:		loop variable, prime in `primes`
-	res;	# boolean:		whether the search in `gr` can be terminated
+	nrFound,# pos-int:		number of newly found normal subgroups
+	res,	# boolean:		whether the search in `gr` can be terminated
+	data;	# tuple:		return value of LINS_FindPModules
 
 	# Initialize data from input
 	G := Grp(LinsRoot(gr));
 	n := IndexBound(gr);
 	H := Grp(rH);
 	res := false;
+	nrFound := 0;
 
 	# Search for p-quotients for every prime small enough.
 	for p in primes do
@@ -400,12 +416,14 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 		# will be computed by intersections.
 		if opts.DoPQuotient(gr, rH, p) and LINS_MustCheckP(rH, n, p) then
 			# Compute all p-quotients under H.
-			res := LINS_FindPModules(gr, rH, p, opts);
+			data := LINS_FindPModules(gr, rH, p, opts);
+			res := data[1];
+			nrFound := nrFound + data[2];
 		fi;
 		if res then
 			break;
 		fi;
 	od;
 
-	return res;
+	return [res, nrFound];
 end);
