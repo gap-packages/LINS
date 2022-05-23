@@ -1,6 +1,6 @@
 name: LINS
-version: "0.3"
-date: 2020-05-07
+version: "0.4"
+date: 2022-05-23
 description: |
     provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.
 
@@ -20,7 +20,7 @@ packageinfo: https://FriedrichRober.github.io/LINS/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/FriedrichRober/LINS/releases/download/v0.3/LINS-0.3.tar.gz
+      url: https://github.com/FriedrichRober/LINS/releases/download/v0.4/LINS-0.4.tar.gz
 
 abstract: |
 
@@ -29,25 +29,27 @@ doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>Rob20</span>]   <b class='BibAuthor'>Rober, F.</b>,
+    [<span class='BibKey'>Rob22</span>]   <b class='BibAuthor'>Rober, F.</b>,
      <i class='BibTitle'>LINS, provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.,
-             Version 0.3</i>
-     (<span class='BibYear'>2020</span>)<br />
+             Version 0.4</i>
+     (<span class='BibYear'>2022</span>)<br />
     (<span class='BibNote'>GAP package</span>),
     <span class='BibHowpublished'><a href="https://FriedrichRober.github.io/LINS/">https://FriedrichRober.github.io/LINS/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ LINS0.3,
+    @misc{ LINS0.4,
       author =           {Rober, F.},
-      title =            {{LINS},  provides  an  algorithm for computing the normal subgroups of a finitely presented
-                          group up to some given index bound., {V}ersion 0.3},
+      title =            {{LINS}, provides an algorithm for computing the normal
+                          subgroups  of  a  finitely  presented group up to some
+                          given index bound., {V}ersion 0.4},
       month =            {May},
-      year =             {2020},
+      year =             {2022},
       note =             {GAP package},
-      howpublished =     {\href                                              {https://FriedrichRober.github.io/LINS/}
-                          {\texttt{https://FriedrichRober.github.io/}\discretionary {}{}{}\texttt{LINS/}}},
-      printedkey =       {Rob20}
+      howpublished =     {\href         {https://FriedrichRober.github.io/LINS/}
+                          {\texttt{https://FriedrichRober.github.io/}\discretionary
+                          {}{}{}\texttt{LINS/}}},
+      printedkey =       {Rob22}
     }
 

@@ -2,19 +2,21 @@
   
   [1XIndex[101X
   
-  [2XLINS_AddGroup[102X 2.1-3 
-  [2XLINS_ExponentSum[102X 2.1-11 
-  [2XLINS_FindIntersections[102X 2.1-13 
-  [2XLINS_FindPModules[102X 2.1-6 
-  [2XLINS_FindPQuotients[102X 2.1-7 
-  [2XLINS_FindTQuotients[102X 2.1-4 
-  [2XLINS_IsPowerOf[102X 2.1-9 
-  [2XLINS_IsSubgroupFp[102X 2.1-2 
-  [2XLINS_MinSubgroupSizes[102X 2.1-8 
-  [2XLINS_MustCheckP[102X 2.1-5 
-  [2XLINS_OGL[102X 2.1-10 
-  [2XLINS_PullBackH[102X 2.1-12 
-  [2XLowIndexNormal[102X 2.1-1 
+  [2XComputedNormalSubgroups[102X 2.1-2 
+  [2XGrp[102X, for a lins node 2.2-1 
+  [2XIndex[102X, for a lins node 2.2-2 
+  [2XIndexBound[102X 2.1-4 
+  [2XIsomorphismFpGroup[102X, for a lins graph 2.1-6 
+  [2XLinsOptions[102X 2.1-5 
+  [2XLinsRoot[102X 2.1-3 
+  [2XList[102X, for a lins graph 2.1-1 
+  [2XLowIndexNormalSubgroupsSearch[102X 2.3-1 
+  [2XLowIndexNormalSubgroupsSearchForAll[102X 2.3-2 
+  [2XLowIndexNormalSubgroupsSearchForIndex[102X 2.3-3 
+  [2XMinimalSubgroups[102X 2.2-4 
+  [2XMinimalSupergroups[102X 2.2-3 
+  [2XSubgroups[102X 2.2-6 
+  [2XSupergroups[102X 2.2-5 
   
   
   -------------------------------------------------------

@@ -1,126 +1,183 @@
   
-  [1X2 [33X[0;0YLINS[133X[101X
+  [1X2 [33X[0;0YLINS Interface[133X[101X
+  
+  [33X[0;0YThis  chapter  explains the provided search methods and the interface to the
+  search graph structure [10XLinsGraph[110X.[133X
   
   
-  [1X2.1 [33X[0;0YLINS[133X[101X
+  [1X2.1 [33X[0;0YLINS Graph[133X[101X
   
-  [1X2.1-1 LowIndexNormal[101X
+  [33X[0;0YAll  search  methods  in  [5XLINS[105X  return a [10XLinsGraph[110X encoding a partial normal
+  subgroup  lattice  of  a finitely presented group [22XG[122X. A [10XLinsGraph[110X is a graph,
+  where  each  node  is  a [10XLinsNode[110X that contains a normal subgroup [22XH[122X of [22XG[122X and
+  pointers  to the minimal [22XG[122X-normal super/sub-groups of [22XH[122X, i.e. its neighbours
+  in the graph. The directed edges of the graph are therefore encoded directly
+  into the nodes.[133X
   
-  [33X[1;0Y[29X[2XLowIndexNormal[102X( [3XG[103X, [3Xn[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya list of groups[133X
+  [1X2.1-1 List[101X
+  
+  [33X[1;0Y[29X[2XList[102X( [3Xgr[103X ) [32X method[133X
+  
+  [33X[0;0YReturns a list of all [10XLinsNodes[110X in the graph [3Xgr[103X.[133X
+  
+  [33X[0;0YThe  nodes are sorted by index in increasing order, e.g. the root node is at
+  the  first  position.  In  order  to  get  a list containing only the normal
+  subgroups    that    the    search    graph    attempted    to   find,   use
+  [2XComputedNormalSubgroups[102X ([14X2.1-2[114X).[133X
+  
+  [1X2.1-2 ComputedNormalSubgroups[101X
+  
+  [33X[1;0Y[29X[2XComputedNormalSubgroups[102X( [3Xgr[103X ) [32X attribute[133X
+  
+  [33X[0;0YReturns the normal subgroups that the search graph attempted to find.[133X
+  
+  [33X[0;0YIf  the  [10XComputedNormalSubgroups[110X  component  of  the  graph is not set, this
+  defaults to a call of [2XList[102X ([14X2.1-1[114X).[133X
+  
+  [1X2.1-3 LinsRoot[101X
+  
+  [33X[1;0Y[29X[2XLinsRoot[102X( [3Xgr[103X ) [32X attribute[133X
+  
+  [33X[0;0YReturns the root node of the graph.[133X
+  
+  [33X[0;0YIf  the  search  was  started  in  the finitely presented group [22XG[122X, this will
+  return the [10XLinsNode[110X that contains [22XG[122X.[133X
+  
+  [1X2.1-4 IndexBound[101X
+  
+  [33X[1;0Y[29X[2XIndexBound[102X( [3Xgr[103X ) [32X attribute[133X
+  
+  [33X[0;0YReturns the index bound for the search in [3Xgr[103X.[133X
+  
+  [1X2.1-5 LinsOptions[101X
+  
+  [33X[1;0Y[29X[2XLinsOptions[102X( [3Xgr[103X ) [32X attribute[133X
+  
+  [33X[0;0YReturns the search options of the graph [3Xgr[103X.[133X
+  
+  [1X2.1-6 IsomorphismFpGroup[101X
+  
+  [33X[1;0Y[29X[2XIsomorphismFpGroup[102X( [3Xgr[103X ) [32X attribute[133X
+  
+  [33X[0;0YReturns  the  isomorphism  from  the  original  group of the search onto the
+  fp-group contained in the root.[133X
+  
+  
+  [1X2.2 [33X[0;0YLINS Node[133X[101X
+  
+  [33X[0;0YA  [10XLinsNode[110X  is a part of the search graph structure [10XLinsGraph[110X (see [14X2.1[114X). As
+  such,  all  methods  are with respect to the search graph, where the node is
+  contained in.[133X
+  
+  [1X2.2-1 Grp[101X
+  
+  [33X[1;0Y[29X[2XGrp[102X( [3XrH[103X ) [32X method[133X
+  
+  [33X[0;0YReturns the group contained in the node.[133X
+  
+  [1X2.2-2 Index[101X
+  
+  [33X[1;0Y[29X[2XIndex[102X( [3XrH[103X ) [32X method[133X
+  
+  [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
+  contained in [3XrH[103X.[133X
+  
+  [33X[0;0YReturns the index [22X[G : H][122X.[133X
+  
+  [1X2.2-3 MinimalSupergroups[101X
+  
+  [33X[1;0Y[29X[2XMinimalSupergroups[102X( [3XrH[103X ) [32X attribute[133X
+  
+  [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
+  contained in [3XrH[103X.[133X
+  
+  [33X[0;0YReturns  a  list of all [10XLinsNodes[110X containing minimal [22XG[122X-normal supergroups of
+  [22XH[122X.[133X
+  
+  [1X2.2-4 MinimalSubgroups[101X
+  
+  [33X[1;0Y[29X[2XMinimalSubgroups[102X( [3XrH[103X ) [32X attribute[133X
+  
+  [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
+  contained in [3XrH[103X.[133X
+  
+  [33X[0;0YReturns a list of all [10XLinsNodes[110X containing minimal [22XG[122X-normal subgroups of [22XH[122X.[133X
+  
+  [1X2.2-5 Supergroups[101X
+  
+  [33X[1;0Y[29X[2XSupergroups[102X( [3XrH[103X ) [32X operation[133X
+  
+  [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
+  contained in [3XrH[103X.[133X
+  
+  [33X[0;0YReturns a list of all [10XLinsNodes[110X containing [22XG[122X-normal supergroups of [22XH[122X.[133X
+  
+  [1X2.2-6 Subgroups[101X
+  
+  [33X[1;0Y[29X[2XSubgroups[102X( [3XrH[103X ) [32X operation[133X
+  
+  [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
+  contained in [3XrH[103X.[133X
+  
+  [33X[0;0YReturns a list of all [10XLinsNodes[110X containing [22XG[122X-normal subgroups of [22XH[122X.[133X
+  
+  
+  [1X2.3 [33X[0;0YLINS Search Functions[133X[101X
+  
+  [1X2.3-1 LowIndexNormalSubgroupsSearch[101X
+  
+  [33X[1;0Y[29X[2XLowIndexNormalSubgroupsSearch[102X( [3XG[103X, [3Xn[103X[, [3Xopts[103X] ) [32X function[133X
+  
+  [33X[0;0YGiven a finitely presented group [3XG[103X and some index bound [3Xn[103X, this will start a
+  search in the normal subgroup lattice of [3XG[103X up to index [3Xn[103X.[133X
+  
+  [33X[0;0YThe  optional argument [3Xopts[103X must be a record containing valid search options
+  (see [14X3.3[114X).[133X
+  
+  [33X[0;0YIf  the optional argument [3Xopts[103X is not given, the search will be started with
+  the  default  options, i.e. it will terminate once all normal subgroups of [3XG[103X
+  with index at most [3Xn[103X are found.[133X
+  
+  [33X[0;0YIt  is possible to call the function with a group [3XG[103X that is not an fp-group.
+  The   group   will   be   automatically   replaced  with  an  fp-group  (see
+  [2XIsomorphismFpGroup[102X ([14X2.1-6[114X)).[133X
+  
+  [6XReturns:[106X  [33X[0;10Y[10XLinsGraph[110X encoding a partial normal subgroup lattice of [3XG[103X[133X
+  
+  [1X2.3-2 LowIndexNormalSubgroupsSearchForAll[101X
+  
+  [33X[1;0Y[29X[2XLowIndexNormalSubgroupsSearchForAll[102X( [3XG[103X, [3Xn[103X ) [32X function[133X
   
   [33X[0;0YGiven a finitely presented group [3XG[103X and some index bound [3Xn[103X, this will compute
   all normal subgroups of [3XG[103X with index at most [3Xn[103X.[133X
   
-  [1X2.1-2 LINS_IsSubgroupFp[101X
+  [33X[0;0YThis  is a synonym for calling [2XLowIndexNormalSubgroupsSearch[102X ([14X2.3-1[114X) without
+  any options.[133X
   
-  [33X[1;0Y[29X[2XLINS_IsSubgroupFp[102X( [3XH[103X, [3XG[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya boolean[133X
+  [33X[0;0YIt  is possible to call the function with a group [3XG[103X that is not an fp-group.
+  The   group   will   be   automatically   replaced  with  an  fp-group  (see
+  [2XIsomorphismFpGroup[102X ([14X2.1-6[114X)).[133X
   
-  [33X[0;0YGiven  two  subgroups  [3XH[103X  and  [3XG[103X of some finitely presented supergroup, this
-  returns true if H is a subgroup of G.[133X
+  [6XReturns:[106X  [33X[0;10Y[10XLinsGraph[110X encoding a partial normal subgroup lattice of [3XG[103X[133X
   
-  [1X2.1-3 LINS_AddGroup[101X
+  [1X2.3-3 LowIndexNormalSubgroupsSearchForIndex[101X
   
-  [33X[1;0Y[29X[2XLINS_AddGroup[102X( [3XGroupsFound[103X, [3XH[103X, [3XSupers[103X, [3Xtest[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Y[list, positive integer][133X
+  [33X[1;0Y[29X[2XLowIndexNormalSubgroupsSearchForIndex[102X( [3XG[103X, [3Xn[103X, [3Xl[103X ) [32X function[133X
   
-  [33X[0;0YAdds  the  group  [3XH[103X  to  the list [3XGroupsFound[103X. Let G denote the group at the
-  first  position  of  [3XGroupsFound[103X,  which shall be a supergroup of all groups
-  contained  in  the list. [3XSupers[103X is a list of positions of supergroups in the
-  list [3XGroupsFound[103X. If [3Xtest[103X is true, then it is checked, if the group [3XH[103X is not
-  already  contained  in the list [3XGroupsFound[103X. The group [3XH[103X will be inserted in
-  the  list [3XGroupsFound[103X after the last group with smaller or equal index in G.
-  All  references  to  positions  of  supergroups will get updated in the list
-  [3XGroupsFound[103X.  The  function  returns  a  tupel with the updated list and the
-  position where [3XH[103X can be found in the new list.[133X
+  [33X[0;0YGiven  a  finitely  presented  group  [3XG[103X, some index [3Xn[103X and [3Xl[103X being a positive
+  integer  or [10Xinfinity[110X, this will attempt to find [3Xl[103X normal subgroups of [3XG[103X with
+  index [3Xn[103X.[133X
   
-  [1X2.1-4 LINS_FindTQuotients[101X
+  [33X[0;0YIn particular, if [3Xl[103X is [10Xinfinity[110X, all normal subgroups of [3XG[103X with index [3Xn[103X will
+  be computed.[133X
   
-  [33X[1;0Y[29X[2XLINS_FindTQuotients[102X( [3XGroupsFound[103X, [3Xn[103X, [3XCurrent[103X, [3XQQ[103X ) [32X function[133X
+  [33X[0;0YFurthermore,  if  [3Xl[103X is a positive integer and the [10XComputedNormalSubgroups[110X of
+  the graph has less than [3Xl[103X nodes, then all normal subgroups of [3XG[103X with index [3Xn[103X
+  were computed.[133X
   
-  [33X[0;0YLet  the  group  G be located in the list [3XGroupsFound[103X at position 1. Let the
-  group  H  be  located in the list [3XGroupsFound[103X at position [3XCurrent[103X. Calculate
-  every  normal  subgroup  K of G, such that the quotient H/K is isomorphic to
-  some  non-abelian group Q, where QQ has stored some information about Q, and
-  the  index  [G:K]  is  less  equal  [3Xn[103X,  and add any such group K to the List
-  [3XGroupsFound[103X by calling the LINS_AddGroup-function.[133X
+  [33X[0;0YIt  is possible to call the function with a group [3XG[103X that is not an fp-group.
+  The   group   will   be   automatically   replaced  with  an  fp-group  (see
+  [2XIsomorphismFpGroup[102X ([14X2.1-6[114X)).[133X
   
-  [33X[0;0YThe  pregenerated  list QQ will contain the following information in form of
-  tupels of any such group Q with group order up to the maximum index boundary
-  max_index.  Let  Q be such a group of interest, then the information about Q
-  will  be  consisting  of  the following: 1 : the group order 2 : an index of
-  some  group  S,  that  has  trivial  core  in  Q  The  list  QQ is sorted by
-  information  1.  Then any normal subgroup K of G, such that the quotient H/K
-  is  isomorphic to some Q in the list QQ can be found as the normal core of a
-  subgroup  L of H, that has an index equal to information 2. In order to find
-  the  subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every
-  subgroup of H up to some sufficient large enough index.[133X
-  
-  [1X2.1-5 LINS_MustCheckP[101X
-  
-  [33X[1;0Y[29X[2XLINS_MustCheckP[102X( [3Xn[103X, [3Xp[103X, [3Xindex[103X, [3XminSubSizes[103X ) [32X function[133X
-  [6XReturns:[106X  [33X[0;10Ya boolean[133X
-  
-  [33X[0;0YLet  [3Xn[103X  be the maximal index, [3Xp[103X a prime, [3Xindex[103X the index of some group H and
-  [3XminSubSizes[103X the sizes computed by a call of LINS_MinSubgroupSizes on H. This
-  function checks if [3Xp[103X-Quotients have to be computed. Otherwise the groups can
-  be expressed as Intersections of bigger groups.[133X
-  
-  [1X2.1-6 LINS_FindPModules[101X
-  
-  [33X[1;0Y[29X[2XLINS_FindPModules[102X( [3XGroupsFound[103X, [3Xn[103X, [3XCurrent[103X, [3Xp[103X ) [32X function[133X
-  
-  [33X[0;0YLet  the  group  G be located in the list [3XGroupsFound[103X at position 1. Let the
-  group  H  be  located in the list [3XGroupsFound[103X at position [3XCurrent[103X. Calculate
-  every  normal subgroup K of G, such that [3XH[103X/K is a [3Xp[103X-Group and the index in G
-  is less equal [3Xn[103X, and add any such group K to the List [3XGroupsFound[103X by calling
-  the LINS_AddGroup-function.[133X
-  
-  [33X[0;0YWe  construct  a  module  over  the  groupring  (F_[3Xp[103X  G) and compute maximal
-  submodules  of  this  module.  These  submodules  can be translated into the
-  subgroups  of H we are searching for, namely elementary abelian [3Xp[103X-Quotients.
-  Then we call the method on the found subgroups so we compute all [3Xp[103X-Quotients
-  and not only the elementary abelian ones.[133X
-  
-  [1X2.1-7 LINS_FindPQuotients[101X
-  
-  [33X[1;0Y[29X[2XLINS_FindPQuotients[102X( [3XGroupsFound[103X, [3Xn[103X, [3XCurrent[103X, [3Xp[103X ) [32X function[133X
-  
-  [33X[0;0YLet  the  group  G be located in the list [3XGroupsFound[103X at position 1. Let the
-  group  H  be  located  in  the  list  [3XGroupsFound[103X  at  position  [3XCurrent[103X. If
-  LINS_MustCheckP return true, then we calculate every normal subgroup K of G,
-  such  that  [3XH[103X/K is a p-Group and the index in G is less equal [3Xn[103X, and add any
-  such group K to the List [3XGroupsFound[103X by calling the LINS_AddGroup-function.[133X
-  
-  [1X2.1-8 LINS_MinSubgroupSizes[101X
-  
-  [33X[1;0Y[29X[2XLINS_MinSubgroupSizes[102X(  ) [32X function[133X
-  
-  [1X2.1-9 LINS_IsPowerOf[101X
-  
-  [33X[1;0Y[29X[2XLINS_IsPowerOf[102X(  ) [32X function[133X
-  
-  [1X2.1-10 LINS_OGL[101X
-  
-  [33X[1;0Y[29X[2XLINS_OGL[102X(  ) [32X function[133X
-  
-  [1X2.1-11 LINS_ExponentSum[101X
-  
-  [33X[1;0Y[29X[2XLINS_ExponentSum[102X(  ) [32X function[133X
-  
-  [1X2.1-12 LINS_PullBackH[101X
-  
-  [33X[1;0Y[29X[2XLINS_PullBackH[102X(  ) [32X function[133X
-  
-  [1X2.1-13 LINS_FindIntersections[101X
-  
-  [33X[1;0Y[29X[2XLINS_FindIntersections[102X( [3XGroupsFound[103X, [3Xn[103X, [3XCurrent[103X ) [32X function[133X
-  
-  [33X[0;0YLet  the  group  G be located in the list [3XGroupsFound[103X at position 1. Let the
-  group  H  be  located in the list [3XGroupsFound[103X at position [3XCurrent[103X. Calculate
-  all  pairwise intersections of the group H with all other groups in the list
-  [3XGroupsFound[103X  that  are  stored  before  the position [3XCurrent[103X. Add any normal
-  subgroup  found  as  an intersection and index in G less equal [3Xn[103X, by calling
-  the LINS_AddGroup-function.[133X
+  [6XReturns:[106X  [33X[0;10Y[10XLinsGraph[110X encoding a partial normal subgroup lattice of [3XG[103X[133X
   

@@ -8,7 +8,7 @@
 <script type="text/javascript"
   src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
-<title>GAP (LINS) - Chapter 2: LINS</title>
+<title>GAP (LINS) - Chapter 2: LINS Interface</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 <meta name="generator" content="GAPDoc2HTML" />
 <link rel="stylesheet" type="text/css" href="manual.css" />
@@ -18,136 +18,210 @@
 <body class="chap2"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 <p id="mathjaxlink" class="pcenter"><a href="chap2.html">[MathJax off]</a></p>
-<p><a id="X78AAD867845D14C0" name="X78AAD867845D14C0"></a></p>
-<div class="ChapSects"><a href="chap2_mj.html#X78AAD867845D14C0">2 <span class="Heading">LINS</span></a>
-<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X78AAD867845D14C0">2.1 <span class="Heading">LINS</span></a>
+<p><a id="X785A18B58132442A" name="X785A18B58132442A"></a></p>
+<div class="ChapSects"><a href="chap2_mj.html#X785A18B58132442A">2 <span class="Heading">LINS Interface</span></a>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7FE2171385FFDCFA">2.1 <span class="Heading">LINS Graph</span></a>
 </span>
 <div class="ContSSBlock">
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87C66F9B7E2F25A2">2.1-1 LowIndexNormal</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X852814F27E8BBBE6">2.1-2 LINS_IsSubgroupFp</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X840E337381E9D3E8">2.1-3 LINS_AddGroup</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7DFEF56484FFCD42">2.1-4 LINS_FindTQuotients</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X84BAAC9C7D358C24">2.1-5 LINS_MustCheckP</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7F0C9015849093EC">2.1-6 LINS_FindPModules</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7D604F6384617745">2.1-7 LINS_FindPQuotients</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A9EEAA37A865606">2.1-8 LINS_MinSubgroupSizes</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C10055C79D5D42B">2.1-9 LINS_IsPowerOf</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X811C0DCF7FB37E13">2.1-10 LINS_OGL</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X789E958C879E5CDE">2.1-11 LINS_ExponentSum</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X798B48298250C9BD">2.1-12 LINS_PullBackH</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7927D90979F014DF">2.1-13 LINS_FindIntersections</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X805D91168165F914">2.1-1 List</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7C5BDEAA86131918">2.1-2 ComputedNormalSubgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7982DB9485ED76E7">2.1-3 LinsRoot</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7A5319077C05B8E7">2.1-4 IndexBound</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X831B320C79AA71A4">2.1-5 LinsOptions</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X828E91E67C410968">2.1-6 IsomorphismFpGroup</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X78C3620F7CD6CBA1">2.2 <span class="Heading">LINS Node</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BEE08B378362A2B">2.2-1 Grp</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7B06D640788992F7">2.2-2 Index</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8312138679C92F8E">2.2-3 MinimalSupergroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8303436F840AA49E">2.2-4 MinimalSubgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X798F8ACC7B187E8C">2.2-5 Supergroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X7BA181CA81D785BB">2.2-6 Subgroups</a></span>
+</div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2_mj.html#X7C993B5A7C54E27B">2.3 <span class="Heading">LINS Search Functions</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X8064963E80A5D83F">2.3-1 LowIndexNormalSubgroupsSearch</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X87176F3085F306FF">2.3-2 LowIndexNormalSubgroupsSearchForAll</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2_mj.html#X871127A07C12AD32">2.3-3 LowIndexNormalSubgroupsSearchForIndex</a></span>
 </div></div>
 </div>
 
-<h3>2 <span class="Heading">LINS</span></h3>
+<h3>2 <span class="Heading">LINS Interface</span></h3>
 
-<p><a id="X78AAD867845D14C0" name="X78AAD867845D14C0"></a></p>
+<p>This chapter explains the provided search methods and the interface to the search graph structure <code class="code">LinsGraph</code>.</p>
 
-<h4>2.1 <span class="Heading">LINS</span></h4>
+<p><a id="X7FE2171385FFDCFA" name="X7FE2171385FFDCFA"></a></p>
 
-<p><a id="X87C66F9B7E2F25A2" name="X87C66F9B7E2F25A2"></a></p>
+<h4>2.1 <span class="Heading">LINS Graph</span></h4>
 
-<h5>2.1-1 LowIndexNormal</h5>
+<p>All search methods in <strong class="pkg">LINS</strong> return a <code class="code">LinsGraph</code> encoding a partial normal subgroup lattice of a finitely presented group <span class="SimpleMath">\(G\)</span>. A <code class="code">LinsGraph</code> is a graph, where each node is a <code class="code">LinsNode</code> that contains a normal subgroup <span class="SimpleMath">\(H\)</span> of <span class="SimpleMath">\(G\)</span> and pointers to the minimal <span class="SimpleMath">\(G\)</span>-normal super/sub-groups of <span class="SimpleMath">\(H\)</span>, i.e. its neighbours in the graph. The directed edges of the graph are therefore encoded directly into the nodes.</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LowIndexNormal</code>( <var class="Arg">G</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: a list of groups</p>
+<p><a id="X805D91168165F914" name="X805D91168165F914"></a></p>
 
+<h5>2.1-1 List</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; List</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns a list of all <code class="code">LinsNodes</code> in the graph <var class="Arg">gr</var>.</p>
+
+<p>The nodes are sorted by index in increasing order, e.g. the root node is at the first position. In order to get a list containing only the normal subgroups that the search graph attempted to find, use <code class="func">ComputedNormalSubgroups</code> (<a href="chap2_mj.html#X7C5BDEAA86131918"><span class="RefLink">2.1-2</span></a>).</p>
+
+<p><a id="X7C5BDEAA86131918" name="X7C5BDEAA86131918"></a></p>
+
+<h5>2.1-2 ComputedNormalSubgroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; ComputedNormalSubgroups</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the normal subgroups that the search graph attempted to find.</p>
+
+<p>If the <code class="code">ComputedNormalSubgroups</code> component of the graph is not set, this defaults to a call of <code class="func">List</code> (<a href="chap2_mj.html#X805D91168165F914"><span class="RefLink">2.1-1</span></a>).</p>
+
+<p><a id="X7982DB9485ED76E7" name="X7982DB9485ED76E7"></a></p>
+
+<h5>2.1-3 LinsRoot</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsRoot</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the root node of the graph.</p>
+
+<p>If the search was started in the finitely presented group <span class="SimpleMath">\(G\)</span>, this will return the <code class="code">LinsNode</code> that contains <span class="SimpleMath">\(G\)</span>.</p>
+
+<p><a id="X7A5319077C05B8E7" name="X7A5319077C05B8E7"></a></p>
+
+<h5>2.1-4 IndexBound</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IndexBound</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the index bound for the search in <var class="Arg">gr</var>.</p>
+
+<p><a id="X831B320C79AA71A4" name="X831B320C79AA71A4"></a></p>
+
+<h5>2.1-5 LinsOptions</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsOptions</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the search options of the graph <var class="Arg">gr</var>.</p>
+
+<p><a id="X828E91E67C410968" name="X828E91E67C410968"></a></p>
+
+<h5>2.1-6 IsomorphismFpGroup</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; IsomorphismFpGroup</code>( <var class="Arg">gr</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Returns the isomorphism from the original group of the search onto the fp-group contained in the root.</p>
+
+<p><a id="X78C3620F7CD6CBA1" name="X78C3620F7CD6CBA1"></a></p>
+
+<h4>2.2 <span class="Heading">LINS Node</span></h4>
+
+<p>A <code class="code">LinsNode</code> is a part of the search graph structure <code class="code">LinsGraph</code> (see <a href="chap2_mj.html#X7FE2171385FFDCFA"><span class="RefLink">2.1</span></a>). As such, all methods are with respect to the search graph, where the node is contained in.</p>
+
+<p><a id="X7BEE08B378362A2B" name="X7BEE08B378362A2B"></a></p>
+
+<h5>2.2-1 Grp</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Grp</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Returns the group contained in the node.</p>
+
+<p><a id="X7B06D640788992F7" name="X7B06D640788992F7"></a></p>
+
+<h5>2.2-2 Index</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Index</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;method&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(G\)</span> be the group contained in the root node and <span class="SimpleMath">\(H\)</span> be the <span class="SimpleMath">\(G\)</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
+
+<p>Returns the index <span class="SimpleMath">\([G : H]\)</span>.</p>
+
+<p><a id="X8312138679C92F8E" name="X8312138679C92F8E"></a></p>
+
+<h5>2.2-3 MinimalSupergroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalSupergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(G\)</span> be the group contained in the root node and <span class="SimpleMath">\(H\)</span> be the <span class="SimpleMath">\(G\)</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
+
+<p>Returns a list of all <code class="code">LinsNodes</code> containing minimal <span class="SimpleMath">\(G\)</span>-normal supergroups of <span class="SimpleMath">\(H\)</span>.</p>
+
+<p><a id="X8303436F840AA49E" name="X8303436F840AA49E"></a></p>
+
+<h5>2.2-4 MinimalSubgroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalSubgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(G\)</span> be the group contained in the root node and <span class="SimpleMath">\(H\)</span> be the <span class="SimpleMath">\(G\)</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
+
+<p>Returns a list of all <code class="code">LinsNodes</code> containing minimal <span class="SimpleMath">\(G\)</span>-normal subgroups of <span class="SimpleMath">\(H\)</span>.</p>
+
+<p><a id="X798F8ACC7B187E8C" name="X798F8ACC7B187E8C"></a></p>
+
+<h5>2.2-5 Supergroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Supergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(G\)</span> be the group contained in the root node and <span class="SimpleMath">\(H\)</span> be the <span class="SimpleMath">\(G\)</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
+
+<p>Returns a list of all <code class="code">LinsNodes</code> containing <span class="SimpleMath">\(G\)</span>-normal supergroups of <span class="SimpleMath">\(H\)</span>.</p>
+
+<p><a id="X7BA181CA81D785BB" name="X7BA181CA81D785BB"></a></p>
+
+<h5>2.2-6 Subgroups</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Subgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<p>Let <span class="SimpleMath">\(G\)</span> be the group contained in the root node and <span class="SimpleMath">\(H\)</span> be the <span class="SimpleMath">\(G\)</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
+
+<p>Returns a list of all <code class="code">LinsNodes</code> containing <span class="SimpleMath">\(G\)</span>-normal subgroups of <span class="SimpleMath">\(H\)</span>.</p>
+
+<p><a id="X7C993B5A7C54E27B" name="X7C993B5A7C54E27B"></a></p>
+
+<h4>2.3 <span class="Heading">LINS Search Functions</span></h4>
+
+<p><a id="X8064963E80A5D83F" name="X8064963E80A5D83F"></a></p>
+
+<h5>2.3-1 LowIndexNormalSubgroupsSearch</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LowIndexNormalSubgroupsSearch</code>( <var class="Arg">G</var>, <var class="Arg">n</var>[, <var class="Arg">opts</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given a finitely presented group <var class="Arg">G</var> and some index bound <var class="Arg">n</var>, this will start a search in the normal subgroup lattice of <var class="Arg">G</var> up to index <var class="Arg">n</var>.</p>
+
+<p>The optional argument <var class="Arg">opts</var> must be a record containing valid search options (see <a href="chap3_mj.html#X7E1489817AF4CDDB"><span class="RefLink">3.3</span></a>).</p>
+
+<p>If the optional argument <var class="Arg">opts</var> is not given, the search will be started with the default options, i.e. it will terminate once all normal subgroups of <var class="Arg">G</var> with index at most <var class="Arg">n</var> are found.</p>
+
+<p>It is possible to call the function with a group <var class="Arg">G</var> that is not an fp-group. The group will be automatically replaced with an fp-group (see <code class="func">IsomorphismFpGroup</code> (<a href="chap2_mj.html#X828E91E67C410968"><span class="RefLink">2.1-6</span></a>)).</p>
+
+<p>Returns: <code class="code">LinsGraph</code> encoding a partial normal subgroup lattice of <var class="Arg">G</var></p>
+
+<p><a id="X87176F3085F306FF" name="X87176F3085F306FF"></a></p>
+
+<h5>2.3-2 LowIndexNormalSubgroupsSearchForAll</h5>
+
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LowIndexNormalSubgroupsSearchForAll</code>( <var class="Arg">G</var>, <var class="Arg">n</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Given a finitely presented group <var class="Arg">G</var> and some index bound <var class="Arg">n</var>, this will compute all normal subgroups of <var class="Arg">G</var> with index at most <var class="Arg">n</var>.</p>
 
-<p><a id="X852814F27E8BBBE6" name="X852814F27E8BBBE6"></a></p>
+<p>This is a synonym for calling <code class="func">LowIndexNormalSubgroupsSearch</code> (<a href="chap2_mj.html#X8064963E80A5D83F"><span class="RefLink">2.3-1</span></a>) without any options.</p>
 
-<h5>2.1-2 LINS_IsSubgroupFp</h5>
+<p>It is possible to call the function with a group <var class="Arg">G</var> that is not an fp-group. The group will be automatically replaced with an fp-group (see <code class="func">IsomorphismFpGroup</code> (<a href="chap2_mj.html#X828E91E67C410968"><span class="RefLink">2.1-6</span></a>)).</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_IsSubgroupFp</code>( <var class="Arg">H</var>, <var class="Arg">G</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: a boolean</p>
+<p>Returns: <code class="code">LinsGraph</code> encoding a partial normal subgroup lattice of <var class="Arg">G</var></p>
 
-<p>Given two subgroups <var class="Arg">H</var> and <var class="Arg">G</var> of some finitely presented supergroup, this returns true if H is a subgroup of G.</p>
+<p><a id="X871127A07C12AD32" name="X871127A07C12AD32"></a></p>
 
-<p><a id="X840E337381E9D3E8" name="X840E337381E9D3E8"></a></p>
+<h5>2.3-3 LowIndexNormalSubgroupsSearchForIndex</h5>
 
-<h5>2.1-3 LINS_AddGroup</h5>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LowIndexNormalSubgroupsSearchForIndex</code>( <var class="Arg">G</var>, <var class="Arg">n</var>, <var class="Arg">l</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
+<p>Given a finitely presented group <var class="Arg">G</var>, some index <var class="Arg">n</var> and <var class="Arg">l</var> being a positive integer or <code class="code">infinity</code>, this will attempt to find <var class="Arg">l</var> normal subgroups of <var class="Arg">G</var> with index <var class="Arg">n</var>.</p>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_AddGroup</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">H</var>, <var class="Arg">Supers</var>, <var class="Arg">test</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: [list, positive integer]</p>
+<p>In particular, if <var class="Arg">l</var> is <code class="code">infinity</code>, all normal subgroups of <var class="Arg">G</var> with index <var class="Arg">n</var> will be computed.</p>
 
-<p>Adds the group <var class="Arg">H</var> to the list <var class="Arg">GroupsFound</var>. Let G denote the group at the first position of <var class="Arg">GroupsFound</var>, which shall be a supergroup of all groups contained in the list. <var class="Arg">Supers</var> is a list of positions of supergroups in the list <var class="Arg">GroupsFound</var>. If <var class="Arg">test</var> is true, then it is checked, if the group <var class="Arg">H</var> is not already contained in the list <var class="Arg">GroupsFound</var>. The group <var class="Arg">H</var> will be inserted in the list <var class="Arg">GroupsFound</var> after the last group with smaller or equal index in G. All references to positions of supergroups will get updated in the list <var class="Arg">GroupsFound</var>. The function returns a tupel with the updated list and the position where <var class="Arg">H</var> can be found in the new list.</p>
+<p>Furthermore, if <var class="Arg">l</var> is a positive integer and the <code class="code">ComputedNormalSubgroups</code> of the graph has less than <var class="Arg">l</var> nodes, then all normal subgroups of <var class="Arg">G</var> with index <var class="Arg">n</var> were computed.</p>
 
-<p><a id="X7DFEF56484FFCD42" name="X7DFEF56484FFCD42"></a></p>
+<p>It is possible to call the function with a group <var class="Arg">G</var> that is not an fp-group. The group will be automatically replaced with an fp-group (see <code class="func">IsomorphismFpGroup</code> (<a href="chap2_mj.html#X828E91E67C410968"><span class="RefLink">2.1-6</span></a>)).</p>
 
-<h5>2.1-4 LINS_FindTQuotients</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindTQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">QQ</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that the quotient H/K is isomorphic to some non-abelian group Q, where QQ has stored some information about Q, and the index [G:K] is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
-
-<p>The pregenerated list QQ will contain the following information in form of tupels of any such group Q with group order up to the maximum index boundary max_index. Let Q be such a group of interest, then the information about Q will be consisting of the following: 1 : the group order 2 : an index of some group S, that has trivial core in Q The list QQ is sorted by information 1. Then any normal subgroup K of G, such that the quotient H/K is isomorphic to some Q in the list QQ can be found as the normal core of a subgroup L of H, that has an index equal to information 2. In order to find the subgroup L of H, the Low-Index-Subgroups-Procedure will calculate every subgroup of H up to some sufficient large enough index.</p>
-
-<p><a id="X84BAAC9C7D358C24" name="X84BAAC9C7D358C24"></a></p>
-
-<h5>2.1-5 LINS_MustCheckP</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_MustCheckP</code>( <var class="Arg">n</var>, <var class="Arg">p</var>, <var class="Arg">index</var>, <var class="Arg">minSubSizes</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Returns: a boolean</p>
-
-<p>Let <var class="Arg">n</var> be the maximal index, <var class="Arg">p</var> a prime, <var class="Arg">index</var> the index of some group H and <var class="Arg">minSubSizes</var> the sizes computed by a call of LINS_MinSubgroupSizes on H. This function checks if <var class="Arg">p</var>-Quotients have to be computed. Otherwise the groups can be expressed as Intersections of bigger groups.</p>
-
-<p><a id="X7F0C9015849093EC" name="X7F0C9015849093EC"></a></p>
-
-<h5>2.1-6 LINS_FindPModules</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindPModules</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a <var class="Arg">p</var>-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
-
-<p>We construct a module over the groupring (F_<var class="Arg">p</var> G) and compute maximal submodules of this module. These submodules can be translated into the subgroups of H we are searching for, namely elementary abelian <var class="Arg">p</var>-Quotients. Then we call the method on the found subgroups so we compute all <var class="Arg">p</var>-Quotients and not only the elementary abelian ones.</p>
-
-<p><a id="X7D604F6384617745" name="X7D604F6384617745"></a></p>
-
-<h5>2.1-7 LINS_FindPQuotients</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindPQuotients</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var>, <var class="Arg">p</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. If LINS_MustCheckP return true, then we calculate every normal subgroup K of G, such that <var class="Arg">H</var>/K is a p-Group and the index in G is less equal <var class="Arg">n</var>, and add any such group K to the List <var class="Arg">GroupsFound</var> by calling the LINS_AddGroup-function.</p>
-
-<p><a id="X7A9EEAA37A865606" name="X7A9EEAA37A865606"></a></p>
-
-<h5>2.1-8 LINS_MinSubgroupSizes</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_MinSubgroupSizes</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X7C10055C79D5D42B" name="X7C10055C79D5D42B"></a></p>
-
-<h5>2.1-9 LINS_IsPowerOf</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_IsPowerOf</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X811C0DCF7FB37E13" name="X811C0DCF7FB37E13"></a></p>
-
-<h5>2.1-10 LINS_OGL</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_OGL</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X789E958C879E5CDE" name="X789E958C879E5CDE"></a></p>
-
-<h5>2.1-11 LINS_ExponentSum</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_ExponentSum</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X798B48298250C9BD" name="X798B48298250C9BD"></a></p>
-
-<h5>2.1-12 LINS_PullBackH</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_PullBackH</code>(  )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p><a id="X7927D90979F014DF" name="X7927D90979F014DF"></a></p>
-
-<h5>2.1-13 LINS_FindIntersections</h5>
-
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LINS_FindIntersections</code>( <var class="Arg">GroupsFound</var>, <var class="Arg">n</var>, <var class="Arg">Current</var> )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
-<p>Let the group G be located in the list <var class="Arg">GroupsFound</var> at position 1. Let the group H be located in the list <var class="Arg">GroupsFound</var> at position <var class="Arg">Current</var>. Calculate all pairwise intersections of the group H with all other groups in the list <var class="Arg">GroupsFound</var> that are stored before the position <var class="Arg">Current</var>. Add any normal subgroup found as an intersection and index in G less equal <var class="Arg">n</var>, by calling the LINS_AddGroup-function.</p>
+<p>Returns: <code class="code">LinsGraph</code> encoding a partial normal subgroup lattice of <var class="Arg">G</var></p>
 
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0_mj.html">[Top of Book]</a>&nbsp;  <a href="chap0_mj.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1_mj.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3_mj.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chapInd_mj.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0_mj.html">Top</a>  <a href="chap1_mj.html">1</a>  <a href="chap2_mj.html">2</a>  <a href="chap3_mj.html">3</a>  <a href="chap4_mj.html">4</a>  <a href="chapInd_mj.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

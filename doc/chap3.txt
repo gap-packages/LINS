@@ -1,9 +1,102 @@
   
-  [1X3 [33X[0;0YLicense[133X[101X
+  [1X3 [33X[0;0YLINS Search[133X[101X
   
-  [33X[0;0YLINS  is  free  software  you can redistribute it and/or modify it under the
-  terms  of  the  GNU General Public License as published by the Free Software
-  Foundation;  either  version 3 of the License, or (at your option) any later
-  version.  For  details,  see  the  file  LICENSE distributed as part of this
-  package or see the FSF's own site.[133X
+  [33X[0;0YThis  chapter  is  for  advanced  users  and  those  interested  in  a brief
+  introduction to the mathematical background of [5XLINS[105X.[133X
+  
+  
+  [1X3.1 [33X[0;0YLINS Search Strategy[133X[101X
+  
+  [33X[0;0YIn  this  section, we briefly introduce the basic search strategy for normal
+  subgroups.[133X
+  
+  [33X[0;0YTODO[133X
+  
+  
+  [1X3.2 [33X[0;0YLINS Target Tables[133X[101X
+  
+  [33X[0;0YTODO[133X
+  
+  
+  [1X3.3 [33X[0;0YLINS Search Options[133X[101X
+  
+  [33X[0;0YThe  method  [10XLowIndexNormalSubgroupsSearch[110X  allows an optional argument [3Xopts[103X
+  which  must  be  a  record and modifies the search for the execution of only
+  this single command.[133X
+  
+  [33X[0;0YThe following components of [3Xopts[103X are supported.[133X
+  
+  [8X[10XDoSetParent[110X[8X[108X
+        [33X[0;6Y[9Xtrue[109X  to set parent of every subgroup to the group [3XG[103X that is contained
+        in   the  root  of  the  search  graph.  It  also  sets  the  property
+        [10XIsNormalInParent[110X to [9Xtrue[109X for every subgroup.[133X
+  
+        [33X[0;6YThis should be only disabled for debugging or testing purposes.[133X
+  
+  [8X[10XInitGraph[110X[8X[108X
+        [33X[0;6Ya  function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X. It can popullate
+        the  record  object  [3Xgr[103X  via  calls  like [10Xgr!.NAME = VALUE[110X in order to
+        initialize  certain components that might be needed by other functions
+        later on (see option [10XDoTerminate[110X).[133X
+  
+  [8X[10XDoCut[110X[8X[108X
+        [33X[0;6Ya function that takes as arguments a [9XLinsGraph[109X [3Xgr[103X and a [9XLinsNode[109X [3XrH[103X.[133X
+  
+        [33X[0;6YReturns  [9Xtrue[109X  if  subgroups under [3XrH[103X should not be computed, i.e. the
+        branch will be cut under the node [3XrH[103X.[133X
+  
+  [8X[10XDoTerminate[110X[8X[108X
+        [33X[0;6Ya function that takes as arguments a [9XLinsGraph[109X [3Xgr[103X and two [9XLinsNodes[109X [3XrH[103X
+        and  [3XrK[103X.  We  are currently computing the subgroups under [3XrH[103X and found
+        the normal subgroup [3XrK[103X.[133X
+  
+        [33X[0;6YThis  function  may  write  data to [10Xgr!.ComputedNormalSubgroups`[110X. Make
+        sure  to  initalize  this  via the option [10XInitGraph[110X (for example to an
+        empty list), since it is not bound by default.[133X
+  
+        [33X[0;6YReturns [9Xtrue[109X if the search can be terminated.[133X
+  
+  [8X[10XFilterTQuotients[110X[8X[108X
+        [33X[0;6Ya function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X, a [9XLinsNode[109X [3XrH[103X and
+        a    list    of   targets   [3XQQ[103X   following   the   specifications   of
+        [10XLINS_FindTQuotients[110X.[133X
+  
+        [33X[0;6YFor   a   call   via   [10XLowIndexNormalSubgroupsSearch[110X,  we  have  [10XrH  =
+        LinsRoot(gr)[110X and [10XQQ = LINS_TargetsQuotient[110X.[133X
+  
+        [33X[0;6YReturns  an  index  list  from  the  targets  [3XQQ[103X, that will be used by
+        [10XLINS_FindTQuotients[110X.[133X
+  
+  [8X[10XDoIntersection[110X[8X[108X
+        [33X[0;6Ya  function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X, two [9XLinsNodes[109X [3XrH[103X
+        and [3XrK[103X, and a positive integer [3Xi[103X. Let [22XG[122X be the group that is contained
+        in the root of the search graph.[133X
+  
+        [33X[0;6YReturns  [9Xtrue[109X  if  the  intersection [22XU[122X of the groups in [3XrH[103X and [3XrK[103X with
+        index [22X[G : U] = i[122X should be computed.[133X
+  
+  [8X[10XDoPQuotient[110X[8X[108X
+        [33X[0;6Ya function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X, a [9XLinsNode[109X [3XrH[103X and
+        a prime [3Xp[103X.[133X
+  
+        [33X[0;6YReturns  [9Xtrue[109X if [3Xp[103X-quotients under [3XrH[103X should be computed for the prime
+        [3Xp[103X.[133X
+  
+  [8X[10XDoPModule[110X[8X[108X
+        [33X[0;6Ya  function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X, a [9XLinsNode[109X [3XrH[103X, a
+        prime [3Xp[103X and a positive integer [3Xi[103X. Let [22XG[122X be the group that is contained
+        in the root of the search graph.[133X
+  
+        [33X[0;6YReturns  [9Xtrue[109X  if  the  normal  subgroup  [22XK[122X  of index [22X[G : K] = i[122X with
+        elementary abelian [3Xp[103X-quotient in [3XrH[103X should be computed.[133X
+  
+  
+  [1X3.4 [33X[0;0YLINS Custom Search Functions[133X[101X
+  
+  [33X[0;0YIn  this  section  we explain how to write a custom search function by using
+  the options for [10XLowIndexNormalSubgroupsSearch[110X.[133X
+  
+  [33X[0;0YWe explain this on the example of [10XLowIndexNormalSubgroupsSearchForIndex[110X.[133X
+  
+  [33X[0;0YTODO[133X
   

@@ -1,17 +1,31 @@
-#
-# LINS: Provides a method for the computation of normal subgroups in a finitely presented group.
-#
-# This file contains package meta data. For additional information on
-# the meaning and correct usage of these fields, please consult the
-# manual of the "Example" package as well as the comments in its
-# PackageInfo.g file.
-#
+#############################################################################
+##  PackageInfo.g
+#############################################################################
+##
+##  This file contains package meta data. For additional information on
+##  the meaning and correct usage of these fields, please consult the
+##  manual of the "Example" package as well as the comments in its
+##  PackageInfo.g file.
+##
+#############################################################################
+##
+##  This file is part of the LINS package.
+##
+##  This file's authors include Friedrich Rober.
+##
+##  Please refer to the COPYRIGHT file for details.
+##
+##  SPDX-License-Identifier: GPL-2.0-or-later
+##
+#############################################################################
+
+
 SetPackageInfo( rec(
 
 PackageName := "LINS",
 Subtitle := "provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.",
-Version := "0.3",
-Date := "07/05/2020", # dd/mm/yyyy format
+Version := "0.4",
+Date := "23/05/2022", # dd/mm/yyyy format
 
 Persons := [
   rec(

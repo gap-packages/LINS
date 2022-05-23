@@ -7,7 +7,8 @@ This package provides an algorithm for computing the normal subgroups of a finit
 
 This algorithm is based on work of Derek Holt and David Firth.
 Derek Holt and David Firth implemented this algorithm in the algebra software MAGMA.
-The current implementation in GAP uses a table of groups that was computed by Derek Holt.
+
+The current implementation in GAP uses a table of groups that was computed by the code in `createTables.gi`.
 
 ## Installation
 
@@ -27,7 +28,7 @@ which creates a subdirectory called `LINS/`.
 ## Documentation
 
 You can read the documentation online at
->   <https://FriedrichRober.github.io/WPE/doc/chap0.html>
+>   <https://FriedrichRober.github.io/LINS/doc/chap0.html>
 
 If you want to access it from within GAP by entering `?LINS` on the GAP prompt,
 you first have to build the manual by using `gap makedoc.g` from within the `LINS/` root directory.
