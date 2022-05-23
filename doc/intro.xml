@@ -37,7 +37,7 @@ gap> G := DihedralGroup(n);
 
 The search algorithm automatically translates the group into a finitely presented group
 via a call to <C>IsomorphismFpGroup</C>. <Br/>
-The translation is stored as an <C>Isomorphism</C> inside the lins graph.
+The isomorphism is stored inside the lins graph.
 <Example><![CDATA[
 gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
 <lins graph found 4 normal subgroups up to index 50>
@@ -45,7 +45,7 @@ gap> r := LinsRoot(gr);
 <lins node of index 1>
 gap> H := Grp(r);
 <fp group of size 50 on the generators [ F1, F2, F3 ]>
-gap> Iso := Isomorphism(gr);
+gap> Iso := IsomorphismFpGroup(gr);
 [ f1, f2, f3 ] -> [ F1, F2, F3 ]
 gap> Source(Iso) = G;
 true
