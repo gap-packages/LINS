@@ -24,7 +24,7 @@ e.g. the root node is at the first position.
 </ManSection>
 
 <#Include Label="ComputedNormalSubgroups">
-<#Include Label="Root">
+<#Include Label="LinsRoot">
 <#Include Label="IndexBound">
 <#Include Label="LinsOptions">
 <#Include Label="Isomorphism">

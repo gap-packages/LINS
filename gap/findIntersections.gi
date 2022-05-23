@@ -60,7 +60,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	data;			# tuple:		[`rU`, `isNew`]
 
 	# If the current group is `G`, then continue.
-	rG := Root(gr);
+	rG := LinsRoot(gr);
 	if rG = rH then
 		return false;
 	fi;

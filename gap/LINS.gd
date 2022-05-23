@@ -128,9 +128,9 @@ DeclareAttribute( "ComputedNormalSubgroups", IsLinsGraph, "mutable" );
 ## <#/GAPDoc>
 DeclareAttribute( "IndexBound", IsLinsGraph, "mutable" );
 
-## <#GAPDoc Label="Root">
+## <#GAPDoc Label="LinsRoot">
 ## <ManSection>
-## <Attr Name="Root" Arg="gr"/>
+## <Attr Name="LinsRoot" Arg="gr"/>
 ## <Description>
 ## 	 Returns the root node of the graph. <P/>
 ##	 If the search was started in the finitely presented group <M>G</M>,
@@ -138,7 +138,7 @@ DeclareAttribute( "IndexBound", IsLinsGraph, "mutable" );
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareAttribute( "Root", IsLinsGraph, "mutable" );
+DeclareAttribute( "LinsRoot", IsLinsGraph, "mutable" );
 
 ## <#GAPDoc Label="LinsOptions">
 ## <ManSection>

@@ -145,7 +145,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
 	rK,				# LINS node: 	loop var
 	K;              # group:		located in node `rK`
 
-	G := Grp(Root(gr));
+	G := Grp(LinsRoot(gr));
 	rH := LinsNode(H, Index(G, H));
 
 	# Search for correct level
