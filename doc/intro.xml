@@ -41,7 +41,7 @@ The translation is stored as an <C>Isomorphism</C> inside the lins graph.
 <Example><![CDATA[
 gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
 <lins graph found 4 normal subgroups up to index 50>
-gap> r := Root(gr);
+gap> r := LinsRoot(gr);
 <lins node of index 1>
 gap> H := Grp(r);
 <fp group of size 50 on the generators [ F1, F2, F3 ]>

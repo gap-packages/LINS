@@ -62,7 +62,7 @@ Returns <K>true</K> if the search can be terminated.
 a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A> and a list of targets <A>QQ</A>
 following the specifications of <C>LINS_FindTQuotients</C>. <P/>
 
-For a call via <C>LowIndexNormalSubgroupsSearch</C>, we have <C>rH = Root(gr)</C> and <C>QQ = LINS_TargetsQuotient</C>. <P/>
+For a call via <C>LowIndexNormalSubgroupsSearch</C>, we have <C>rH = LinsRoot(gr)</C> and <C>QQ = LINS_TargetsQuotient</C>. <P/>
 
 Returns an index list from the targets <A>QQ</A>, that will be used by <C>LINS_FindTQuotients</C>.
 </Item>

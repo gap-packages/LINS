@@ -260,7 +260,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 
 	# Initialize data
 	n := IndexBound(gr);
-	G :=Grp(Root(gr));
+	G :=Grp(LinsRoot(gr));
 	H := Grp(rH);
 
 	# Isomorphism onto the fp-group of `H`
@@ -386,7 +386,7 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
 	res;	# boolean:		whether the search in `gr` can be terminated
 
 	# Initialize data from input
-	G := Grp(Root(gr));
+	G := Grp(LinsRoot(gr));
 	n := IndexBound(gr);
 	H := Grp(rH);
 	res := false;

@@ -78,7 +78,7 @@ function(r)
 	fi;
 end);
 
-InstallOtherMethod( Root, "for Lins Node", [ IsLinsNode ],
+InstallOtherMethod( LinsRoot, "for Lins Node", [ IsLinsNode ],
 function(r)
 	local s;
 	s := r;
@@ -131,7 +131,7 @@ function(G, n)
 
 	r := LinsNode(G, 1);
 	gr := rec(
-		Root := r,
+		LinsRoot := r,
 		IndexBound := n,
 		Levels := [ rec(Index := 1, Nodes := [r]) ]);
 
@@ -146,9 +146,9 @@ function(gr)
 end);
 
 
-InstallMethod( Root, "for Lins Graph", [ IsLinsGraph ],
+InstallMethod( LinsRoot, "for Lins Graph", [ IsLinsGraph ],
 function(r)
-	return r!.Root;
+	return r!.LinsRoot;
 end);
 
 InstallOtherMethod( ListOp, "for Lins Graph", [ IsLinsGraph ],
@@ -180,7 +180,7 @@ function(gr)
 	if IsBound(gr!.Iso) then
 		return gr!.Iso;
 	else
-		return IdentityMapping(Grp(Root(gr)));
+		return IdentityMapping(Grp(LinsRoot(gr)));
 	fi;
 end);
 
@@ -217,7 +217,7 @@ end);
 BindGlobal( "LINS_FilterTQuotients",
 function(gr, rH, QQ)
 local G, H, n, I, Q;
-	G := Grp(Root(gr));
+	G := Grp(LinsRoot(gr));
 	H := Grp(rH);
 	n := IndexBound(gr);
 	I := [];
@@ -330,7 +330,7 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	fi;
 
 	# Call T-Quotient Procedure on G
-	res := LINS_FindTQuotients(gr, Root(gr), LINS_TargetsQuotient, opts);
+	res := LINS_FindTQuotients(gr, LinsRoot(gr), LINS_TargetsQuotient, opts);
 	if res then
 		return gr;
 	fi;

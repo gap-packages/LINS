@@ -28,7 +28,7 @@
 ##
 ##  The main function `LowIndexNormalSubgroupsSearch` calls this function with
 ##
-##						`rH` = `Root(gr)`,
+##						`rH` = `LinsRoot(gr)`,
 ##						`QQ` = `LINS_TargetsQuotient`.
 #############################################################################
 ##  Description:
@@ -87,7 +87,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	data;	# tuple:		[`rK`, `isNew`]
 
 	# Initialize data from input
-	G := Grp(Root(gr));
+	G := Grp(LinsRoot(gr));
 	H := Grp(rH);
 	n := IndexBound(gr);
 
