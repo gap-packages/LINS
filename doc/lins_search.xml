@@ -52,7 +52,7 @@ i.e. the branch will be cut under the node <A>rH</A>.
 a function that takes as arguments a <K>LinsGraph</K> <A>gr</A> and two <K>LinsNodes</K> <A>rH</A> and <A>rK</A>
 We are currently computing the subgroups under <A>rH</A>.
 We have computed the normal subgroup <A>rK</A>.
-This function may write data to <C>gr!.Output`</C>.
+This function may write data to <C>gr!.ComputedNormalSubgroups`</C>.
 Make sure to initalize this via the option <C>InitGraph</C> (for example to an empty list),
 since it is not bound by default. <P/>
 Returns <K>true</K> if the search can be terminated.

@@ -5,7 +5,7 @@ function(n, l)
 		gr!.Index := n;
 		gr!.NrFound := 0;
 		gr!.NrToFind := l;
-		gr!.Output := [];
+		gr!.ComputedNormalSubgroups := [];
 	end;
 end);
 
@@ -21,12 +21,12 @@ end);
 # Should the search be terminated?
 # We are currently computing the subgroups under `rH`.
 # We have computed the normal subgroup `rK`.
-# This function may write data to `gr!.Output`.
+# This function may write data to `gr!.ComputedNormalSubgroups`.
 BindGlobal( "LINS_Index_DoTerminate",
 function(gr, rH, rK)
 	if rK!.Index = gr!.Index then
 		gr!.NrFound := gr!.NrFound + 1;
-		Add(gr!.Output, rK);
+		Add(gr!.ComputedNormalSubgroups, rK);
 		if gr!.NrFound = gr!.NrToFind then
 			return true;
 		fi;
