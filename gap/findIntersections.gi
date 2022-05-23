@@ -36,8 +36,9 @@
 ##  Compute all pairwise intersections $U$ of the group $H$
 ##  with all preceding groups in `gr`, where $[G : U] <= n$.
 ##
-##  Returns true if the search in `gr` can be terminated.
-#############################################################################
+##  Returns a tuple [doTerminate, nrSubgroups].
+##  - doTerminate is true if the search in `gr` can be terminated.
+##  - nrSubgroups is the number of newly found normal subgroups.#############################################################################
 
 InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
   	local
@@ -57,6 +58,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	index,      	# pos-int:		index of the intersection of `H` and `K`
 	U,				# group:		intersection of `H` and `K`
 	rU,				# LINS node:	containing group `U`
+	nrFound,		# pos-int:		number of newly found normal subgroups
 	data;			# tuple:		[`rU`, `isNew`]
 
 	# If the current group is `G`, then continue.
@@ -71,6 +73,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 	n := IndexBound(gr);
 	allSupergroups := Supergroups(rH);
 	allSubgroups := Subgroups(rH);
+	nrFound := 0;
 
 	# Main iteration over all preceding groups in `gr`
 	for level in gr!.Levels{[1 .. PositionProperty(gr!.Levels, level -> level.Index = Index(rH))]} do
@@ -102,7 +105,12 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 			xgroups := Subgroups(rK);
 			subs := Filtered(allSubgroups, s -> s in xgroups);
 			if opts.DoIntersection(gr, rH, rK, index) and not (index in List(subs, Index)) then
+				Info(InfoLINS, 3, LINS_tab3,
+					"Group ", LINS_red, "K = ", K, LINS_black,
+					", index ", LINS_red, Index(G, K), LINS_black, ".");
+
 				# Add the intersection to LINS graph `gr`
+				nrFound := nrFound + 1;
 				U := Intersection(K, H);
 				if opts.DoSetParent then
 					LINS_SetParent(U, G);
@@ -110,15 +118,20 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 
 				data := LINS_AddGroup(gr, U, [rK, rH], false, opts);
 				rU := data[1];
+
+				Info(InfoLINS, 3, LINS_tab3,
+					"Found new normal subgroup ", LINS_red, "U = H ∩ K = ", U, LINS_black,
+					" of index ", LINS_red, Index(G, U), LINS_black, ".");
+
 				if opts.DoTerminate(gr, rH, rU) then
 					gr!.TerminatedUnder := rH;
 					gr!.TerminatedAt := rU;
-					return true;
+					return [true, nrFound];
 				fi;
 				Add(allSubgroups, rU);
 			fi;
 		od;
 	od;
 
-	return false;
+	return [false, nrFound];
 end);
