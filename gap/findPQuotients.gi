@@ -339,9 +339,9 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
 			if isNew then
 				nrFound := nrFound + 1;
 				Info(InfoLINS, 3, LINS_tab3,
-					"Prime ", LINS_red, "p = ", p, LINS_black, ". ",
-					"Found new normal subgroup ", LINS_red, "K = ", K, LINS_black,
-					" of index ", LINS_red, Index(G, K), LINS_black, ".");
+					"Prime ", LINS_red, "p = ", p, LINS_reset, ". ",
+					"Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
+					" of index ", LINS_red, Index(G, K), LINS_reset, ".");
 			fi;
 			if isNew and opts.DoTerminate(gr, rH, rK) then
 				gr!.TerminatedUnder := rH;

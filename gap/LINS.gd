@@ -27,7 +27,7 @@ SetInfoLevel( InfoLINS, 0 );
 BindGlobal("LINS_tab1", "");
 BindGlobal("LINS_tab2", "  ");
 BindGlobal("LINS_tab3", "    ");
-BindGlobal("LINS_black", "\033[30m");
+BindGlobal("LINS_reset", "\033[0m");
 BindGlobal("LINS_red", "\033[31m");
 BindGlobal("LINS_blue", "\033[34m");
 
