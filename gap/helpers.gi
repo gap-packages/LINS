@@ -14,6 +14,15 @@
 
 
 #############################################################################
+####=====================================================================####
+##
+## Primes
+##
+####=====================================================================####
+#############################################################################
+
+
+#############################################################################
 ##  LINS_AllPrimesUpTo
 #############################################################################
 ##  Description:
@@ -24,7 +33,7 @@
 ##  FIXME: Move me into GAP
 #############################################################################
 
-InstallGlobalFunction(LINS_AllPrimesUpTo,
+BindGlobal("LINS_AllPrimesUpTo",
 function(n)
     local i, j, sieve, result;
     if n <= 1000 then
@@ -47,4 +56,77 @@ function(n)
         i := i + 2;
     od;
     return ListBlist([1 .. n], sieve);
+end);
+
+
+#############################################################################
+####=====================================================================####
+##
+## LINS Target Tables
+##
+####=====================================================================####
+#############################################################################
+
+
+#############################################################################
+##  LINS_StringGroup
+#############################################################################
+##  Description:
+##
+##  Tranform a group into a string representation
+#############################################################################
+BindGlobal("LINS_StringGroup",
+function(G)
+	local rep, gens, rels, F, R, i, j;
+	if IsPermGroup(G) or IsMatrixGroup(G) then
+		rep := String(GeneratorsOfGroup(G));
+	elif IsFpGroup(G) then
+		gens := GeneratorsOfGroup(G);
+		rels := RelatorsOfFpGroup(G);
+		F := List([1 .. Length(gens)], i -> Concatenation("F.", String(i)));
+		R := List(rels, LetterRepAssocWord);
+		rep := Concatenation(String(Length(F)), " | ", String(R));
+	else
+		Error("Unsupported representation of group!");
+	fi;
+	return rep;
+end);
+
+#############################################################################
+##  LINS_GroupString
+#############################################################################
+##  Description:
+##
+##  Tranform a string representation into a group
+#############################################################################
+BindGlobal("LINS_GroupString",
+function(rep)
+	local G, L, n, F, R;
+	L := SplitString(rep, "|");
+	# Group is given by generators
+	if Length(L) = 1 then
+		G := Group(EvalString(rep));
+	# Group is given by relators
+	elif Length(L) = 2 then
+		n := EvalString(L[1]);
+		F := FreeGroup(n);
+		R := List(EvalString(L[2]), word -> AssocWordByLetterRep(FamilyObj(F.1), word));
+		G := F / R;
+	else
+		Error("Unsupported representation of group!");
+	fi;
+	return G;
+end);
+
+#############################################################################
+##  LINS_TransformTargets
+#############################################################################
+##  Description:
+##
+##  Tranform an entry of the targets list
+#############################################################################
+BindGlobal("LINS_TransformTargets",
+function(entry)
+    entry[2] := LINS_GroupString(entry[2]);
+    return entry;
 end);

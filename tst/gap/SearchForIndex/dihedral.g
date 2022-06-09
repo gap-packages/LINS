@@ -13,14 +13,24 @@
 ##  - 3. if n is even, two times D(n)
 #############################################################################
 
-TestDihedral := function(N, m, l)
+TestDihedral := function(N, m, l, UseLIS...)
     local G, L, Current, n, k;
+
+    if Length(UseLIS) > 1 then
+		Error("Unknown number of arguments!");
+	elif Length(UseLIS) = 1 then
+		UseLIS := UseLIS[1];
+	else
+		UseLIS := false;
+	fi;
+
     if not IsEvenInt(N) then
         Error("Dihedral group has even size!");
     fi;
+
     n := N / 2;
     G := DihedralGroup(N);
-    L := ComputedNormalSubgroups(LowIndexNormalSubgroupsSearchForIndex(G, m, l));
+    L := ComputedNormalSubgroups(LowIndexNormalSubgroupsSearchForIndex(G, m, l, rec(UseLIS := UseLIS)));
 
     if m = 2 then
         # two times D(n) and C(n/2)

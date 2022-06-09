@@ -20,6 +20,7 @@
 ReadPackage( "LINS", "gap/helpers.gi");
 
 ReadPackage( "LINS", "gap/targetsQuotient.gi");
+ReadPackage( "LINS", "gap/targetsQuotientUseLIS.gi");
 ReadPackage( "LINS", "gap/targetsCharSimple.gi");
 
 ReadPackage( "LINS", "gap/LINS.gi");
@@ -30,3 +31,5 @@ ReadPackage( "LINS", "gap/findPQuotients.gi");
 ReadPackage( "LINS", "gap/findIntersections.gi");
 
 ReadPackage( "LINS", "gap/LINS_Index.gi");
+
+# ReadPackage( "LINS", "gap/createTables.gi");

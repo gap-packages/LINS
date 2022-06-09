@@ -26,7 +26,7 @@ jobs:
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
           HPCGAP: ${{ matrix.HPCGAP }}
-          GAP_PKGS_TO_BUILD: "io profiling grape"
+          GAP_PKGS_TO_BUILD: "io profiling grape cohomolo"
       - uses: gap-actions/run-test-for-packages@v1
 
   # The documentation job

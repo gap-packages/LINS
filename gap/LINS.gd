@@ -272,12 +272,3 @@ DeclareGlobalFunction( "LINS_FindIntersections" );
 
 DeclareGlobalFunction( "LINS_IsSubgroupFp" );
 DeclareGlobalFunction( "LINS_SetParent" );
-
-DeclareGlobalFunction( "LINS_AllPrimesUpTo" );
-
-#############################################################################
-## functions for precomputed data
-#############################################################################
-
-DeclareGlobalFunction( "LINS_CreateTargetsCharSimple" );
-DeclareGlobalFunction( "LINS_CreateTargetsQuotients" );

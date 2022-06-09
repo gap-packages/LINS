@@ -35,6 +35,8 @@ It also sets the property <C>IsNormalInParent</C> to <K>true</K> for every subgr
 
 This should be only disabled for debugging or testing purposes.
 </Item>
+
+
 <Mark><C>InitGraph</C></Mark>
 <Item>
 a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>.
@@ -42,48 +44,76 @@ It can popullate the record object <A>gr</A> via calls like <C>gr!.NAME = VALUE<
 in order to initialize certain components that might be needed by other functions later on
 (see option <C>DoTerminate</C>).
 </Item>
+
+
 <Mark><C>DoCut</C></Mark>
 <Item>
 a function that takes as arguments a <K>LinsGraph</K> <A>gr</A> and a <K>LinsNode</K> <A>rH</A>. <P/>
 Returns <K>true</K> if subgroups under <A>rH</A> should not be computed,
 i.e. the branch will be cut under the node <A>rH</A>.
 </Item>
+
+
 <Mark><C>DoTerminate</C></Mark>
 <Item>
 a function that takes as arguments a <K>LinsGraph</K> <A>gr</A> and two <K>LinsNodes</K> <A>rH</A> and <A>rK</A>.
 We are currently computing the subgroups under <A>rH</A> and found the normal subgroup <A>rK</A>. <P/>
+
 This function may write data to <C>gr!.ComputedNormalSubgroups`</C>.
 Make sure to initalize this via the option <C>InitGraph</C> (for example to an empty list),
 since it is not bound by default. <P/>
+
 Returns <K>true</K> if the search can be terminated.
 </Item>
+
+
+<Mark><C>UseLIS</C></Mark>
+<Item>
+<K>false</K> to use the new procedure with <C>GQuotient</C> calls in <C>LINS_FindTQuotients</C>.<P/>
+
+<K>true</K> to use the old procedure with a <C>LowIndexSubgroupsFpGroup</C> call in <C>LINS_FindTQuotients</C>.
+</Item>
+
+
 <Mark><C>FilterTQuotients</C></Mark>
 <Item>
-a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A> and a list of targets <A>QQ</A>
+a function that takes as an argument a <K>LinsGraph</K> <A>gr</A> and a list of <A>targets</A>
 following the specifications of <C>LINS_FindTQuotients</C>. <P/>
 
-For a call via <C>LowIndexNormalSubgroupsSearch</C>, we have <C>rH = LinsRoot(gr)</C> and <C>QQ = LINS_TargetsQuotient</C>. <P/>
+The value of <C>targets</C> in a call via <C>LowIndexNormalSubgroupsSearch</C>
+depends on the value of the option <C>UseLIS</C>.<P/>
 
-Returns an index list from the targets <A>QQ</A>, that will be used by <C>LINS_FindTQuotients</C>.
+If <C>UseLIS</C> is false, we have <C>targets = LINS_TargetsQuotient</C>. <P/>
+
+If <C>UseLIS</C> is true, we have <C>targets = LINS_TargetsQuotientUseLIS</C>. <P/>
+
+Returns a sublist from <A>targets</A>, that will be used by <C>LINS_FindTQuotients</C>.
 </Item>
+
+
 <Mark><C>DoIntersection</C></Mark>
 <Item>
 a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, two <K>LinsNodes</K> <A>rH</A> and <A>rK</A>, and a positive integer <A>i</A>. Let <M>G</M> be the group that is contained in the root of the search graph. <P/>
 
 Returns <K>true</K> if the intersection <M>U</M> of the groups in <A>rH</A> and <A>rK</A> with index <M>[G : U] = i</M> should be computed.
 </Item>
+
+
 <Mark><C>DoPQuotient</C></Mark>
 <Item>
 a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A> and a prime <A>p</A>. <P/>
 
 Returns <K>true</K> if <A>p</A>-quotients under <A>rH</A> should be computed for the prime <A>p</A>.
 </Item>
+
+
 <Mark><C>DoPModule</C></Mark>
 <Item>
 a function that takes as an argument a <K>LinsGraph</K> <A>gr</A>, a <K>LinsNode</K> <A>rH</A>, a prime <A>p</A> and a positive integer <A>i</A>. Let <M>G</M> be the group that is contained in the root of the search graph. <P/>
 
 Returns <K>true</K> if the normal subgroup <M>K</M> of index <M>[G : K] = i</M>
-with elementary abelian <A>p</A>-quotient in <A>rH</A> should be computed.</Item>
+with elementary abelian <A>p</A>-quotient in <A>rH</A> should be computed.
+</Item>
 </List>
 
 </Section>

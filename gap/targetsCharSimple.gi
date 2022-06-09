@@ -38,6 +38,8 @@
 ##  The list `LINS_TargetsCharSimple` is sorted by information $1$.
 #############################################################################
 
+BindGlobal("LINS_TargetsCharSimple_Index", 10000000);
+
 BindGlobal("LINS_TargetsCharSimple",
 [ [              60,           [ 2 ],          "A5^1" ],
   [             168,           [ 2 ],    "PSL(2,7)^1" ],
