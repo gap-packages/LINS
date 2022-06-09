@@ -99,7 +99,7 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	I := Set(opts.FilterTQuotients(gr, rH, QQ));
 
 	Info(InfoLINS, 3, LINS_tab3,
-		"Search with index list ", LINS_red, I, LINS_black, ".");
+		"Search with index list ", LINS_red, I, LINS_reset, ".");
 
 	# If the index list is empty, we have nothing to do.
 	if Length(I) = 0 then
@@ -113,9 +113,9 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 	IH := Image(Iso);
 	LL := LowIndexSubgroupsFpGroup(IH, m);
 	Info(InfoLINS, 3, LINS_tab3,
-		LINS_blue, "LowIndexSubgroups ", LINS_black, "computed ",
-		LINS_red, Length(LL), LINS_black, " subgroups up to index ",
-		LINS_red, m, LINS_black, ".");
+		LINS_blue, "LowIndexSubgroups ", LINS_reset, "computed ",
+		LINS_red, Length(LL), LINS_reset, " subgroups up to index ",
+		LINS_red, m, LINS_reset, ".");
 
 	# Search every subgroup `L` with an index in `H` contained in `I`.
 	# Then calculate the core of `L` and try to add the new subgroup to `gr`.
@@ -136,8 +136,8 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, rH, QQ, opts)
 					if isNew then
 						nrFound := nrFound + 1;
 						Info(InfoLINS, 3, LINS_tab3,
-							"Found new normal subgroup ", LINS_red, "K = ", K, LINS_black,
-							" of index ", LINS_red, Index(G, K), LINS_black, ".");
+							"Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
+							" of index ", LINS_red, Index(G, K), LINS_reset, ".");
 					fi;
 					if isNew and opts.DoTerminate(gr, rH, rK) then
 						gr!.TerminatedUnder := rH;

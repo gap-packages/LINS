@@ -106,8 +106,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 			subs := Filtered(allSubgroups, s -> s in xgroups);
 			if opts.DoIntersection(gr, rH, rK, index) and not (index in List(subs, Index)) then
 				Info(InfoLINS, 3, LINS_tab3,
-					"Group ", LINS_red, "K = ", K, LINS_black,
-					", index ", LINS_red, Index(G, K), LINS_black, ".");
+					"Group ", LINS_red, "K = ", K, LINS_reset,
+					", index ", LINS_red, Index(G, K), LINS_reset, ".");
 
 				# Add the intersection to LINS graph `gr`
 				nrFound := nrFound + 1;
@@ -120,8 +120,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
 				rU := data[1];
 
 				Info(InfoLINS, 3, LINS_tab3,
-					"Found new normal subgroup ", LINS_red, "U = H ∩ K = ", U, LINS_black,
-					" of index ", LINS_red, Index(G, U), LINS_black, ".");
+					"Found new normal subgroup ", LINS_red, "U = H ∩ K = ", U, LINS_reset,
+					" of index ", LINS_red, Index(G, U), LINS_reset, ".");
 
 				if opts.DoTerminate(gr, rH, rU) then
 					gr!.TerminatedUnder := rH;
