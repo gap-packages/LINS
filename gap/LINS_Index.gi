@@ -36,19 +36,19 @@ end);
 
 # Compute the index list from the targets
 BindGlobal( "LINS_Index_FilterTQuotients",
-function(gr, rH, QQ)
-local n, I, Q;
+function(gr, targets)
+local n, filteredTargets, entry;
 	n := IndexBound(gr);
-	I := [];
-	for Q in QQ do
-		if Q[1] > n / rH!.Index then
+	filteredTargets := [];
+	for entry in targets do
+		if entry[1] > n then
 			break;
 		fi;
-		if RemInt(gr!.Index, Q[1]) = 0 then
-			Add(I, Q[2]);
+		if RemInt(gr!.Index, entry[1]) = 0 then
+			Add(filteredTargets, entry);
 		fi;
 	od;
-	return I;
+	return filteredTargets;
 end);
 
 # Whether to compute the intersection of the groups `rH` and `rK`
@@ -81,7 +81,7 @@ function(gr, rH, p, index)
 end);
 
 # See documentation
-InstallGlobalFunction( LowIndexNormalSubgroupsSearchForIndex, function(G, n, l)
+InstallGlobalFunction( LowIndexNormalSubgroupsSearchForIndex, function(G, n, l, moreOpts...)
 	local opts, initGraph;
 
 	if not IsGroup(G) then
@@ -96,6 +96,14 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearchForIndex, function(G, n, l)
 		ErrorNoReturn("<l> must be a positive integer or infinity!");
 	fi;
 
+	if Length(moreOpts) > 1 then
+		Error("Unknown number of arguments!");
+	elif Length(moreOpts) = 1 then
+		moreOpts := moreOpts[1];
+	else
+		moreOpts := rec();
+	fi;
+
 	initGraph := LINS_Index_InitGraph_Wrapper(n, l);
 
 	opts := rec(
@@ -107,6 +115,8 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearchForIndex, function(G, n, l)
 		DoPQuotient := LINS_Index_DoPQuotient,
 		DoPModule := LINS_Index_DoPModule
 	);
+
+	LINS_AppendOptions(opts, moreOpts);
 
 	return LowIndexNormalSubgroupsSearch(G, n, opts);
 end);

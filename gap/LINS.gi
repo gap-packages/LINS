@@ -215,19 +215,17 @@ end);
 
 # Compute the index list from the targets
 BindGlobal( "LINS_FilterTQuotients",
-function(gr, rH, QQ)
-local G, H, n, I, Q;
-	G := Grp(LinsRoot(gr));
-	H := Grp(rH);
+function(gr, targets)
+local n, filteredTargets, entry;
 	n := IndexBound(gr);
-	I := [];
-	for Q in QQ do
-		if Q[1] > n / Index(G,H) then
+	filteredTargets := [];
+	for entry in targets do
+		if entry[1] > n then
 			break;
 		fi;
-		Add(I, Q[2]);
+		Add(filteredTargets, entry);
 	od;
-	return I;
+	return filteredTargets;
 end);
 
 # Whether to compute the intersection of the groups `rH` and `rK`
@@ -253,6 +251,7 @@ end);
 # Default options, immutable entries
 BindGlobal( "LINS_DefaultOptions", Immutable(rec(
     DoSetParent := true,
+	UseLIS := false,
 	InitGraph := LINS_InitGraph,
 	DoCut := LINS_DoCut,
 	DoTerminate := LINS_DoTerminate,
@@ -273,6 +272,18 @@ function(optionsBase, optionsUpdate)
     od;
 end);
 
+BindGlobal( "LINS_AppendOptions",
+function(optionsBase, optionsUpdate)
+    local r;
+    for r in RecNames(optionsUpdate) do
+        if IsBound(optionsBase.(r)) then
+            ErrorNoReturn("Option already set: ", r);
+        fi;
+        optionsBase.(r) := optionsUpdate.(r);
+    od;
+end);
+
+
 
 #############################################################################
 ####=====================================================================####
@@ -283,11 +294,22 @@ end);
 #############################################################################
 
 # The maximal index bound for the algorithm `LowIndexNormalSubgroupsSearch`
-BindGlobal("LINS_MaxIndex", 10000000);
+BindGlobal("LINS_MaxIndex", Minimum(
+	LINS_TargetsCharSimple_Index,
+	LINS_TargetsQuotient_Index
+	));
+
+# The maximal index bound for the algorithm `LowIndexNormalSubgroupsSearch`,
+# if the `UseLIS` parameter is set to true.
+BindGlobal("LINS_MaxIndex_UseLIS", Minimum(
+	LINS_TargetsCharSimple_Index,
+	LINS_TargetsQuotient_UseLIS_Index
+	));
+
 
 # See documentation
 InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
-	local G, n, phi, opts, gr, i, j, l, level, r, s, primes, data, nrFound, res, par;
+	local G, n, phi, opts, maxIndex, gr, i, j, l, level, r, s, primes, data, nrFound, res, par;
 
 	if Length(args) < 2 or Length(args) > 3 then
 		ErrorNoReturn("Unknown number of arguments!");
@@ -309,9 +331,15 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 		LINS_SetOptions(opts, args[3]);
 	fi;
 
+	if opts.UseLIS then
+		maxIndex := LINS_MaxIndex_UseLIS;
+	else
+		maxIndex := LINS_MaxIndex;
+	fi;
+
 	# Check if we can work with the index
-	if n > LINS_MaxIndex then
-		Error("The index exceeds the maximal index bound N = ", LINS_MaxIndex, " of the algorithm!\n",
+	if n > maxIndex then
+		Error("The index exceeds the maximal index bound N = ", maxIndex, " of the algorithm!\n",
 			  "If you proceed, not all normal subgroups of index larger than N may be found.\n");
 	fi;
 
@@ -339,7 +367,7 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearch, function(args...)
 	Info(InfoLINS, 2, LINS_tab2,
 		"Compute ", LINS_blue, "T-Quotients ", LINS_reset, "under ", LINS_red, "G", LINS_reset, ".");
 
-	data := LINS_FindTQuotients(gr, LinsRoot(gr), LINS_TargetsQuotient, opts);
+	data := LINS_FindTQuotients(gr, opts);
 	res := data[1];
 	nrFound := data[2];
 

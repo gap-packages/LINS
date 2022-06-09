@@ -14,10 +14,19 @@
 ##  with the GAP package "grape".
 #############################################################################
 
-CompareResults := function(G, n, indexCor, supersUnfilteredCor)
+CompareResults := function(G, n, indexCor, supersUnfilteredCor, UseLIS...)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 
-    L := List(LowIndexNormalSubgroupsSearch(G, n, rec(DoSetParent := false)));
+    if Length(UseLIS) > 1 then
+		Error("Unknown number of arguments!");
+	elif Length(UseLIS) = 1 then
+		UseLIS := UseLIS[1];
+	else
+		UseLIS := false;
+	fi;
+
+
+    L := List(LowIndexNormalSubgroupsSearch(G, n, rec(DoSetParent := false, UseLIS := UseLIS)));
 
     # All groups have to be normal
     if ForAny(L, x -> not IsNormal(L[1]!.Grp, x!.Grp)) then

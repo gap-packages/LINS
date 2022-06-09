@@ -6,12 +6,11 @@
 #
 
 # Some tests need to check for graph isomorphism using grape
-LoadPackage( "grape" );
 LoadPackage("cohomolo");
 LoadPackage( "LINS" );
 ReadPackage( "LINS", "gap/createTables.gi");;
 
-TestDirectory(DirectoriesPackageLibrary( "LINS", "tst/files" ),
+TestDirectory(DirectoriesPackageLibrary( "LINS", "tst/files/tables" ),
   rec(exitGAP := true));
 
 FORCE_QUIT_GAP(1); # if we ever get here, there was an error
