@@ -7,10 +7,10 @@
                  presented group up to some given index bound. [101X
   
   
-                                      0.4
+                                      0.5
   
   
-                                  23 May 2022
+                               26 September 2022
   
   
                                 Friedrich Rober
