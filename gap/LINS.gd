@@ -49,8 +49,9 @@ BindGlobal( "LinsNodeType",
 
 DeclareOperation( "LinsNode", [ IsGroup, IsPosInt ]);
 
-# DeclareAttribute( "Grp", IsLinsNode, "mutable" ); # already defined in recog
-# DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
+DeclareAttribute( "Grp", IsLinsNode, "mutable" ); # already defined in recog
+
+DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
 
 ## <#GAPDoc Label="MinimalSupergroups">
 ## <ManSection>
