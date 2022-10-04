@@ -77,19 +77,19 @@ end);
 #############################################################################
 BindGlobal("LINS_StringGroup",
 function(G)
-	local rep, gens, rels, F, R, i, j;
-	if IsPermGroup(G) or IsMatrixGroup(G) then
-		rep := String(GeneratorsOfGroup(G));
-	elif IsFpGroup(G) then
-		gens := GeneratorsOfGroup(G);
-		rels := RelatorsOfFpGroup(G);
-		F := List([1 .. Length(gens)], i -> Concatenation("F.", String(i)));
-		R := List(rels, LetterRepAssocWord);
-		rep := Concatenation(String(Length(F)), " | ", String(R));
-	else
-		Error("Unsupported representation of group!");
-	fi;
-	return rep;
+    local rep, gens, rels, F, R, i, j;
+    if IsPermGroup(G) or IsMatrixGroup(G) then
+        rep := String(GeneratorsOfGroup(G));
+    elif IsFpGroup(G) then
+        gens := GeneratorsOfGroup(G);
+        rels := RelatorsOfFpGroup(G);
+        F := List([1 .. Length(gens)], i -> Concatenation("F.", String(i)));
+        R := List(rels, LetterRepAssocWord);
+        rep := Concatenation(String(Length(F)), " | ", String(R));
+    else
+        Error("Unsupported representation of group!");
+    fi;
+    return rep;
 end);
 
 #############################################################################
@@ -101,21 +101,21 @@ end);
 #############################################################################
 BindGlobal("LINS_GroupString",
 function(rep)
-	local G, L, n, F, R;
-	L := SplitString(rep, "|");
-	# Group is given by generators
-	if Length(L) = 1 then
-		G := Group(EvalString(rep));
-	# Group is given by relators
-	elif Length(L) = 2 then
-		n := EvalString(L[1]);
-		F := FreeGroup(n);
-		R := List(EvalString(L[2]), word -> AssocWordByLetterRep(FamilyObj(F.1), word));
-		G := F / R;
-	else
-		Error("Unsupported representation of group!");
-	fi;
-	return G;
+    local G, L, n, F, R;
+    L := SplitString(rep, "|");
+    # Group is given by generators
+    if Length(L) = 1 then
+        G := Group(EvalString(rep));
+    # Group is given by relators
+    elif Length(L) = 2 then
+        n := EvalString(L[1]);
+        F := FreeGroup(n);
+        R := List(EvalString(L[2]), word -> AssocWordByLetterRep(FamilyObj(F.1), word));
+        G := F / R;
+    else
+        Error("Unsupported representation of group!");
+    fi;
+    return G;
 end);
 
 #############################################################################
