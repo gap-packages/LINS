@@ -18,12 +18,12 @@ CompareResults := function(G, n, indexCor, supersUnfilteredCor, UseLIS...)
     local L, path, index, supersUnfiltered, supers, supersCor, m, colour, gamma, gammaCor;
 
     if Length(UseLIS) > 1 then
-		Error("Unknown number of arguments!");
-	elif Length(UseLIS) = 1 then
-		UseLIS := UseLIS[1];
-	else
-		UseLIS := false;
-	fi;
+        Error("Unknown number of arguments!");
+    elif Length(UseLIS) = 1 then
+        UseLIS := UseLIS[1];
+    else
+        UseLIS := false;
+    fi;
 
 
     L := List(LowIndexNormalSubgroupsSearch(G, n, rec(DoSetParent := false, UseLIS := UseLIS)));

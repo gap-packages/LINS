@@ -20,41 +20,41 @@ BindGlobal("Terminate", MakeImmutable("Terminate"));
 # false, if K was already found beforehand
 BindGlobal("LINS_AddGroup_Caller",
 function(gr, rH, K, opts, infoText)
-	local
-	G,      # group: 		located in the root node of the LINS graph `gr`.
-	n,		# pos-int: 		index bound of LINS graph `gr`.
-	data,	# tuple:		[`rK`, `isNew`]
-	rK,		# LINS node:	containing group `K`
-	isNew;	# boolean:		whether the group `K` is new in `gr`
+    local
+    G,      # group:        located in the root node of the LINS graph `gr`.
+    n,      # pos-int:      index bound of LINS graph `gr`.
+    data,   # tuple:        [`rK`, `isNew`]
+    rK,     # LINS node:    containing group `K`
+    isNew;  # boolean:      whether the group `K` is new in `gr`
 
-	G := Grp(LinsRoot(gr));
-	n := IndexBound(gr);
+    G := Grp(LinsRoot(gr));
+    n := IndexBound(gr);
 
-	if opts.DoSetParent then
-		LINS_SetParent(K, G);
-	fi;
+    if opts.DoSetParent then
+        LINS_SetParent(K, G);
+    fi;
 
-	if Index(G, K) <= n then
-		data := LINS_AddGroup(gr, K, [rH], true, opts);
-		rK := data[1];
-		isNew := data[2];
+    if Index(G, K) <= n then
+        data := LINS_AddGroup(gr, K, [rH], true, opts);
+        rK := data[1];
+        isNew := data[2];
 
-		if isNew then
-			Info(InfoLINS, 3, LINS_tab3, infoText,
-				"Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
-				" of index ", LINS_red, Index(G, K), LINS_reset, ".");
+        if isNew then
+            Info(InfoLINS, 3, LINS_tab3, infoText,
+                "Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
+                " of index ", LINS_red, Index(G, K), LINS_reset, ".");
 
-			if opts.DoTerminate(gr, rH, rK) then
-				gr!.TerminatedUnder := rH;
-				gr!.TerminatedAt := rK;
-				return Terminate;
-			else
-				return true;
-			fi;
-		fi;
-	fi;
+            if opts.DoTerminate(gr, rH, rK) then
+                gr!.TerminatedUnder := rH;
+                gr!.TerminatedAt := rK;
+                return Terminate;
+            else
+                return true;
+            fi;
+        fi;
+    fi;
 
-	return false;
+    return false;
 end);
 
 #############################################################################
@@ -62,8 +62,8 @@ end);
 #############################################################################
 ##  Input:
 ##
-##	- gr : 		  LINS graph
-##  - opts : 	  LINS options (see documentation)
+##  - gr :        LINS graph
+##  - opts :      LINS options (see documentation)
 #############################################################################
 ##  Usage:
 ##
@@ -109,7 +109,7 @@ end);
 ##
 ##  - 1 : the group order $|Q|$
 ##  - 2 : an index of some non-trivial subgroup $S < Q$,
-##		  that has trivial core in $Q$
+##        that has trivial core in $Q$
 ##
 ##  The list $targets$ is sorted by information $1$.
 ##
@@ -132,86 +132,86 @@ end);
 #############################################################################
 
 InstallGlobalFunction( LINS_FindTQuotients, function(gr, opts)
-	local
-	rG,					# LINS node:	root node of LINS graph `gr`.
-	G,      			# group: 		located in the root node `rG`.
-	iso,				# iso:			isomorphism from original group `H` to fp-group `G`
-	H,      			# group: 		source of `iso`.
-	n,				 	# pos-int: 		index bound of LINS graph `gr`.
-	targets,			# list:			list of targets
-	filteredTargets, 	# list:			filtered list of targets
-	I,      			# [pos-int]: 	every index we need to check
-	m,      			# pos-int: 		maximum of `I`
-	LL,     			# [group]: 		all subgroups of `IH` with index at most `m`
-	L,      			# group: 		loop var, subgroup in `LL`
-	QQ,     			# [group]: 	 	list of quotient isomorphism types
-	Q,      			# group: 		loop var, quotient in `I`
-	homs,   			# [hom]: 		list of homomorphisms into `Q`
-	hom,    			# hom: 			loop var, homomorphism in `L` from `H` into `Q`
-	K,      			# group: 		normal subgroup of `G` (with Q-quotient)
-	data,				# state:		bool or Terminate
-	nrFound;			# pos-int:		number of newly found normal subgroups
+    local
+    rG,                 # LINS node:    root node of LINS graph `gr`.
+    G,                  # group:        located in the root node `rG`.
+    iso,                # iso:          isomorphism from original group `H` to fp-group `G`
+    H,                  # group:        source of `iso`.
+    n,                  # pos-int:      index bound of LINS graph `gr`.
+    targets,            # list:         list of targets
+    filteredTargets,    # list:         filtered list of targets
+    I,                  # [pos-int]:    every index we need to check
+    m,                  # pos-int:      maximum of `I`
+    LL,                 # [group]:      all subgroups of `IH` with index at most `m`
+    L,                  # group:        loop var, subgroup in `LL`
+    QQ,                 # [group]:      list of quotient isomorphism types
+    Q,                  # group:        loop var, quotient in `I`
+    homs,               # [hom]:        list of homomorphisms into `Q`
+    hom,                # hom:          loop var, homomorphism in `L` from `H` into `Q`
+    K,                  # group:        normal subgroup of `G` (with Q-quotient)
+    data,               # state:        bool or Terminate
+    nrFound;            # pos-int:      number of newly found normal subgroups
 
-	# Initialize data from input.
-	rG := LinsRoot(gr);
-	G := Grp(rG);
-	if IsBound(gr!.Iso) then
-		iso := gr!.Iso;
-	else
-		iso := IdentityMapping(G);
-	fi;
-	H := Source(iso);
-	n := IndexBound(gr);
-	nrFound := 0;
+    # Initialize data from input.
+    rG := LinsRoot(gr);
+    G := Grp(rG);
+    if IsBound(gr!.Iso) then
+        iso := gr!.Iso;
+    else
+        iso := IdentityMapping(G);
+    fi;
+    H := Source(iso);
+    n := IndexBound(gr);
+    nrFound := 0;
 
-	# Filter the targets.
-	if opts.UseLIS then
-		targets := LINS_TargetsQuotient_UseLIS;
-	else
-		targets := LINS_TargetsQuotient;
-	fi;
+    # Filter the targets.
+    if opts.UseLIS then
+        targets := LINS_TargetsQuotient_UseLIS;
+    else
+        targets := LINS_TargetsQuotient;
+    fi;
 
-	filteredTargets := Set(opts.FilterTQuotients(gr, targets));
+    filteredTargets := Set(opts.FilterTQuotients(gr, targets));
 
-	Info(InfoLINS, 3, LINS_tab3,
-		"Search with index list ", LINS_red, I, LINS_reset, ".");
+    Info(InfoLINS, 3, LINS_tab3,
+        "Search with index list ", LINS_red, I, LINS_reset, ".");
 
-	# If the target list is empty, we have nothing to do.
-	if Length(filteredTargets) = 0 then
-		return [false, 0];
-	fi;
+    # If the target list is empty, we have nothing to do.
+    if Length(filteredTargets) = 0 then
+        return [false, 0];
+    fi;
 
-	# Compute every subgroup of `G` with quotient `Q` in `filteredTargets`.
-	if opts.UseLIS then
-		I := List(filteredTargets, entry -> entry[2]);
-		m := Maximum(I);
-		LL := LowIndexSubgroupsFpGroup(G, m);
-		for L in LL do
-			if Position(I, Index(G, L)) <> fail then
-				K := Core(G, L);
-				data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
-				if data = true then
-					nrFound := nrFound + 1;
-				elif data = Terminate then
-					return [true, nrFound + 1];
-				fi;
-			fi;
-		od;
-	else
-		QQ := List(filteredTargets, entry -> entry[2]);
-		for Q in QQ do
-			homs := GQuotients(H, Q);
-			for hom in homs do
-				K := Image(iso, Kernel(hom));
-				data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
-				if data = true then
-					nrFound := nrFound + 1;
-				elif data = Terminate then
-					return [true, nrFound + 1];
-				fi;
-			od;
-		od;
-	fi;
+    # Compute every subgroup of `G` with quotient `Q` in `filteredTargets`.
+    if opts.UseLIS then
+        I := List(filteredTargets, entry -> entry[2]);
+        m := Maximum(I);
+        LL := LowIndexSubgroupsFpGroup(G, m);
+        for L in LL do
+            if Position(I, Index(G, L)) <> fail then
+                K := Core(G, L);
+                data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
+                if data = true then
+                    nrFound := nrFound + 1;
+                elif data = Terminate then
+                    return [true, nrFound + 1];
+                fi;
+            fi;
+        od;
+    else
+        QQ := List(filteredTargets, entry -> entry[2]);
+        for Q in QQ do
+            homs := GQuotients(H, Q);
+            for hom in homs do
+                K := Image(iso, Kernel(hom));
+                data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
+                if data = true then
+                    nrFound := nrFound + 1;
+                elif data = Terminate then
+                    return [true, nrFound + 1];
+                fi;
+            od;
+        od;
+    fi;
 
-	return [false, nrFound];
+    return [false, nrFound];
 end);

@@ -58,8 +58,8 @@ DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
 ## <Attr Name="MinimalSupergroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
-##	 and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
-## 	 Returns a list of all <C>LinsNodes</C> containing
+##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
+##   Returns a list of all <C>LinsNodes</C> containing
 ##   minimal <M>G</M>-normal supergroups of <M>H</M>.
 ## </Description>
 ## </ManSection>
@@ -71,8 +71,8 @@ DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
 ## <Attr Name="MinimalSubgroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
-##	 and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
-## 	 Returns a list of all <C>LinsNodes</C> containing
+##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
+##   Returns a list of all <C>LinsNodes</C> containing
 ##   minimal <M>G</M>-normal subgroups of <M>H</M>.
 ## </Description>
 ## </ManSection>
@@ -87,8 +87,8 @@ DeclareProperty( "IsCut", IsLinsNode, "mutable" );
 ## <Oper Name="Supergroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
-##	 and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
-## 	 Returns a list of all <C>LinsNodes</C> containing
+##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
+##   Returns a list of all <C>LinsNodes</C> containing
 ##   <M>G</M>-normal supergroups of <M>H</M>.
 ## </Description>
 ## </ManSection>
@@ -100,8 +100,8 @@ DeclareOperation( "Supergroups", [IsLinsNode]);
 ## <Oper Name="Subgroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
-##	 and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
-## 	 Returns a list of all <C>LinsNodes</C> containing
+##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
+##   Returns a list of all <C>LinsNodes</C> containing
 ##   <M>G</M>-normal subgroups of <M>H</M>.
 ## </Description>
 ## </ManSection>
@@ -130,7 +130,7 @@ DeclareOperation( "LinsGraph", [ IsGroup , IsPosInt]);
 ## <ManSection>
 ## <Attr Name="ComputedNormalSubgroups" Arg="gr"/>
 ## <Description>
-## 	 Returns the normal subgroups that the search graph attempted to find. <P/>
+##   Returns the normal subgroups that the search graph attempted to find. <P/>
 ##   If the <C>ComputedNormalSubgroups</C> component of the graph is not set,
 ##   this defaults to a call of <Ref Meth="List" Label="for a lins graph"/>.
 ## </Description>
@@ -142,7 +142,7 @@ DeclareAttribute( "ComputedNormalSubgroups", IsLinsGraph, "mutable" );
 ## <ManSection>
 ## <Attr Name="IndexBound" Arg="gr"/>
 ## <Description>
-## 	 Returns the index bound for the search in <A>gr</A>.
+##   Returns the index bound for the search in <A>gr</A>.
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
@@ -152,8 +152,8 @@ DeclareAttribute( "IndexBound", IsLinsGraph, "mutable" );
 ## <ManSection>
 ## <Attr Name="LinsRoot" Arg="gr"/>
 ## <Description>
-## 	 Returns the root node of the graph. <P/>
-##	 If the search was started in the finitely presented group <M>G</M>,
+##   Returns the root node of the graph. <P/>
+##   If the search was started in the finitely presented group <M>G</M>,
 ##   this will return the <C>LinsNode</C> that contains <M>G</M>.
 ## </Description>
 ## </ManSection>
@@ -164,7 +164,7 @@ DeclareAttribute( "LinsRoot", IsLinsGraph, "mutable" );
 ## <ManSection>
 ## <Attr Name="LinsOptions" Arg="gr"/>
 ## <Description>
-## 	 Returns the search options of the graph <A>gr</A>.
+##   Returns the search options of the graph <A>gr</A>.
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
@@ -179,8 +179,8 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ## <ManSection>
 ## <Func Name="LowIndexNormalSubgroupsSearch" Arg="G, n[, opts]"/>
 ## <Description>
-## 	 Given a finitely presented group <A>G</A> and some index bound <A>n</A>,
-## 	 this will start a search in the normal subgroup lattice
+##   Given a finitely presented group <A>G</A> and some index bound <A>n</A>,
+##   this will start a search in the normal subgroup lattice
 ##   of <A>G</A> up to index <A>n</A>. <P/>
 ##
 ##   The optional argument <A>opts</A> must be a record containing
@@ -192,11 +192,11 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ##   with index at most <A>n</A> are found. <P/>
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
-##	 The group will be automatically replaced with an fp-group
+##   The group will be automatically replaced with an fp-group
 ##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
-##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
+##   <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
 ## </Returns>
 ## </ManSection>
 ## <#/GAPDoc>
@@ -214,11 +214,11 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearch" );
 ##   without any options. <P/>
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
-##	 The group will be automatically replaced with an fp-group
+##   The group will be automatically replaced with an fp-group
 ##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
-##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
+##   <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
 ## </Returns>
 ## </ManSection>
 ## <#/GAPDoc>
@@ -241,11 +241,11 @@ DeclareGlobalFunction( "LowIndexNormalSubgroupsSearchForAll" );
 ##   with index <A>n</A> were computed. <P/>
 ##
 ##   It is possible to call the function with a group <A>G</A> that is not an fp-group.
-##	 The group will be automatically replaced with an fp-group
+##   The group will be automatically replaced with an fp-group
 ##   (see <Ref Meth="IsomorphismFpGroup" Label="for a lins graph"/>).
 ## </Description>
 ## <Returns>
-##	 <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
+##   <C>LinsGraph</C> encoding a partial normal subgroup lattice of <A>G</A>
 ## </Returns>
 ## </ManSection>
 ## <#/GAPDoc>
