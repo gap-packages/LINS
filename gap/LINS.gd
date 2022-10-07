@@ -264,11 +264,3 @@ DeclareGlobalFunction( "LINS_FindPModules" );
 DeclareGlobalFunction( "LINS_MustCheckP" );
 
 DeclareGlobalFunction( "LINS_FindIntersections" );
-
-
-#############################################################################
-## helper function
-#############################################################################
-
-DeclareGlobalFunction( "LINS_IsSubgroupFp" );
-DeclareGlobalFunction( "LINS_SetParent" );
