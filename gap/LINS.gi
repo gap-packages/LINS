@@ -88,7 +88,7 @@ function(r)
     return s;
 end);
 
-BindGlobal( "LINS_allNodes",
+BindGlobal( "LINS_AllNodes",
 function(r, next)
     local queue, s, t, nextNodes, allNodes;
     queue := [r];
@@ -108,12 +108,12 @@ end);
 
 InstallMethod( LinsNodeSupergroups, "for Lins Node", [ IsLinsNode],
 function(r)
-    return LINS_allNodes(r, LinsNodeMinimalSupergroups);
+    return LINS_AllNodes(r, LinsNodeMinimalSupergroups);
 end);
 
 InstallMethod( LinsNodeSubgroups, "for Lins Node", [ IsLinsNode],
 function(r)
-    return LINS_allNodes(r, LinsNodeMinimalSubgroups);
+    return LINS_AllNodes(r, LinsNodeMinimalSubgroups);
 end);
 
 
