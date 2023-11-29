@@ -54,22 +54,22 @@ function(r)
     return r!.Index;
 end);
 
-InstallMethod( MinimalSupergroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( LinsNodeMinimalSupergroups, "for Lins Node", [ IsLinsNode],
 function(r)
     return r!.MinimalSupergroups;
 end);
 
-InstallMethod( MinimalSubgroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( LinsNodeMinimalSubgroups, "for Lins Node", [ IsLinsNode],
 function(r)
     return r!.MinimalSubgroups;
 end);
 
-InstallMethod( TriedPrimes, "for Lins Node", [ IsLinsNode ],
+InstallMethod( LinsNodeTriedPrimes, "for Lins Node", [ IsLinsNode ],
 function(r)
     return r!.TriedPrimes;
 end);
 
-InstallMethod( IsCut, "for Lins Node", [ IsLinsNode ],
+InstallMethod( LinsNodeIsCut, "for Lins Node", [ IsLinsNode ],
 function(r)
     if IsBound(r!.IsCut) then
         return r!.IsCut;
@@ -82,8 +82,8 @@ InstallOtherMethod( LinsRoot, "for Lins Node", [ IsLinsNode ],
 function(r)
     local s;
     s := r;
-    while not IsEmpty(MinimalSupergroups(s)) do
-        s := MinimalSupergroups(s)[1];
+    while not IsEmpty(LinsNodeMinimalSupergroups(s)) do
+        s := LinsNodeMinimalSupergroups(s)[1];
     od;
     return s;
 end);
@@ -106,14 +106,14 @@ function(r, next)
     return allNodes;
 end);
 
-InstallMethod( Supergroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( LinsNodeSupergroups, "for Lins Node", [ IsLinsNode],
 function(r)
-    return LINS_allNodes(r, MinimalSupergroups);
+    return LINS_allNodes(r, LinsNodeMinimalSupergroups);
 end);
 
-InstallMethod( Subgroups, "for Lins Node", [ IsLinsNode],
+InstallMethod( LinsNodeSubgroups, "for Lins Node", [ IsLinsNode],
 function(r)
-    return LINS_allNodes(r, MinimalSubgroups);
+    return LINS_allNodes(r, LinsNodeMinimalSubgroups);
 end);
 
 
@@ -288,7 +288,7 @@ end);
 #############################################################################
 ####=====================================================================####
 ##
-## Low Index Normal Subgroups (Search Graph)
+## Low Index Normal LinsNodeSubgroups (Search Graph)
 ##
 ####=====================================================================####
 #############################################################################

@@ -71,8 +71,8 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
     G := Grp(rG);
     H := Grp(rH);
     n := IndexBound(gr);
-    allSupergroups := Supergroups(rH);
-    allSubgroups := Subgroups(rH);
+    allSupergroups := LinsNodeSupergroups(rH);
+    allSubgroups := LinsNodeSubgroups(rH);
     nrFound := 0;
 
     # Main iteration over all preceding groups in `gr`
@@ -81,7 +81,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
             if rK = rH then
                 break;
             fi;
-            if IsCut(rK) then
+            if LinsNodeIsCut(rK) then
                 continue;
             fi;
             # If `K` is a supergroup of `H`, then continue.
@@ -91,7 +91,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
             K := Grp(rK);
 
             # Find the smallest supergroup of `H` and `K`. (which is $HK$)
-            xgroups := Supergroups(rK);
+            xgroups := LinsNodeSupergroups(rK);
             supers := Filtered(allSupergroups, s -> s in xgroups);
             rM := supers[PositionMaximum(List(supers, Index))];
             index := rK!.Index * rH!.Index / rM!.Index;
@@ -102,7 +102,7 @@ InstallGlobalFunction( LINS_FindIntersections, function(gr, rH, opts)
             fi;
 
             # Check if the intersection has been already computed
-            xgroups := Subgroups(rK);
+            xgroups := LinsNodeSubgroups(rK);
             subs := Filtered(allSubgroups, s -> s in xgroups);
             if opts.DoIntersection(gr, rH, rK, index) and not (index in List(subs, Index)) then
                 Info(InfoLINS, 3, LINS_tab3,
