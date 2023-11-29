@@ -87,7 +87,7 @@ InstallGlobalFunction(LINS_MustCheckP, function(rH, n, p)
     index := Index(rH);
 
     # sizes of minimal normal subgroups of $G/H$
-    minSubSizes := List(MinimalSupergroups(rH), rK -> Index(rH) / Index(rK));
+    minSubSizes := List(LinsNodeMinimalSupergroups(rH), rK -> Index(rH) / Index(rK));
 
     # Has the quotient G/H a non-trivial normal `p`-subgroup?
     # If yes, then do not compute `p`-quotients under $H$.
@@ -256,10 +256,10 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
     data;   # tuple:        [`rK`, `isNew`]
 
     # Check if `p`-quotients have been computed already from this group
-    if p in TriedPrimes(rH) then
+    if p in LinsNodeTriedPrimes(rH) then
         return [false, 0];
     fi;
-    AddSet(TriedPrimes(rH), p);
+    AddSet(LinsNodeTriedPrimes(rH), p);
 
     # Initialize data
     n := IndexBound(gr);

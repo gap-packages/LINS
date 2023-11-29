@@ -62,11 +62,11 @@ end);
 # K < H
 BindGlobal("LINS_AddRelations",
 function(rH, rK)
-    Add(MinimalSupergroups(rK), rH);
-    Add(MinimalSubgroups(rH), rK);
+    Add(LinsNodeMinimalSupergroups(rK), rH);
+    Add(LinsNodeMinimalSubgroups(rH), rK);
     # Stable Sort
-    SortBy(MinimalSupergroups(rK), Index);
-    SortBy(MinimalSubgroups(rH), Index);
+    SortBy(LinsNodeMinimalSupergroups(rK), Index);
+    SortBy(LinsNodeMinimalSubgroups(rH), Index);
 end);
 
 # K < H
@@ -74,28 +74,28 @@ BindGlobal("LINS_RemoveRelations",
 function(rH, rK)
     local pos;
 
-    pos := Position(MinimalSupergroups(rK), rH);
-    Remove(MinimalSupergroups(rK), pos);
-    pos := Position(MinimalSubgroups(rH), rK);
-    Remove(MinimalSubgroups(rH), pos);
+    pos := Position(LinsNodeMinimalSupergroups(rK), rH);
+    Remove(LinsNodeMinimalSupergroups(rK), pos);
+    pos := Position(LinsNodeMinimalSubgroups(rH), rK);
+    Remove(LinsNodeMinimalSubgroups(rH), pos);
 end);
 
 BindGlobal("LINS_UpdateRelations",
 function(rH)
     local subs, supers, toRemove, rK, rL, pair;
 
-    subs := Subgroups(rH);
+    subs := LinsNodeSubgroups(rH);
     toRemove := [];
-    for rK in MinimalSupergroups(rH) do
-        for rL in MinimalSubgroups(rK) do
+    for rK in LinsNodeMinimalSupergroups(rH) do
+        for rL in LinsNodeMinimalSubgroups(rK) do
             if rL in subs then
                 Add(toRemove, [rK, rL]);
             fi;
         od;
     od;
-    supers := Supergroups(rH);
-    for rK in MinimalSubgroups(rH) do
-        for rL in MinimalSupergroups(rK) do
+    supers := LinsNodeSupergroups(rH);
+    for rK in LinsNodeMinimalSubgroups(rH) do
+        for rL in LinsNodeMinimalSupergroups(rK) do
             if rL in supers then
                 Add(toRemove, [rL, rK]);
             fi;
@@ -172,7 +172,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
         Add(level.Nodes, rH);
     fi;
 
-    # Search for all possible MinimalSupergroups of `H`.
+    # Search for all possible LinsNodeMinimalSupergroups of `H`.
     allSupergroups := [];
     for level in Reversed(gr!.Levels{[1 .. pos - 1]}) do
         for rK in level.Nodes do
@@ -181,14 +181,14 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
                 if Index(rH) mod Index(rK) = 0 then
                     if LINS_IsSubgroupFp(K, H) then
                         LINS_AddRelations(rK, rH);
-                        allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, [rK], Supergroups(rK)));
+                        allSupergroups := DuplicateFreeList(Concatenation(allSupergroups, [rK], LinsNodeSupergroups(rK)));
                     fi;
                 fi;
             fi;
         od;
     od;
 
-    # Search for all possible MinimalSubgroups of `H`.
+    # Search for all possible LinsNodeMinimalSubgroups of `H`.
     allSubgroups := [];
     SortBy(allSubgroups, Index);
     for level in gr!.Levels{[pos + 1 .. Length(gr!.Levels)]} do
@@ -198,7 +198,7 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
                 if Index(rK) mod Index(rH) = 0 then
                     if LINS_IsSubgroupFp(H, K) then
                         LINS_AddRelations(rH, rK);
-                        allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, [rK], Subgroups(rK)));
+                        allSubgroups := DuplicateFreeList(Concatenation(allSubgroups, [rK], LinsNodeSubgroups(rK)));
                     fi;
                 fi;
             fi;

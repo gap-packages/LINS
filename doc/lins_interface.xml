@@ -64,10 +64,10 @@ Returns the index <M>[G : H]</M>.
 </Description>
 </ManSection>
 
-<#Include Label="MinimalSupergroups">
-<#Include Label="MinimalSubgroups">
-<#Include Label="Supergroups">
-<#Include Label="Subgroups">
+<#Include Label="LinsNodeMinimalSupergroups">
+<#Include Label="LinsNodeMinimalSubgroups">
+<#Include Label="LinsNodeSupergroups">
+<#Include Label="LinsNodeSubgroups">
 
 </Section>
 

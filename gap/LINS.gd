@@ -53,9 +53,9 @@ DeclareAttribute( "Grp", IsLinsNode, "mutable" ); # already defined in recog
 
 DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
 
-## <#GAPDoc Label="MinimalSupergroups">
+## <#GAPDoc Label="LinsNodeMinimalSupergroups">
 ## <ManSection>
-## <Attr Name="MinimalSupergroups" Arg="rH"/>
+## <Attr Name="LinsNodeMinimalSupergroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
 ##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
@@ -64,11 +64,11 @@ DeclareAttribute( "Index", IsLinsNode, "mutable" ); # already defined in GAP
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
+DeclareAttribute( "LinsNodeMinimalSupergroups", IsLinsNode, "mutable" );
 
-## <#GAPDoc Label="MinimalSubgroups">
+## <#GAPDoc Label="LinsNodeMinimalSubgroups">
 ## <ManSection>
-## <Attr Name="MinimalSubgroups" Arg="rH"/>
+## <Attr Name="LinsNodeMinimalSubgroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
 ##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
@@ -77,14 +77,14 @@ DeclareAttribute( "MinimalSupergroups", IsLinsNode, "mutable" );
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareAttribute( "MinimalSubgroups", IsLinsNode, "mutable" );
+DeclareAttribute( "LinsNodeMinimalSubgroups", IsLinsNode, "mutable" );
 
-DeclareAttribute( "TriedPrimes", IsLinsNode, "mutable" );
-DeclareProperty( "IsCut", IsLinsNode, "mutable" );
+DeclareAttribute( "LinsNodeTriedPrimes", IsLinsNode, "mutable" );
+DeclareProperty( "LinsNodeIsCut", IsLinsNode, "mutable" );
 
-## <#GAPDoc Label="Supergroups">
+## <#GAPDoc Label="LinsNodeSupergroups">
 ## <ManSection>
-## <Oper Name="Supergroups" Arg="rH"/>
+## <Oper Name="LinsNodeSupergroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
 ##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
@@ -93,11 +93,11 @@ DeclareProperty( "IsCut", IsLinsNode, "mutable" );
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareOperation( "Supergroups", [IsLinsNode]);
+DeclareOperation( "LinsNodeSupergroups", [IsLinsNode]);
 
-## <#GAPDoc Label="Subgroups">
+## <#GAPDoc Label="LinsNodeSubgroups">
 ## <ManSection>
-## <Oper Name="Subgroups" Arg="rH"/>
+## <Oper Name="LinsNodeSubgroups" Arg="rH"/>
 ## <Description>
 ##   Let <M>G</M> be the group contained in the root node
 ##   and <M>H</M> be the <M>G</M>-normal subgroup contained in <A>rH</A>. <P/>
@@ -106,7 +106,7 @@ DeclareOperation( "Supergroups", [IsLinsNode]);
 ## </Description>
 ## </ManSection>
 ## <#/GAPDoc>
-DeclareOperation( "Subgroups", [IsLinsNode]);
+DeclareOperation( "LinsNodeSubgroups", [IsLinsNode]);
 
 
 #############################################################################
