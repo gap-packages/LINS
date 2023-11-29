@@ -37,10 +37,10 @@
 <div class="ContSSBlock">
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BEE08B378362A2B">2.2-1 Grp</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7B06D640788992F7">2.2-2 Index</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8312138679C92F8E">2.2-3 MinimalSupergroups</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8303436F840AA49E">2.2-4 MinimalSubgroups</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X798F8ACC7B187E8C">2.2-5 Supergroups</a></span>
-<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BA181CA81D785BB">2.2-6 Subgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X81D3F0917ED3C8D2">2.2-3 LinsNodeMinimalSupergroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X848673C8803B8DE3">2.2-4 LinsNodeMinimalSubgroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7BE4DCA080C54191">2.2-5 LinsNodeSupergroups</a></span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X7EAE7C1F87B8F113">2.2-6 LinsNodeSubgroups</a></span>
 </div></div>
 <div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7C993B5A7C54E27B">2.3 <span class="Heading">LINS Search Functions</span></a>
 </span>
@@ -131,38 +131,38 @@
 
 <p>Returns the index <span class="SimpleMath">[G : H]</span>.</p>
 
-<p><a id="X8312138679C92F8E" name="X8312138679C92F8E"></a></p>
+<p><a id="X81D3F0917ED3C8D2" name="X81D3F0917ED3C8D2"></a></p>
 
-<h5>2.2-3 MinimalSupergroups</h5>
+<h5>2.2-3 LinsNodeMinimalSupergroups</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalSupergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsNodeMinimalSupergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Let <span class="SimpleMath">G</span> be the group contained in the root node and <span class="SimpleMath">H</span> be the <span class="SimpleMath">G</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
 
 <p>Returns a list of all <code class="code">LinsNodes</code> containing minimal <span class="SimpleMath">G</span>-normal supergroups of <span class="SimpleMath">H</span>.</p>
 
-<p><a id="X8303436F840AA49E" name="X8303436F840AA49E"></a></p>
+<p><a id="X848673C8803B8DE3" name="X848673C8803B8DE3"></a></p>
 
-<h5>2.2-4 MinimalSubgroups</h5>
+<h5>2.2-4 LinsNodeMinimalSubgroups</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; MinimalSubgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsNodeMinimalSubgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;attribute&nbsp;)</td></tr></table></div>
 <p>Let <span class="SimpleMath">G</span> be the group contained in the root node and <span class="SimpleMath">H</span> be the <span class="SimpleMath">G</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
 
 <p>Returns a list of all <code class="code">LinsNodes</code> containing minimal <span class="SimpleMath">G</span>-normal subgroups of <span class="SimpleMath">H</span>.</p>
 
-<p><a id="X798F8ACC7B187E8C" name="X798F8ACC7B187E8C"></a></p>
+<p><a id="X7BE4DCA080C54191" name="X7BE4DCA080C54191"></a></p>
 
-<h5>2.2-5 Supergroups</h5>
+<h5>2.2-5 LinsNodeSupergroups</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Supergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsNodeSupergroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Let <span class="SimpleMath">G</span> be the group contained in the root node and <span class="SimpleMath">H</span> be the <span class="SimpleMath">G</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
 
 <p>Returns a list of all <code class="code">LinsNodes</code> containing <span class="SimpleMath">G</span>-normal supergroups of <span class="SimpleMath">H</span>.</p>
 
-<p><a id="X7BA181CA81D785BB" name="X7BA181CA81D785BB"></a></p>
+<p><a id="X7EAE7C1F87B8F113" name="X7EAE7C1F87B8F113"></a></p>
 
-<h5>2.2-6 Subgroups</h5>
+<h5>2.2-6 LinsNodeSubgroups</h5>
 
-<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; Subgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
+<div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LinsNodeSubgroups</code>( <var class="Arg">rH</var> )</td><td class="tdright">(&nbsp;operation&nbsp;)</td></tr></table></div>
 <p>Let <span class="SimpleMath">G</span> be the group contained in the root node and <span class="SimpleMath">H</span> be the <span class="SimpleMath">G</span>-normal subgroup contained in <var class="Arg">rH</var>.</p>
 
 <p>Returns a list of all <code class="code">LinsNodes</code> containing <span class="SimpleMath">G</span>-normal subgroups of <span class="SimpleMath">H</span>.</p>

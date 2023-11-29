@@ -7,16 +7,16 @@
   [2XIndex[102X, for a lins node 2.2-2 
   [2XIndexBound[102X 2.1-4 
   [2XIsomorphismFpGroup[102X, for a lins graph 2.1-6 
+  [2XLinsNodeMinimalSubgroups[102X 2.2-4 
+  [2XLinsNodeMinimalSupergroups[102X 2.2-3 
+  [2XLinsNodeSubgroups[102X 2.2-6 
+  [2XLinsNodeSupergroups[102X 2.2-5 
   [2XLinsOptions[102X 2.1-5 
   [2XLinsRoot[102X 2.1-3 
   [2XList[102X, for a lins graph 2.1-1 
   [2XLowIndexNormalSubgroupsSearch[102X 2.3-1 
   [2XLowIndexNormalSubgroupsSearchForAll[102X 2.3-2 
   [2XLowIndexNormalSubgroupsSearchForIndex[102X 2.3-3 
-  [2XMinimalSubgroups[102X 2.2-4 
-  [2XMinimalSupergroups[102X 2.2-3 
-  [2XSubgroups[102X 2.2-6 
-  [2XSupergroups[102X 2.2-5 
   
   
   -------------------------------------------------------

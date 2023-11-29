@@ -88,12 +88,22 @@
 <p>Returns <code class="keyw">true</code> if the search can be terminated.</p>
 
 </dd>
+<dt><strong class="Mark"><code class="code">UseLIS</code></strong></dt>
+<dd><p><code class="keyw">false</code> to use the new procedure with <code class="code">GQuotient</code> calls in <code class="code">LINS_FindTQuotients</code>.</p>
+
+<p><code class="keyw">true</code> to use the old procedure with a <code class="code">LowIndexSubgroupsFpGroup</code> call in <code class="code">LINS_FindTQuotients</code>.</p>
+
+</dd>
 <dt><strong class="Mark"><code class="code">FilterTQuotients</code></strong></dt>
-<dd><p>a function that takes as an argument a <code class="keyw">LinsGraph</code> <var class="Arg">gr</var>, a <code class="keyw">LinsNode</code> <var class="Arg">rH</var> and a list of targets <var class="Arg">QQ</var> following the specifications of <code class="code">LINS_FindTQuotients</code>.</p>
+<dd><p>a function that takes as an argument a <code class="keyw">LinsGraph</code> <var class="Arg">gr</var> and a list of <var class="Arg">targets</var> following the specifications of <code class="code">LINS_FindTQuotients</code>.</p>
 
-<p>For a call via <code class="code">LowIndexNormalSubgroupsSearch</code>, we have <code class="code">rH = LinsRoot(gr)</code> and <code class="code">QQ = LINS_TargetsQuotient</code>.</p>
+<p>The value of <code class="code">targets</code> in a call via <code class="code">LowIndexNormalSubgroupsSearch</code> depends on the value of the option <code class="code">UseLIS</code>.</p>
 
-<p>Returns an index list from the targets <var class="Arg">QQ</var>, that will be used by <code class="code">LINS_FindTQuotients</code>.</p>
+<p>If <code class="code">UseLIS</code> is false, we have <code class="code">targets = LINS_TargetsQuotient</code>.</p>
+
+<p>If <code class="code">UseLIS</code> is true, we have <code class="code">targets = LINS_TargetsQuotientUseLIS</code>.</p>
+
+<p>Returns a sublist from <var class="Arg">targets</var>, that will be used by <code class="code">LINS_FindTQuotients</code>.</p>
 
 </dd>
 <dt><strong class="Mark"><code class="code">DoIntersection</code></strong></dt>

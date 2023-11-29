@@ -56,15 +56,25 @@
   
         [33X[0;6YReturns [9Xtrue[109X if the search can be terminated.[133X
   
-  [8X[10XFilterTQuotients[110X[8X[108X
-        [33X[0;6Ya function that takes as an argument a [9XLinsGraph[109X [3Xgr[103X, a [9XLinsNode[109X [3XrH[103X and
-        a    list    of   targets   [3XQQ[103X   following   the   specifications   of
+  [8X[10XUseLIS[110X[8X[108X
+        [33X[0;6Y[9Xfalse[109X   to   use   the   new   procedure   with   [10XGQuotient[110X  calls  in
         [10XLINS_FindTQuotients[110X.[133X
   
-        [33X[0;6YFor   a   call   via   [10XLowIndexNormalSubgroupsSearch[110X,  we  have  [10XrH  =
-        LinsRoot(gr)[110X and [10XQQ = LINS_TargetsQuotient[110X.[133X
+        [33X[0;6Y[9Xtrue[109X  to use the old procedure with a [10XLowIndexSubgroupsFpGroup[110X call in
+        [10XLINS_FindTQuotients[110X.[133X
   
-        [33X[0;6YReturns  an  index  list  from  the  targets  [3XQQ[103X, that will be used by
+  [8X[10XFilterTQuotients[110X[8X[108X
+        [33X[0;6Ya  function  that  takes  as  an argument a [9XLinsGraph[109X [3Xgr[103X and a list of
+        [3Xtargets[103X following the specifications of [10XLINS_FindTQuotients[110X.[133X
+  
+        [33X[0;6YThe  value  of  [10Xtargets[110X  in  a  call via [10XLowIndexNormalSubgroupsSearch[110X
+        depends on the value of the option [10XUseLIS[110X.[133X
+  
+        [33X[0;6YIf [10XUseLIS[110X is false, we have [10Xtargets = LINS_TargetsQuotient[110X.[133X
+  
+        [33X[0;6YIf [10XUseLIS[110X is true, we have [10Xtargets = LINS_TargetsQuotientUseLIS[110X.[133X
+  
+        [33X[0;6YReturns   a   sublist   from   [3Xtargets[103X,   that   will   be   used   by
         [10XLINS_FindTQuotients[110X.[133X
   
   [8X[10XDoIntersection[110X[8X[108X

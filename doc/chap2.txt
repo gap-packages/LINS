@@ -84,9 +84,9 @@
   
   [33X[0;0YReturns the index [22X[G : H][122X.[133X
   
-  [1X2.2-3 MinimalSupergroups[101X
+  [1X2.2-3 LinsNodeMinimalSupergroups[101X
   
-  [33X[1;0Y[29X[2XMinimalSupergroups[102X( [3XrH[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XLinsNodeMinimalSupergroups[102X( [3XrH[103X ) [32X attribute[133X
   
   [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
   contained in [3XrH[103X.[133X
@@ -94,27 +94,27 @@
   [33X[0;0YReturns  a  list of all [10XLinsNodes[110X containing minimal [22XG[122X-normal supergroups of
   [22XH[122X.[133X
   
-  [1X2.2-4 MinimalSubgroups[101X
+  [1X2.2-4 LinsNodeMinimalSubgroups[101X
   
-  [33X[1;0Y[29X[2XMinimalSubgroups[102X( [3XrH[103X ) [32X attribute[133X
+  [33X[1;0Y[29X[2XLinsNodeMinimalSubgroups[102X( [3XrH[103X ) [32X attribute[133X
   
   [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
   contained in [3XrH[103X.[133X
   
   [33X[0;0YReturns a list of all [10XLinsNodes[110X containing minimal [22XG[122X-normal subgroups of [22XH[122X.[133X
   
-  [1X2.2-5 Supergroups[101X
+  [1X2.2-5 LinsNodeSupergroups[101X
   
-  [33X[1;0Y[29X[2XSupergroups[102X( [3XrH[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLinsNodeSupergroups[102X( [3XrH[103X ) [32X operation[133X
   
   [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
   contained in [3XrH[103X.[133X
   
   [33X[0;0YReturns a list of all [10XLinsNodes[110X containing [22XG[122X-normal supergroups of [22XH[122X.[133X
   
-  [1X2.2-6 Subgroups[101X
+  [1X2.2-6 LinsNodeSubgroups[101X
   
-  [33X[1;0Y[29X[2XSubgroups[102X( [3XrH[103X ) [32X operation[133X
+  [33X[1;0Y[29X[2XLinsNodeSubgroups[102X( [3XrH[103X ) [32X operation[133X
   
   [33X[0;0YLet [22XG[122X be the group contained in the root node and [22XH[122X be the [22XG[122X-normal subgroup
   contained in [3XrH[103X.[133X

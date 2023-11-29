@@ -7,10 +7,10 @@
                  presented group up to some given index bound. [101X
   
   
-                                      0.5
+                                      0.6
   
   
-                               26 September 2022
+                                29 November 2023
   
   
                                 Friedrich Rober
@@ -42,10 +42,10 @@
     2.2 [33X[0;0YLINS Node[133X
       2.2-1 Grp
       2.2-2 Index
-      2.2-3 MinimalSupergroups
-      2.2-4 MinimalSubgroups
-      2.2-5 Supergroups
-      2.2-6 Subgroups
+      2.2-3 LinsNodeMinimalSupergroups
+      2.2-4 LinsNodeMinimalSubgroups
+      2.2-5 LinsNodeSupergroups
+      2.2-6 LinsNodeSubgroups
     2.3 [33X[0;0YLINS Search Functions[133X
       2.3-1 LowIndexNormalSubgroupsSearch
       2.3-2 LowIndexNormalSubgroupsSearchForAll
