@@ -3,31 +3,43 @@ name: CI
 # Trigger the workflow on push or pull request
 on:
   push:
-    branches: ['master']
+    branches:
+      - master
   pull_request:
+
+# the `concurrency` settings ensure that not too many CI jobs run in parallel
+concurrency:
+  # group by workflow and ref; the last slightly strange component ensures that for pull
+  # requests, we limit to 1 concurrent job, but for the master branch we don't
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.ref != 'refs/heads/master' || github.run_number }}
+  # Cancel intermediate builds, but only if it is a pull request build.
+  cancel-in-progress: ${{ startsWith(github.ref, 'refs/pull/') }}
 
 jobs:
   # The CI test job
   test:
-    name: ${{ matrix.gap-branch }} - HPCGAP ${{ matrix.HPCGAP }}
-    runs-on: ubuntu-latest
+    name: ${{ matrix.gap-branch }} - ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest]
         gap-branch:
           - master
           - stable-4.11
-        HPCGAP: ['no']
 
     steps:
-      - uses: fkirc/skip-duplicate-actions@master
-      - uses: actions/checkout@v2
-      - uses: gap-actions/setup-gap-for-packages@v1
+      - uses: actions/checkout@v3
+      - uses: gap-actions/setup-gap@v2
         with:
           GAPBRANCH: ${{ matrix.gap-branch }}
-          HPCGAP: ${{ matrix.HPCGAP }}
           GAP_PKGS_TO_BUILD: "io profiling grape cohomolo"
-      - uses: gap-actions/run-test-for-packages@v1
+      - uses: gap-actions/build-pkg@v1
+      - uses: gap-actions/run-pkg-tests@v2
+        with:
+          GAP_TESTFILE: tst/testall.g
+      - uses: gap-actions/process-coverage@v2
+      - uses: codecov/codecov-action@v3
 
   # The documentation job
   manual:
@@ -35,13 +47,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: gap-actions/setup-gap-for-packages@v1
-      - uses: gap-actions/compile-documentation-for-packages@v1
+      - uses: actions/checkout@v3
+      - uses: gap-actions/setup-gap@v2
+      - uses: gap-actions/build-pkg-docs@v1
         with:
           use-latex: 'true'
-      - name: 'Upload documentation'
-        uses: actions/upload-artifact@v1
+      - name: "Upload documentation"
+        uses: actions/upload-artifact@v3
         with:
           name: manual
           path: ./doc/manual.pdf
