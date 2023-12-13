@@ -43,10 +43,10 @@ Persons := [
 
 SourceRepository := rec(
     Type := "git",
-    URL := "https://github.com/FriedrichRober/LINS",
+    URL := "https://github.com/gap-packages/LINS",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://FriedrichRober.github.io/LINS/",
+PackageWWWHome := "https://gap-packages.github.io/LINS/",
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
@@ -77,7 +77,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.11",
+  GAP := ">= 4.12",
   NeededOtherPackages := [  ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],
