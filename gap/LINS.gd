@@ -175,6 +175,14 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ## Main functions
 #############################################################################
 
+if not IsBound(LowIndexNormalSubgroups) then
+  # The polycyclic package also declares this in exactly the same way;
+  # to ensure one can load either package or both, in either
+  # order, we only declare these conditionally in both packages.
+  KeyDependentOperation( "LowIndexNormalSubgroups",
+                         IsGroup, IsPosInt, ReturnTrue );
+fi;
+
 ## <#GAPDoc Label="LowIndexNormalSubgroupsSearch">
 ## <ManSection>
 ## <Func Name="LowIndexNormalSubgroupsSearch" Arg="G, n[, opts]"/>

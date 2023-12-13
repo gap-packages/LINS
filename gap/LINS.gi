@@ -464,3 +464,12 @@ end);
 InstallGlobalFunction( LowIndexNormalSubgroupsSearchForAll, function(G, n)
     return LowIndexNormalSubgroupsSearch(G, n);
 end);
+
+InstallMethod( LowIndexNormalSubgroupsOp, "for groups",
+               [IsGroup, IsPosInt],
+function(G, n)
+    local gr, iso;
+    gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+    iso := IsomorphismFpGroup(gr);
+    return List(List(gr), rH -> PreImage(iso, Grp(rH)));
+end);
