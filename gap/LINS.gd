@@ -175,13 +175,23 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ## Main functions
 #############################################################################
 
-if not IsBound(LowIndexNormalSubgroups) then
-  # The polycyclic package also declares this in exactly the same way;
-  # to ensure one can load either package or both, in either
-  # order, we only declare these conditionally in both packages.
-  KeyDependentOperation( "LowIndexNormalSubgroups",
-                         IsGroup, IsPosInt, ReturnTrue );
-fi;
+## <#GAPDoc Label="LowIndexNormalSubs">
+## <ManSection>
+## <Oper Name="LowIndexNormalSubs" Arg="G, n : allSubgroups := true"/>
+## <Description>
+##   Returns a list of all normal subgroups of <A>G</A> with index at most <A>n</A>.
+##   If the option <A>allSubgroups</A> is set to <K>false</K>,
+##   then onlye the normal subgroups of <A>G</A> with index equal to <A>n</A> are returned. <P/>
+##
+##   The generic method uses <Ref BookName="Reference" Attr="IsomorphismFpGroup"/> to transform <A>G</A> into an fp-group
+##   and then calls some variant of the low-level function <Ref Func="LowIndexNormalSubgroupsSearch"/>. <P/>
+##
+##   Note that a similar operation <Ref BookName="polycyclic" Attr="LowIndexNormalSubgroups"/> exists in the package <Package>polycyclic</Package>.
+##   Due to technical incompabilities, those operations could not be unified. <P/>
+## </Description>
+## </ManSection>
+## <#/GAPDoc>
+DeclareOperation( "LowIndexNormalSubs", [IsGroup, IsPosInt] );
 
 ## <#GAPDoc Label="LowIndexNormalSubgroupsSearch">
 ## <ManSection>

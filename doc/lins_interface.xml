@@ -1,7 +1,8 @@
 <Chapter Label="LINS Interface">
 <Heading>LINS Interface</Heading>
 
-This chapter explains the provided search methods
+This chapter is intended for advanced users.
+It explains the provided search methods
 and the interface to the search graph structure <C>LinsGraph</C>.
 
 <Section Label="LINS Graph">
@@ -77,6 +78,128 @@ Returns the index <M>[G : H]</M>.
 <#Include Label="LowIndexNormalSubgroupsSearch">
 <#Include Label="LowIndexNormalSubgroupsSearchForAll">
 <#Include Label="LowIndexNormalSubgroupsSearchForIndex">
+
+</Section>
+
+<Section Label="Advanced Examples">
+<Heading>Examples</Heading>
+
+In this section we present example sessions which demonstrate
+how to use the advanced search methods provided by &LINS;.
+For this we revise the examples from the introduction as well as include new ones. <P/>
+
+<Subsection>
+<Heading>Revised Example : all normal subgroups up to index <M>n</M></Heading>
+
+We compute all normal subgroups in <M>D_{50}</M>,
+the dihedral group of size <M>50</M>.
+<Example><![CDATA[
+gap> n := 50;;
+gap> G := DihedralGroup(n);
+<pc group of size 50 with 3 generators>
+]]></Example>
+
+The search algorithm automatically translates the group into a finitely presented group
+via a call to <C>IsomorphismFpGroup</C>. <Br/>
+The isomorphism is stored inside the lins graph.
+<Example><![CDATA[
+gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+<lins graph contains 4 normal subgroups up to index 50>
+gap> r := LinsRoot(gr);
+<lins node of index 1>
+gap> H := Grp(r);
+<fp group of size 50 on the generators [ F1, F2, F3 ]>
+gap> Iso := IsomorphismFpGroup(gr);
+[ f1, f2, f3 ] -> [ F1, F2, F3 ]
+gap> Source(Iso) = G;
+true
+gap> Range(Iso) = H;
+true
+]]></Example>
+
+In order to get all nodes from the search graph, we need to use <C>List</C>.
+As expected, the algorithm finds <M>D_{50}, C_{25}, C_5</M>
+and the trivial group.
+<Example><![CDATA[
+gap> L := List(gr);
+[ <lins node of index 1>, <lins node of index 2>, <lins node of index 10>, 
+  <lins node of index 50> ]
+gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
+[ "D50", "C25", "C5", "1" ]
+]]></Example>
+
+</Subsection>
+
+<Subsection>
+<Heading>Revised Example : all normal subgroups of index <M>n</M></Heading>
+
+We compute all normal subgroups of index <M>5^2 = 25</M> in <M>C_5^4</M>,
+the direct product of <M>4</M> copies of the cyclic group of order <M>5</M>:
+<Example><![CDATA[
+gap> p := 5;;
+gap> d := 4;;
+gap> C := CyclicGroup(5);;
+gap> G := DirectProduct(ListWithIdenticalEntries(d, C));
+<pc group of size 625 with 4 generators>
+]]></Example>
+
+Again, the search algorithm automatically translates the group into a finitely presented group
+via a call to <C>IsomorphismFpGroup</C>.
+<Example><![CDATA[
+gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);
+<lins graph contains 963 normal subgroups up to index 25>
+]]></Example>
+
+Now we are not interested in all normal subgroups that the search graph considered,
+but only in those of index <M>25</M>. Thus we need to use <C>ComputedNormalSubgroups</C>.
+For a prime <M>p</M>, and integers <M>d, s \in \mathbb{N}</M>,
+the number of subgroups of order <M>p^s</M> of an elementary abelian <M>p</M>-group of order <M>p^d</M>
+is exactly
+<Alt Not="Text,HTML"><Display>
+\frac
+{\left(p^d - 1\right)\left(p^d - p\right) \cdots \left(p^d - p^{s-1}\right)}
+{\left(p^s - 1\right)\left(p^s - p\right) \cdots \left(p^s - p^{s-1}\right)}\;.
+</Display></Alt>
+<Alt Only="Text,HTML"><Display Mode="M">
+( (p^d - 1)(p^d - p) \cdots (p^d - p^{(s-1)}) ) / ( (p^s - 1)(p^s - p) \cdots (p^s - p^{(s-1)}) ) .
+</Display></Alt>
+Thus we expect to find
+<Alt Not="Text,HTML"><M>\frac{(5^4-1) \cdot (5^4-5)}{(5^2 - 1) \cdot (5^2 - 5)} = 806</M></Alt>
+<Alt Only="Text,HTML"><M>( (5^4-1) \cdot (5^4-5) ) / ( (5^2 - 1) \cdot (5^2 - 5) ) = 806</M></Alt>
+normal subgroups of index <M>25</M>. <Br/>
+Furthermore, all subgroups need to be of the isomorphism type <M>C_5^2</M>.
+<Example><![CDATA[
+gap> L := ComputedNormalSubgroups(gr);;
+gap> IsoTypes := Collected(List(L, node -> StructureDescription(Grp(node))));
+[ [ "C5 x C5", 806 ] ]
+]]></Example>
+
+</Subsection>
+
+<Subsection>
+<Heading>Example : a normal subgroup of index <M>n</M></Heading>
+
+We compute a normal subgroup of index <M>3 \cdot 5 = 15</M> in
+<M>C_3 \times C_3 \times C_4 \times C_5</M>,
+a direct product of cyclic groups:
+<Example><![CDATA[
+gap> pList := [3, 3, 4, 5];;
+gap> G := DirectProduct(List(pList, p -> CyclicGroup(p)));
+<pc group of size 180 with 5 generators>
+gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);
+<lins graph contains 7 normal subgroups up to index 15>
+]]></Example>
+
+We use <C>ComputedNormalSubgroups</C> in order to get the normal subgroup of index <M>15</M>.
+As expected, the algorithm finds a group of the isomorphism type <M>C_{12} = C_3 \times C_4</M>.
+<Example><![CDATA[
+gap> L := ComputedNormalSubgroups(gr);
+[ <lins node of index 15> ]
+gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
+[ "C12" ]
+]]></Example>
+
+</Subsection>
 
 </Section>
 

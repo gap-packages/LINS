@@ -142,7 +142,7 @@ end);
 
 InstallMethod( ViewObj, "for Lins Graph Node", [IsLinsGraph],
 function(gr)
-    Print("<lins graph found ", Length(List(gr)), " normal subgroups up to index ", IndexBound(gr), ">");
+    Print("<lins graph contains ", Length(List(gr)), " normal subgroups up to index ", IndexBound(gr), ">");
 end);
 
 
@@ -465,11 +465,19 @@ InstallGlobalFunction( LowIndexNormalSubgroupsSearchForAll, function(G, n)
     return LowIndexNormalSubgroupsSearch(G, n);
 end);
 
-InstallMethod( LowIndexNormalSubgroupsOp, "for groups",
+InstallMethod( LowIndexNormalSubs, "for groups",
                [IsGroup, IsPosInt],
 function(G, n)
-    local gr, iso;
-    gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+    local allSubgroups, gr, iso;
+    allSubgroups := ValueOption("allSubgroups");
+    if allSubgroups = fail then
+        allSubgroups := true;
+    fi;
+    if allSubgroups then
+        gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+    else
+        gr := LowIndexNormalSubgroupsSearchForIndex(G, n, infinity);
+    fi;
     iso := IsomorphismFpGroup(gr);
-    return List(List(gr), rH -> PreImage(iso, Grp(rH)));
+    return List(ComputedNormalSubgroups(gr), rH -> PreImage(iso, Grp(rH)));
 end);
