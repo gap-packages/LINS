@@ -25,4 +25,5 @@ AutoDoc( rec( scaffold := rec(
             "license.xml",
             ],
         ),
+        extract_examples := true,
         autodoc := true ) );
