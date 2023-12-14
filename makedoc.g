@@ -25,4 +25,7 @@ AutoDoc( rec( scaffold := rec(
             "license.xml",
             ],
         ),
+        extract_examples := true,
         autodoc := true ) );
+
+Exec("dev/tests_doc/processTests.sh");
