@@ -94,8 +94,7 @@ For this we revise the examples from the introduction as well as include new one
 We compute all normal subgroups in <M>D_{50}</M>,
 the dihedral group of size <M>50</M>.
 <Example><![CDATA[
-gap> n := 50;;
-gap> G := DihedralGroup(n);
+gap> G := DihedralGroup(50);
 <pc group of size 50 with 3 generators>
 ]]></Example>
 
@@ -103,7 +102,7 @@ The search algorithm automatically translates the group into a finitely presente
 via a call to <C>IsomorphismFpGroup</C>. <Br/>
 The isomorphism is stored inside the lins graph.
 <Example><![CDATA[
-gap> gr := LowIndexNormalSubgroupsSearchForAll(G, n);
+gap> gr := LowIndexNormalSubgroupsSearchForAll(G, 50);
 <lins graph contains 4 normal subgroups up to index 50>
 gap> r := LinsRoot(gr);
 <lins node of index 1>
@@ -136,10 +135,7 @@ gap> IsoTypes := List(L, node -> StructureDescription(Grp(node)));
 We compute all normal subgroups of index <M>5^2 = 25</M> in <M>C_5^4</M>,
 the direct product of <M>4</M> copies of the cyclic group of order <M>5</M>:
 <Example><![CDATA[
-gap> p := 5;;
-gap> d := 4;;
-gap> C := CyclicGroup(5);;
-gap> G := DirectProduct(ListWithIdenticalEntries(d, C));
+gap> G := ElementaryAbelianGroup(5^4);
 <pc group of size 625 with 4 generators>
 ]]></Example>
 
@@ -183,9 +179,8 @@ We compute a normal subgroup of index <M>3 \cdot 5 = 15</M> in
 <M>C_3 \times C_3 \times C_4 \times C_5</M>,
 a direct product of cyclic groups:
 <Example><![CDATA[
-gap> pList := [3, 3, 4, 5];;
-gap> G := DirectProduct(List(pList, p -> CyclicGroup(p)));
-<pc group of size 180 with 5 generators>
+gap> G := AbelianGroup([3, 3, 4, 5]);
+<pc group of size 180 with 4 generators>
 gap> gr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);
 <lins graph contains 7 normal subgroups up to index 15>
 ]]></Example>
