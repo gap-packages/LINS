@@ -1,23 +1,9 @@
 <Chapter Label="LINS Search">
 <Heading>LINS Search</Heading>
 
-This chapter is for advanced users and those interested in a brief introduction to the mathematical background of &LINS;.
+This chapter is for advanced users and those interested in a brief introduction to the mathematical background of &LINS;. <P/>
 
-<Section Label="LINS Search Strategy">
-<Heading>LINS Search Strategy</Heading>
-
-In this section, we briefly introduce the basic search strategy for normal subgroups. <P/>
-
-TODO
-
-</Section>
-
-<Section Label="LINS Target Tables">
-<Heading>LINS Target Tables</Heading>
-
-TODO
-
-</Section>
+<B>(NOTE: The internal options below might change during further development!)</B>
 
 <Section Label="LINS Search Options">
 <Heading>LINS Search Options</Heading>
@@ -115,17 +101,6 @@ Returns <K>true</K> if the normal subgroup <M>K</M> of index <M>[G : K] = i</M>
 with elementary abelian <A>p</A>-quotient in <A>rH</A> should be computed.
 </Item>
 </List>
-
-</Section>
-
-<Section Label="LINS Custom Search Functions">
-<Heading>LINS Custom Search Functions</Heading>
-
-In this section we explain how to write a custom search function by using the options for <C>LowIndexNormalSubgroupsSearch</C>. <P/>
-
-We explain this on the example of <C>LowIndexNormalSubgroupsSearchForIndex</C>. <P/>
-
-TODO
 
 </Section>
 
