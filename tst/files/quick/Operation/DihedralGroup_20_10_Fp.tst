@@ -4,11 +4,10 @@
 # fp-group
 #############################################################################
 
-gap> G := DihedralGroup(IsFpGroup, 20);
-<fp group of size 20 on the generators [ r, s ]>
-gap> L := LowIndexNormalSubs(G, 10);
-[ <fp group of size 20 on the generators [ r, s ]>, Group([ r ]), 
-  Group([ r^-2, s ]), Group([ r^-2, s*r^-1 ]), Group([ r^-2 ]), 
-  Group([ r^5 ]) ]
+gap> G := DihedralGroup(IsFpGroup, 20);;
+gap> L := LowIndexNormalSubs(G, 10);;
 gap> List(L, H -> Index(G, H));
 [ 1, 2, 2, 2, 4, 10 ]
+gap> L2 := LowIndexNormalSubs(G, 2 : allSubgroups := false);;
+gap> List(L2, H -> Index(G, H));
+[ 2, 2, 2 ]
