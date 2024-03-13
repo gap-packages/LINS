@@ -181,7 +181,7 @@ DeclareAttribute( "LinsOptions", IsLinsGraph, "mutable" );
 ## <Description>
 ##   Returns a list of all normal subgroups of <A>G</A> with index at most <A>n</A>.
 ##   If the option <A>allSubgroups</A> is set to <K>false</K>,
-##   then onlye the normal subgroups of <A>G</A> with index equal to <A>n</A> are returned. <P/>
+##   then only the normal subgroups of <A>G</A> with index equal to <A>n</A> are returned. <P/>
 ##
 ##   The generic method uses <Ref BookName="Reference" Attr="IsomorphismFpGroup"/> to transform <A>G</A> into an fp-group
 ##   and then calls some variant of the low-level function <Ref Func="LowIndexNormalSubgroupsSearch"/>. <P/>
