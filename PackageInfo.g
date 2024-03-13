@@ -24,7 +24,7 @@ SetPackageInfo( rec(
 
 PackageName := "LINS",
 Subtitle := "provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.",
-Version := "0.7",
+Version := "0.7dev",
 Date := "13/03/2024", # dd/mm/yyyy format
 
 Persons := [
