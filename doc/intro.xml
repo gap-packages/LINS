@@ -11,8 +11,9 @@ The package &LINS; provides an algorithm for computing the normal subgroups of a
 Moreover it provides an interface for searching in the normal subgroup lattice of a finitely presented group.
 For example, one can use this interface to search for <M>l</M> normal subgroups of index <M>n</M>. <P/>
 
-The algorithm is based on work of Derek Holt and David Firth.
-They have implemented this algorithm in the algebra software MAGMA. <P/>
+The algorithm is based on work of David Firth <Cite Key="Firth"/>.
+He implemented that algorithm in the algebra software MAGMA.
+That implementation in MAGMA has been revised and rewritten to a great extent by Derek Holt. <P/>
 
 The current implementation in &GAP; uses a table of groups that was computed by the code in <F>createTables.gi</F>.
 
