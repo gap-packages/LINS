@@ -4,21 +4,10 @@
   [33X[0;0YThis  chapter  is  for  advanced  users  and  those  interested  in  a brief
   introduction to the mathematical background of [5XLINS[105X.[133X
   
-  
-  [1X3.1 [33X[0;0YLINS Search Strategy[133X[101X
-  
-  [33X[0;0YIn  this  section, we briefly introduce the basic search strategy for normal
-  subgroups.[133X
-  
-  [33X[0;0YTODO[133X
+  [33X[0;0Y[12X(NOTE: The internal options below might change during further development!)[112X[133X
   
   
-  [1X3.2 [33X[0;0YLINS Target Tables[133X[101X
-  
-  [33X[0;0YTODO[133X
-  
-  
-  [1X3.3 [33X[0;0YLINS Search Options[133X[101X
+  [1X3.1 [33X[0;0YLINS Search Options[133X[101X
   
   [33X[0;0YThe  method  [10XLowIndexNormalSubgroupsSearch[110X  allows an optional argument [3Xopts[103X
   which  must  be  a  record and modifies the search for the execution of only
@@ -99,14 +88,4 @@
   
         [33X[0;6YReturns  [9Xtrue[109X  if  the  normal  subgroup  [22XK[122X  of index [22X[G : K] = i[122X with
         elementary abelian [3Xp[103X-quotient in [3XrH[103X should be computed.[133X
-  
-  
-  [1X3.4 [33X[0;0YLINS Custom Search Functions[133X[101X
-  
-  [33X[0;0YIn  this  section  we explain how to write a custom search function by using
-  the options for [10XLowIndexNormalSubgroupsSearch[110X.[133X
-  
-  [33X[0;0YWe explain this on the example of [10XLowIndexNormalSubgroupsSearchForIndex[110X.[133X
-  
-  [33X[0;0YTODO[133X
   

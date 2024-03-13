@@ -1,8 +1,8 @@
   
   [1X2 [33X[0;0YLINS Interface[133X[101X
   
-  [33X[0;0YThis  chapter  explains the provided search methods and the interface to the
-  search graph structure [10XLinsGraph[110X.[133X
+  [33X[0;0YThis chapter is intended for advanced users. It explains the provided search
+  methods and the interface to the search graph structure [10XLinsGraph[110X.[133X
   
   
   [1X2.1 [33X[0;0YLINS Graph[133X[101X
@@ -132,7 +132,7 @@
   search in the normal subgroup lattice of [3XG[103X up to index [3Xn[103X.[133X
   
   [33X[0;0YThe  optional argument [3Xopts[103X must be a record containing valid search options
-  (see [14X3.3[114X).[133X
+  (see [14X3.1[114X).[133X
   
   [33X[0;0YIf  the optional argument [3Xopts[103X is not given, the search will be started with
   the  default  options, i.e. it will terminate once all normal subgroups of [3XG[103X
@@ -180,4 +180,113 @@
   [2XIsomorphismFpGroup[102X ([14X2.1-6[114X)).[133X
   
   [6XReturns:[106X  [33X[0;10Y[10XLinsGraph[110X encoding a partial normal subgroup lattice of [3XG[103X[133X
+  
+  
+  [1X2.4 [33X[0;0YExamples[133X[101X
+  
+  [33X[0;0YIn this section we present example sessions which demonstrate how to use the
+  advanced  search  methods  provided by [5XLINS[105X. For this we revise the examples
+  from the introduction as well as include new ones.[133X
+  
+  
+  [1X2.4-1 [33X[0;0YRevised Example : all normal subgroups up to index [22Xn[122X[101X[1X[133X[101X
+  
+  [33X[0;0YWe compute all normal subgroups in [22XD_50[122X, the dihedral group of size [22X50[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := DihedralGroup(50);[127X[104X
+    [4X[28X<pc group of size 50 with 3 generators>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YThe  search  algorithm  automatically  translates  the group into a finitely
+  presented group via a call to [10XIsomorphismFpGroup[110X.[133X
+  [33X[0;0YThe isomorphism is stored inside the lins graph.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xgr := LowIndexNormalSubgroupsSearchForAll(G, 50);[127X[104X
+    [4X[28X<lins graph contains 4 normal subgroups up to index 50>[128X[104X
+    [4X[25Xgap>[125X [27Xr := LinsRoot(gr);[127X[104X
+    [4X[28X<lins node of index 1>[128X[104X
+    [4X[25Xgap>[125X [27XH := Grp(r);[127X[104X
+    [4X[28X<fp group of size 50 on the generators [ F1, F2, F3 ]>[128X[104X
+    [4X[25Xgap>[125X [27XIso := IsomorphismFpGroup(gr);[127X[104X
+    [4X[28X[ f1, f2, f3 ] -> [ F1, F2, F3 ][128X[104X
+    [4X[25Xgap>[125X [27XSource(Iso) = G;[127X[104X
+    [4X[28Xtrue[128X[104X
+    [4X[25Xgap>[125X [27XRange(Iso) = H;[127X[104X
+    [4X[28Xtrue[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YIn  order  to  get  all nodes from the search graph, we need to use [10XList[110X. As
+  expected, the algorithm finds [22XD_50, C_25, C_5[122X and the trivial group.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XL := List(gr);[127X[104X
+    [4X[28X[ <lins node of index 1>, <lins node of index 2>, <lins node of index 10>, [128X[104X
+    [4X[28X  <lins node of index 50> ][128X[104X
+    [4X[25Xgap>[125X [27XIsoTypes := List(L, node -> StructureDescription(Grp(node)));[127X[104X
+    [4X[28X[ "D50", "C25", "C5", "1" ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.4-2 [33X[0;0YRevised Example : all normal subgroups of index [22Xn[122X[101X[1X[133X[101X
+  
+  [33X[0;0YWe  compute  all  normal  subgroups  of  index [22X5^2 = 25[122X in [22XC_5^4[122X, the direct
+  product of [22X4[122X copies of the cyclic group of order [22X5[122X:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := ElementaryAbelianGroup(5^4);[127X[104X
+    [4X[28X<pc group of size 625 with 4 generators>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YAgain,  the  search  algorithm  automatically  translates  the  group into a
+  finitely presented group via a call to [10XIsomorphismFpGroup[110X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27Xgr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);[127X[104X
+    [4X[28X<lins graph contains 963 normal subgroups up to index 25>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YNow  we  are  not  interested  in all normal subgroups that the search graph
+  considered,   but   only  in  those  of  index  [22X25[122X.  Thus  we  need  to  use
+  [10XComputedNormalSubgroups[110X. For a prime [22Xp[122X, and integers [22Xd, s ∈ N[122X, the number of
+  subgroups  of  order  [22Xp^s[122X  of  an elementary abelian [22Xp[122X-group of order [22Xp^d[122X is
+  exactly[133X
+  
+  
+  [24X[33X[0;6Y( (p^d - 1)(p^d - p) ⋯ (p^d - p^(s-1)) ) / ( (p^s - 1)(p^s - p) ⋯ (p^s - p^(s-1)) ) .[133X[124X
+  
+  [33X[0;0YThus  we  expect to find [22X( (5^4-1) ⋅ (5^4-5) ) / ( (5^2 - 1) ⋅ (5^2 - 5) ) =
+  806[122X normal subgroups of index [22X25[122X.[133X
+  [33X[0;0YFurthermore, all subgroups need to be of the isomorphism type [22XC_5^2[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XL := ComputedNormalSubgroups(gr);;[127X[104X
+    [4X[25Xgap>[125X [27XIsoTypes := Collected(List(L, node -> StructureDescription(Grp(node))));[127X[104X
+    [4X[28X[ [ "C5 x C5", 806 ] ][128X[104X
+  [4X[32X[104X
+  
+  
+  [1X2.4-3 [33X[0;0YExample : a normal subgroup of index [22Xn[122X[101X[1X[133X[101X
+  
+  [33X[0;0YWe compute a normal subgroup of index [22X3 ⋅ 5 = 15[122X in [22XC_3 × C_3 × C_4 × C_5[122X, a
+  direct product of cyclic groups:[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XG := AbelianGroup([3, 3, 4, 5]);[127X[104X
+    [4X[28X<pc group of size 180 with 4 generators>[128X[104X
+    [4X[25Xgap>[125X [27Xgr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);[127X[104X
+    [4X[28X<lins graph contains 7 normal subgroups up to index 15>[128X[104X
+  [4X[32X[104X
+  
+  [33X[0;0YWe  use [10XComputedNormalSubgroups[110X in order to get the normal subgroup of index
+  [22X15[122X.  As expected, the algorithm finds a group of the isomorphism type [22XC_12 =
+  C_3 × C_4[122X.[133X
+  
+  [4X[32X  Example  [32X[104X
+    [4X[25Xgap>[125X [27XL := ComputedNormalSubgroups(gr);[127X[104X
+    [4X[28X[ <lins node of index 15> ][128X[104X
+    [4X[25Xgap>[125X [27XIsoTypes := List(L, node -> StructureDescription(Grp(node)));[127X[104X
+    [4X[28X[ "C12" ][128X[104X
+  [4X[32X[104X
   

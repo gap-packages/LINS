@@ -15,7 +15,7 @@
 <body class="chap2"  onload="jscontent()">
 
 
-<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinktop"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <div class="chlinkprevnexttop">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
 
@@ -49,11 +49,21 @@
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X87176F3085F306FF">2.3-2 LowIndexNormalSubgroupsSearchForAll</a></span>
 <span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X871127A07C12AD32">2.3-3 LowIndexNormalSubgroupsSearchForIndex</a></span>
 </div></div>
+<div class="ContSect"><span class="tocline"><span class="nocss">&nbsp;</span><a href="chap2.html#X7A489A5D79DA9E5C">2.4 <span class="Heading">Examples</span></a>
+</span>
+<div class="ContSSBlock">
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X8710B1687E0AFB86">2.4-1 <span class="Heading">Revised Example : all normal subgroups up to index <span class="SimpleMath">n</span></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X78E0C77181121AB2">2.4-2 <span class="Heading">Revised Example : all normal subgroups of index <span class="SimpleMath">n</span></span></a>
+</span>
+<span class="ContSS"><br /><span class="nocss">&nbsp;&nbsp;</span><a href="chap2.html#X82F9F3B67D438032">2.4-3 <span class="Heading">Example : a normal subgroup of index <span class="SimpleMath">n</span></span></a>
+</span>
+</div></div>
 </div>
 
 <h3>2 <span class="Heading">LINS Interface</span></h3>
 
-<p>This chapter explains the provided search methods and the interface to the search graph structure <code class="code">LinsGraph</code>.</p>
+<p>This chapter is intended for advanced users. It explains the provided search methods and the interface to the search graph structure <code class="code">LinsGraph</code>.</p>
 
 <p><a id="X7FE2171385FFDCFA" name="X7FE2171385FFDCFA"></a></p>
 
@@ -178,7 +188,7 @@
 <div class="func"><table class="func" width="100%"><tr><td class="tdleft"><code class="func">&#8227; LowIndexNormalSubgroupsSearch</code>( <var class="Arg">G</var>, <var class="Arg">n</var>[, <var class="Arg">opts</var>] )</td><td class="tdright">(&nbsp;function&nbsp;)</td></tr></table></div>
 <p>Given a finitely presented group <var class="Arg">G</var> and some index bound <var class="Arg">n</var>, this will start a search in the normal subgroup lattice of <var class="Arg">G</var> up to index <var class="Arg">n</var>.</p>
 
-<p>The optional argument <var class="Arg">opts</var> must be a record containing valid search options (see <a href="chap3.html#X7E1489817AF4CDDB"><span class="RefLink">3.3</span></a>).</p>
+<p>The optional argument <var class="Arg">opts</var> must be a record containing valid search options (see <a href="chap3.html#X7E1489817AF4CDDB"><span class="RefLink">3.1</span></a>).</p>
 
 <p>If the optional argument <var class="Arg">opts</var> is not given, the search will be started with the default options, i.e. it will terminate once all normal subgroups of <var class="Arg">G</var> with index at most <var class="Arg">n</var> are found.</p>
 
@@ -214,11 +224,115 @@
 
 <p>Returns: <code class="code">LinsGraph</code> encoding a partial normal subgroup lattice of <var class="Arg">G</var></p>
 
+<p><a id="X7A489A5D79DA9E5C" name="X7A489A5D79DA9E5C"></a></p>
+
+<h4>2.4 <span class="Heading">Examples</span></h4>
+
+<p>In this section we present example sessions which demonstrate how to use the advanced search methods provided by <strong class="pkg">LINS</strong>. For this we revise the examples from the introduction as well as include new ones.</p>
+
+<p><a id="X8710B1687E0AFB86" name="X8710B1687E0AFB86"></a></p>
+
+<h5>2.4-1 <span class="Heading">Revised Example : all normal subgroups up to index <span class="SimpleMath">n</span></span></h5>
+
+<p>We compute all normal subgroups in <span class="SimpleMath">D_50</span>, the dihedral group of size <span class="SimpleMath">50</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := DihedralGroup(50);</span>
+&lt;pc group of size 50 with 3 generators&gt;
+</pre></div>
+
+<p>The search algorithm automatically translates the group into a finitely presented group via a call to <code class="code">IsomorphismFpGroup</code>. <br /> The isomorphism is stored inside the lins graph.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gr := LowIndexNormalSubgroupsSearchForAll(G, 50);</span>
+&lt;lins graph contains 4 normal subgroups up to index 50&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">r := LinsRoot(gr);</span>
+&lt;lins node of index 1&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">H := Grp(r);</span>
+&lt;fp group of size 50 on the generators [ F1, F2, F3 ]&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Iso := IsomorphismFpGroup(gr);</span>
+[ f1, f2, f3 ] -&gt; [ F1, F2, F3 ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Source(Iso) = G;</span>
+true
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">Range(Iso) = H;</span>
+true
+</pre></div>
+
+<p>In order to get all nodes from the search graph, we need to use <code class="code">List</code>. As expected, the algorithm finds <span class="SimpleMath">D_50, C_25, C_5</span> and the trivial group.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := List(gr);</span>
+[ &lt;lins node of index 1&gt;, &lt;lins node of index 2&gt;, &lt;lins node of index 10&gt;, 
+  &lt;lins node of index 50&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsoTypes := List(L, node -&gt; StructureDescription(Grp(node)));</span>
+[ "D50", "C25", "C5", "1" ]
+</pre></div>
+
+<p><a id="X78E0C77181121AB2" name="X78E0C77181121AB2"></a></p>
+
+<h5>2.4-2 <span class="Heading">Revised Example : all normal subgroups of index <span class="SimpleMath">n</span></span></h5>
+
+<p>We compute all normal subgroups of index <span class="SimpleMath">5^2 = 25</span> in <span class="SimpleMath">C_5^4</span>, the direct product of <span class="SimpleMath">4</span> copies of the cyclic group of order <span class="SimpleMath">5</span>:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := ElementaryAbelianGroup(5^4);</span>
+&lt;pc group of size 625 with 4 generators&gt;
+</pre></div>
+
+<p>Again, the search algorithm automatically translates the group into a finitely presented group via a call to <code class="code">IsomorphismFpGroup</code>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gr := LowIndexNormalSubgroupsSearchForIndex(G, 5 ^ 2, infinity);</span>
+&lt;lins graph contains 963 normal subgroups up to index 25&gt;
+</pre></div>
+
+<p>Now we are not interested in all normal subgroups that the search graph considered, but only in those of index <span class="SimpleMath">25</span>. Thus we need to use <code class="code">ComputedNormalSubgroups</code>. For a prime <span class="SimpleMath">p</span>, and integers <span class="SimpleMath">d, s ∈ N</span>, the number of subgroups of order <span class="SimpleMath">p^s</span> of an elementary abelian <span class="SimpleMath">p</span>-group of order <span class="SimpleMath">p^d</span> is exactly</p>
+
+<p class="pcenter">( (p^d - 1)(p^d - p) ⋯ (p^d - p^(s-1)) ) / ( (p^s - 1)(p^s - p) ⋯ (p^s - p^(s-1)) ) .</p>
+
+<p>Thus we expect to find <span class="SimpleMath">( (5^4-1) ⋅ (5^4-5) ) / ( (5^2 - 1) ⋅ (5^2 - 5) ) = 806</span> normal subgroups of index <span class="SimpleMath">25</span>. <br /> Furthermore, all subgroups need to be of the isomorphism type <span class="SimpleMath">C_5^2</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := ComputedNormalSubgroups(gr);;</span>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsoTypes := Collected(List(L, node -&gt; StructureDescription(Grp(node))));</span>
+[ [ "C5 x C5", 806 ] ]
+</pre></div>
+
+<p><a id="X82F9F3B67D438032" name="X82F9F3B67D438032"></a></p>
+
+<h5>2.4-3 <span class="Heading">Example : a normal subgroup of index <span class="SimpleMath">n</span></span></h5>
+
+<p>We compute a normal subgroup of index <span class="SimpleMath">3 ⋅ 5 = 15</span> in <span class="SimpleMath">C_3 × C_3 × C_4 × C_5</span>, a direct product of cyclic groups:</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">G := AbelianGroup([3, 3, 4, 5]);</span>
+&lt;pc group of size 180 with 4 generators&gt;
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">gr := LowIndexNormalSubgroupsSearchForIndex(G, 15, 1);</span>
+&lt;lins graph contains 7 normal subgroups up to index 15&gt;
+</pre></div>
+
+<p>We use <code class="code">ComputedNormalSubgroups</code> in order to get the normal subgroup of index <span class="SimpleMath">15</span>. As expected, the algorithm finds a group of the isomorphism type <span class="SimpleMath">C_12 = C_3 × C_4</span>.</p>
+
+
+<div class="example"><pre>
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">L := ComputedNormalSubgroups(gr);</span>
+[ &lt;lins node of index 15&gt; ]
+<span class="GAPprompt">gap&gt;</span> <span class="GAPinput">IsoTypes := List(L, node -&gt; StructureDescription(Grp(node)));</span>
+[ "C12" ]
+</pre></div>
+
 
 <div class="chlinkprevnextbot">&nbsp;<a href="chap0.html">[Top of Book]</a>&nbsp;  <a href="chap0.html#contents">[Contents]</a>&nbsp;  &nbsp;<a href="chap1.html">[Previous Chapter]</a>&nbsp;  &nbsp;<a href="chap3.html">[Next Chapter]</a>&nbsp;  </div>
 
 
-<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapInd.html">Ind</a>  </div>
+<div class="chlinkbot"><span class="chlink1">Goto Chapter: </span><a href="chap0.html">Top</a>  <a href="chap1.html">1</a>  <a href="chap2.html">2</a>  <a href="chap3.html">3</a>  <a href="chap4.html">4</a>  <a href="chapBib.html">Bib</a>  <a href="chapInd.html">Ind</a>  </div>
 
 <hr />
 <p class="foot">generated by <a href="http://www.math.rwth-aachen.de/~Frank.Luebeck/GAPDoc">GAPDoc2HTML</a></p>

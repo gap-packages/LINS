@@ -1,5 +1,5 @@
-[![CI](https://github.com/FriedrichRober/LINS/workflows/CI/badge.svg)](https://github.com/FriedrichRober/LINS/actions?query=workflow%3ACI+branch%3Amaster)
-[![Code Coverage](https://codecov.io/gh/FriedrichRober/LINS/coverage.svg?branch=master&token=)](https://codecov.io/gh/FriedrichRober/LINS)
+[![CI](https://github.com/gap-packages/LINS/workflows/CI/badge.svg)](https://github.com/gap-packages/LINS/actions?query=workflow%3ACI+branch%3Amaster)
+[![Code Coverage](https://codecov.io/gh/gap-packages/LINS/coverage.svg?branch=master&token=)](https://codecov.io/gh/gap-packages/LINS)
 
 # LINS - GAP package
 
@@ -13,7 +13,7 @@ The current implementation in GAP uses a table of groups that was computed by th
 ## Installation
 
 **1.** To get the newest version of this GAP 4 package download the archive file `LINS-x.x.tar.gz` from
->   <https://FriedrichRober.github.io/LINS/>
+>   <https://gap-packages.github.io/LINS/>
 
 **2.** Locate a `pkg/` directory where GAP searches for packages, see
 >   [9.2 GAP Root Directories](https://www.gap-system.org/Manuals/doc/ref/chap9.html#X7A4973627A5DB27D)
@@ -28,7 +28,7 @@ which creates a subdirectory called `LINS/`.
 ## Documentation
 
 You can read the documentation online at
->   <https://FriedrichRober.github.io/LINS/doc/chap0.html>
+>   <https://gap-packages.github.io/LINS/doc/chap0.html>
 
 If you want to access it from within GAP by entering `?LINS` on the GAP prompt,
 you first have to build the manual by using `gap makedoc.g` from within the `LINS/` root directory.
@@ -36,7 +36,7 @@ you first have to build the manual by using `gap makedoc.g` from within the `LIN
 ## Bug reports
 
 Please submit bug reports, feature requests and suggestions via our issue tracker at
->  <https://github.com/FriedrichRober/LINS/issues>
+>  <https://github.com/gap-packages/LINS/issues>
 
 ## License
 

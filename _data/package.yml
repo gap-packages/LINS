@@ -1,6 +1,6 @@
 name: LINS
-version: "0.6"
-date: 2023-11-29
+version: "0.7"
+date: 2024-03-13
 description: |
     provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.
 
@@ -12,15 +12,15 @@ maintainers:
     - name: Friedrich Rober
       url: mailto:friedrich.rober@rwth-aachen.de
 
-GAP: ">= 4.11"
+GAP: ">= 4.12"
 
-www: https://FriedrichRober.github.io/LINS/
+www: https://gap-packages.github.io/LINS/
 readme: README.md
-packageinfo: https://FriedrichRober.github.io/LINS/PackageInfo.g
+packageinfo: https://gap-packages.github.io/LINS/PackageInfo.g
 
 downloads:
     - name: .tar.gz
-      url: https://github.com/FriedrichRober/LINS/releases/download/v0.6/LINS-0.6.tar.gz
+      url: https://github.com/gap-packages/LINS/releases/download/v0.7/LINS-0.7.tar.gz
 
 abstract: |
 
@@ -29,27 +29,27 @@ doc-html: doc/chap0.html
 doc-pdf: doc/manual.pdf
 citeas: |
     <p class='BibEntry'>
-    [<span class='BibKey'>Rob23</span>]   <b class='BibAuthor'>Rober, F.</b>,
+    [<span class='BibKey'>Rob24</span>]   <b class='BibAuthor'>Rober, F.</b>,
      <i class='BibTitle'>LINS, provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.,
-             Version 0.6</i>
-     (<span class='BibYear'>2023</span>)<br />
+             Version 0.7</i>
+     (<span class='BibYear'>2024</span>)<br />
     (<span class='BibNote'>GAP package</span>),
-    <span class='BibHowpublished'><a href="https://FriedrichRober.github.io/LINS/">https://FriedrichRober.github.io/LINS/</a></span>.
+    <span class='BibHowpublished'><a href="https://gap-packages.github.io/LINS/">https://gap-packages.github.io/LINS/</a></span>.
     </p>
     
 
 bibtex: |
-    @misc{ LINS0.6,
+    @misc{ LINS0.7,
       author =           {Rober, F.},
       title =            {{LINS}, provides an algorithm for computing the normal
                           subgroups  of  a  finitely  presented group up to some
-                          given index bound., {V}ersion 0.6},
-      month =            {Nov},
-      year =             {2023},
+                          given index bound., {V}ersion 0.7},
+      month =            {Mar},
+      year =             {2024},
       note =             {GAP package},
-      howpublished =     {\href         {https://FriedrichRober.github.io/LINS/}
-                          {\texttt{https://FriedrichRober.github.io/}\discretionary
+      howpublished =     {\href           {https://gap-packages.github.io/LINS/}
+                          {\texttt{https://gap-packages.github.io/}\discretionary
                           {}{}{}\texttt{LINS/}}},
-      printedkey =       {Rob23}
+      printedkey =       {Rob24}
     }
 

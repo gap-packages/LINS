@@ -24,8 +24,8 @@ SetPackageInfo( rec(
 
 PackageName := "LINS",
 Subtitle := "provides an algorithm for computing the normal subgroups of a finitely presented group up to some given index bound.",
-Version := "0.6",
-Date := "29/11/2023", # dd/mm/yyyy format
+Version := "0.7",
+Date := "13/03/2024", # dd/mm/yyyy format
 
 Persons := [
   rec(
@@ -43,10 +43,10 @@ Persons := [
 
 SourceRepository := rec(
     Type := "git",
-    URL := "https://github.com/FriedrichRober/LINS",
+    URL := "https://github.com/gap-packages/LINS",
 ),
 IssueTrackerURL := Concatenation( ~.SourceRepository.URL, "/issues" ),
-PackageWWWHome := "https://FriedrichRober.github.io/LINS/",
+PackageWWWHome := "https://gap-packages.github.io/LINS/",
 PackageInfoURL := Concatenation( ~.PackageWWWHome, "PackageInfo.g" ),
 README_URL     := Concatenation( ~.PackageWWWHome, "README.md" ),
 ArchiveURL      := Concatenation( ~.SourceRepository.URL,
@@ -77,7 +77,7 @@ PackageDoc := rec(
 ),
 
 Dependencies := rec(
-  GAP := ">= 4.11",
+  GAP := ">= 4.12",
   NeededOtherPackages := [  ],
   SuggestedOtherPackages := [ ],
   ExternalConditions := [ ],

@@ -7,10 +7,10 @@
                  presented group up to some given index bound. [101X
   
   
-                                      0.6
+                                      0.7
   
   
-                                29 November 2023
+                                 13 March 2024
   
   
                                 Friedrich Rober
@@ -30,7 +30,8 @@
     1.2 [33X[0;0YExamples[133X
       1.2-1 [33X[0;0YExample : all normal subgroups up to index [22Xn[122X[133X
       1.2-2 [33X[0;0YExample : all normal subgroups of index [22Xn[122X[133X
-      1.2-3 [33X[0;0YExample : a normal subgroup of index [22Xn[122X[133X
+    1.3 [33X[0;0YMain Functions[133X
+      1.3-1 LowIndexNormalSubs
   2 [33X[0;0YLINS Interface[133X
     2.1 [33X[0;0YLINS Graph[133X
       2.1-1 List
@@ -50,11 +51,12 @@
       2.3-1 LowIndexNormalSubgroupsSearch
       2.3-2 LowIndexNormalSubgroupsSearchForAll
       2.3-3 LowIndexNormalSubgroupsSearchForIndex
+    2.4 [33X[0;0YExamples[133X
+      2.4-1 [33X[0;0YRevised Example : all normal subgroups up to index [22Xn[122X[133X
+      2.4-2 [33X[0;0YRevised Example : all normal subgroups of index [22Xn[122X[133X
+      2.4-3 [33X[0;0YExample : a normal subgroup of index [22Xn[122X[133X
   3 [33X[0;0YLINS Search[133X
-    3.1 [33X[0;0YLINS Search Strategy[133X
-    3.2 [33X[0;0YLINS Target Tables[133X
-    3.3 [33X[0;0YLINS Search Options[133X
-    3.4 [33X[0;0YLINS Custom Search Functions[133X
+    3.1 [33X[0;0YLINS Search Options[133X
   4 [33X[0;0YLicense[133X
   
   
