@@ -8,6 +8,7 @@
 # Some tests need to check for graph isomorphism using grape
 LoadPackage( "grape" );
 LoadPackage("cohomolo");
+LoadPackage("recog");
 LoadPackage( "LINS" );
 ReadPackage( "LINS", "gap/createTables.gi");;
 
