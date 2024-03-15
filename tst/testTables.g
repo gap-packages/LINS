@@ -5,8 +5,9 @@
 # metadata in PackageInfo.g.
 #
 
-# Some tests need to check for graph isomorphism using grape
+# The computation of the tables (targets) requires the computation of schur multipliers
 LoadPackage("cohomolo");
+# Makes the computation of the tables (targets) faster
 LoadPackage("recog");
 LoadPackage( "LINS" );
 ReadPackage( "LINS", "gap/createTables.gi");;
