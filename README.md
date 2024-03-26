@@ -16,7 +16,7 @@ The current implementation in GAP uses a table of groups that was computed by th
 >   <https://gap-packages.github.io/LINS/>
 
 **2.** Locate a `pkg/` directory where GAP searches for packages, see
->   [9.2 GAP Root Directories](https://www.gap-system.org/Manuals/doc/ref/chap9.html#X7A4973627A5DB27D)
+>   [9.2 GAP Root Directories](https://docs.gap-system.org/doc/ref/chap9.html#X7A4973627A5DB27D)
 
 in the GAP manual for more information.
 
