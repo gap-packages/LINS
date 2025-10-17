@@ -39,11 +39,9 @@ jobs:
       - uses: gap-actions/build-pkg@v1
       - uses: gap-actions/build-pkg-docs@v1
       - uses: gap-actions/run-pkg-tests@v3
-      # Disabled the "only-needed" tests for now, as they run into a GAP
-      # library warning about "Alternating recognition needed"
-      #- uses: gap-actions/run-pkg-tests@v3
-      #  with:
-      #    only-needed: true
+      - uses: gap-actions/run-pkg-tests@v3
+        with:
+          only-needed: true
       - uses: gap-actions/process-coverage@v2
       - uses: codecov/codecov-action@v5
         with:
