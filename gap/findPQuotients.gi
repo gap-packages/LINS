@@ -46,7 +46,7 @@ end);
 ##  returns the size of the group $GL(s, p)$.
 #############################################################################
 
-BindGlobal("LINS_OGL", function(s, p)
+BindGlobal("LINS_OGL", function(s, p)  # TODO: could use GAP function SizeGL instead (it is not listed in the reference manual; maybe it should be...)
     local i, j;
 
     i := 1;
@@ -113,6 +113,7 @@ InstallGlobalFunction(LINS_MustCheckP, function(rH, n, p)
     od;
 
     # maximal integer $s$ such that $[G : H] * p ^ s <= n$
+    # TODO: isn't this just `s := LogInt(n/index, p);` ?
     s := 1;
     while p ^ (s + 1) <= n / index do
         s := s + 1;
@@ -272,6 +273,7 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
     IH := Image(Iso);
 
     # Create the Isomorphism to the group structure of the `p`-Module `M`
+    # TODO: have you considered using anupq here instead of PQuotient?
     P := PQuotient(IH, p, 1, LINS_MaxPGenerators);
     Mu := EpimorphismQuotientSystem(P);
     M := Image(Mu);
@@ -412,6 +414,9 @@ InstallGlobalFunction(LINS_FindPQuotients, function(gr, rH, primes, opts)
         if p > n / Index(rH) then
             break;
         fi;
+        # TODO: note that group Q will have a non-trivial p-quotient 
+        # iff  0 or p is in AbelianInvariants(Q)
+
         # Check according to some rules whether the p-quotients
         # will be computed by intersections.
         if opts.DoPQuotient(gr, rH, p) and LINS_MustCheckP(rH, n, p) then
