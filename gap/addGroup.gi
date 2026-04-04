@@ -23,7 +23,7 @@
 ##  We need coset tables of both `H` and `G` in the parent `P`.
 #############################################################################
 
-InstallGlobalFunction(LINS_IsSubgroupFp, function(G, H)
+BindGlobal("LINS_IsSubgroupFp", function(G, H)
     local word;
 
     for word in AugmentedCosetTableInWholeGroup(H).primaryGeneratorWords do
@@ -44,7 +44,7 @@ end);
 ##  Sets parent and attributes for normal subgroup `H` of `G`.
 #############################################################################
 
-InstallGlobalFunction(LINS_SetParent,
+BindGlobal("LINS_SetParent",
 function(H, G)
     SetParent(H, G);
     SetIsNormalInParent(H, true);
@@ -135,8 +135,8 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
     local
     G,              # group:        located in the root node
                     #               of LINS graph `gr`.
-    rH,             # LINS node:    containing `H`
     n,              # pos-int:      index bound of LINS graph `gr`.
+    rH,             # LINS node:    containing `H`
     allSupergroups, # [LINS node]:  supergroups of `rH`
     allSubgroups,   # [LINS node]:  subgroups of `rH`
     pos,            # pos-int:      position of level at index $[G : H]$
@@ -146,6 +146,11 @@ InstallGlobalFunction(LINS_AddGroup, function(gr, H, Supers, test, opts)
     K;              # group:        located in node `rK`
 
     G := Grp(LinsRoot(gr));
+
+    if opts.DoSetParent then
+        LINS_SetParent(H, G);
+    fi;
+
     rH := LinsNode(H, Index(G, H));
 
     # Search for correct level
