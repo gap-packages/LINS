@@ -35,8 +35,6 @@ jobs:
         with:
           gap-version: ${{ matrix.gap-version }}
       - uses: gap-actions/build-pkg@v3
-        with:
-          extra-pkgs: "io profiling grape cohomolo"
       - uses: gap-actions/build-pkg-docs@v2
       - uses: gap-actions/run-pkg-tests@v4
       # Disabled the "only-needed" tests for now, as they run into a GAP
