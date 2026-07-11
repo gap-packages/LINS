@@ -81,6 +81,7 @@ Dependencies := rec(
   GAP := ">= 4.12",
   NeededOtherPackages := [  ],
   SuggestedOtherPackages := [ ],
+  TestPackages := [ ["cohomolo", "1.6"], ["grape", "4.9"] ],
   ExternalConditions := [ ],
 ),
 
