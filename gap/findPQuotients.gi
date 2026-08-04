@@ -177,13 +177,6 @@ end);
 
 
 #############################################################################
-## maximal generators of a p-quotient.
-#############################################################################
-
-BindGlobal("LINS_MaxPGenerators", 1000);
-
-
-#############################################################################
 ##  LINS_FindPModules
 #############################################################################
 ##  Input:
@@ -225,6 +218,8 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
     n,      # pos-int:      index bound of LINS graph `gr`.
     Iso,    # isomorphism:  from `H` into fp-group
     IH,     # fp-group:     image under `Iso`, isomorphic to `H`
+    logord, # int:          option for PQuotient, the maximal order
+            #               for P we consider is p^logord
     P,      # quotsys:      p-quotient of `IH` of class 1
     Mu,     # epimorphism:  from `IH` into `P`
     M,      # pc-group:     image under `Mu`
@@ -272,7 +267,8 @@ InstallGlobalFunction(LINS_FindPModules, function(gr, rH, p, opts)
     IH := Image(Iso);
 
     # Create the Isomorphism to the group structure of the `p`-Module `M`
-    P := PQuotient(IH, p, 1, LINS_MaxPGenerators);
+    logord := Int(Log(Float(n / rH!.Index))/Log(Float(p)));
+    P := PQuotient(IH, p, 1, logord);
     Mu := EpimorphismQuotientSystem(P);
     M := Image(Mu);
     GenM := GeneratorsOfGroup(M);
