@@ -13,50 +13,6 @@
 #############################################################################
 
 
-BindGlobal("Terminate", MakeImmutable("Terminate"));
-
-# Terminate, if we found sufficient enough groups
-# true, if K is a new group
-# false, if K was already found beforehand
-BindGlobal("LINS_AddGroup_Caller",
-function(gr, rH, K, opts, infoText)
-    local
-    G,      # group:        located in the root node of the LINS graph `gr`.
-    n,      # pos-int:      index bound of LINS graph `gr`.
-    data,   # tuple:        [`rK`, `isNew`]
-    rK,     # LINS node:    containing group `K`
-    isNew;  # boolean:      whether the group `K` is new in `gr`
-
-    G := Grp(LinsRoot(gr));
-    n := IndexBound(gr);
-
-    if opts.DoSetParent then
-        LINS_SetParent(K, G);
-    fi;
-
-    if Index(G, K) <= n then
-        data := LINS_AddGroup(gr, K, [rH], true, opts);
-        rK := data[1];
-        isNew := data[2];
-
-        if isNew then
-            Info(InfoLINS, 3, LINS_tab3, infoText,
-                "Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
-                " of index ", LINS_red, Index(G, K), LINS_reset, ".");
-
-            if opts.DoTerminate(gr, rH, rK) then
-                gr!.TerminatedUnder := rH;
-                gr!.TerminatedAt := rK;
-                return Terminate;
-            else
-                return true;
-            fi;
-        fi;
-    fi;
-
-    return false;
-end);
-
 #############################################################################
 ##  LINS_FindTQuotients
 #############################################################################
@@ -149,8 +105,10 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, opts)
     homs,               # [hom]:        list of homomorphisms into `Q`
     hom,                # hom:          loop var, homomorphism in `L` from `H` into `Q`
     K,                  # group:        normal subgroup of `G` (with Q-quotient)
-    data,               # state:        bool or Terminate
-    nrFound;            # pos-int:      number of newly found normal subgroups
+    rK,                 # LINS node:    containing `K`
+    isNew,              # boolean:      whether the group `K` is new in `gr`
+    nrFound,            # pos-int:      number of newly found normal subgroups
+    data;               # tuple:        [`rK`, `isNew`]
 
     # Initialize data from input.
     rG := LinsRoot(gr);
@@ -189,11 +147,19 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, opts)
         for L in LL do
             if Position(I, Index(G, L)) <> fail then
                 K := Core(G, L);
-                data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
-                if data = true then
+                data := LINS_AddGroup(gr, K, [rG], true, opts);
+                rK := data[1];
+                isNew := data[2];
+                if isNew then
                     nrFound := nrFound + 1;
-                elif data = Terminate then
-                    return [true, nrFound + 1];
+                    Info(InfoLINS, 3, LINS_tab3,
+                        "Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
+                        " of index ", LINS_red, Index(G, K), LINS_reset, ".");
+                fi;
+                if isNew and opts.DoTerminate(gr, rG, rK) then
+                    gr!.TerminatedUnder := rG;
+                    gr!.TerminatedAt := rK;
+                    return [true, nrFound];
                 fi;
             fi;
         od;
@@ -203,11 +169,19 @@ InstallGlobalFunction( LINS_FindTQuotients, function(gr, opts)
             homs := GQuotients(H, Q);
             for hom in homs do
                 K := Image(iso, Kernel(hom));
-                data := LINS_AddGroup_Caller(gr, rG, K, opts, "");
-                if data = true then
+                data := LINS_AddGroup(gr, K, [rG], true, opts);
+                rK := data[1];
+                isNew := data[2];
+                if isNew then
                     nrFound := nrFound + 1;
-                elif data = Terminate then
-                    return [true, nrFound + 1];
+                    Info(InfoLINS, 3, LINS_tab3,
+                        "Found new normal subgroup ", LINS_red, "K = ", K, LINS_reset,
+                        " of index ", LINS_red, Index(G, K), LINS_reset, ".");
+                fi;
+                if isNew and opts.DoTerminate(gr, rG, rK) then
+                    gr!.TerminatedUnder := rG;
+                    gr!.TerminatedAt := rK;
+                    return [true, nrFound];
                 fi;
             od;
         od;
